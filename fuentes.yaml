@@ -30,64 +30,61 @@ fuentes:
     nivel: 1
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR — Noticias"
     url: https://www.sedar.es/index.php/comunicacion/noticias
     nivel: 1
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR — Convocatorias"
     url: https://www.sedar.es/index.php/cientifico/convocatorias
     nivel: 1
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "Campus SEDAR"
     url: https://www.sedarcampus.es/
     nivel: 1
     ambito: anestesia
     filtro: evento
-    estado: ok
-    # redirige a: https://campussedar.es
+    estado: pendiente
   - nombre: "SEMICYUC"
     url: https://semicyuc.org/
     nivel: 1
     ambito: criticos
     filtro: evento
-    estado: roto
+    estado: pendiente
   - nombre: "SED — Sociedad Española del Dolor"
     url: https://sedolor.es/
     nivel: 1
     ambito: dolor
     filtro: evento
-    estado: bloqueada
+    estado: pendiente
   - nombre: "Formación SED"
     url: https://formaciondolor.com/
     nivel: 1
     ambito: dolor
     filtro: evento
-    estado: roto
+    estado: pendiente
   - nombre: "Congreso SED"
     url: https://congresosedolor.es/
     nivel: 1
     ambito: dolor
     filtro: evento
-    estado: roto
+    estado: pendiente
   - nombre: "SEMDOR"
     url: https://www.congresosemdor.es/
     nivel: 1
     ambito: dolor
     filtro: evento
-    estado: ok
-    # sugerencia: https://www.congresosemdor.es/inicio-2026/
-    # RSS: https://www.congresosemdor.es/feed/
+    estado: pendiente
   - nombre: "ESRA-España"
     url: https://www.esra-spain.org/
     nivel: 1
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
 
   # ---------- Agregadores especializados ----------
   - nombre: "AnestesiaR — Cursos y Congresos"
@@ -95,14 +92,14 @@ fuentes:
     nivel: 1
     ambito: anestesia
     filtro: evento
-    estado: bloqueada
+    estado: pendiente
     nota: "Bloquea el rastreo automatizado (robots.txt). El programa lo detecta y lo salta."
   - nombre: "Dolor.com — Congresos y jornadas"
     url: https://www.dolor.com/formacion/congresos-y-jornadas
     nivel: 1
     ambito: dolor
     filtro: evento
-    estado: ok
+    estado: pendiente
 
   # ---------- SEDAR — Secciones y grupos de trabajo ----------
   - nombre: "SEDAR · Ambulatoria"
@@ -110,133 +107,133 @@ fuentes:
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · Calidad, Seguridad y Ética"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/seguridad-y-etica/formacion-calidad
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · Cardíaca, Vascular y Torácica"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/anestesia-cardiaca-vascular-y-toracica/formacion-cardiotoracica
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · Cuidados Intensivos"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/cuidados-intensivos/formacion-cuidados-intensivos
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · Docencia"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/docencia/formacion-docencia
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · Docencia — Tutores y residentes"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/docencia/formacion-tutores-docencia
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · Docencia — Simulación"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/docencia/simulacion-docencia
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · Dolor"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/dolor/formacion-dolor
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · Gestión Clínica"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gestion-clinica/formacion-gestion-clinica
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · Hemostasia y Fluidoterapia"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/hemostasia/formacion-hemostasia
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · Locorregional"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/locorregional/formacion-locorregional
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · Neurociencias"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/neurociencias/formacion-neurociencias
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · Obstetricia"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/obstetricia/formacion-obstetricia
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · Pediátrica"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/pediatrica/formacion-pediatrica
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · RCP"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/rcp/formacion-rcp
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · Vía Aérea"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/via-aerea/formacion-via
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · SEDAR Joven — Cursos presenciales"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/sedar-joven/cursos-presenciales-sedarjoven
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · GTipo"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gtipo/formacion-gtipo
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · GT Cooperación Internacional"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gt-cooperacion-internacional/formacion-gtcooperacion
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · GT Donación y Trasplante"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gt-donacion-y-trasplante/formacion
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · GT Enfermedades Raras"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gt-bloqueo-enfermedades-raras/formacion
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
   - nombre: "SEDAR · GT Cuidados Paliativos"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gt-cuidados-paliativos/formacion-gt-paliativos
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: pendiente
 
   # ---------- Anestesiología — sociedades autonómicas ----------
   - nombre: "AAEAR (Andalucía-Extremadura)"
@@ -244,90 +241,73 @@ fuentes:
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
-    # sugerencia: https://www.aaear.es/informacion-legal/
+    estado: pendiente
   - nombre: "SCARTD (Cataluña)"
     url: https://www.scartd.org/?p=page%2Fhtml%2Fcongressos
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
-    # sugerencia: https://www.scartd.org/?p=page/html/extraacademiques
+    estado: pendiente
   - nombre: "SBARTD (Baleares)"
     url: http://www.sbartd.es
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
-    # sugerencia: https://www.sbartd.es/cursos.html
-    # redirige a: https://www.sbartd.es/
+    estado: pendiente
   - nombre: "Anestesia Clínico Valencia"
     url: http://www.anestesiaclinicovalencia.org
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
-    # sugerencia: https://www.anestesiaclinicovalencia.org/agenda/recursos/
-    # redirige a: https://www.anestesiaclinicovalencia.org/
-    # RSS: https://www.anestesiaclinicovalencia.org/feed/
+    estado: pendiente
   - nombre: "ANESTEX (Extremadura)"
     url: http://anestex.com
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
-    # sugerencia: https://anestex.com/actividades
-    # redirige a: https://anestex.com/
+    estado: pendiente
   - nombre: "Anestesia Asturias-Cantabria"
     url: http://anestesiaasturiascantabria.blogspot.com
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
-    # sugerencia: http://anestesiaasturiascantabria.blogspot.com/p/actividades-cientificas.html
-    # RSS: http://anestesiaasturiascantabria.blogspot.com/feeds/posts/default
+    estado: pendiente
   - nombre: "SVNARTD (País Vasco-Navarra)"
     url: https://www.svnrartd.com
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: roto
+    estado: pendiente
   - nombre: "AGARYD (Galicia)"
     url: https://www.agaryd.es
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: roto
+    estado: pendiente
   - nombre: "SADARTD (Aragón)"
     url: https://sadartd.wordpress.com
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
-    # sugerencia: https://sadartd.wordpress.com/congreso-sadar-2016/
-    # RSS: https://sadartd.wordpress.com/feed/
+    estado: pendiente
   - nombre: "ACMARTD (Castilla-La Mancha)"
     url: http://acmartd.org
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
-    # sugerencia: http://acmartd.org/reanudamos-el-curso-tomando-el-pulso-a-la-anestesiologia-en-castilla-la-mancha-2026/
-    # RSS: http://acmartd.org/feed/
+    estado: pendiente
   - nombre: "SOCARTD (Canarias)"
     url: https://socartd.es
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: ok
-    # sugerencia: https://socartd.es/xxiv-jornadas-canarias-de-anestesia-reanimacion-y-terapeutica-del-dolor/
-    # RSS: https://socartd.es/feed/
+    estado: pendiente
   - nombre: "SOCLARTD (Castilla y León)"
     url: http://www.soclartd.org.es
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: roto
+    estado: pendiente
 
   # ---------- Medicina Intensiva — nacional ----------
   - nombre: "SEEIUC"
@@ -335,41 +315,31 @@ fuentes:
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: ok
-    # sugerencia: https://seeiuc.org/asociese/ventajas/formacion-continuada-incluida/
-    # RSS: https://seeiuc.org/feed/
+    estado: pendiente
   - nombre: "SECIP"
     url: https://www.secip.com/
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: ok
-    # sugerencia: https://secip.com/proximos-cursos/
-    # redirige a: https://secip.com/
-    # RSS: https://secip.com/feed/
+    estado: pendiente
   - nombre: "SEMES"
     url: https://www.semes.org/
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: ok
-    # sugerencia: https://www.semes.org/socios/
-    # RSS: https://www.semes.org/feed/
+    estado: pendiente
   - nombre: "CERCP"
     url: https://cercp.org/
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: ok
-    # RSS: https://cercp.org/feed/
+    estado: pendiente
   - nombre: "ONT — Formación"
     url: https://www.ont.es/
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: ok
-    # sugerencia: https://www.ont.es/informacion-a-los-profesionales-4/formacion-cursos-y-eventos-4-10/
-    # RSS: https://www.ont.es/feed/
+    estado: pendiente
 
   # ---------- Medicina Intensiva — sociedades autonómicas ----------
   - nombre: "SAMIUC (Andalucía)"
@@ -377,92 +347,79 @@ fuentes:
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: roto
+    estado: pendiente
   - nombre: "SARMICYUC (Aragón)"
     url: https://www.sarmicyuc.com
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: ok
-    # sugerencia: https://sarmicyuc.com/eventos/
-    # redirige a: https://sarmicyuc.com/
-    # RSS: https://sarmicyuc.com/feed/
+    estado: pendiente
   - nombre: "SBMIUC (Baleares)"
     url: https://www.sbmiuc.org
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: roto
+    estado: pendiente
   - nombre: "SOCAMICYUC (Canarias)"
     url: https://www.socamicyuc.org
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: roto
+    estado: pendiente
   - nombre: "SCLMICYUC (Castilla y León)"
     url: https://www.sclmicyuc.org
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: ok
-    # sugerencia: https://sclmicyuc.org/pagina-2/
-    # redirige a: https://sclmicyuc.org/
-    # RSS: https://sclmicyuc.org/feed/
+    estado: pendiente
   - nombre: "SOMIUCAM (Castilla-La Mancha)"
     url: https://www.somiucam.org
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: ok
-    # sugerencia: https://somiucam.org/cursos/
-    # redirige a: https://somiucam.org/
-    # RSS: https://somiucam.org/feed/
+    estado: pendiente
   - nombre: "SOCMIC (Cataluña)"
     url: https://www.socmic.cat
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: ok
-    # sugerencia: https://www.socmic.cat/?p=page/html/documents
+    estado: pendiente
   - nombre: "SEXMICYUC (Extremadura)"
     url: https://www.sexmicyuc.com
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: bloqueada
+    estado: pendiente
   - nombre: "SOGAMIUC (Galicia)"
     url: https://www.sogamiuc.org
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: ok
-    # sugerencia: https://sogamiuc.org/servicios-recursos/
-    # redirige a: https://sogamiuc.org/
-    # RSS: https://sogamiuc.org/feed/
+    estado: pendiente
   - nombre: "SOMIAMA (Madrid)"
     url: https://www.somiama.org/
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: roto
+    estado: pendiente
   - nombre: "SNMIUC (Sociedad Norte)"
     url: https://www.snmiuc.org
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: roto
+    estado: pendiente
   - nombre: "SOVAMICYUC (C. Valenciana)"
     url: https://www.sovamicyuc.org
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: roto
+    estado: pendiente
   - nombre: "SOMIUC (Murcia)"
     url: https://www.somiuc.es
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: roto
+    estado: pendiente
 
   # ---------- Dolor y adyacentes ----------
   - nombre: "SECPAL"
@@ -470,40 +427,31 @@ fuentes:
     nivel: 2
     ambito: dolor
     filtro: estricto
-    estado: roto
+    estado: pendiente
   - nombre: "SETRI"
     url: https://www.setri.es/
     nivel: 2
     ambito: dolor
     filtro: estricto
-    estado: ok
-    # sugerencia: https://setri.es/actividades
-    # redirige a: https://setri.es/
-    # RSS: https://setri.es/feed/
+    estado: pendiente
   - nombre: "SETH (Trombosis y Hemostasia)"
     url: https://www.seth.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://seth.es/evento/xvi-curso-internacional-de-formacion-continuada-en-hemofilia-y-otras-coagulopatias/
-    # redirige a: https://seth.es/
-    # RSS: https://seth.es/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fseth.es%2F&format=xml
+    estado: pendiente
   - nombre: "SEMPSPH (Seguridad del paciente)"
     url: https://www.sempsph.com/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: pendiente
   - nombre: "SECA (Calidad asistencial)"
     url: https://www.calidadasistencial.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://calidadasistencial.es/noticias_/
-    # redirige a: https://calidadasistencial.es/
-    # RSS: https://calidadasistencial.es/feed/
+    estado: pendiente
 
   # ---------- Agregadores generalistas ----------
   - nombre: "DimeCongresos"
@@ -511,45 +459,37 @@ fuentes:
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://dimecongresos.com/congresos/congreso-investigacion-y-formacion-en-ciencia-sanitaria/
-    # RSS: https://dimecongresos.com/feed/
+    estado: pendiente
   - nombre: "Hospitecnia — Agenda"
     url: https://hospitecnia.com/agenda/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://hospitecnia.com/agenda/cursos/curso-online-ingenieria-aplicada-camaras-hiperbaricas-uso-sanitario/
-    # RSS: https://hospitecnia.com/rss.xml
+    estado: pendiente
   - nombre: "Revista de Congresos"
-    url: https://revistacongresos.com/eventos/
+    url: https://revistacongresos.com/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
   - nombre: "Mutual Médica — Congresos"
     url: https://www.mutualmedica.com/post/mutualmedica/calendario-congresos-medicina-espana
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
+    estado: pendiente
   - nombre: "Redacción Médica"
     url: https://www.redaccionmedica.com/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.redaccionmedica.com/formacion/
-    # RSS: https://www.redaccionmedica.com/rss/
+    estado: pendiente
   - nombre: "ConSalud"
     url: https://www.consalud.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.consalud.es/formacion
-    # RSS: https://www.consalud.es/feed/
+    estado: pendiente
 
   # ---------- Servicios autonómicos de salud — formación (capa hospitalaria) ----------
   - nombre: "Sacyl — Jornadas y eventos (Castilla y León)"
@@ -557,120 +497,103 @@ fuentes:
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
+    estado: pendiente
   - nombre: "Acadèmia de Ciències Mèdiques (Cataluña-Baleares)"
     url: https://www.academia.cat/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.academia.cat/agenda
+    estado: pendiente
   - nombre: "IAVANTE (Andalucía)"
     url: https://www.iavante.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.iavante.es/buscador-cursos/
+    estado: pendiente
   - nombre: "ACIS — Axencia de Coñecemento en Saúde (Galicia)"
     url: https://acis.sergas.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://acis.sergas.gal/cartafol/Formacion-continuada
-    # redirige a: https://acis.sergas.gal/
-    # RSS: https://acis.sergas.gal/_vti_bin/spsdisco.aspx
+    estado: pendiente
   - nombre: "EVES — Escola Valenciana d'Estudis de la Salut"
     url: https://eves.san.gva.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://eves.san.gva.es/ca/formacio/sollicitar-cursos
-    # redirige a: https://eves.san.gva.es/va/
+    estado: pendiente
   - nombre: "IACS (Aragón)"
     url: https://www.iacs.es/formacion/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.iacs.es/agenda-proximos-eventos/
-    # RSS: https://www.iacs.es/feed/
+    estado: pendiente
   - nombre: "FFIS / Murciasalud (Murcia)"
     url: https://www.ffis.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.ffis.es/ffis/buscadorCursos.jsf
+    estado: pendiente
   - nombre: "Osakidetza — Formación (País Vasco)"
     url: https://www.osakidetza.euskadi.eus/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # redirige a: https://www.osakidetza.euskadi.eus/ataria/
+    estado: pendiente
   - nombre: "Comunidad de Madrid — Formación sanitaria"
-    url: https://www.comunidad.madrid/servicios/salud
+    url: https://www.comunidad.madrid/salud
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
   - nombre: "SESCAM — Formación (Castilla-La Mancha)"
     url: https://sescam.castillalamancha.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
   - nombre: "Servicio Canario de la Salud — Formación"
     url: https://www3.gobiernodecanarias.org/sanidad/scs/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
+    estado: pendiente
   - nombre: "SESPA (Asturias)"
     url: https://www.astursalud.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.astursalud.es/categorias/-/categorias/profesionales/04000gestion-del-conocimiento/02000formacion/04000sesiones-jornadas-y-congresos
-    # redirige a: https://www.astursalud.es/astursalud
+    estado: pendiente
   - nombre: "IDIVAL / SCS (Cantabria)"
     url: https://www.idival.org/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
   - nombre: "IB-Salut (Baleares)"
     url: https://www.ibsalut.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.ibsalut.es/professionals/recursos-humans
+    estado: pendiente
   - nombre: "SES (Extremadura)"
     url: https://saludextremadura.ses.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://saludextremadura.ses.es:443/web/informacion-legal
-    # redirige a: https://saludextremadura.ses.es:443/web/
+    estado: pendiente
   - nombre: "Rioja Salud"
     url: https://www.riojasalud.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.riojasalud.es/profesionales/rrhh
+    estado: pendiente
   - nombre: "Navarra — Salud, formación"
     url: https://www.navarra.es/es/web/salud
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: pendiente
 
   # ---------- Universidades públicas ----------
   - nombre: "U. de Sevilla"
@@ -678,278 +601,229 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.us.es/trabaja-en-la-us/profesorado/informacion-general
-    # RSS: https://www.us.es/rss.xml
+    estado: pendiente
   - nombre: "U. de Granada"
     url: https://www.ugr.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.ugr.es/estudiantes/informacion-general
-    # RSS: https://www.ugr.es/rss.xml
+    estado: pendiente
   - nombre: "U. de Córdoba"
     url: https://www.uco.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: pendiente
   - nombre: "U. de Cádiz"
     url: https://www.uca.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.uca.es/evento/escuela-de-formacion-teatral-modulo-1-contacto-con-tacto/
-    # RSS: https://www.uca.es/feed/
+    estado: pendiente
   - nombre: "U. de Málaga"
     url: https://www.uma.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.uma.es/masteres-oficiales/
-    # RSS: https://www.uma.es/feed/
+    estado: pendiente
   - nombre: "U. de Almería"
     url: https://www.ual.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.ual.es/cursosdeverano
+    estado: pendiente
   - nombre: "U. de Jaén"
     url: https://www.ujaen.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: http://www.ujaen.es/estudios/oferta-academica/masteres
-    # RSS: https://www.ujaen.es/rss.xml
+    estado: pendiente
   - nombre: "U. de Huelva"
     url: https://www.uhu.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.uhu.es/eventos/jornadas-de-bienvenida-curso-20262027
-    # RSS: https://www.uhu.es/rss.xml
+    estado: pendiente
   - nombre: "U. de Zaragoza"
     url: https://www.unizar.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.unizar.es/consejo-de-direccion/vicerrector-de-innovacion-transferencia-y-formacion-permanente
-    # RSS: https://www.unizar.es/rss.xml
+    estado: pendiente
   - nombre: "U. de Oviedo"
     url: https://www.uniovi.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.uniovi.es/estudia/masteres/informacion
+    estado: pendiente
   - nombre: "U. de les Illes Balears"
     url: https://www.uib.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
   - nombre: "U. de Las Palmas de Gran Canaria"
     url: https://www.ulpgc.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: pendiente
   - nombre: "U. de La Laguna"
     url: https://www.ull.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.ull.es/portal/noticias/2026/astrofisica-un-area-puntera-en-investigacion-y-formacion/
-    # RSS: https://www.ull.es/feed/
+    estado: pendiente
   - nombre: "U. de Cantabria"
     url: https://web.unican.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://web.unican.es/cursosdeverano
-    # RSS: https://web.unican.es/_vti_bin/spsdisco.aspx
+    estado: pendiente
   - nombre: "U. de Castilla-La Mancha"
     url: https://www.uclm.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: pendiente
   - nombre: "U. de Salamanca"
     url: https://www.usal.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://usal.es/informacion-orientacion
-    # redirige a: https://usal.es/
+    estado: pendiente
   - nombre: "U. de Valladolid"
     url: https://www.uva.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # redirige a: https://www.uva.es/export/sites/uva/
+    estado: pendiente
   - nombre: "U. de Burgos"
     url: https://www.ubu.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.ubu.es/titulos-propios-por-categoria/masteres-de-formacion-permanente
+    estado: pendiente
   - nombre: "U. de León"
     url: https://www.unileon.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.unileon.es/estudiantes/oferta-academica/masteres
-    # RSS: https://www.unileon.es/rss.xml
+    estado: pendiente
   - nombre: "U. de Barcelona"
     url: https://www.ub.edu/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
   - nombre: "U. Autònoma de Barcelona"
     url: https://www.uab.cat/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.uab.cat/web/estudis/mooc-1345667655947.html
+    estado: pendiente
   - nombre: "U. Pompeu Fabra"
     url: https://www.upf.edu/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: pendiente
   - nombre: "U. de Girona"
     url: https://www.udg.edu/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.udg.edu/ca/viu/udgsalut/recursos
-    # redirige a: https://www.udg.edu/ca/
+    estado: pendiente
   - nombre: "U. Rovira i Virgili"
     url: https://www.urv.cat/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.urv.cat/ca/internacional/formacio/
-    # redirige a: https://www.urv.cat/ca/
+    estado: pendiente
   - nombre: "U. de Lleida"
     url: https://www.udl.cat/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.udl.cat/ca/serveis/il/cursos/
-    # redirige a: https://www.udl.cat/ca/
+    estado: pendiente
   - nombre: "U. de València"
     url: https://www.uv.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.uv.es/uvweb/universitat/ca/agenda-uv/ajudes-cursos-proves-llengues-1285851282125/Esdeveniment.html?id=1286468430875
+    estado: pendiente
   - nombre: "U. Miguel Hernández de Elche"
     url: https://www.umh.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.umh.es/agenda/eventos_es.html
+    estado: pendiente
   - nombre: "U. de Alicante"
     url: https://www.ua.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # RSS: https://www.ua.es/es/universidad-de-alicante.rss
+    estado: pendiente
   - nombre: "U. Jaume I"
     url: https://www.uji.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.uji.es/com/sumari/agenda/
+    estado: pendiente
   - nombre: "U. de Extremadura"
     url: https://www.unex.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: pendiente
   - nombre: "U. de Santiago de Compostela"
     url: https://www.usc.gal/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.usc.gal/gl/estudos/cursos-congresos
-    # redirige a: https://www.usc.gal/gl
+    estado: pendiente
   - nombre: "U. Complutense de Madrid"
     url: https://www.ucm.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.ucm.es/cfp/master-formacion-permanente
+    estado: pendiente
   - nombre: "U. Autónoma de Madrid"
     url: https://www.uam.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # redirige a: https://www.uam.es/uam/inicio
+    estado: pendiente
   - nombre: "U. Rey Juan Carlos"
     url: https://www.urjc.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.urjc.es/estudios/formacion-continua
+    estado: pendiente
   - nombre: "U. de Alcalá"
     url: https://www.uah.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.uah.es/es/admision-y-ayudas/formacion-permanente/
-    # redirige a: https://www.uah.es/es/
+    estado: pendiente
   - nombre: "U. de Murcia"
     url: https://www.um.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.um.es/web/centrodeformacion/
+    estado: pendiente
   - nombre: "U. Pública de Navarra"
     url: https://www.unavarra.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.unavarra.es/sites/formacion-permanente/home.html
-    # redirige a: https://www.unavarra.es/portada
+    estado: pendiente
   - nombre: "U. del País Vasco / EHU"
     url: https://www.ehu.eus/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.ehu.eus/es/web/ikasi/
-    # redirige a: https://www.ehu.eus/es/
+    estado: pendiente
 
   # ---------- Universidades privadas ----------
   - nombre: "U. de Navarra"
@@ -957,136 +831,115 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.unav.edu/informacion-legal
+    estado: pendiente
   - nombre: "U. CEU San Pablo"
     url: https://www.uspceu.com/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: pendiente
   - nombre: "U. CEU Cardenal Herrera"
     url: https://www.uchceu.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: pendiente
   - nombre: "U. CEU Fernando III"
     url: https://www.ceufernandoiii.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
   - nombre: "U. Abat Oliba CEU"
     url: https://www.uaoceu.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: pendiente
   - nombre: "U. Europea de Madrid"
     url: https://universidadeuropea.com/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: pendiente
   - nombre: "U. Francisco de Vitoria"
     url: https://www.ufv.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.ufv.es/estudiar-en-ufv/otras-formaciones/
-    # RSS: https://www.ufv.es/feed/
+    estado: pendiente
   - nombre: "U. Alfonso X el Sabio"
     url: https://www.uax.com/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.uax.com/politica-seguridad-informacion-grupo-uax
+    estado: pendiente
   - nombre: "U. Nebrija"
     url: https://www.nebrija.com/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.nebrija.com/solicitud-de-informacion/grados-postgrados/
+    estado: pendiente
   - nombre: "U. Camilo José Cela"
     url: https://www.ucjc.edu/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.ucjc.edu/curso-formacion-permanente/
-    # RSS: https://www.ucjc.edu/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.ucjc.edu%2F&format=xml
+    estado: pendiente
   - nombre: "U. Internacional de Catalunya"
     url: https://www.uic.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.uic.es/ca/universitat/altres/agenda-dactivitats
-    # redirige a: https://www.uic.es/ca
+    estado: pendiente
   - nombre: "U. Ramon Llull"
     url: https://www.url.edu/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.url.edu/ca/sala-de-premsa/recursos-audiovisuals
-    # redirige a: https://www.url.edu/ca
-    # RSS: https://www.url.edu/rss.xml
+    estado: pendiente
   - nombre: "U. de Vic - UCC"
     url: https://www.uvic.cat/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.uvic.cat/agenda
-    # RSS: https://www.uvic.cat/rss.xml
+    estado: pendiente
   - nombre: "U. Católica de Valencia"
     url: https://www.ucv.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.ucv.es/oferta-academica/otros-titulos-formacion-permanente
+    estado: pendiente
   - nombre: "U. Católica de Murcia (UCAM)"
     url: https://www.ucam.edu/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.ucam.edu/biblioteca/formacion
+    estado: pendiente
   - nombre: "U. Loyola"
     url: https://www.uloyola.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.uloyola.es/servicios/servicio-de-orientacion-e-informacion
-    # RSS: https://www.uloyola.es/blog/rss
+    estado: pendiente
   - nombre: "U. de Deusto"
     url: https://www.deusto.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: pendiente
   - nombre: "U. San Jorge"
     url: https://www.usj.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: pendiente
   - nombre: "U. Fernando Pessoa Canarias"
     url: https://www.ufpcanarias.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://ufpcanarias.com/formacion-permanente/
-    # redirige a: https://ufpcanarias.com/
-    # RSS: https://ufpcanarias.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fufpcanarias.com%2F&format=xml&lang=es
+    estado: pendiente
 
   # ---------- Grupos hospitalarios privados ----------
   - nombre: "Quirónsalud"
@@ -1094,58 +947,55 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: pendiente
   - nombre: "HM Hospitales"
     url: https://www.hmhospitales.com/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: pendiente
   - nombre: "Vithas"
     url: https://vithas.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://vithas.es/servicios-de-salud/chequeo-mujer-express/
-    # RSS: https://vithas.es/feed/
+    estado: pendiente
   - nombre: "Ribera Salud"
     url: https://riberasalud.com/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
   - nombre: "Clínica Universidad de Navarra"
     url: https://www.cun.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: pendiente
   - nombre: "IMED Hospitales"
     url: https://imedhospitales.com/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
   - nombre: "Grupo Recoletas"
     url: https://www.recoletas.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: pendiente
   - nombre: "Hospitales Ruber"
     url: https://www.ruber.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: pendiente
   - nombre: "Sanitas"
     url: https://www.sanitas.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.sanitas.es/seguros/seguro-mascotas
+    estado: pendiente
 
   # ---------- Colegios de médicos ----------
   - nombre: "CGCOM (Consejo General)"
@@ -1153,73 +1003,58 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: pendiente
   - nombre: "ICOMEM (Madrid)"
     url: https://www.icomem.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.icomem.es/seccion/A-F-Formacion-y-Actividades-Medicas
+    estado: pendiente
   - nombre: "COMB (Barcelona)"
     url: https://www.comb.cat/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # redirige a: https://www.comb.cat/ca/home
+    estado: pendiente
   - nombre: "ICOMV (Valencia)"
     url: https://www.comv.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.comv.es/informacion-ofertas-empleo/
-    # RSS: https://www.comv.es/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.comv.es%2F&format=xml
+    estado: pendiente
   - nombre: "COM Sevilla"
     url: https://www.comsevilla.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://comsevilla.es/curso-de-cirugia-menor-en-atencion-primaria-toma-de-decisiones-tecnicas-y-manejo-de-complicaciones/
-    # redirige a: https://comsevilla.es/
-    # RSS: https://comsevilla.es/feed/
+    estado: pendiente
   - nombre: "COM Zaragoza"
     url: https://www.comz.org/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.comz.org/asesoria-acreditacion-formacion-continuada
+    estado: pendiente
   - nombre: "COM Bizkaia"
     url: https://www.cmb.eus/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.cmb.eus/Canales/Listado.aspx?IdMenu=4f5f0ab2-f1f1-46e1-bc3a-79fa51409f66&Idioma=es-ES
-    # redirige a: https://www.cmb.eus/inicio
+    estado: pendiente
   - nombre: "COM Málaga"
     url: https://www.commalaga.com/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://commalaga.com/formacion-commalaga/enfermedades-pilosebaceas-iv-curso-de-dermatologia-para-ap-1-al-31-de-octubre/
-    # redirige a: https://commalaga.com/
-    # RSS: https://commalaga.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcommalaga.com%2F&format=xml
+    estado: pendiente
   - nombre: "COM A Coruña"
     url: https://www.comc.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
   - nombre: "COM Murcia"
     url: https://www.commurcia.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://commurcia.es/formacion.php/?section=otros
-    # redirige a: https://commurcia.es/
+    estado: pendiente

@@ -50,6 +50,26 @@ USER_AGENT = (
 TIMEOUT = 25
 HILOS = 6  # peticiones en paralelo; suficiente para ser rápido sin ser un abuso
 
+# Cabeceras. Nos identificamos como lo que somos, pero algunos servidores
+# tienen filtros rudimentarios que rechazan cualquier visitante que no parezca
+# un navegador y devuelven 406 o 403 — le pasa a SEMICYUC y a la SED, que en el
+# navegador se abren sin problema. Cuando eso ocurre reintentamos una vez con
+# cabeceras de navegador. Seguimos respetando robots.txt, que es donde una web
+# expresa de verdad si quiere o no ser rastreada.
+CAB_BOT = {
+    "User-Agent": USER_AGENT,
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "es-ES,es;q=0.9",
+}
+CAB_NAVEGADOR = {
+    "User-Agent": ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                   "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36"),
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "es-ES,es;q=0.9",
+}
+RECHAZO_POR_CABECERAS = (403, 406, 412, 429)
+
+
 # Palabras que delatan una página de agenda / formación
 PISTAS_AGENDA = [
     "agenda", "eventos", "evento", "cursos", "curso", "congresos", "congreso",
@@ -75,12 +95,10 @@ def normaliza(t: str) -> str:
 
 def descarga(url: str, timeout: int = TIMEOUT):
     try:
-        r = requests.get(
-            url,
-            headers={"User-Agent": USER_AGENT, "Accept-Language": "es-ES,es;q=0.9"},
-            timeout=timeout,
-            allow_redirects=True,
-        )
+        r = requests.get(url, headers=CAB_BOT, timeout=timeout, allow_redirects=True)
+        if r.status_code in RECHAZO_POR_CABECERAS:
+            r = requests.get(url, headers=CAB_NAVEGADOR, timeout=timeout,
+                             allow_redirects=True)
         if "charset" not in r.headers.get("Content-Type", "").lower():
             r.encoding = r.apparent_encoding or "utf-8"
         return r

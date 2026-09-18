@@ -55,6 +55,26 @@ PAUSA = 1.5          # segundos entre peticiones al MISMO dominio: cortesía bá
 TIMEOUT = 25
 HILOS = 6            # fuentes en paralelo (dominios distintos), para no eternizarse
 
+# Cabeceras. Nos identificamos como lo que somos, pero algunos servidores
+# tienen filtros rudimentarios que rechazan cualquier visitante que no parezca
+# un navegador y devuelven 406 o 403 — le pasa a SEMICYUC y a la SED, que en el
+# navegador se abren sin problema. Cuando eso ocurre reintentamos una vez con
+# cabeceras de navegador. Seguimos respetando robots.txt, que es donde una web
+# expresa de verdad si quiere o no ser rastreada.
+CAB_BOT = {
+    "User-Agent": USER_AGENT,
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "es-ES,es;q=0.9",
+}
+CAB_NAVEGADOR = {
+    "User-Agent": ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                   "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36"),
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "es-ES,es;q=0.9",
+}
+RECHAZO_POR_CABECERAS = (403, 406, 412, 429)
+
+
 # Reloj por dominio: varias webs a la vez, sí; varias peticiones seguidas al
 # mismo servidor, no. Es la diferencia entre rastrear con educación y martillear.
 _ultimo_acceso: dict[str, float] = defaultdict(float)
@@ -151,11 +171,10 @@ def robots_permite(url: str) -> bool:
 def descarga(url: str) -> requests.Response | None:
     espera_turno(url)
     try:
-        r = requests.get(
-            url,
-            headers={"User-Agent": USER_AGENT, "Accept-Language": "es-ES,es;q=0.9"},
-            timeout=TIMEOUT,
-        )
+        r = requests.get(url, headers=CAB_BOT, timeout=TIMEOUT)
+        if r.status_code in RECHAZO_POR_CABECERAS:
+            espera_turno(url)
+            r = requests.get(url, headers=CAB_NAVEGADOR, timeout=TIMEOUT)
         r.raise_for_status()
         # Si el servidor no declara charset, requests asume ISO-8859-1 y
         # destroza tildes y eñes. Detectamos la codificación real.
