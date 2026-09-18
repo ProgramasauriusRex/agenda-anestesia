@@ -1,0 +1,48 @@
+name: Agenda semanal
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rastrear:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+
+      - name: Rastrear
+        run: |
+          DIA=$(date +%d); MES=$(date +%m)
+          if [ "$DIA" -le 07 ] && echo "01 04 07 10" | grep -qw "$MES"; then
+            echo "Rastreo trimestral: niveles 1, 2 y 3"
+            python agenda.py --nivel 1 2 3 --meses 1 --diagnostico
+          elif [ "$DIA" -le 07 ]; then
+            echo "Rastreo mensual: niveles 1 y 2"
+            python agenda.py --nivel 1 2 --meses 1 --diagnostico
+          else
+            echo "Rastreo semanal: nivel 1"
+            python agenda.py --nivel 1 --meses 1
+          fi
+
+      - name: Guardar la agenda en el repositorio
+        run: |
+          git config user.name "agenda-bot"
+          git config user.email "agenda-bot@users.noreply.github.com"
+          git add salida estado.json fuentes.yaml
+          git diff --staged --quiet || git commit -m "Agenda $(date +%Y-%m-%d)"
+          git push
+
+      - name: Dejarla también como fichero descargable
+        uses: actions/upload-artifact@v4
+        with:
+          name: agenda-${{ github.run_number }}
+          path: salida/
