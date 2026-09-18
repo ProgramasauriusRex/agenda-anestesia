@@ -1,0 +1,1060 @@
+# ============================================================================
+#  FUENTES A RASTREAR
+#  Agenda de Anestesiología, Cuidados Críticos y Terapia del Dolor (España)
+# ============================================================================
+#
+#  ESTE ES EL ÚNICO FICHERO QUE NECESITAS TOCAR.
+#  Para añadir una web nueva, copia un bloque de cuatro líneas y cambia los datos.
+#
+#  nivel   1 = se revisa cada semana
+#          2 = se revisa una vez al mes
+#          3 = se revisa cada tres meses
+#  ambito  anestesia | criticos | dolor | mixto
+#  filtro  evento    -> basta con que el texto diga "curso", "congreso"...
+#          estricto  -> además tiene que mencionar la especialidad
+#                       (úsalo en webs generalistas: universidades, hospitales,
+#                        agregadores; si no, se llena de ruido)
+#  estado  pendiente -> aún no comprobada
+#          ok        -> comprobada y funcionando
+#          roto      -> no responde; el programa la salta
+#          El programa "verificar.py" pone este campo al día solo.
+#
+#  Total de fuentes en este fichero: 168
+# ============================================================================
+
+fuentes:
+
+  # ---------- Sociedades nacionales ----------
+  - nombre: "SEDAR — Congresos"
+    url: https://www.sedar.es/index.php/formacion/congresos
+    nivel: 1
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR — Noticias"
+    url: https://www.sedar.es/index.php/comunicacion/noticias
+    nivel: 1
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR — Convocatorias"
+    url: https://www.sedar.es/index.php/cientifico/convocatorias
+    nivel: 1
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "Campus SEDAR"
+    url: https://www.sedarcampus.es/
+    nivel: 1
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEMICYUC"
+    url: https://semicyuc.org/
+    nivel: 1
+    ambito: criticos
+    filtro: evento
+    estado: pendiente
+  - nombre: "SED — Sociedad Española del Dolor"
+    url: https://sedolor.es/
+    nivel: 1
+    ambito: dolor
+    filtro: evento
+    estado: pendiente
+  - nombre: "Formación SED"
+    url: https://formaciondolor.com/
+    nivel: 1
+    ambito: dolor
+    filtro: evento
+    estado: pendiente
+  - nombre: "Congreso SED"
+    url: https://congresosedolor.es/
+    nivel: 1
+    ambito: dolor
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEMDOR"
+    url: https://www.congresosemdor.es/
+    nivel: 1
+    ambito: dolor
+    filtro: evento
+    estado: pendiente
+  - nombre: "ESRA-España"
+    url: https://www.esra-spain.org/
+    nivel: 1
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+
+  # ---------- Agregadores especializados ----------
+  - nombre: "AnestesiaR — Cursos y Congresos"
+    url: https://anestesiar.org/Blog/otras-secciones/cursos-congresos/
+    nivel: 1
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+    nota: "Bloquea el rastreo automatizado (robots.txt). El programa lo detecta y lo salta."
+  - nombre: "Dolor.com — Congresos y jornadas"
+    url: https://www.dolor.com/formacion/congresos-y-jornadas
+    nivel: 1
+    ambito: dolor
+    filtro: evento
+    estado: pendiente
+
+  # ---------- SEDAR — Secciones y grupos de trabajo ----------
+  - nombre: "SEDAR · Ambulatoria"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/ambulatoria/formacion-ambulatoria
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · Calidad, Seguridad y Ética"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/seguridad-y-etica/formacion-calidad
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · Cardíaca, Vascular y Torácica"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/anestesia-cardiaca-vascular-y-toracica/formacion-cardiotoracica
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · Cuidados Intensivos"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/cuidados-intensivos/formacion-cuidados-intensivos
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · Docencia"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/docencia/formacion-docencia
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · Docencia — Tutores y residentes"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/docencia/formacion-tutores-docencia
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · Docencia — Simulación"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/docencia/simulacion-docencia
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · Dolor"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/dolor/formacion-dolor
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · Gestión Clínica"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gestion-clinica/formacion-gestion-clinica
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · Hemostasia y Fluidoterapia"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/hemostasia/formacion-hemostasia
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · Locorregional"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/locorregional/formacion-locorregional
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · Neurociencias"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/neurociencias/formacion-neurociencias
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · Obstetricia"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/obstetricia/formacion-obstetricia
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · Pediátrica"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/pediatrica/formacion-pediatrica
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · RCP"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/rcp/formacion-rcp
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · Vía Aérea"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/via-aerea/formacion-via
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · SEDAR Joven — Cursos presenciales"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/sedar-joven/cursos-presenciales-sedarjoven
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · GTipo"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gtipo/formacion-gtipo
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · GT Cooperación Internacional"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gt-cooperacion-internacional/formacion-gtcooperacion
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · GT Donación y Trasplante"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gt-donacion-y-trasplante/formacion
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · GT Enfermedades Raras"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gt-bloqueo-enfermedades-raras/formacion
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEDAR · GT Cuidados Paliativos"
+    url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gt-cuidados-paliativos/formacion-gt-paliativos
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+
+  # ---------- Anestesiología — sociedades autonómicas ----------
+  - nombre: "AAEAR (Andalucía-Extremadura)"
+    url: https://www.aaear.es
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SCARTD (Cataluña)"
+    url: https://www.scartd.org/?p=page%2Fhtml%2Fcongressos
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SBARTD (Baleares)"
+    url: http://www.sbartd.es
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "Anestesia Clínico Valencia"
+    url: http://www.anestesiaclinicovalencia.org
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "ANESTEX (Extremadura)"
+    url: http://anestex.com
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "Anestesia Asturias-Cantabria"
+    url: http://anestesiaasturiascantabria.blogspot.com
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SVNARTD (País Vasco-Navarra)"
+    url: https://www.svnrartd.com
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "AGARYD (Galicia)"
+    url: https://www.agaryd.es
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SADARTD (Aragón)"
+    url: https://sadartd.wordpress.com
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "ACMARTD (Castilla-La Mancha)"
+    url: http://acmartd.org
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SOCARTD (Canarias)"
+    url: https://socartd.es
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SOCLARTD (Castilla y León)"
+    url: http://www.soclartd.org.es
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+
+  # ---------- Medicina Intensiva — nacional ----------
+  - nombre: "SEEIUC"
+    url: https://seeiuc.org/
+    nivel: 2
+    ambito: criticos
+    filtro: evento
+    estado: pendiente
+  - nombre: "SECIP"
+    url: https://www.secip.com/
+    nivel: 2
+    ambito: criticos
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEMES"
+    url: https://www.semes.org/
+    nivel: 2
+    ambito: criticos
+    filtro: evento
+    estado: pendiente
+  - nombre: "CERCP"
+    url: https://cercp.org/
+    nivel: 2
+    ambito: criticos
+    filtro: evento
+    estado: pendiente
+  - nombre: "ONT — Formación"
+    url: https://www.ont.es/
+    nivel: 2
+    ambito: criticos
+    filtro: evento
+    estado: pendiente
+
+  # ---------- Medicina Intensiva — sociedades autonómicas ----------
+  - nombre: "SAMIUC (Andalucía)"
+    url: https://www.samiuc.es/
+    nivel: 2
+    ambito: criticos
+    filtro: evento
+    estado: pendiente
+  - nombre: "SARMICYUC (Aragón)"
+    url: https://www.sarmicyuc.com
+    nivel: 2
+    ambito: criticos
+    filtro: evento
+    estado: pendiente
+  - nombre: "SBMIUC (Baleares)"
+    url: https://www.sbmiuc.org
+    nivel: 2
+    ambito: criticos
+    filtro: evento
+    estado: pendiente
+  - nombre: "SOCAMICYUC (Canarias)"
+    url: https://www.socamicyuc.org
+    nivel: 2
+    ambito: criticos
+    filtro: evento
+    estado: pendiente
+  - nombre: "SCLMICYUC (Castilla y León)"
+    url: https://www.sclmicyuc.org
+    nivel: 2
+    ambito: criticos
+    filtro: evento
+    estado: pendiente
+  - nombre: "SOMIUCAM (Castilla-La Mancha)"
+    url: https://www.somiucam.org
+    nivel: 2
+    ambito: criticos
+    filtro: evento
+    estado: pendiente
+  - nombre: "SOCMIC (Cataluña)"
+    url: https://www.socmic.cat
+    nivel: 2
+    ambito: criticos
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEXMICYUC (Extremadura)"
+    url: https://www.sexmicyuc.com
+    nivel: 2
+    ambito: criticos
+    filtro: evento
+    estado: pendiente
+  - nombre: "SOGAMIUC (Galicia)"
+    url: https://www.sogamiuc.org
+    nivel: 2
+    ambito: criticos
+    filtro: evento
+    estado: pendiente
+  - nombre: "SOMIAMA (Madrid)"
+    url: https://www.somiama.org/
+    nivel: 2
+    ambito: criticos
+    filtro: evento
+    estado: pendiente
+  - nombre: "SNMIUC (Sociedad Norte)"
+    url: https://www.snmiuc.org
+    nivel: 2
+    ambito: criticos
+    filtro: evento
+    estado: pendiente
+  - nombre: "SOVAMICYUC (C. Valenciana)"
+    url: https://www.sovamicyuc.org
+    nivel: 2
+    ambito: criticos
+    filtro: evento
+    estado: pendiente
+  - nombre: "SOMIUC (Murcia)"
+    url: https://www.somiuc.es
+    nivel: 2
+    ambito: criticos
+    filtro: evento
+    estado: pendiente
+
+  # ---------- Dolor y adyacentes ----------
+  - nombre: "SECPAL"
+    url: https://www.secpal.org/
+    nivel: 2
+    ambito: dolor
+    filtro: estricto
+    estado: pendiente
+  - nombre: "SETRI"
+    url: https://www.setri.es/
+    nivel: 2
+    ambito: dolor
+    filtro: estricto
+    estado: pendiente
+  - nombre: "SETH (Trombosis y Hemostasia)"
+    url: https://www.seth.es/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "SEMPSPH (Seguridad del paciente)"
+    url: https://www.sempsph.com/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "SECA (Calidad asistencial)"
+    url: https://www.calidadasistencial.es/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+
+  # ---------- Agregadores generalistas ----------
+  - nombre: "DimeCongresos"
+    url: https://dimecongresos.com/congresos-de-medicina-listado/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Hospitecnia — Agenda"
+    url: https://hospitecnia.com/agenda/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Revista de Congresos"
+    url: https://revistacongresos.com/eventos/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Mutual Médica — Congresos"
+    url: https://www.mutualmedica.com/post/mutualmedica/calendario-congresos-medicina-espana
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Redacción Médica"
+    url: https://www.redaccionmedica.com/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "ConSalud"
+    url: https://www.consalud.es/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+
+  # ---------- Servicios autonómicos de salud — formación (capa hospitalaria) ----------
+  - nombre: "Sacyl — Jornadas y eventos (Castilla y León)"
+    url: https://www.saludcastillayleon.es/profesionales/es/jornadas-eventos
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Acadèmia de Ciències Mèdiques (Cataluña-Baleares)"
+    url: https://www.academia.cat/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "IAVANTE (Andalucía)"
+    url: https://www.iavante.es/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "ACIS — Axencia de Coñecemento en Saúde (Galicia)"
+    url: https://acis.sergas.es/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "EVES — Escola Valenciana d'Estudis de la Salut"
+    url: https://eves.san.gva.es/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "IACS (Aragón)"
+    url: https://www.iacs.es/formacion/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "FFIS / Murciasalud (Murcia)"
+    url: https://www.ffis.es/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Osakidetza — Formación (País Vasco)"
+    url: https://www.osakidetza.euskadi.eus/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Comunidad de Madrid — Formación sanitaria"
+    url: https://www.comunidad.madrid/servicios/salud
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "SESCAM — Formación (Castilla-La Mancha)"
+    url: https://sescam.castillalamancha.es/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Servicio Canario de la Salud — Formación"
+    url: https://www3.gobiernodecanarias.org/sanidad/scs/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "SESPA (Asturias)"
+    url: https://www.astursalud.es/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "IDIVAL / SCS (Cantabria)"
+    url: https://www.idival.org/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "IB-Salut (Baleares)"
+    url: https://www.ibsalut.es/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "SES (Extremadura)"
+    url: https://saludextremadura.ses.es/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Rioja Salud"
+    url: https://www.riojasalud.es/
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Navarra — Salud, formación"
+    url: https://www.navarra.es/es/web/salud
+    nivel: 2
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+
+  # ---------- Universidades públicas ----------
+  - nombre: "U. de Sevilla"
+    url: https://www.us.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Granada"
+    url: https://www.ugr.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Córdoba"
+    url: https://www.uco.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Cádiz"
+    url: https://www.uca.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Málaga"
+    url: https://www.uma.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Almería"
+    url: https://www.ual.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Jaén"
+    url: https://www.ujaen.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Huelva"
+    url: https://www.uhu.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Zaragoza"
+    url: https://www.unizar.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Oviedo"
+    url: https://www.uniovi.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de les Illes Balears"
+    url: https://www.uib.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Las Palmas de Gran Canaria"
+    url: https://www.ulpgc.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de La Laguna"
+    url: https://www.ull.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Cantabria"
+    url: https://web.unican.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Castilla-La Mancha"
+    url: https://www.uclm.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Salamanca"
+    url: https://www.usal.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Valladolid"
+    url: https://www.uva.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Burgos"
+    url: https://www.ubu.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de León"
+    url: https://www.unileon.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Barcelona"
+    url: https://www.ub.edu/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Autònoma de Barcelona"
+    url: https://www.uab.cat/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Pompeu Fabra"
+    url: https://www.upf.edu/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Girona"
+    url: https://www.udg.edu/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Rovira i Virgili"
+    url: https://www.urv.cat/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Lleida"
+    url: https://www.udl.cat/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de València"
+    url: https://www.uv.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Miguel Hernández de Elche"
+    url: https://www.umh.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Alicante"
+    url: https://www.ua.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Jaume I"
+    url: https://www.uji.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Extremadura"
+    url: https://www.unex.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Santiago de Compostela"
+    url: https://www.usc.gal/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Complutense de Madrid"
+    url: https://www.ucm.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Autónoma de Madrid"
+    url: https://www.uam.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Rey Juan Carlos"
+    url: https://www.urjc.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Alcalá"
+    url: https://www.uah.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Murcia"
+    url: https://www.um.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Pública de Navarra"
+    url: https://www.unavarra.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. del País Vasco / EHU"
+    url: https://www.ehu.eus/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+
+  # ---------- Universidades privadas ----------
+  - nombre: "U. de Navarra"
+    url: https://www.unav.edu/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. CEU San Pablo"
+    url: https://www.uspceu.com/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. CEU Cardenal Herrera"
+    url: https://www.uchceu.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. CEU Fernando III"
+    url: https://www.ceufernandoiii.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Abat Oliba CEU"
+    url: https://www.uaoceu.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Europea de Madrid"
+    url: https://universidadeuropea.com/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Francisco de Vitoria"
+    url: https://www.ufv.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Alfonso X el Sabio"
+    url: https://www.uax.com/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Nebrija"
+    url: https://www.nebrija.com/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Camilo José Cela"
+    url: https://www.ucjc.edu/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Internacional de Catalunya"
+    url: https://www.uic.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Ramon Llull"
+    url: https://www.url.edu/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Vic - UCC"
+    url: https://www.uvic.cat/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Católica de Valencia"
+    url: https://www.ucv.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Católica de Murcia (UCAM)"
+    url: https://www.ucam.edu/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Loyola"
+    url: https://www.uloyola.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. de Deusto"
+    url: https://www.deusto.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. San Jorge"
+    url: https://www.usj.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Fernando Pessoa Canarias"
+    url: https://www.ufpcanarias.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+
+  # ---------- Grupos hospitalarios privados ----------
+  - nombre: "Quirónsalud"
+    url: https://www.quironsalud.com/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "HM Hospitales"
+    url: https://www.hmhospitales.com/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Vithas"
+    url: https://vithas.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Ribera Salud"
+    url: https://riberasalud.com/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Clínica Universidad de Navarra"
+    url: https://www.cun.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "IMED Hospitales"
+    url: https://imedhospitales.com/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Grupo Recoletas"
+    url: https://www.recoletas.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Hospitales Ruber"
+    url: https://www.ruber.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Sanitas"
+    url: https://www.sanitas.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+
+  # ---------- Colegios de médicos ----------
+  - nombre: "CGCOM (Consejo General)"
+    url: https://www.cgcom.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "ICOMEM (Madrid)"
+    url: https://www.icomem.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "COMB (Barcelona)"
+    url: https://www.comb.cat/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "ICOMV (Valencia)"
+    url: https://www.comv.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "COM Sevilla"
+    url: https://www.comsevilla.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "COM Zaragoza"
+    url: https://www.comz.org/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "COM Bizkaia"
+    url: https://www.cmb.eus/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "COM Málaga"
+    url: https://www.commalaga.com/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "COM A Coruña"
+    url: https://www.comc.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "COM Murcia"
+    url: https://www.commurcia.es/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
