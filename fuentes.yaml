@@ -1178,12 +1178,11 @@ fuentes:
     filtro: estricto
     estado: bloqueada
   - nombre: "Colegio de Médicos de Álava"
-    url: https://icoma.eus/
+    url: https://icoma.eus/formacion/jornadas-y-congresos/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://icoma.eus/formacion/jornadas-y-congresos/
+    estado: pendiente
     # RSS: https://icoma.eus/feed/
   - nombre: "Colegio de Médicos de Albacete"
     url: https://www.comalbacete.net/
@@ -1192,41 +1191,36 @@ fuentes:
     filtro: estricto
     estado: ok
   - nombre: "Colegio de Médicos de Alicante"
-    url: https://coma.es/
+    url: https://coma.es/servicio/formacion/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://coma.es/servicio/formacion/
+    estado: pendiente
     # RSS: https://coma.es/feed/
   - nombre: "Colegio de Médicos de Almería"
-    url: https://www.comalmeria.es/
+    url: https://www.comalmeria.es/formacion-medica
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.comalmeria.es/formacion-medica
+    estado: pendiente
   - nombre: "Colegio de Médicos de Asturias"
-    url: https://www.comast.es/
+    url: https://www.comast.es/cursos
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.comast.es/cursos
+    estado: pendiente
   - nombre: "Colegio de Médicos de Ávila"
-    url: https://www.icomav.es/
+    url: https://www.icomav.es/comformacion.html
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.icomav.es/comformacion.html
+    estado: pendiente
   - nombre: "Colegio de Médicos de Badajoz"
-    url: https://www.combadajoz.com/
+    url: https://www.combadajoz.com/formacion-fmc/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.combadajoz.com/formacion-fmc/
+    estado: pendiente
     # RSS: https://www.combadajoz.com/feed/
   - nombre: "Colegio de Médicos de Barcelona"
     url: https://www.comb.cat/
@@ -1252,12 +1246,11 @@ fuentes:
     # sugerencia: https://www.combu.es/eventos/jornadas-y-congresos/xix-jornadas-salud-y-modos-de-vida-ediren/
     # RSS: https://www.combu.es/feed/
   - nombre: "Colegio de Médicos de Cáceres"
-    url: https://comeca.org/
+    url: https://comeca.org/cursos-actividades/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://comeca.org/cursos-actividades/
+    estado: pendiente
     # RSS: https://comeca.org/feed/
   - nombre: "Colegio de Médicos de Cádiz"
     url: https://comcadiz.es/
@@ -1280,12 +1273,11 @@ fuentes:
     filtro: estricto
     estado: ok
   - nombre: "Colegio de Médicos de Ceuta"
-    url: https://comceuta.es/
+    url: https://comceuta.es/formacion/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://comceuta.es/formacion/
+    estado: pendiente
     # RSS: https://comceuta.es/feed/
   - nombre: "Colegio de Médicos de Ciudad Real"
     url: https://comciudadreal.es/
@@ -1302,30 +1294,27 @@ fuentes:
     # sugerencia: https://www.comcordoba.com/formacion-emergencias-comcordoba/
     # RSS: https://www.comcordoba.com/feed/
   - nombre: "Colegio de Médicos de A Coruña"
-    url: https://comc-es.org/
+    url: https://comc-es.org/formacion/cursos-colegio/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://comc-es.org/formacion/cursos-colegio/
+    estado: pendiente
     # RSS: https://comc-es.org/feed/
   - nombre: "Colegio de Médicos de Cuenca"
-    url: https://www.comcuenca.org/
+    url: https://comcuenca.org/el-colegio/vocalias/formacion-y-o-posgrado/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://comcuenca.org/el-colegio/vocalias/formacion-y-o-posgrado/
+    estado: pendiente
     # redirige a: https://comcuenca.org/
     # RSS: https://comcuenca.org/feed/
     nota: "Dirección sin confirmar: no aparece en buscadores. Si el verificador la marca rota, búscala a mano."
   - nombre: "Colegio de Médicos de Gipuzkoa"
-    url: https://www.comgi.eus/
+    url: https://www.comgi.eus/es_formacion.aspx
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.comgi.eus/es_formacion.aspx
+    estado: pendiente
   - nombre: "Colegio de Médicos de Girona"
     url: https://www.comg.cat/
     nivel: 2
@@ -1334,40 +1323,37 @@ fuentes:
     estado: ok
     # sugerencia: https://www.comg.cat/col-legiats/formacio/cursos-que-et-poden-interessar-2
   - nombre: "Colegio de Médicos de Granada"
-    url: https://comgranada.com/
+    url: https://comgranada.com/formacion/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://comgranada.com/formacion/
+    estado: pendiente
     # RSS: https://comgranada.com/feed/
   - nombre: "Colegio de Médicos de Guadalajara"
-    url: http://formacion.comguada.es/
+    url: https://www.comguada.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
   - nombre: "Colegio de Médicos de Huelva"
-    url: https://comhuelva.com/
+    url: https://comhuelva.com/formacion/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://comhuelva.com/formacion/
+    estado: pendiente
     # RSS: https://comhuelva.com/feed/
   - nombre: "Colegio de Médicos de Huesca"
-    url: https://comhuesca.es/
+    url: https://colegiomedicoshuesca.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
   - nombre: "Colegio de Médicos de Illes Balears"
-    url: https://www.comib.com/
+    url: https://www.comib.com/formacion/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.comib.com/formacion/
+    estado: pendiente
     # RSS: https://www.comib.com/feed/
   - nombre: "Colegio de Médicos de Jaén"
     url: https://www.colmedjaen.es/
@@ -1392,12 +1378,11 @@ fuentes:
     estado: ok
     # sugerencia: https://www.medicoslaspalmas.es/index.php/formacion/cursos-colegio/informacion-cursos-colegio
   - nombre: "Colegio de Médicos de León"
-    url: https://www.comleon.es/
+    url: https://www.comleon.es/formacion/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.comleon.es/formacion/
+    estado: pendiente
     # RSS: https://www.comleon.es/feed/
   - nombre: "Colegio de Médicos de Lleida"
     url: https://www.comll.cat/es/
@@ -1427,12 +1412,11 @@ fuentes:
     # redirige a: https://commalaga.com/
     # RSS: https://commalaga.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcommalaga.com%2F&format=xml
   - nombre: "Colegio de Médicos de Melilla"
-    url: https://commelilla.es/
+    url: https://commelilla.es/cursos-de-formacion/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://commelilla.es/cursos-de-formacion/
+    estado: pendiente
     # RSS: https://commelilla.es/feed/
   - nombre: "Colegio de Médicos de Murcia"
     url: https://www.commurcia.es/
@@ -1443,20 +1427,18 @@ fuentes:
     # sugerencia: https://commurcia.es/formacion.php/?section=otros
     # redirige a: https://commurcia.es/
   - nombre: "Colegio de Médicos de Navarra"
-    url: https://colegiodemedicos.es/
+    url: https://colegiodemedicos.es/actividades/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://colegiodemedicos.es/actividades/
+    estado: pendiente
     # RSS: https://colegiodemedicos.es/feed/
   - nombre: "Colegio de Médicos de Ourense"
-    url: https://www.cmourense.org/
+    url: https://www.cmourense.org/es/eventos
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.cmourense.org/es/eventos
+    estado: pendiente
   - nombre: "Colegio de Médicos de Palencia"
     url: https://www.compalencia.org/
     nivel: 2
@@ -1466,12 +1448,11 @@ fuentes:
     # sugerencia: https://www.compalencia.org/Programa-Encuentros-de-formacion-en-Medicina-de-Familia-Palencia.pdf
     # redirige a: https://www.compalencia.org/compalencia
   - nombre: "Colegio de Médicos de Pontevedra"
-    url: https://www.cmpont.es/
+    url: https://www.cmpont.es/colegio/congresos
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.cmpont.es/colegio/congresos
+    estado: pendiente
   - nombre: "Colegio de Médicos de Salamanca"
     url: https://comsalamanca.es/formacion
     nivel: 2
@@ -1480,12 +1461,11 @@ fuentes:
     estado: ok
     # sugerencia: https://comsalamanca.es/formacion/151257-iii-congreso-internacional-en-innovacion-investigacion-formacion-y-transferencia-del-conocimiento-en-ciencias-de-la-salud
   - nombre: "Colegio de Médicos de Santa Cruz de Tenerife"
-    url: https://medicostenerife.es/
+    url: https://medicostenerife.es/calendario-de-eventos-y-cursos/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: http://medicostenerife.es/calendario-de-eventos-y-cursos/
+    estado: pendiente
     # RSS: https://medicostenerife.es/feed/
   - nombre: "Colegio de Médicos de Segovia"
     url: https://www.comsegovia.com/
@@ -1503,19 +1483,17 @@ fuentes:
     # redirige a: https://comsevilla.es/
     # RSS: https://comsevilla.es/feed/
   - nombre: "Colegio de Médicos de Soria"
-    url: https://www.comsor.es/
+    url: https://www.comsor.es/agendaformacion.html
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.comsor.es/agendaformacion.html
+    estado: pendiente
   - nombre: "Colegio de Médicos de Tarragona"
-    url: https://comt.cat/
+    url: https://comt.cat/comt-formacio/
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://comt.cat/comt-formacio/
+    estado: pendiente
     # RSS: https://comt.cat/feed/
   - nombre: "Colegio de Médicos de Teruel"
     url: https://www.comteruel.es/
@@ -1549,12 +1527,11 @@ fuentes:
     filtro: estricto
     estado: bloqueada
   - nombre: "Colegio de Médicos de Zamora"
-    url: https://www.colmeza.com/
+    url: https://www.colmeza.com/index.php/servicios/formacion/cursos
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    # sugerencia: https://www.colmeza.com/index.php/servicios/formacion/cursos
+    estado: pendiente
     # RSS: https://www.colmeza.com/index.php?format=feed&type=rss
   - nombre: "Colegio de Médicos de Zaragoza"
     url: https://www.comz.org/
