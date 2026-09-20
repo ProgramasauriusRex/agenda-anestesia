@@ -1,9 +1,10 @@
 name: Agenda semanal
 
+# Cuándo se ejecuta solo:
 on:
   schedule:
-    - cron: "0 6 * * 1"
-  workflow_dispatch:
+    - cron: "0 6 * * 1"     # todos los lunes (06:00 UTC = 08:00 en España)
+  workflow_dispatch:         # y siempre que le des al botón "Run workflow"
 
 permissions:
   contents: write
@@ -19,19 +20,10 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt
 
+      # Todas las fuentes, todas las semanas. Los cursos que se muestran son
+      # los del próximo mes; el resto se guarda en memoria para cuando toque.
       - name: Rastrear
-        run: |
-          DIA=$(date +%d); MES=$(date +%m)
-          if [ "$DIA" -le 07 ] && echo "01 04 07 10" | grep -qw "$MES"; then
-            echo "Rastreo trimestral: niveles 1, 2 y 3"
-            python agenda.py --nivel 1 2 3 --meses 1 --diagnostico
-          elif [ "$DIA" -le 07 ]; then
-            echo "Rastreo mensual: niveles 1 y 2"
-            python agenda.py --nivel 1 2 --meses 1 --diagnostico
-          else
-            echo "Rastreo semanal: nivel 1"
-            python agenda.py --nivel 1 --meses 1
-          fi
+        run: python agenda.py --nivel 1 2 3 --meses 1 --diagnostico
 
       - name: Guardar la agenda en el repositorio
         run: |
