@@ -1,9 +1,9 @@
 # Verificación de fuentes — 20/09/2026
 
-- **Funcionan:** 167 de 211
-- **Con RSS** (las fiables): 75
+- **Funcionan:** 170 de 211
+- **Con RSS** (las fiables): 78
 - **Bloqueadas** por robots.txt: 27
-- **No responden:** 17
+- **No responden:** 14
 
 ## Fuentes con RSS — las sólidas
 
@@ -27,20 +27,23 @@ la entidad rediseña su web.
 | Colegio de Médicos de Cáceres | https://comeca.org/feed/ |
 | Colegio de Médicos de Córdoba | https://www.comcordoba.com/feed/ |
 | Colegio de Médicos de Granada | https://comgranada.com/feed/ |
+| Colegio de Médicos de Guadalajara | https://www.comguada.es/feed/ |
 | Colegio de Médicos de Huelva | https://comhuelva.com/feed/ |
+| Colegio de Médicos de Huesca | https://colegiomedicoshuesca.es/feed/ |
 | Colegio de Médicos de Illes Balears | https://www.comib.com/feed/ |
 | Colegio de Médicos de La Rioja | https://medicosrioja.com/feed/ |
 | Colegio de Médicos de León | https://www.comleon.es/feed/ |
 | Colegio de Médicos de Melilla | https://commelilla.es/feed/ |
 | Colegio de Médicos de Málaga | https://commalaga.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcommalaga.com%2F&format=xml |
 | Colegio de Médicos de Navarra | https://colegiodemedicos.es/feed/ |
+| Colegio de Médicos de Pontevedra | https://www.cmpont.es/colegio/congresos?format=feed&type=rss |
 | Colegio de Médicos de Santa Cruz de Tenerife | https://medicostenerife.es/feed/ |
 | Colegio de Médicos de Sevilla | https://comsevilla.es/feed/ |
 | Colegio de Médicos de Tarragona | https://comt.cat/feed/ |
 | Colegio de Médicos de Teruel | https://comteruel.com/index.php?format=feed&type=rss |
 | Colegio de Médicos de Toledo | https://www.comtoledo.org/feed/ |
 | Colegio de Médicos de Valencia | https://www.comv.es/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.comv.es%2F&format=xml |
-| Colegio de Médicos de Zamora | https://www.colmeza.com/index.php?format=feed&type=rss |
+| Colegio de Médicos de Zamora | https://www.colmeza.com/index.php/servicios/formacion/cursos?format=feed&type=rss |
 | Colegio de Médicos de Álava | https://icoma.eus/feed/ |
 | ConSalud | https://www.consalud.es/feed/ |
 | Congreso SED | https://congresosedolor.es/feed/ |
@@ -103,46 +106,41 @@ una página más concreta. Revísalas y, si son correctas, cámbialas en
 | Acadèmia de Ciències Mèdiques (Cataluña-Baleares) | https://www.academia.cat/agenda |
 | Anestesia Asturias-Cantabria | http://anestesiaasturiascantabria.blogspot.com/p/actividades-cientificas.html |
 | Anestesia Clínico Valencia | https://www.anestesiaclinicovalencia.org/agenda/recursos/ |
-| Colegio de Médicos de A Coruña | https://comc-es.org/formacion/cursos-colegio/ |
-| Colegio de Médicos de Alicante | https://coma.es/servicio/formacion/ |
-| Colegio de Médicos de Almería | https://www.comalmeria.es/formacion-medica |
-| Colegio de Médicos de Asturias | https://www.comast.es/cursos |
-| Colegio de Médicos de Badajoz | https://www.combadajoz.com/formacion-fmc/ |
+| Colegio de Médicos de Almería | https://www.comalmeria.es/%20cursos/2026/viii-jornadas-provinciales-de-bioetica-de-almeria |
+| Colegio de Médicos de Asturias | https://www.comast.es/eventos |
+| Colegio de Médicos de Badajoz | https://www.combadajoz.com/formacion-dirigida-a-tutores/ |
 | Colegio de Médicos de Bizkaia | https://www.cmb.eus/Canales/Listado.aspx?IdMenu=4f5f0ab2-f1f1-46e1-bc3a-79fa51409f66&Idioma=es-ES |
 | Colegio de Médicos de Burgos | https://www.combu.es/eventos/jornadas-y-congresos/xix-jornadas-salud-y-modos-de-vida-ediren/ |
 | Colegio de Médicos de Cantabria | https://www.comcantabria.es/formacion/como-dar-malas-noticias-recursos-ante-enfermedades-complejas-y-duelo-complicado/ |
-| Colegio de Médicos de Ceuta | https://comceuta.es/formacion/ |
-| Colegio de Médicos de Cuenca | https://comcuenca.org/el-colegio/vocalias/formacion-y-o-posgrado/ |
-| Colegio de Médicos de Cáceres | https://comeca.org/cursos-actividades/ |
+| Colegio de Médicos de Ceuta | https://comceuta.es/noticias-y-eventos/ |
+| Colegio de Médicos de Cáceres | https://comeca.org/formacion-fumeca/jornadas-divulgacion-cientifica/ |
 | Colegio de Médicos de Córdoba | https://www.comcordoba.com/formacion-emergencias-comcordoba/ |
-| Colegio de Médicos de Gipuzkoa | https://www.comgi.eus/es_formacion.aspx |
+| Colegio de Médicos de Gipuzkoa | https://www.comgi.eus/es_documentos_de_interes.aspx |
 | Colegio de Médicos de Girona | https://www.comg.cat/col-legiats/formacio/cursos-que-et-poden-interessar-2 |
-| Colegio de Médicos de Granada | https://comgranada.com/formacion/ |
-| Colegio de Médicos de Huelva | https://comhuelva.com/formacion/ |
-| Colegio de Médicos de Illes Balears | https://www.comib.com/formacion/ |
+| Colegio de Médicos de Granada | https://comgranada.com/category/formacion/congresos-y-jornadas/ |
+| Colegio de Médicos de Guadalajara | http://www.comguada.es/formacion/ |
+| Colegio de Médicos de Huelva | https://comhuelva.com/noticias-de-actualidad/ |
+| Colegio de Médicos de Huesca | https://colegiomedicoshuesca.es/formacion/ |
+| Colegio de Médicos de Illes Balears | https://www.comib.com/formacion/patronat/ |
 | Colegio de Médicos de Jaén | https://www.colmedjaen.es/noticias/la-aeem-celebra-el-iii-curso-de-formacion-continuada-con-un-enfoque-integral-sobre-menopausia-y-salud-femenina |
 | Colegio de Médicos de La Rioja | https://medicosrioja.com/formacion/ |
 | Colegio de Médicos de Las Palmas | https://www.medicoslaspalmas.es/index.php/formacion/cursos-colegio/informacion-cursos-colegio |
-| Colegio de Médicos de León | https://www.comleon.es/formacion/ |
-| Colegio de Médicos de Melilla | https://commelilla.es/cursos-de-formacion/ |
+| Colegio de Médicos de León | https://www.comleon.es/formacion/#content |
+| Colegio de Médicos de Melilla | https://commelilla.es/formacion/ |
 | Colegio de Médicos de Murcia | https://commurcia.es/formacion.php/?section=otros |
 | Colegio de Médicos de Málaga | https://commalaga.com/formacion-commalaga/enfermedades-pilosebaceas-iv-curso-de-dermatologia-para-ap-1-al-31-de-octubre/ |
-| Colegio de Médicos de Navarra | https://colegiodemedicos.es/actividades/ |
-| Colegio de Médicos de Ourense | https://www.cmourense.org/es/eventos |
+| Colegio de Médicos de Navarra | https://colegiodemedicos.es/sugerencias-formacion/ |
 | Colegio de Médicos de Palencia | https://www.compalencia.org/Programa-Encuentros-de-formacion-en-Medicina-de-Familia-Palencia.pdf |
-| Colegio de Médicos de Pontevedra | https://www.cmpont.es/colegio/congresos |
 | Colegio de Médicos de Salamanca | https://comsalamanca.es/formacion/151257-iii-congreso-internacional-en-innovacion-investigacion-formacion-y-transferencia-del-conocimiento-en-ciencias-de-la-salud |
-| Colegio de Médicos de Santa Cruz de Tenerife | http://medicostenerife.es/calendario-de-eventos-y-cursos/ |
+| Colegio de Médicos de Santa Cruz de Tenerife | https://medicostenerife.es/formacion/ |
 | Colegio de Médicos de Sevilla | https://comsevilla.es/curso-de-cirugia-menor-en-atencion-primaria-toma-de-decisiones-tecnicas-y-manejo-de-complicaciones/ |
-| Colegio de Médicos de Soria | https://www.comsor.es/agendaformacion.html |
-| Colegio de Médicos de Tarragona | https://comt.cat/comt-formacio/ |
+| Colegio de Médicos de Soria | https://www.comsor.es/congresos.html |
+| Colegio de Médicos de Tarragona | https://comt.cat/es/comt-formacion/ |
 | Colegio de Médicos de Teruel | https://comteruel.com/index.php/colegiados/noticias/exito-de-la-i-edicion-del-curso-de-formacion-en-manejo-de-heridas-en-urgencias-para-medicos-mir-3 |
 | Colegio de Médicos de Toledo | https://www.comtoledo.org/formacion-y-o-posgrado/ |
 | Colegio de Médicos de Valencia | https://www.comv.es/informacion-ofertas-empleo/ |
-| Colegio de Médicos de Zamora | https://www.colmeza.com/index.php/servicios/formacion/cursos |
 | Colegio de Médicos de Zaragoza | https://www.comz.org/asesoria-acreditacion-formacion-continuada |
-| Colegio de Médicos de Álava | https://icoma.eus/formacion/jornadas-y-congresos/ |
-| Colegio de Médicos de Ávila | https://www.icomav.es/comformacion.html |
+| Colegio de Médicos de Ávila | https://www.icomav.es/formacionexterna.html |
 | ConSalud | https://www.consalud.es/formacion |
 | Congreso SED | https://congresosedolor.es/congreso-vitoria/cursos-precongreso/ |
 | DimeCongresos | https://dimecongresos.com/congresos/congreso-investigacion-y-formacion-en-ciencia-sanitaria/ |
@@ -220,6 +218,7 @@ una página más concreta. Revísalas y, si son correctas, cámbialas en
 | U. de València | https://www.uv.es/uvweb/universitat/ca/agenda-uv/ajudes-cursos-proves-llengues-1285851282125/Esdeveniment.html?id=1286468430875 |
 | U. de Vic - UCC | https://www.uvic.cat/agenda |
 | U. de Zaragoza | https://www.unizar.es/consejo-de-direccion/vicerrector-de-innovacion-transferencia-y-formacion-permanente |
+| U. de les Illes Balears | https://www.uib.es/recerca |
 | U. del País Vasco / EHU | https://www.ehu.eus/es/web/ikasi/ |
 | Vithas | https://vithas.es/servicios-de-salud/chequeo-mujer-express/ |
 
@@ -265,8 +264,6 @@ o una caída puntual. Búscalas en Google y corrige la dirección en
 | Fuente | Dirección | Qué ha pasado |
 |---|---|---|
 | AGARYD (Galicia) | https://www.agaryd.es | ConnectTimeout: HTTPSConnectionPool(host='www.agaryd.es', port=443): Max retries excee |
-| Colegio de Médicos de Guadalajara | http://formacion.comguada.es/ | ConnectionError: HTTPConnectionPool(host='formacion.comguada.es', port=80): Max retries |
-| Colegio de Médicos de Huesca | https://comhuesca.es/ | ConnectionError: HTTPSConnectionPool(host='comhuesca.es', port=443): Max retries exceed |
 | Comunidad de Madrid — Formación sanitaria | https://www.comunidad.madrid/salud | HTTP 404 |
 | IDIVAL / SCS (Cantabria) | https://www.idival.org/ | SSLError: HTTPSConnectionPool(host='www.idival.org', port=443): Max retries exce |
 | IMED Hospitales | https://imedhospitales.com/ | SSLError: HTTPSConnectionPool(host='imedhospitales.com', port=443): Max retries  |
@@ -280,4 +277,3 @@ o una caída puntual. Búscalas en Google y corrige la dirección en
 | SOVAMICYUC (C. Valenciana) | https://www.sovamicyuc.org | ConnectionError: HTTPSConnectionPool(host='www.sovamicyuc.org', port=443): Max retries  |
 | U. CEU Fernando III | https://www.ceufernandoiii.es/ | ConnectionError: HTTPSConnectionPool(host='www.ceufernandoiii.es', port=443): Max retri |
 | U. de Barcelona | https://www.ub.edu/ | HTTP 403 |
-| U. de les Illes Balears | https://www.uib.es/ | ConnectTimeout: HTTPSConnectionPool(host='www.uib.es', port=443): Max retries exceeded |
