@@ -1,9 +1,9 @@
 # Verificación de fuentes — 20/09/2026
 
-- **Funcionan:** 170 de 211
-- **Con RSS** (las fiables): 78
+- **Funcionan:** 169 de 211
+- **Con RSS** (las fiables): 73
 - **Bloqueadas** por robots.txt: 27
-- **No responden:** 14
+- **No responden:** 15
 
 ## Fuentes con RSS — las sólidas
 
@@ -59,27 +59,22 @@ la entidad rediseña su web.
 | SARMICYUC (Aragón) | https://sarmicyuc.com/feed/ |
 | SCLMICYUC (Castilla y León) | https://sclmicyuc.org/feed/ |
 | SECA (Calidad asistencial) | https://calidadasistencial.es/feed/ |
-| SECIP | https://secip.com/feed/ |
 | SECPAL | https://www.secpal.org/feed/ |
 | SEEIUC | https://seeiuc.org/feed/ |
-| SEMDOR | https://www.congresosemdor.es/feed/ |
 | SEMES | https://www.semes.org/feed/ |
 | SEMICYUC | https://semicyuc.org/feed/ |
-| SETH (Trombosis y Hemostasia) | https://seth.es/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fseth.es%2F&format=xml |
 | SETRI | https://setri.es/feed/ |
 | SOCARTD (Canarias) | https://socartd.es/feed/ |
 | SOGAMIUC (Galicia) | https://sogamiuc.org/feed/ |
 | SOMIAMA (Madrid) | https://www.somiama.org/WordPress/?feed=rss2 |
 | SOMIUCAM (Castilla-La Mancha) | https://somiucam.org/feed/ |
 | SVNARTD (País Vasco-Navarra) | https://www.svnrartd.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.svnrartd.com%2F&format=xml |
-| U. Camilo José Cela | https://www.ucjc.edu/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.ucjc.edu%2F&format=xml |
-| U. Fernando Pessoa Canarias | https://ufpcanarias.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fufpcanarias.com%2F&format=xml&lang=es |
+| Servicio Canario de la Salud — Formación | https://www3.gobiernodecanarias.org/noticias/feed/ |
 | U. Francisco de Vitoria | https://www.ufv.es/feed/ |
 | U. Loyola | https://www.uloyola.es/blog/rss |
 | U. Ramon Llull | https://www.url.edu/rss.xml |
 | U. de Alicante | https://www.ua.es/es/universidad-de-alicante.rss |
 | U. de Cantabria | https://web.unican.es/_vti_bin/spsdisco.aspx |
-| U. de Cádiz | https://www.uca.es/feed/ |
 | U. de Granada | https://www.ugr.es/rss.xml |
 | U. de Huelva | https://www.uhu.es/rss.xml |
 | U. de Jaén | https://www.ujaen.es/rss.xml |
@@ -162,15 +157,12 @@ una página más concreta. Revísalas y, si son correctas, cámbialas en
 | SCARTD (Cataluña) | https://www.scartd.org/?p=page/html/extraacademiques |
 | SCLMICYUC (Castilla y León) | https://sclmicyuc.org/pagina-2/ |
 | SECA (Calidad asistencial) | https://calidadasistencial.es/noticias_/ |
-| SECIP | https://secip.com/proximos-cursos/ |
 | SECPAL | https://www.secpal.org/formacion-y-congresos/ |
 | SEEIUC | https://seeiuc.org/asociese/ventajas/formacion-continuada-incluida/ |
-| SEMDOR | https://www.congresosemdor.es/inicio-2026/ |
 | SEMES | https://www.semes.org/socios/ |
 | SEMICYUC | https://semicyuc.org/events/ |
 | SES (Extremadura) | https://saludextremadura.ses.es:443/web/informacion-legal |
 | SESPA (Asturias) | https://www.astursalud.es/categorias/-/categorias/profesionales/04000gestion-del-conocimiento/02000formacion/04000sesiones-jornadas-y-congresos |
-| SETH (Trombosis y Hemostasia) | https://seth.es/evento/xvi-curso-internacional-de-formacion-continuada-en-hemofilia-y-otras-coagulopatias/ |
 | SETRI | https://setri.es/actividades |
 | SOCARTD (Canarias) | https://socartd.es/xxiv-jornadas-canarias-de-anestesia-reanimacion-y-terapeutica-del-dolor/ |
 | SOCMIC (Cataluña) | https://www.socmic.cat/?p=page/html/documents |
@@ -181,11 +173,9 @@ una página más concreta. Revísalas y, si son correctas, cámbialas en
 | Sanitas | https://www.sanitas.es/seguros/seguro-mascotas |
 | U. Alfonso X el Sabio | https://www.uax.com/politica-seguridad-informacion-grupo-uax |
 | U. Autònoma de Barcelona | https://www.uab.cat/web/estudis/mooc-1345667655947.html |
-| U. Camilo José Cela | https://www.ucjc.edu/curso-formacion-permanente/ |
 | U. Católica de Murcia (UCAM) | https://www.ucam.edu/biblioteca/formacion |
 | U. Católica de Valencia | https://www.ucv.es/oferta-academica/otros-titulos-formacion-permanente |
 | U. Complutense de Madrid | https://www.ucm.es/cfp/master-formacion-permanente |
-| U. Fernando Pessoa Canarias | https://ufpcanarias.com/formacion-permanente/ |
 | U. Francisco de Vitoria | https://www.ufv.es/estudiar-en-ufv/otras-formaciones/ |
 | U. Internacional de Catalunya | https://www.uic.es/ca/universitat/altres/agenda-dactivitats |
 | U. Jaume I | https://www.uji.es/serveis/oipep/base/programes/ofertes-ocupacio/ocuparty/202627/mtservicios/ |
@@ -200,7 +190,6 @@ una página más concreta. Revísalas y, si son correctas, cámbialas en
 | U. de Almería | https://www.ual.es/cursosdeverano |
 | U. de Burgos | https://www.ubu.es/titulos-propios-por-categoria/masteres-de-formacion-permanente |
 | U. de Cantabria | https://web.unican.es/cursosdeverano |
-| U. de Cádiz | https://www.uca.es/evento/ |
 | U. de Girona | https://www.udg.edu/ca/viu/udgsalut/recursos |
 | U. de Granada | https://www.ugr.es/estudiantes/informacion-general |
 | U. de Huelva | https://www.uhu.es/eventos/jornadas-de-bienvenida-curso-20262027 |
@@ -277,3 +266,4 @@ o una caída puntual. Búscalas en Google y corrige la dirección en
 | SOVAMICYUC (C. Valenciana) | https://www.sovamicyuc.org | ConnectionError: HTTPSConnectionPool(host='www.sovamicyuc.org', port=443): Max retries  |
 | U. CEU Fernando III | https://www.ceufernandoiii.es/ | ConnectionError: HTTPSConnectionPool(host='www.ceufernandoiii.es', port=443): Max retri |
 | U. de Barcelona | https://www.ub.edu/ | HTTP 403 |
+| U. de Cádiz | https://www.uca.es/ | ConnectTimeout: HTTPSConnectionPool(host='www.uca.es', port=443): Max retries exceeded |

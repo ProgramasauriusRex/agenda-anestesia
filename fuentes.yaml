@@ -31,25 +31,28 @@ fuentes:
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR — Noticias"
     url: https://www.sedar.es/index.php/comunicacion/noticias
     nivel: 1
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR — Convocatorias"
     url: https://www.sedar.es/index.php/cientifico/convocatorias
     nivel: 1
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "Campus SEDAR"
     url: https://www.sedarcampus.es/
     nivel: 1
     ambito: anestesia
     filtro: evento
     estado: ok
-    # redirige a: https://campussedar.es
+    feed: none
   - nombre: "SEMICYUC"
     url: https://semicyuc.org/
     nivel: 1
@@ -58,13 +61,13 @@ fuentes:
     estado: ok
     feed: https://semicyuc.org/feed/
     # sugerencia: https://semicyuc.org/events/
-    # RSS: https://semicyuc.org/feed/
   - nombre: "SED — Sociedad Española del Dolor"
     url: https://sedolor.es/
     nivel: 1
     ambito: dolor
     filtro: evento
     estado: bloqueada
+    feed: none
   - nombre: "Formación SED"
     url: https://formaciondolor.com/
     nivel: 1
@@ -73,7 +76,6 @@ fuentes:
     estado: ok
     feed: https://formaciondolor.com/feed/
     # sugerencia: https://formaciondolor.com/congresos/congreso-vitoria-2026/
-    # RSS: https://formaciondolor.com/feed/
   - nombre: "Congreso SED"
     url: https://congresosedolor.es/
     nivel: 1
@@ -82,22 +84,20 @@ fuentes:
     estado: ok
     feed: https://congresosedolor.es/feed/
     # sugerencia: https://congresosedolor.es/congreso-vitoria/cursos-precongreso/
-    # RSS: https://congresosedolor.es/feed/
   - nombre: "SEMDOR"
     url: https://www.congresosemdor.es/
     nivel: 1
     ambito: dolor
     filtro: evento
     estado: ok
-    feed: https://www.congresosemdor.es/feed/
-    # sugerencia: https://www.congresosemdor.es/inicio-2026/
-    # RSS: https://www.congresosemdor.es/feed/
+    feed: none
   - nombre: "ESRA-España"
     url: https://www.esra-spain.org/
     nivel: 1
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
 
   # ---------- Agregadores especializados ----------
   - nombre: "AnestesiaR — Cursos y Congresos"
@@ -106,6 +106,7 @@ fuentes:
     ambito: anestesia
     filtro: evento
     estado: bloqueada
+    feed: none
     nota: "Bloquea el rastreo automatizado (robots.txt). El programa lo detecta y lo salta."
   - nombre: "Dolor.com — Congresos y jornadas"
     url: https://www.dolor.com/formacion/congresos-y-jornadas
@@ -113,6 +114,7 @@ fuentes:
     ambito: dolor
     filtro: estricto
     estado: ok
+    feed: none
 
   # ---------- SEDAR — Secciones y grupos de trabajo ----------
   - nombre: "SEDAR · Ambulatoria"
@@ -121,132 +123,154 @@ fuentes:
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · Calidad, Seguridad y Ética"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/seguridad-y-etica/formacion-calidad
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · Cardíaca, Vascular y Torácica"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/anestesia-cardiaca-vascular-y-toracica/formacion-cardiotoracica
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · Cuidados Intensivos"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/cuidados-intensivos/formacion-cuidados-intensivos
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · Docencia"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/docencia/formacion-docencia
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · Docencia — Tutores y residentes"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/docencia/formacion-tutores-docencia
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · Docencia — Simulación"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/docencia/simulacion-docencia
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · Dolor"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/dolor/formacion-dolor
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · Gestión Clínica"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gestion-clinica/formacion-gestion-clinica
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · Hemostasia y Fluidoterapia"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/hemostasia/formacion-hemostasia
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · Locorregional"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/locorregional/formacion-locorregional
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · Neurociencias"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/neurociencias/formacion-neurociencias
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · Obstetricia"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/obstetricia/formacion-obstetricia
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · Pediátrica"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/pediatrica/formacion-pediatrica
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · RCP"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/rcp/formacion-rcp
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · Vía Aérea"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/via-aerea/formacion-via
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · SEDAR Joven — Cursos presenciales"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/sedar-joven/cursos-presenciales-sedarjoven
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · GTipo"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gtipo/formacion-gtipo
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · GT Cooperación Internacional"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gt-cooperacion-internacional/formacion-gtcooperacion
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · GT Donación y Trasplante"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gt-donacion-y-trasplante/formacion
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · GT Enfermedades Raras"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gt-bloqueo-enfermedades-raras/formacion
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
   - nombre: "SEDAR · GT Cuidados Paliativos"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gt-cuidados-paliativos/formacion-gt-paliativos
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
 
   # ---------- Anestesiología — sociedades autonómicas ----------
   - nombre: "AAEAR (Andalucía-Extremadura)"
@@ -255,6 +279,7 @@ fuentes:
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
     # sugerencia: https://www.aaear.es/informacion-legal/
   - nombre: "SCARTD (Cataluña)"
     url: https://www.scartd.org/?p=page%2Fhtml%2Fcongressos
@@ -262,6 +287,7 @@ fuentes:
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
     # sugerencia: https://www.scartd.org/?p=page/html/extraacademiques
   - nombre: "SBARTD (Baleares)"
     url: http://www.sbartd.es
@@ -269,6 +295,7 @@ fuentes:
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
     # sugerencia: https://www.sbartd.es/cursos.html
     # redirige a: https://www.sbartd.es/
   - nombre: "Anestesia Clínico Valencia"
@@ -280,13 +307,13 @@ fuentes:
     feed: https://www.anestesiaclinicovalencia.org/feed/
     # sugerencia: https://www.anestesiaclinicovalencia.org/agenda/recursos/
     # redirige a: https://www.anestesiaclinicovalencia.org/
-    # RSS: https://www.anestesiaclinicovalencia.org/feed/
   - nombre: "ANESTEX (Extremadura)"
     url: http://anestex.com
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: none
     # sugerencia: https://anestex.com/actividades
     # redirige a: https://anestex.com/
   - nombre: "Anestesia Asturias-Cantabria"
@@ -297,7 +324,6 @@ fuentes:
     estado: ok
     feed: http://anestesiaasturiascantabria.blogspot.com/feeds/posts/default
     # sugerencia: http://anestesiaasturiascantabria.blogspot.com/p/actividades-cientificas.html
-    # RSS: http://anestesiaasturiascantabria.blogspot.com/feeds/posts/default
   - nombre: "SVNARTD (País Vasco-Navarra)"
     url: https://www.svnrartd.com
     nivel: 2
@@ -306,13 +332,13 @@ fuentes:
     estado: ok
     feed: https://www.svnrartd.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.svnrartd.com%2F&format=xml
     # sugerencia: https://www.svnrartd.com/cat/agenda-cursos-y-congresos
-    # RSS: https://www.svnrartd.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.svnrartd.com%2F&format=xml
   - nombre: "AGARYD (Galicia)"
     url: https://www.agaryd.es
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: roto
+    feed: none
   - nombre: "SADARTD (Aragón)"
     url: https://sadartd.wordpress.com
     nivel: 2
@@ -321,7 +347,6 @@ fuentes:
     estado: ok
     feed: https://sadartd.wordpress.com/feed/
     # sugerencia: https://sadartd.wordpress.com/congreso-sadar-2016/
-    # RSS: https://sadartd.wordpress.com/feed/
   - nombre: "ACMARTD (Castilla-La Mancha)"
     url: http://acmartd.org
     nivel: 2
@@ -330,7 +355,6 @@ fuentes:
     estado: ok
     feed: http://acmartd.org/feed/
     # sugerencia: http://acmartd.org/reanudamos-el-curso-tomando-el-pulso-a-la-anestesiologia-en-castilla-la-mancha-2026/
-    # RSS: http://acmartd.org/feed/
   - nombre: "SOCARTD (Canarias)"
     url: https://socartd.es
     nivel: 2
@@ -339,13 +363,13 @@ fuentes:
     estado: ok
     feed: https://socartd.es/feed/
     # sugerencia: https://socartd.es/xxiv-jornadas-canarias-de-anestesia-reanimacion-y-terapeutica-del-dolor/
-    # RSS: https://socartd.es/feed/
   - nombre: "SOCLARTD (Castilla y León)"
     url: http://www.soclartd.org.es
     nivel: 2
     ambito: anestesia
     filtro: evento
     estado: roto
+    feed: none
 
   # ---------- Medicina Intensiva — nacional ----------
   - nombre: "SEEIUC"
@@ -356,17 +380,13 @@ fuentes:
     estado: ok
     feed: https://seeiuc.org/feed/
     # sugerencia: https://seeiuc.org/asociese/ventajas/formacion-continuada-incluida/
-    # RSS: https://seeiuc.org/feed/
   - nombre: "SECIP"
     url: https://www.secip.com/
     nivel: 2
     ambito: criticos
     filtro: evento
     estado: ok
-    feed: https://secip.com/feed/
-    # sugerencia: https://secip.com/proximos-cursos/
-    # redirige a: https://secip.com/
-    # RSS: https://secip.com/feed/
+    feed: none
   - nombre: "SEMES"
     url: https://www.semes.org/
     nivel: 2
@@ -375,7 +395,6 @@ fuentes:
     estado: ok
     feed: https://www.semes.org/feed/
     # sugerencia: https://www.semes.org/socios/
-    # RSS: https://www.semes.org/feed/
   - nombre: "CERCP"
     url: https://cercp.org/
     nivel: 2
@@ -383,7 +402,6 @@ fuentes:
     filtro: evento
     estado: ok
     feed: https://cercp.org/feed/
-    # RSS: https://cercp.org/feed/
   - nombre: "ONT — Formación"
     url: https://www.ont.es/
     nivel: 2
@@ -392,7 +410,6 @@ fuentes:
     estado: ok
     feed: https://www.ont.es/feed/
     # sugerencia: https://www.ont.es/informacion-a-los-profesionales-4/formacion-cursos-y-eventos-4-10/
-    # RSS: https://www.ont.es/feed/
 
   # ---------- Medicina Intensiva — sociedades autonómicas ----------
   - nombre: "SAMIUC (Andalucía)"
@@ -401,6 +418,7 @@ fuentes:
     ambito: criticos
     filtro: evento
     estado: roto
+    feed: none
   - nombre: "SARMICYUC (Aragón)"
     url: https://www.sarmicyuc.com
     nivel: 2
@@ -410,19 +428,20 @@ fuentes:
     feed: https://sarmicyuc.com/feed/
     # sugerencia: https://sarmicyuc.com/eventos/
     # redirige a: https://sarmicyuc.com/
-    # RSS: https://sarmicyuc.com/feed/
   - nombre: "SBMIUC (Baleares)"
     url: https://www.sbmiuc.org
     nivel: 2
     ambito: criticos
     filtro: evento
     estado: roto
+    feed: none
   - nombre: "SOCAMICYUC (Canarias)"
     url: https://www.socamicyuc.org
     nivel: 2
     ambito: criticos
     filtro: evento
     estado: roto
+    feed: none
   - nombre: "SCLMICYUC (Castilla y León)"
     url: https://www.sclmicyuc.org
     nivel: 2
@@ -432,7 +451,6 @@ fuentes:
     feed: https://sclmicyuc.org/feed/
     # sugerencia: https://sclmicyuc.org/pagina-2/
     # redirige a: https://sclmicyuc.org/
-    # RSS: https://sclmicyuc.org/feed/
   - nombre: "SOMIUCAM (Castilla-La Mancha)"
     url: https://www.somiucam.org
     nivel: 2
@@ -442,13 +460,13 @@ fuentes:
     feed: https://somiucam.org/feed/
     # sugerencia: https://somiucam.org/cursos/
     # redirige a: https://somiucam.org/
-    # RSS: https://somiucam.org/feed/
   - nombre: "SOCMIC (Cataluña)"
     url: https://www.socmic.cat
     nivel: 2
     ambito: criticos
     filtro: evento
     estado: ok
+    feed: none
     # sugerencia: https://www.socmic.cat/?p=page/html/documents
   - nombre: "SEXMICYUC (Extremadura)"
     url: https://www.sexmicyuc.com
@@ -456,6 +474,7 @@ fuentes:
     ambito: criticos
     filtro: evento
     estado: bloqueada
+    feed: none
   - nombre: "SOGAMIUC (Galicia)"
     url: https://www.sogamiuc.org
     nivel: 2
@@ -465,7 +484,6 @@ fuentes:
     feed: https://sogamiuc.org/feed/
     # sugerencia: https://sogamiuc.org/servicios-recursos/
     # redirige a: https://sogamiuc.org/
-    # RSS: https://sogamiuc.org/feed/
   - nombre: "SOMIAMA (Madrid)"
     url: https://www.somiama.org/
     nivel: 2
@@ -474,25 +492,27 @@ fuentes:
     estado: ok
     feed: https://www.somiama.org/WordPress/?feed=rss2
     # sugerencia: https://www.somiama.org/WordPress/?page_id=166
-    # RSS: https://www.somiama.org/WordPress/?feed=rss2
   - nombre: "SNMIUC (Sociedad Norte)"
     url: https://www.snmiuc.org
     nivel: 2
     ambito: criticos
     filtro: evento
     estado: roto
+    feed: none
   - nombre: "SOVAMICYUC (C. Valenciana)"
     url: https://www.sovamicyuc.org
     nivel: 2
     ambito: criticos
     filtro: evento
     estado: roto
+    feed: none
   - nombre: "SOMIUC (Murcia)"
     url: https://www.somiuc.es
     nivel: 2
     ambito: criticos
     filtro: evento
     estado: roto
+    feed: none
 
   # ---------- Dolor y adyacentes ----------
   - nombre: "SECPAL"
@@ -503,7 +523,6 @@ fuentes:
     estado: ok
     feed: https://www.secpal.org/feed/
     # sugerencia: https://www.secpal.org/formacion-y-congresos/
-    # RSS: https://www.secpal.org/feed/
   - nombre: "SETRI"
     url: https://www.setri.es/
     nivel: 2
@@ -513,23 +532,20 @@ fuentes:
     feed: https://setri.es/feed/
     # sugerencia: https://setri.es/actividades
     # redirige a: https://setri.es/
-    # RSS: https://setri.es/feed/
   - nombre: "SETH (Trombosis y Hemostasia)"
     url: https://www.seth.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
-    feed: https://seth.es/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fseth.es%2F&format=xml
-    # sugerencia: https://seth.es/evento/xvi-curso-internacional-de-formacion-continuada-en-hemofilia-y-otras-coagulopatias/
-    # redirige a: https://seth.es/
-    # RSS: https://seth.es/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fseth.es%2F&format=xml
+    feed: none
   - nombre: "SEMPSPH (Seguridad del paciente)"
     url: https://www.sempsph.com/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "SECA (Calidad asistencial)"
     url: https://www.calidadasistencial.es/
     nivel: 2
@@ -539,7 +555,6 @@ fuentes:
     feed: https://calidadasistencial.es/feed/
     # sugerencia: https://calidadasistencial.es/noticias_/
     # redirige a: https://calidadasistencial.es/
-    # RSS: https://calidadasistencial.es/feed/
 
   # ---------- Agregadores generalistas ----------
   - nombre: "DimeCongresos"
@@ -550,7 +565,6 @@ fuentes:
     estado: ok
     feed: https://dimecongresos.com/feed/
     # sugerencia: https://dimecongresos.com/congresos/congreso-investigacion-y-formacion-en-ciencia-sanitaria/
-    # RSS: https://dimecongresos.com/feed/
   - nombre: "Hospitecnia — Agenda"
     url: https://hospitecnia.com/agenda/
     nivel: 2
@@ -559,7 +573,6 @@ fuentes:
     estado: ok
     feed: https://hospitecnia.com/rss.xml
     # sugerencia: https://hospitecnia.com/agenda/jornadas-ingenieria-biomedica/
-    # RSS: https://hospitecnia.com/rss.xml
   - nombre: "Revista de Congresos"
     url: https://revistacongresos.com/
     nivel: 2
@@ -568,13 +581,13 @@ fuentes:
     estado: ok
     feed: https://revistacongresos.com/feed/
     # sugerencia: https://revistacongresos.com/calendario-de-congresos/
-    # RSS: https://revistacongresos.com/feed/
   - nombre: "Mutual Médica — Congresos"
     url: https://www.mutualmedica.com/post/mutualmedica/calendario-congresos-medicina-espana
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
   - nombre: "Redacción Médica"
     url: https://www.redaccionmedica.com/
     nivel: 2
@@ -583,7 +596,6 @@ fuentes:
     estado: ok
     feed: https://www.redaccionmedica.com/rss/
     # sugerencia: https://www.redaccionmedica.com/formacion/
-    # RSS: https://www.redaccionmedica.com/rss/
   - nombre: "ConSalud"
     url: https://www.consalud.es/
     nivel: 2
@@ -592,7 +604,6 @@ fuentes:
     estado: ok
     feed: https://www.consalud.es/feed/
     # sugerencia: https://www.consalud.es/formacion
-    # RSS: https://www.consalud.es/feed/
 
   # ---------- Servicios autonómicos de salud — formación (capa hospitalaria) ----------
   - nombre: "Sacyl — Jornadas y eventos (Castilla y León)"
@@ -601,12 +612,14 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
   - nombre: "Acadèmia de Ciències Mèdiques (Cataluña-Baleares)"
     url: https://www.academia.cat/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.academia.cat/agenda
   - nombre: "IAVANTE (Andalucía)"
     url: https://www.iavante.es/
@@ -614,6 +627,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.iavante.es/buscador-cursos/
   - nombre: "ACIS — Axencia de Coñecemento en Saúde (Galicia)"
     url: https://acis.sergas.es/
@@ -624,13 +638,13 @@ fuentes:
     feed: https://acis.sergas.gal/_vti_bin/spsdisco.aspx
     # sugerencia: https://acis.sergas.gal/cartafol/Formacion-continuada
     # redirige a: https://acis.sergas.gal/
-    # RSS: https://acis.sergas.gal/_vti_bin/spsdisco.aspx
   - nombre: "EVES — Escola Valenciana d'Estudis de la Salut"
     url: https://eves.san.gva.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://eves.san.gva.es/ca/formacio/sollicitar-cursos
     # redirige a: https://eves.san.gva.es/va/
   - nombre: "IACS (Aragón)"
@@ -641,13 +655,13 @@ fuentes:
     estado: ok
     feed: https://www.iacs.es/feed/
     # sugerencia: https://www.iacs.es/agenda-proximos-eventos/
-    # RSS: https://www.iacs.es/feed/
   - nombre: "FFIS / Murciasalud (Murcia)"
     url: https://www.ffis.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.ffis.es/ffis/buscadorCursos.jsf
   - nombre: "Osakidetza — Formación (País Vasco)"
     url: https://www.osakidetza.euskadi.eus/
@@ -655,6 +669,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # redirige a: https://www.osakidetza.euskadi.eus/ataria/
   - nombre: "Comunidad de Madrid — Formación sanitaria"
     url: https://www.comunidad.madrid/salud
@@ -662,24 +677,28 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: roto
+    feed: none
   - nombre: "SESCAM — Formación (Castilla-La Mancha)"
     url: https://sescam.castillalamancha.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: roto
+    feed: none
   - nombre: "Servicio Canario de la Salud — Formación"
     url: https://www3.gobiernodecanarias.org/sanidad/scs/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: https://www3.gobiernodecanarias.org/noticias/feed/
   - nombre: "SESPA (Asturias)"
     url: https://www.astursalud.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.astursalud.es/categorias/-/categorias/profesionales/04000gestion-del-conocimiento/02000formacion/04000sesiones-jornadas-y-congresos
     # redirige a: https://www.astursalud.es/astursalud
   - nombre: "IDIVAL / SCS (Cantabria)"
@@ -688,12 +707,14 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: roto
+    feed: none
   - nombre: "IB-Salut (Baleares)"
     url: https://www.ibsalut.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.ibsalut.es/professionals/recursos-humans
   - nombre: "SES (Extremadura)"
     url: https://saludextremadura.ses.es/
@@ -701,6 +722,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://saludextremadura.ses.es:443/web/informacion-legal
     # redirige a: https://saludextremadura.ses.es:443/web/
   - nombre: "Rioja Salud"
@@ -709,6 +731,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.riojasalud.es/profesionales/rrhh
   - nombre: "Navarra — Salud, formación"
     url: https://www.navarra.es/es/web/salud
@@ -716,6 +739,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
 
   # ---------- Universidades públicas ----------
   - nombre: "U. de Sevilla"
@@ -726,7 +750,6 @@ fuentes:
     estado: ok
     feed: https://www.us.es/rss.xml
     # sugerencia: https://www.us.es/trabaja-en-la-us/profesorado/informacion-general
-    # RSS: https://www.us.es/rss.xml
   - nombre: "U. de Granada"
     url: https://www.ugr.es/
     nivel: 3
@@ -735,22 +758,20 @@ fuentes:
     estado: ok
     feed: https://www.ugr.es/rss.xml
     # sugerencia: https://www.ugr.es/estudiantes/informacion-general
-    # RSS: https://www.ugr.es/rss.xml
   - nombre: "U. de Córdoba"
     url: https://www.uco.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "U. de Cádiz"
     url: https://www.uca.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    feed: https://www.uca.es/feed/
-    # sugerencia: https://www.uca.es/evento/
-    # RSS: https://www.uca.es/feed/
+    estado: roto
+    feed: none
   - nombre: "U. de Málaga"
     url: https://www.uma.es/
     nivel: 3
@@ -759,13 +780,13 @@ fuentes:
     estado: ok
     feed: https://www.uma.es/feed/
     # sugerencia: https://www.uma.es/masteres-oficiales/
-    # RSS: https://www.uma.es/feed/
   - nombre: "U. de Almería"
     url: https://www.ual.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.ual.es/cursosdeverano
   - nombre: "U. de Jaén"
     url: https://www.ujaen.es/
@@ -775,7 +796,6 @@ fuentes:
     estado: ok
     feed: https://www.ujaen.es/rss.xml
     # sugerencia: http://www.ujaen.es/estudios/oferta-academica/masteres
-    # RSS: https://www.ujaen.es/rss.xml
   - nombre: "U. de Huelva"
     url: https://www.uhu.es/
     nivel: 3
@@ -784,7 +804,6 @@ fuentes:
     estado: ok
     feed: https://www.uhu.es/rss.xml
     # sugerencia: https://www.uhu.es/eventos/jornadas-de-bienvenida-curso-20262027
-    # RSS: https://www.uhu.es/rss.xml
   - nombre: "U. de Zaragoza"
     url: https://www.unizar.es/
     nivel: 3
@@ -793,13 +812,13 @@ fuentes:
     estado: ok
     feed: https://www.unizar.es/rss.xml
     # sugerencia: https://www.unizar.es/consejo-de-direccion/vicerrector-de-innovacion-transferencia-y-formacion-permanente
-    # RSS: https://www.unizar.es/rss.xml
   - nombre: "U. de Oviedo"
     url: https://www.uniovi.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.uniovi.es/estudia/masteres/informacion
   - nombre: "U. de les Illes Balears"
     url: https://www.uib.es/
@@ -807,6 +826,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.uib.es/recerca
     # redirige a: https://www.uib.es/inici
   - nombre: "U. de Las Palmas de Gran Canaria"
@@ -815,6 +835,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "U. de La Laguna"
     url: https://www.ull.es/
     nivel: 3
@@ -823,7 +844,6 @@ fuentes:
     estado: ok
     feed: https://www.ull.es/feed/
     # sugerencia: https://www.ull.es/portal/noticias/2026/astrofisica-un-area-puntera-en-investigacion-y-formacion/
-    # RSS: https://www.ull.es/feed/
   - nombre: "U. de Cantabria"
     url: https://web.unican.es/
     nivel: 3
@@ -832,19 +852,20 @@ fuentes:
     estado: ok
     feed: https://web.unican.es/_vti_bin/spsdisco.aspx
     # sugerencia: https://web.unican.es/cursosdeverano
-    # RSS: https://web.unican.es/_vti_bin/spsdisco.aspx
   - nombre: "U. de Castilla-La Mancha"
     url: https://www.uclm.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "U. de Salamanca"
     url: https://www.usal.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://usal.es/informacion-orientacion
     # redirige a: https://usal.es/
   - nombre: "U. de Valladolid"
@@ -853,6 +874,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # redirige a: https://www.uva.es/export/sites/uva/
   - nombre: "U. de Burgos"
     url: https://www.ubu.es/
@@ -860,6 +882,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.ubu.es/titulos-propios-por-categoria/masteres-de-formacion-permanente
   - nombre: "U. de León"
     url: https://www.unileon.es/
@@ -869,19 +892,20 @@ fuentes:
     estado: ok
     feed: https://www.unileon.es/rss.xml
     # sugerencia: https://www.unileon.es/estudiantes/oferta-academica/masteres
-    # RSS: https://www.unileon.es/rss.xml
   - nombre: "U. de Barcelona"
     url: https://www.ub.edu/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: roto
+    feed: none
   - nombre: "U. Autònoma de Barcelona"
     url: https://www.uab.cat/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.uab.cat/web/estudis/mooc-1345667655947.html
   - nombre: "U. Pompeu Fabra"
     url: https://www.upf.edu/
@@ -889,12 +913,14 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "U. de Girona"
     url: https://www.udg.edu/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.udg.edu/ca/viu/udgsalut/recursos
     # redirige a: https://www.udg.edu/ca/
   - nombre: "U. Rovira i Virgili"
@@ -903,6 +929,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.urv.cat/ca/internacional/formacio/
     # redirige a: https://www.urv.cat/ca/
   - nombre: "U. de Lleida"
@@ -911,6 +938,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.udl.cat/ca/serveis/il/cursos/
     # redirige a: https://www.udl.cat/ca/
   - nombre: "U. de València"
@@ -919,6 +947,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.uv.es/uvweb/universitat/ca/agenda-uv/ajudes-cursos-proves-llengues-1285851282125/Esdeveniment.html?id=1286468430875
   - nombre: "U. Miguel Hernández de Elche"
     url: https://www.umh.es/
@@ -926,6 +955,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.umh.es/agenda/eventos_es.html
   - nombre: "U. de Alicante"
     url: https://www.ua.es/
@@ -934,13 +964,13 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.ua.es/es/universidad-de-alicante.rss
-    # RSS: https://www.ua.es/es/universidad-de-alicante.rss
   - nombre: "U. Jaume I"
     url: https://www.uji.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.uji.es/serveis/oipep/base/programes/ofertes-ocupacio/ocuparty/202627/mtservicios/
   - nombre: "U. de Extremadura"
     url: https://www.unex.es/
@@ -948,12 +978,14 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "U. de Santiago de Compostela"
     url: https://www.usc.gal/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.usc.gal/gl/estudos/cursos-congresos
     # redirige a: https://www.usc.gal/gl
   - nombre: "U. Complutense de Madrid"
@@ -962,6 +994,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.ucm.es/cfp/master-formacion-permanente
   - nombre: "U. Autónoma de Madrid"
     url: https://www.uam.es/
@@ -969,6 +1002,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # redirige a: https://www.uam.es/uam/inicio
   - nombre: "U. Rey Juan Carlos"
     url: https://www.urjc.es/
@@ -976,6 +1010,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.urjc.es/estudios/formacion-continua
   - nombre: "U. de Alcalá"
     url: https://www.uah.es/
@@ -983,6 +1018,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.uah.es/es/admision-y-ayudas/formacion-permanente/
     # redirige a: https://www.uah.es/es/
   - nombre: "U. de Murcia"
@@ -991,6 +1027,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.um.es/web/centrodeformacion/
   - nombre: "U. Pública de Navarra"
     url: https://www.unavarra.es/
@@ -998,6 +1035,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.unavarra.es/sites/formacion-permanente/home.html
     # redirige a: https://www.unavarra.es/portada
   - nombre: "U. del País Vasco / EHU"
@@ -1006,6 +1044,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.ehu.eus/es/web/ikasi/
     # redirige a: https://www.ehu.eus/es/
 
@@ -1016,6 +1055,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.unav.edu/informacion-legal
   - nombre: "U. CEU San Pablo"
     url: https://www.uspceu.com/
@@ -1023,30 +1063,35 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "U. CEU Cardenal Herrera"
     url: https://www.uchceu.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "U. CEU Fernando III"
     url: https://www.ceufernandoiii.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: roto
+    feed: none
   - nombre: "U. Abat Oliba CEU"
     url: https://www.uaoceu.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "U. Europea de Madrid"
     url: https://universidadeuropea.com/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "U. Francisco de Vitoria"
     url: https://www.ufv.es/
     nivel: 3
@@ -1055,13 +1100,13 @@ fuentes:
     estado: ok
     feed: https://www.ufv.es/feed/
     # sugerencia: https://www.ufv.es/estudiar-en-ufv/otras-formaciones/
-    # RSS: https://www.ufv.es/feed/
   - nombre: "U. Alfonso X el Sabio"
     url: https://www.uax.com/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.uax.com/politica-seguridad-informacion-grupo-uax
   - nombre: "U. Nebrija"
     url: https://www.nebrija.com/
@@ -1069,6 +1114,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.nebrija.com/solicitud-de-informacion/grados-postgrados/
   - nombre: "U. Camilo José Cela"
     url: https://www.ucjc.edu/
@@ -1076,15 +1122,14 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
-    feed: https://www.ucjc.edu/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.ucjc.edu%2F&format=xml
-    # sugerencia: https://www.ucjc.edu/curso-formacion-permanente/
-    # RSS: https://www.ucjc.edu/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.ucjc.edu%2F&format=xml
+    feed: none
   - nombre: "U. Internacional de Catalunya"
     url: https://www.uic.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.uic.es/ca/universitat/altres/agenda-dactivitats
     # redirige a: https://www.uic.es/ca
   - nombre: "U. Ramon Llull"
@@ -1096,7 +1141,6 @@ fuentes:
     feed: https://www.url.edu/rss.xml
     # sugerencia: https://www.url.edu/ca/sala-de-premsa/recursos-audiovisuals
     # redirige a: https://www.url.edu/ca
-    # RSS: https://www.url.edu/rss.xml
   - nombre: "U. de Vic - UCC"
     url: https://www.uvic.cat/
     nivel: 3
@@ -1105,13 +1149,13 @@ fuentes:
     estado: ok
     feed: https://www.uvic.cat/rss.xml
     # sugerencia: https://www.uvic.cat/agenda
-    # RSS: https://www.uvic.cat/rss.xml
   - nombre: "U. Católica de Valencia"
     url: https://www.ucv.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.ucv.es/oferta-academica/otros-titulos-formacion-permanente
   - nombre: "U. Católica de Murcia (UCAM)"
     url: https://www.ucam.edu/
@@ -1119,6 +1163,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.ucam.edu/biblioteca/formacion
   - nombre: "U. Loyola"
     url: https://www.uloyola.es/
@@ -1128,29 +1173,27 @@ fuentes:
     estado: ok
     feed: https://www.uloyola.es/blog/rss
     # sugerencia: https://www.uloyola.es/servicios/servicio-de-orientacion-e-informacion
-    # RSS: https://www.uloyola.es/blog/rss
   - nombre: "U. de Deusto"
     url: https://www.deusto.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "U. San Jorge"
     url: https://www.usj.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "U. Fernando Pessoa Canarias"
     url: https://www.ufpcanarias.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: ok
-    feed: https://ufpcanarias.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fufpcanarias.com%2F&format=xml&lang=es
-    # sugerencia: https://ufpcanarias.com/formacion-permanente/
-    # redirige a: https://ufpcanarias.com/
-    # RSS: https://ufpcanarias.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fufpcanarias.com%2F&format=xml&lang=es
+    feed: none
 
   # ---------- Grupos hospitalarios privados ----------
   - nombre: "Quirónsalud"
@@ -1159,12 +1202,14 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "HM Hospitales"
     url: https://www.hmhospitales.com/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "Vithas"
     url: https://vithas.es/
     nivel: 3
@@ -1173,7 +1218,6 @@ fuentes:
     estado: ok
     feed: https://vithas.es/feed/
     # sugerencia: https://vithas.es/servicios-de-salud/chequeo-mujer-express/
-    # RSS: https://vithas.es/feed/
   - nombre: "Ribera Salud"
     url: https://riberasalud.com/
     nivel: 3
@@ -1183,37 +1227,41 @@ fuentes:
     feed: https://www.riberasalud.com/feed/
     # sugerencia: https://www.riberasalud.com/eventos/
     # redirige a: https://www.riberasalud.com/
-    # RSS: https://www.riberasalud.com/feed/
   - nombre: "Clínica Universidad de Navarra"
     url: https://www.cun.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "IMED Hospitales"
     url: https://imedhospitales.com/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: roto
+    feed: none
   - nombre: "Grupo Recoletas"
     url: https://www.recoletas.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "Hospitales Ruber"
     url: https://www.ruber.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "Sanitas"
     url: https://www.sanitas.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.sanitas.es/seguros/seguro-mascotas
 
   # ---------- Colegios de médicos ----------
@@ -1229,6 +1277,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "Colegio de Médicos de Álava"
     url: https://icoma.eus/formacion/jornadas-y-congresos/
     nivel: 2
@@ -1236,13 +1285,13 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://icoma.eus/feed/
-    # RSS: https://icoma.eus/feed/
   - nombre: "Colegio de Médicos de Albacete"
     url: https://www.comalbacete.net/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
   - nombre: "Colegio de Médicos de Alicante"
     url: https://coma.es/servicio/formacion/
     nivel: 2
@@ -1250,13 +1299,13 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://coma.es/feed/
-    # RSS: https://coma.es/feed/
   - nombre: "Colegio de Médicos de Almería"
     url: https://www.comalmeria.es/formacion-medica
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.comalmeria.es/%20cursos/2026/viii-jornadas-provinciales-de-bioetica-de-almeria
   - nombre: "Colegio de Médicos de Asturias"
     url: https://www.comast.es/cursos
@@ -1264,6 +1313,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.comast.es/eventos
   - nombre: "Colegio de Médicos de Ávila"
     url: https://www.icomav.es/comformacion.html
@@ -1271,6 +1321,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.icomav.es/formacionexterna.html
   - nombre: "Colegio de Médicos de Badajoz"
     url: https://www.combadajoz.com/formacion-fmc/
@@ -1280,13 +1331,13 @@ fuentes:
     estado: ok
     feed: https://www.combadajoz.com/feed/
     # sugerencia: https://www.combadajoz.com/formacion-dirigida-a-tutores/
-    # RSS: https://www.combadajoz.com/feed/
   - nombre: "Colegio de Médicos de Barcelona"
     url: https://www.comb.cat/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # redirige a: https://www.comb.cat/ca/home
   - nombre: "Colegio de Médicos de Bizkaia"
     url: https://www.cmb.eus/
@@ -1294,6 +1345,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.cmb.eus/Canales/Listado.aspx?IdMenu=4f5f0ab2-f1f1-46e1-bc3a-79fa51409f66&Idioma=es-ES
     # redirige a: https://www.cmb.eus/inicio
   - nombre: "Colegio de Médicos de Burgos"
@@ -1304,7 +1356,6 @@ fuentes:
     estado: ok
     feed: https://www.combu.es/feed/
     # sugerencia: https://www.combu.es/eventos/jornadas-y-congresos/xix-jornadas-salud-y-modos-de-vida-ediren/
-    # RSS: https://www.combu.es/feed/
   - nombre: "Colegio de Médicos de Cáceres"
     url: https://comeca.org/cursos-actividades/
     nivel: 2
@@ -1313,13 +1364,13 @@ fuentes:
     estado: ok
     feed: https://comeca.org/feed/
     # sugerencia: https://comeca.org/formacion-fumeca/jornadas-divulgacion-cientifica/
-    # RSS: https://comeca.org/feed/
   - nombre: "Colegio de Médicos de Cádiz"
     url: https://comcadiz.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "Colegio de Médicos de Cantabria"
     url: https://www.comcantabria.es/formacion/
     nivel: 2
@@ -1328,13 +1379,13 @@ fuentes:
     estado: ok
     feed: https://www.comcantabria.es/feed/
     # sugerencia: https://www.comcantabria.es/formacion/como-dar-malas-noticias-recursos-ante-enfermedades-complejas-y-duelo-complicado/
-    # RSS: https://www.comcantabria.es/feed/
   - nombre: "Colegio de Médicos de Castellón"
     url: https://comcas.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
   - nombre: "Colegio de Médicos de Ceuta"
     url: https://comceuta.es/formacion/
     nivel: 2
@@ -1343,13 +1394,13 @@ fuentes:
     estado: ok
     feed: https://comceuta.es/feed/
     # sugerencia: https://comceuta.es/noticias-y-eventos/
-    # RSS: https://comceuta.es/feed/
   - nombre: "Colegio de Médicos de Ciudad Real"
     url: https://comciudadreal.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "Colegio de Médicos de Córdoba"
     url: https://www.comcordoba.com/
     nivel: 2
@@ -1358,7 +1409,6 @@ fuentes:
     estado: ok
     feed: https://www.comcordoba.com/feed/
     # sugerencia: https://www.comcordoba.com/formacion-emergencias-comcordoba/
-    # RSS: https://www.comcordoba.com/feed/
   - nombre: "Colegio de Médicos de A Coruña"
     url: https://comc-es.org/formacion/cursos-colegio/
     nivel: 2
@@ -1366,7 +1416,6 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://comc-es.org/feed/
-    # RSS: https://comc-es.org/feed/
   - nombre: "Colegio de Médicos de Cuenca"
     url: https://comcuenca.org/el-colegio/vocalias/formacion-y-o-posgrado/
     nivel: 2
@@ -1374,7 +1423,6 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://comcuenca.org/feed/
-    # RSS: https://comcuenca.org/feed/
     nota: "Dirección sin confirmar: no aparece en buscadores. Si el verificador la marca rota, búscala a mano."
   - nombre: "Colegio de Médicos de Gipuzkoa"
     url: https://www.comgi.eus/es_formacion.aspx
@@ -1382,6 +1430,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.comgi.eus/es_documentos_de_interes.aspx
   - nombre: "Colegio de Médicos de Girona"
     url: https://www.comg.cat/
@@ -1389,6 +1438,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.comg.cat/col-legiats/formacio/cursos-que-et-poden-interessar-2
   - nombre: "Colegio de Médicos de Granada"
     url: https://comgranada.com/formacion/
@@ -1398,7 +1448,6 @@ fuentes:
     estado: ok
     feed: https://comgranada.com/feed/
     # sugerencia: https://comgranada.com/category/formacion/congresos-y-jornadas/
-    # RSS: https://comgranada.com/feed/
   - nombre: "Colegio de Médicos de Guadalajara"
     url: https://www.comguada.es/
     nivel: 2
@@ -1407,7 +1456,6 @@ fuentes:
     estado: ok
     feed: https://www.comguada.es/feed/
     # sugerencia: http://www.comguada.es/formacion/
-    # RSS: https://www.comguada.es/feed/
   - nombre: "Colegio de Médicos de Huelva"
     url: https://comhuelva.com/formacion/
     nivel: 2
@@ -1416,7 +1464,6 @@ fuentes:
     estado: ok
     feed: https://comhuelva.com/feed/
     # sugerencia: https://comhuelva.com/noticias-de-actualidad/
-    # RSS: https://comhuelva.com/feed/
   - nombre: "Colegio de Médicos de Huesca"
     url: https://colegiomedicoshuesca.es/
     nivel: 2
@@ -1425,7 +1472,6 @@ fuentes:
     estado: ok
     feed: https://colegiomedicoshuesca.es/feed/
     # sugerencia: https://colegiomedicoshuesca.es/formacion/
-    # RSS: https://colegiomedicoshuesca.es/feed/
   - nombre: "Colegio de Médicos de Illes Balears"
     url: https://www.comib.com/formacion/
     nivel: 2
@@ -1434,13 +1480,13 @@ fuentes:
     estado: ok
     feed: https://www.comib.com/feed/
     # sugerencia: https://www.comib.com/formacion/patronat/
-    # RSS: https://www.comib.com/feed/
   - nombre: "Colegio de Médicos de Jaén"
     url: https://www.colmedjaen.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.colmedjaen.es/noticias/la-aeem-celebra-el-iii-curso-de-formacion-continuada-con-un-enfoque-integral-sobre-menopausia-y-salud-femenina
   - nombre: "Colegio de Médicos de La Rioja"
     url: https://medicosrioja.com/cursos/
@@ -1450,13 +1496,13 @@ fuentes:
     estado: ok
     feed: https://medicosrioja.com/feed/
     # sugerencia: https://medicosrioja.com/formacion/
-    # RSS: https://medicosrioja.com/feed/
   - nombre: "Colegio de Médicos de Las Palmas"
     url: https://www.medicoslaspalmas.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.medicoslaspalmas.es/index.php/formacion/cursos-colegio/informacion-cursos-colegio
   - nombre: "Colegio de Médicos de León"
     url: https://www.comleon.es/formacion/
@@ -1466,25 +1512,27 @@ fuentes:
     estado: ok
     feed: https://www.comleon.es/feed/
     # sugerencia: https://www.comleon.es/formacion/#content
-    # RSS: https://www.comleon.es/feed/
   - nombre: "Colegio de Médicos de Lleida"
     url: https://www.comll.cat/es/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "Colegio de Médicos de Lugo"
     url: https://comlugo.org/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "Colegio de Médicos de Madrid"
     url: https://www.icomem.es/formacion/3/Formacion-Medica-Continuada/pag/1
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
   - nombre: "Colegio de Médicos de Málaga"
     url: https://www.commalaga.com/
     nivel: 2
@@ -1494,7 +1542,6 @@ fuentes:
     feed: https://commalaga.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcommalaga.com%2F&format=xml
     # sugerencia: https://commalaga.com/formacion-commalaga/enfermedades-pilosebaceas-iv-curso-de-dermatologia-para-ap-1-al-31-de-octubre/
     # redirige a: https://commalaga.com/
-    # RSS: https://commalaga.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcommalaga.com%2F&format=xml
   - nombre: "Colegio de Médicos de Melilla"
     url: https://commelilla.es/cursos-de-formacion/
     nivel: 2
@@ -1503,13 +1550,13 @@ fuentes:
     estado: ok
     feed: https://commelilla.es/feed/
     # sugerencia: https://commelilla.es/formacion/
-    # RSS: https://commelilla.es/feed/
   - nombre: "Colegio de Médicos de Murcia"
     url: https://www.commurcia.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://commurcia.es/formacion.php/?section=otros
     # redirige a: https://commurcia.es/
   - nombre: "Colegio de Médicos de Navarra"
@@ -1520,19 +1567,20 @@ fuentes:
     estado: ok
     feed: https://colegiodemedicos.es/feed/
     # sugerencia: https://colegiodemedicos.es/sugerencias-formacion/
-    # RSS: https://colegiodemedicos.es/feed/
   - nombre: "Colegio de Médicos de Ourense"
     url: https://www.cmourense.org/es/eventos
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
   - nombre: "Colegio de Médicos de Palencia"
     url: https://www.compalencia.org/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.compalencia.org/Programa-Encuentros-de-formacion-en-Medicina-de-Familia-Palencia.pdf
     # redirige a: https://www.compalencia.org/compalencia
   - nombre: "Colegio de Médicos de Pontevedra"
@@ -1542,13 +1590,13 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.cmpont.es/colegio/congresos?format=feed&type=rss
-    # RSS: https://www.cmpont.es/colegio/congresos?format=feed&type=rss
   - nombre: "Colegio de Médicos de Salamanca"
     url: https://comsalamanca.es/formacion
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://comsalamanca.es/formacion/151257-iii-congreso-internacional-en-innovacion-investigacion-formacion-y-transferencia-del-conocimiento-en-ciencias-de-la-salud
   - nombre: "Colegio de Médicos de Santa Cruz de Tenerife"
     url: https://medicostenerife.es/calendario-de-eventos-y-cursos/
@@ -1558,13 +1606,13 @@ fuentes:
     estado: ok
     feed: https://medicostenerife.es/feed/
     # sugerencia: https://medicostenerife.es/formacion/
-    # RSS: https://medicostenerife.es/feed/
   - nombre: "Colegio de Médicos de Segovia"
     url: https://www.comsegovia.com/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
   - nombre: "Colegio de Médicos de Sevilla"
     url: https://www.comsevilla.es/
     nivel: 2
@@ -1574,13 +1622,13 @@ fuentes:
     feed: https://comsevilla.es/feed/
     # sugerencia: https://comsevilla.es/curso-de-cirugia-menor-en-atencion-primaria-toma-de-decisiones-tecnicas-y-manejo-de-complicaciones/
     # redirige a: https://comsevilla.es/
-    # RSS: https://comsevilla.es/feed/
   - nombre: "Colegio de Médicos de Soria"
     url: https://www.comsor.es/agendaformacion.html
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.comsor.es/congresos.html
   - nombre: "Colegio de Médicos de Tarragona"
     url: https://comt.cat/comt-formacio/
@@ -1590,7 +1638,6 @@ fuentes:
     estado: ok
     feed: https://comt.cat/feed/
     # sugerencia: https://comt.cat/es/comt-formacion/
-    # RSS: https://comt.cat/feed/
   - nombre: "Colegio de Médicos de Teruel"
     url: https://www.comteruel.es/
     nivel: 2
@@ -1600,7 +1647,6 @@ fuentes:
     feed: https://comteruel.com/index.php?format=feed&type=rss
     # sugerencia: https://comteruel.com/index.php/colegiados/noticias/exito-de-la-i-edicion-del-curso-de-formacion-en-manejo-de-heridas-en-urgencias-para-medicos-mir-3
     # redirige a: https://comteruel.com/
-    # RSS: https://comteruel.com/index.php?format=feed&type=rss
   - nombre: "Colegio de Médicos de Toledo"
     url: https://www.comtoledo.org/actividades/
     nivel: 2
@@ -1609,7 +1655,6 @@ fuentes:
     estado: ok
     feed: https://www.comtoledo.org/feed/
     # sugerencia: https://www.comtoledo.org/formacion-y-o-posgrado/
-    # RSS: https://www.comtoledo.org/feed/
   - nombre: "Colegio de Médicos de Valencia"
     url: https://www.comv.es/
     nivel: 2
@@ -1618,13 +1663,13 @@ fuentes:
     estado: ok
     feed: https://www.comv.es/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.comv.es%2F&format=xml
     # sugerencia: https://www.comv.es/informacion-ofertas-empleo/
-    # RSS: https://www.comv.es/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.comv.es%2F&format=xml
   - nombre: "Colegio de Médicos de Valladolid"
     url: https://medicosva.es/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: bloqueada
+    feed: none
   - nombre: "Colegio de Médicos de Zamora"
     url: https://www.colmeza.com/index.php/servicios/formacion/cursos
     nivel: 2
@@ -1632,11 +1677,11 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.colmeza.com/index.php/servicios/formacion/cursos?format=feed&type=rss
-    # RSS: https://www.colmeza.com/index.php/servicios/formacion/cursos?format=feed&type=rss
   - nombre: "Colegio de Médicos de Zaragoza"
     url: https://www.comz.org/
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: none
     # sugerencia: https://www.comz.org/asesoria-acreditacion-formacion-continuada
