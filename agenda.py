@@ -420,19 +420,31 @@ def rastrea(fuente: dict, verbose: bool = True) -> tuple[list[Evento], str]:
     if not robots_permite(url):
         return [], "robots.txt prohíbe el rastreo"
 
+    # Si el verificador ya averiguó si esta web tiene RSS, no se vuelve a
+    # preguntar. Sondear 13 direcciones a ciegas cada semana, en webs que ya
+    # sabemos que no tienen canal, es la diferencia entre 21 segundos y 2 por
+    # fuente: justo lo que permite revisarlas todas cada lunes.
+    conocido = str(fuente.get("feed") or "").strip()
+    if conocido and conocido.lower() != "none":
+        ev = desde_feed(conocido, fuente)
+        if ev:
+            return ev, f"feed ({len(ev)})"
+        # El canal puede haber muerto o no traer eventos: seguimos por HTML
+
     r = descarga(url)
     if not r:
         return [], "no responde / error de red"
 
     html = r.text
-    feed = busca_feed(url, html)
-    if feed:
-        ev = desde_feed(feed, fuente)
-        if ev:
-            return ev, f"feed ({len(ev)})"
-        # hay feed pero sin eventos relevantes: probamos HTML igualmente
+    feed = None
+    if not conocido:                      # aún no sabemos si tiene canal
+        feed = busca_feed(url, html)
+        if feed:
+            ev = desde_feed(feed, fuente)
+            if ev:
+                return ev, f"feed ({len(ev)})"
     ev = desde_html(url, html, fuente)
-    via = "feed vacío → html" if feed else "html"
+    via = "feed vacío → html" if (feed or conocido) else "html"
     return ev, f"{via} ({len(ev)})"
 
 

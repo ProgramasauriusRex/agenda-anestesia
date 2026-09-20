@@ -83,7 +83,9 @@ Tarda unos minutos. Va una por una comprobando cuatro cosas, y al terminar
 Lo que verás en el informe:
 
 - **Con RSS** → las sólidas. Publican un canal pensado para máquinas, y no se
-  rompen cuando la entidad rediseña su web.
+  rompen cuando la entidad rediseña su web. El verificador anota ese canal en
+  el campo `feed`, y a partir de ahí el rastreo semanal va directo a él: es lo
+  que permite revisar las 211 cada lunes en un par de minutos.
 - **Páginas de agenda encontradas** → la dirección apuntaba a la portada y el
   verificador ha encontrado una página mejor (la sección "Cursos", "Agenda"…).
   Quedan anotadas en `fuentes.yaml` como comentario, para que las revises.
@@ -101,13 +103,27 @@ pequeñas cambian a menudo. El verificador existe precisamente para eso.
 
 ## Cómo está organizada la lista de webs
 
-Las 211 no se revisan todas cada lunes. Están repartidas en tres niveles:
+**Las 211 se revisan todas cada lunes.** Los niveles siguen existiendo en
+`fuentes.yaml`, pero solo sirven para pedir una pasada parcial a mano
+(`python agenda.py --nivel 1`), no para decidir el rastreo automático.
 
-| Nivel | Cuántas | Cada cuánto | Qué hay |
-|---|---|---|---|
-| **1** | 12 | Semanal | SEDAR, SEMICYUC, SED, SEMDOR, ESRA, AnestesiaR, Dolor.com |
-| **2** | 132 | Mensual | Los **52 colegios de médicos**, grupos de trabajo de SEDAR, las 12 sociedades autonómicas de anestesia, las 13 de intensivos, agregadores y los portales de formación de los 17 servicios autonómicos de salud |
-| **3** | 67 | Trimestral | 38 universidades públicas, 19 privadas, grupos hospitalarios privados y el Consejo General de Colegios |
+| Nivel | Cuántas | Qué hay |
+|---|---|---|
+| **1** | 12 | SEDAR, SEMICYUC, SED, SEMDOR, ESRA, AnestesiaR, Dolor.com |
+| **2** | 132 | Los **52 colegios de médicos**, grupos de trabajo de SEDAR, las 12 sociedades autonómicas de anestesia, las 13 de intensivos, agregadores y los portales de formación de los 17 servicios autonómicos de salud |
+| **3** | 67 | 38 universidades públicas, 19 privadas, grupos hospitalarios privados y el Consejo General de Colegios |
+
+### Por qué se pueden revisar todas
+
+Porque cada visita cuesta poco. El verificador apunta en `fuentes.yaml`, en el
+campo `feed`, si la web tiene canal RSS y cuál es — o `none` si no tiene. El
+rastreo semanal lee ese dato y va directo, en vez de sondear a ciegas trece
+direcciones buscando un canal que quizá no exista.
+
+La diferencia es de 21 segundos por web a 2, y es lo que convierte "las 211
+cada lunes" en un par de minutos y unas 340 peticiones repartidas: dos por web
+y una vez por semana. Menos de lo que gasta una persona abriendo esa misma
+página en el navegador.
 
 **Sobre los hospitales:** en vez de perseguir 840 webs de hospital, el nivel 2
 incluye los **portales de formación de los servicios autonómicos de salud**
@@ -130,7 +146,9 @@ Abre `fuentes.yaml` y copia este bloque al final, cambiando los datos:
     estado: pendiente
 ```
 
-- `nivel`: 1 semanal, 2 mensual, 3 trimestral
+El campo `feed` lo rellena solo el verificador; no lo escribas tú.
+
+- `nivel`: solo para pasadas parciales a mano; el rastreo automático las visita todas
 - `ambito`: `anestesia`, `criticos`, `dolor` o `mixto`
 - `filtro`: `evento` en webs ya específicas de la especialidad;
   `estricto` en webs generalistas (colegios, universidades, hospitales,
@@ -160,13 +178,12 @@ python agenda.py
 
 Sube estos archivos a un repositorio de GitHub y se ejecutará solo:
 
-- **Cada lunes a las 8:00** → nivel 1 (las 12 principales)
-- **El primer lunes de mes** → niveles 1 y 2 (144 webs)
-- **En enero, abril, julio y octubre** → los tres niveles (211 webs)
-- **Cada tres meses** → verificación de que las 211 direcciones siguen vivas
+- **Cada lunes a las 8:00** → las 211 webs, cursos del próximo mes
+- **Cada tres meses** → verificación de que las direcciones siguen vivas, y
+  actualización del campo `feed` de cada una
 
-La ventana es siempre la misma, el próximo mes. Lo que cambia con la fecha es
-**a cuántas webs se visita**, no cuánto se mira hacia delante.
+(En horario de invierno se ejecuta a las 7:00: el reloj interno va en horario
+universal.)
 
 No necesitas tener el ordenador encendido y es gratis. Las tablas quedan
 guardadas en la carpeta `salida/` del repositorio, con su histórico.

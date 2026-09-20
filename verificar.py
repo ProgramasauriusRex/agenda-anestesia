@@ -80,9 +80,14 @@ PISTAS_AGENDA = [
     "másteres", "postgrado", "posgrado",
 ]
 
+# La misma lista que usa agenda.py, y aquí se prueba ENTERA: este programa
+# se ejecuta cuatro veces al año, así que puede permitirse buscar a fondo.
+# Su resultado se guarda en fuentes.yaml (campo "feed"), y gracias a eso el
+# rastreo semanal no tiene que volver a sondear nada.
 RUTAS_FEED = [
     "/feed/", "/feed", "/rss", "/rss.xml", "/atom.xml", "/index.xml",
-    "?feed=rss2", "/events/feed/", "/agenda/feed/", "/noticias/feed/",
+    "?feed=rss2", "/feed/atom/", "/events/feed/", "/agenda/feed/",
+    "/blog/feed/", "/noticias/feed/", "/?format=feed&type=rss",
 ]
 
 
@@ -132,7 +137,7 @@ def busca_feed(url: str, html: str) -> str | None:
 
     p = urlparse(url)
     raiz = f"{p.scheme}://{p.netloc}"
-    for ruta in RUTAS_FEED[:4]:  # solo las más probables, para no eternizarse
+    for ruta in RUTAS_FEED:
         cand = urljoin(raiz, ruta)
         r = descarga(cand, timeout=12)
         if isinstance(r, Exception) or r.status_code != 200:
@@ -235,42 +240,48 @@ def aplica_a_yaml(resultados: list[dict]) -> int:
     Actualiza fuentes.yaml SIN destruir los comentarios: edita las líneas
     una a una en lugar de regenerar el fichero.
     """
-    lineas = YAML_PATH.read_text(encoding="utf-8").split("\n")
-
-    # Borramos las anotaciones que puso una ejecución anterior. Sin esto, cada
-    # pasada añadiría una copia más y el fichero acabaría ilegible.
-    AUTO = ("# sugerencia:", "# redirige a:", "# RSS:")
-    lineas = [ln for ln in lineas if not ln.strip().startswith(AUTO)]
-
+    texto = YAML_PATH.read_text(encoding="utf-8")
     por_url = {r["url"]: r for r in resultados}
     cambios = 0
-    url_actual = None
 
-    for i, linea in enumerate(lineas):
-        m = re.match(r"^(\s*)url:\s*(\S+)\s*$", linea)
-        if m:
-            url_actual = m.group(2)
+    # Se trabaja bloque a bloque (cada fuente es un bloque) en lugar de línea
+    # a línea: así se puede añadir o sustituir campos sin descolocar nada.
+    partes = texto.split("  - nombre: ")
+    salida = [partes[0]]
+    for bloque in partes[1:]:
+        m = re.search(r"\n    url:\s*(\S+)", bloque)
+        r = por_url.get(m.group(1)) if m else None
+        if not r:
+            salida.append(bloque)
             continue
-        m = re.match(r"^(\s*)estado:\s*(\S+)\s*$", linea)
-        if m and url_actual in por_url:
-            r = por_url[url_actual]
-            nuevo = r["estado"]
-            if nuevo != m.group(2):
-                lineas[i] = f"{m.group(1)}estado: {nuevo}"
-                cambios += 1
-            # Anotamos la sugerencia como comentario, para que la revises tú
-            extras = []
-            if r["url_sugerida"]:
-                extras.append(f"{m.group(1)}# sugerencia: {r['url_sugerida']}")
-            if r["url_final"]:
-                extras.append(f"{m.group(1)}# redirige a: {r['url_final']}")
-            if r["feed"]:
-                extras.append(f"{m.group(1)}# RSS: {r['feed']}")
-            if extras:
-                lineas[i] = lineas[i] + "\n" + "\n".join(extras)
-            url_actual = None
 
-    YAML_PATH.write_text("\n".join(lineas), encoding="utf-8")
+        # Fuera las anotaciones de la pasada anterior, o se acumularían
+        lineas = [l for l in bloque.split("\n")
+                  if not l.strip().startswith(("# sugerencia:", "# redirige a:", "# RSS:"))]
+        lineas = [l for l in lineas if not re.match(r"^\s*feed:", l)]
+
+        nuevas = []
+        for l in lineas:
+            me = re.match(r"^(\s*)estado:\s*(\S+)\s*$", l)
+            if not me:
+                nuevas.append(l)
+                continue
+            sangria = me.group(1)
+            if me.group(2) != r["estado"]:
+                cambios += 1
+            nuevas.append(f"{sangria}estado: {r['estado']}")
+            # El canal RSS se guarda como dato, no como comentario: el rastreo
+            # semanal lo lee y se ahorra sondear la web cada lunes.
+            # "none" significa "comprobado: no tiene", que vale tanto como
+            # saber la dirección del canal.
+            nuevas.append(f"{sangria}feed: {r['feed'] or 'none'}")
+            if r["url_sugerida"]:
+                nuevas.append(f"{sangria}# sugerencia: {r['url_sugerida']}")
+            if r["url_final"]:
+                nuevas.append(f"{sangria}# redirige a: {r['url_final']}")
+        salida.append("\n".join(nuevas))
+
+    YAML_PATH.write_text("  - nombre: ".join(salida), encoding="utf-8")
     return cambios
 
 
