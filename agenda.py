@@ -4,11 +4,16 @@ Rastreador semanal de cursos y congresos de Anestesiología, Cuidados Críticos
 y Terapia del Dolor en España.
 
 Uso:
-    python agenda.py                 # rastrea nivel 1 (semanal)
+    python agenda.py                 # nivel 1: los cursos nuevos del próximo mes
     python agenda.py --nivel 1 2     # nivel 1 y 2
-    python agenda.py --meses 3       # ventana de 3 meses hacia delante
-    python agenda.py --todo          # ignora el histórico y muestra todo
+    python agenda.py --meses 3       # el post muestra 3 meses en vez de 1
+    python agenda.py --todo          # muestra también lo ya visto; no escribe nada
     python agenda.py --diagnostico   # informe de salud de cada fuente
+
+Cada rastreo guarda lo que encuentra hasta un año vista en
+salida/eventos-conocidos.json, y el post se construye desde esa memoria:
+así los cursos de las fuentes mensuales y trimestrales aparecen cuando les
+toca, aunque su web no se haya vuelto a visitar.
 
 Estrategia por fuente, en este orden:
   1. Busca un feed RSS/Atom. Es lo ideal: formato estable, pensado para
@@ -30,7 +35,7 @@ import unicodedata
 import urllib.robotparser as robotparser
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
-from dataclasses import dataclass, asdict, field
+from dataclasses import dataclass, asdict, field, fields
 from datetime import date, timedelta
 from pathlib import Path
 from threading import Lock
@@ -98,16 +103,48 @@ PALABRAS_EVENTO = [
     "master", "simposio", "simposium", "symposium", "reunion", "webinar",
     "seminario", "diploma", "diplomatura", "formacion", "sesion", "encuentro",
     "workshop", "ponencia", "inscripcion", "inscripciones", "programa cientifico",
+    "foro", "forum", "congress", "conference", "course", "meeting", "summit",
 ]
 
-PALABRAS_ESPECIALIDAD = [
-    "anestesi", "reanimacion", "sedacion", "sedoanalgesia", "dolor", "analgesi",
-    "critico", "criticos", "intensiv", "uci", "urpa", "perioperator",
-    "via aerea", "intubacion", "ventilacion mecanica", "hemodinamic",
-    "ecografia", "ecocardiograf", "bloqueo", "locorregional", "raquide",
-    "epidural", "opioide", "sepsis", "shock", "rcp", "soporte vital",
-    "paciente critico", "quirofano", "postoperator", "preoperator",
+# Términos de la especialidad. Se buscan como PALABRA COMPLETA (o raíz al
+# principio de palabra), nunca como trozo de otra. Con la búsqueda por trozos
+# que había antes, "uci" saltaba con "reducir", "intensiv" con "curso
+# intensivo de inglés" y "critico" con "pensamiento crítico": en webs
+# generalistas como los colegios de médicos eso era ruido asegurado.
+# "Crítico" e "intensivo" solo cuentan dentro de sus expresiones clínicas.
+PATRONES_ESPECIALIDAD = [
+    # Raíces largas y exclusivas del campo: se aceptan también DENTRO de otra
+    # palabra ("neuroanestesia", "Euroanaesthesia", "sedoanalgesia"), porque
+    # no aparecen en palabras ajenas. Las cortas o ambiguas llevan \b.
+    # Anestesiología
+    r"anestesi\w*", r"anesthe\w*", r"anaesthe\w*", r"reanimacion\b",
+    r"\bsedacion\b", r"\bsedoanalgesia\b", r"\bquirofano\w*", r"\burpa\b",
+    r"\bperioperatori\w*", r"\bperioperative\b", r"\bpreoperatori\w*",
+    r"\bpostoperatori\w*", r"\bvia aerea\b", r"\bairway\b", r"\bintubacion\b",
+    r"\blocorregional\w*", r"\braquid\w*", r"\bepidural\w*", r"\bneuroaxial\w*",
+    r"\bbloqueos?\s+(?:de\s+|del\s+)?(?:nervi|plex|regional|periferic|neuromuscular"
+    r"|ecoguiad|interfascial|fascial|epidural|raquid)\w*",
+    # Dolor y paliativos
+    r"\bdolor\b", r"\bpain\b", r"analgesi\w*", r"opioid\w*",
+    r"paliativ\w*", r"\bpalliative\b",
+    # Críticos
+    r"\buci\b", r"\bicu\b", r"\bmedicina intensiva\b", r"\bcuidados intensivos\b",
+    r"\bintensive care\b", r"\bcuidados criticos\b", r"\bmedicina critica\b",
+    r"\bpaciente critico\b", r"\benfermo critico\b", r"\bcritical care\b",
+    r"\bcritically ill\b", r"\bventilacion mecanica\b", r"\bventilacion no invasiva\b",
+    r"\bhemodinamic\w*", r"\bsepsis\b", r"\bshock\b",
+    # Reanimación cardiopulmonar
+    r"\brcp\b", r"\bsoporte vital\b", r"\bsv[ab]\b", r"\bresuscitation\b",
+    # Ecografía (útil en anestesia y críticos; puede colar algo de primaria)
+    r"ecografi\w*", r"ecocardiograf\w*", r"\bpocus\b",
+    # Siglas de las sociedades del campo: "Congreso SECPAL" o "Jornada SEDAR"
+    # no dicen la especialidad con palabras, pero la sigla ya la delata
+    r"\b(?:sedar|semicyuc|seeiuc|secip|semdor|secpal|setri|esra|esaic|edaic|feea"
+    r"|aaear|scartd|sbartd|agaryd|sadartd|acmartd|socartd|soclartd|svnartd"
+    r"|samiuc|sarmicyuc|sbmiuc|socamicyuc|sclmicyuc|somiucam|socmic|sexmicyuc"
+    r"|sogamiuc|somiama|snmiuc|sovamicyuc|somiuc|pnrcp|cercp)\b",
 ]
+_RE_ESPECIALIDAD = re.compile("|".join(PATRONES_ESPECIALIDAD))
 
 # Ruido típico de menús y pies de página que nunca es un evento
 RUIDO = [
@@ -227,8 +264,40 @@ def es_relevante(texto: str, filtro: str) -> bool:
         return False
     tiene_evento = any(p in t for p in PALABRAS_EVENTO)
     if filtro == "estricto":
-        return tiene_evento and any(p in t for p in PALABRAS_ESPECIALIDAD)
+        return tiene_evento and bool(_RE_ESPECIALIDAD.search(t))
     return tiene_evento
+
+
+_BORDES = ".,;:·-–—()[]|\"'«»"
+
+
+def limpia_titulo(titulo: str, frag: str) -> str:
+    """
+    Algunas agendas meten la fecha dentro del enlace y además repiten el
+    título: "63 Congreso SECOT 2026 30 de septiembre de 2026 63 Congreso SECOT
+    2026". Quitamos la fecha (ya va en su columna) y la repetición. Si el
+    resultado queda demasiado corto, devolvemos el título original.
+    """
+    palabras = titulo.split()
+    # Los signos se ignoran solo para COMPARAR; el título conserva los suyos
+    norm = [normaliza(p).strip(_BORDES) for p in palabras]
+    trozo = [x for x in (normaliza(p).strip(_BORDES) for p in frag.split()) if x]
+    n = len(trozo)
+    limpio = titulo.strip()
+    if n:
+        for i in range(len(norm) - n + 1):
+            if norm[i:i + n] == trozo:
+                palabras = palabras[:i] + palabras[i + n:]
+                # Al quitar la fecha pueden quedar separadores colgando
+                # ("Curso X ·"); paréntesis y comillas se respetan
+                limpio = " ".join(palabras).strip(" -–—·|:,;")
+                break
+    w = limpio.split()
+    mitad = len(w) // 2
+    if len(w) >= 4 and len(w) % 2 == 0 and \
+            [normaliza(x) for x in w[:mitad]] == [normaliza(x) for x in w[mitad:]]:
+        limpio = " ".join(w[:mitad])
+    return limpio if len(limpio) >= 8 else titulo
 
 
 def extrae_lugar(texto: str) -> str:
@@ -270,7 +339,7 @@ def desde_feed(url_feed: str, fuente: dict) -> list[Evento]:
         if not ini:
             continue
         eventos.append(Evento(
-            titulo=titulo[:180] or resumen[:120],
+            titulo=limpia_titulo(titulo, frag)[:180] or resumen[:120],
             fecha_texto=frag,
             inicio=ini.isoformat(), fin=fin.isoformat() if fin else None,
             lugar=extrae_lugar(conjunto),
@@ -330,7 +399,7 @@ def desde_html(url: str, html: str, fuente: dict) -> list[Evento]:
         vistos.add(clave)
 
         eventos.append(Evento(
-            titulo=texto_enlace[:180],
+            titulo=limpia_titulo(texto_enlace, frag)[:180],
             fecha_texto=frag,
             inicio=ini.isoformat(), fin=fin.isoformat() if fin else None,
             lugar=extrae_lugar(conjunto),
@@ -379,6 +448,41 @@ def guarda_estado(estado: dict) -> None:
     ESTADO.write_text(json.dumps(estado, ensure_ascii=False, indent=1))
 
 
+# --- Memoria de cursos conocidos ------------------------------------------
+#
+# Las fuentes de nivel 2 y 3 se visitan una vez al mes o al trimestre. Si de
+# cada visita solo se aprovechase "el próximo mes", los cursos de los meses
+# siguientes no se verían nunca: cuando llegase su momento, nadie estaría
+# mirando esa web. Por eso cada rastreo guarda TODO lo que encuentra hasta
+# un año vista, y el post de cada lunes se construye con esta memoria:
+# un curso descubierto en enero para marzo sale en el post de finales de
+# febrero, aunque su web no se vuelva a visitar hasta abril.
+#
+# Vive dentro de salida/ para que el workflow de GitHub la guarde sin
+# necesidad de tocarlo.
+
+MEMORIA = SALIDA / "eventos-conocidos.json"
+_CAMPOS_EVENTO = {f.name for f in fields(Evento)}
+
+
+def carga_memoria() -> dict[str, dict]:
+    if MEMORIA.exists():
+        try:
+            return json.loads(MEMORIA.read_text(encoding="utf-8"))
+        except Exception:
+            return {}
+    return {}
+
+
+def guarda_memoria(memoria: dict[str, dict]) -> None:
+    SALIDA.mkdir(exist_ok=True)
+    MEMORIA.write_text(json.dumps(memoria, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
+def evento_desde_memoria(d: dict) -> "Evento":
+    return Evento(**{k: v for k, v in d.items() if k in _CAMPOS_EVENTO})
+
+
 # --- Salida ---------------------------------------------------------------
 
 def a_markdown(eventos: list[Evento], hoy: date) -> str:
@@ -420,15 +524,20 @@ def main() -> int:
     ap.add_argument("--nivel", nargs="+", type=int, default=[1],
                     help="niveles a rastrear (1 semanal, 2 mensual, 3 anual)")
     ap.add_argument("--meses", type=int, default=1,
-                    help="ventana hacia delante, en meses (por defecto 1)")
+                    help="ventana del post: cuántos meses hacia delante se muestran (por defecto 1)")
+    ap.add_argument("--horizonte", type=int, default=12,
+                    help="cuántos meses hacia delante se recogen y se guardan en memoria (por defecto 12)")
     ap.add_argument("--todo", action="store_true",
-                    help="muestra también lo ya visto; NO toca la memoria")
+                    help="muestra también lo ya visto; NO escribe ninguna memoria")
     ap.add_argument("--diagnostico", action="store_true",
                     help="informe de salud de cada fuente")
+    ap.add_argument("--hoy", help=argparse.SUPPRESS)  # solo para pruebas: simula otra fecha
     args = ap.parse_args()
 
-    hoy = date.today()
+    hoy = date.fromisoformat(args.hoy) if args.hoy else date.today()
     limite = hoy + timedelta(days=args.meses * 31)
+    horizonte = hoy + timedelta(days=max(args.horizonte, args.meses) * 31)
+    margen = hoy - timedelta(days=2)
 
     cfg = yaml.safe_load((BASE / "fuentes.yaml").read_text(encoding="utf-8"))
     fuentes = [f for f in cfg["fuentes"] if f.get("nivel", 1) in args.nivel]
@@ -461,11 +570,26 @@ def main() -> int:
     for e in todos:
         if e.id not in unicos:
             unicos[e.id] = e
-    eventos = list(unicos.values())
+    # Lo recién encontrado, hasta el horizonte (un año por defecto)
+    frescos = [e for e in unicos.values()
+               if e.inicio and margen <= date.fromisoformat(e.inicio) <= horizonte]
 
-    # Ventana temporal
-    eventos = [e for e in eventos
-               if e.inicio and hoy - timedelta(days=2) <= date.fromisoformat(e.inicio) <= limite]
+    # Se suma a la memoria de cursos conocidos y se olvida lo ya pasado
+    memoria = carga_memoria()
+    for e in frescos:
+        d = asdict(e)
+        d["descubierto"] = memoria.get(e.id, {}).get("descubierto", hoy.isoformat())
+        d["ultima_vez"] = hoy.isoformat()
+        memoria[e.id] = d
+    memoria = {k: v for k, v in memoria.items()
+               if v.get("inicio") and date.fromisoformat(v["inicio"]) >= margen}
+    if not args.todo:
+        guarda_memoria(memoria)
+
+    # El post sale de la memoria, no solo de lo visitado hoy: así entran los
+    # cursos de fuentes mensuales y trimestrales cuando les llega su momento.
+    eventos = [evento_desde_memoria(d) for d in memoria.values()
+               if margen <= date.fromisoformat(d["inicio"]) <= limite]
 
     # Solo lo nuevo.
     #
@@ -482,6 +606,9 @@ def main() -> int:
         nuevos = [e for e in eventos if e.id not in estado["vistos"]]
         for e in nuevos:
             estado["vistos"][e.id] = hoy.isoformat()
+        # Lo enseñado hace más de un año ya no puede repetirse: se olvida
+        antiguedad = (hoy - timedelta(days=400)).isoformat()
+        estado["vistos"] = {k: v for k, v in estado["vistos"].items() if v >= antiguedad}
         guarda_estado(estado)
 
     eventos.sort(key=lambda e: e.inicio or "9999")
@@ -493,7 +620,8 @@ def main() -> int:
     if eventos:
         (SALIDA / f"agenda-{sello}.csv").write_text(a_csv(eventos), encoding="utf-8")
 
-    print(f"\n{len(eventos)} eventos en ventana · {len(nuevos)} nuevos desde el último rastreo",
+    print(f"\n{len(frescos)} cursos encontrados hoy · {len(memoria)} en memoria · "
+          f"{len(eventos)} en la ventana del post · {len(nuevos)} nuevos",
           file=sys.stderr)
     print(f"→ salida/agenda-{sello}.md\n", file=sys.stderr)
 

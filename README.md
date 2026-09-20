@@ -1,6 +1,6 @@
 # Agenda Anestesia
 
-Rastrea automáticamente **168 webs** españolas y genera cada semana una tabla con
+Rastrea automáticamente **211 webs** españolas y genera cada semana una tabla con
 los cursos y congresos de Anestesiología, Cuidados Críticos y Dolor:
 
 **Título · Fechas · Lugar · Entidad organizadora**
@@ -13,14 +13,15 @@ No hace falta entenderlos todos. En la práctica solo tocarás el primero.
 
 | Archivo | Para qué sirve | ¿Lo tocas tú? |
 |---|---|---|
-| **`fuentes.yaml`** | La lista de las 168 webs | **Sí**, este es el tuyo |
+| **`fuentes.yaml`** | La lista de las 211 webs | **Sí**, este es el tuyo |
 | `agenda.py` | El programa que visita las webs y hace la tabla | No |
-| `verificar.py` | Comprueba que las 168 direcciones siguen vivas | No (lo ejecutas, no lo editas) |
+| `verificar.py` | Comprueba que las 211 direcciones siguen vivas | No (lo ejecutas, no lo editas) |
 | `fechas.py` | Entiende las fechas en español | No |
 | `test_extractor.py` | Control de calidad del programa | No |
 | `requirements.txt` | Lista de programas auxiliares a instalar | No |
 | `.github/workflows/` | El despertador: hace que todo corra solo | No |
-| `estado.json` | Recuerda lo que ya te enseñó (se crea solo) | No |
+| `estado.json` | Recuerda qué cursos ya te enseñó, para no repetirlos (se crea solo) | No |
+| `salida/eventos-conocidos.json` | Memoria de cursos encontrados hasta un año vista (se crea sola) | No |
 | `salida/` | Aquí aparecen las tablas (se crea sola) | No |
 
 ---
@@ -28,7 +29,7 @@ No hace falta entenderlos todos. En la práctica solo tocarás el primero.
 ## Las tres órdenes que vas a usar
 
 ```bash
-python verificar.py      # comprueba que las 168 webs responden (al empezar, y cada 3-6 meses)
+python verificar.py      # comprueba que las 211 webs responden (al empezar, y cada 3-6 meses)
 python agenda.py         # los cursos NUEVOS del próximo mes  ← el del post semanal
 python agenda.py --todo --meses 6    # mirar sin más: no altera el post del lunes
 ```
@@ -45,16 +46,28 @@ que no te ha enseñado todavía. Eso es justo el contenido del post.
 así que puedes curiosear con ventanas amplias sin estropear el post del lunes
 siguiente. Esto importa más de lo que parece — ver el apartado siguiente.
 
-### Por qué la memoria solo apunta lo que enseña
+### Las dos memorias
 
-El programa recuerda qué cursos ya te mostró, para no repetirlos. La tentación
-sería apuntar *todo lo que encuentra*, pero eso rompería tu rutina en silencio:
-un congreso de marzo detectado hoy quedaría marcado como "ya visto", y cuando en
-febrero entrase por fin en la ventana del próximo mes **no aparecería como nuevo
-y no llegaría nunca al post**. Perderías cursos sin enterarte.
+El programa lleva dos memorias, y conviene entender por qué.
 
-Por eso se apunta solo lo que sale en pantalla. Un curso lejano se ve la primera
-vez que entra en la ventana del mes, que es cuando te interesa publicarlo.
+**1. Memoria de cursos conocidos** (`salida/eventos-conocidos.json`). Cada
+rastreo guarda **todo lo que encuentra hasta un año vista**, y el post del lunes
+se construye desde ahí, no solo desde lo visitado ese día.
+
+Sin ella, las fuentes mensuales y trimestrales serían casi invisibles: una web
+que se visita cada tres meses solo aportaría los cursos del mes siguiente a la
+visita, y los de los meses dos y tres no aparecerían nunca. Con ella, un curso
+que un colegio anuncia en septiembre para noviembre sale en tu post de finales
+de octubre, aunque la web del colegio no se haya vuelto a visitar.
+
+Los cursos ya celebrados se olvidan solos.
+
+**2. Memoria de lo ya enseñado** (`estado.json`). Para no repetirte cada lunes
+los mismos cursos. Solo apunta lo que sale en pantalla: si apuntara todo lo que
+encuentra, un congreso lejano quedaría marcado como "visto" antes de tiempo y
+nunca llegaría al post.
+
+`--todo` no escribe en ninguna de las dos: es una consulta de lectura.
 
 ---
 
@@ -75,7 +88,7 @@ Lo que verás en el informe:
   verificador ha encontrado una página mejor (la sección "Cursos", "Agenda"…).
   Quedan anotadas en `fuentes.yaml` como comentario, para que las revises.
 - **Bloqueadas por robots.txt** → el sitio prohíbe el rastreo y el programa lo
-  respeta. Sabemos que AnestesiaR y SEMICYUC están aquí. Para esas, el camino es
+  respeta. AnestesiaR y la web principal de la SED están aquí. Para esas, el camino es
   el boletín de socio o Instagram.
 - **No responden** → dirección equivocada o web desaparecida. Búscala en Google
   y corrige la línea `url:`, o borra el bloque entero si ya no existe.
@@ -88,13 +101,13 @@ pequeñas cambian a menudo. El verificador existe precisamente para eso.
 
 ## Cómo está organizada la lista de webs
 
-Las 168 no se revisan todas cada lunes. Están repartidas en tres niveles:
+Las 211 no se revisan todas cada lunes. Están repartidas en tres niveles:
 
 | Nivel | Cuántas | Cada cuánto | Qué hay |
 |---|---|---|---|
 | **1** | 12 | Semanal | SEDAR, SEMICYUC, SED, SEMDOR, ESRA, AnestesiaR, Dolor.com |
-| **2** | 80 | Mensual | Grupos de trabajo de SEDAR, las 12 sociedades autonómicas de anestesia, las 13 de intensivos, agregadores y los portales de formación de los 17 servicios autonómicos de salud |
-| **3** | 76 | Trimestral | 38 universidades públicas, 19 privadas, grupos hospitalarios privados y colegios de médicos |
+| **2** | 132 | Mensual | Los **52 colegios de médicos**, grupos de trabajo de SEDAR, las 12 sociedades autonómicas de anestesia, las 13 de intensivos, agregadores y los portales de formación de los 17 servicios autonómicos de salud |
+| **3** | 67 | Trimestral | 38 universidades públicas, 19 privadas, grupos hospitalarios privados y el Consejo General de Colegios |
 
 **Sobre los hospitales:** en vez de perseguir 840 webs de hospital, el nivel 2
 incluye los **portales de formación de los servicios autonómicos de salud**
@@ -120,9 +133,16 @@ Abre `fuentes.yaml` y copia este bloque al final, cambiando los datos:
 - `nivel`: 1 semanal, 2 mensual, 3 trimestral
 - `ambito`: `anestesia`, `criticos`, `dolor` o `mixto`
 - `filtro`: `evento` en webs ya específicas de la especialidad;
-  `estricto` en webs generalistas (universidades, hospitales, agregadores),
-  donde además exige que el texto mencione la especialidad. Sin eso, la tabla se
-  te llena de congresos de traumatología.
+  `estricto` en webs generalistas (colegios, universidades, hospitales,
+  agregadores), donde además exige que el texto mencione la especialidad. Sin
+  eso, la tabla se te llena de congresos de traumatología.
+
+  El filtro estricto busca **palabras completas y expresiones clínicas**, no
+  trozos: "UCI" no salta con "reducir", ni "intensivo" con "curso intensivo de
+  inglés", ni "crítico" con "pensamiento crítico". También reconoce las siglas
+  de las sociedades del campo (SEDAR, SEMICYUC, SECPAL…). La ecografía cuenta
+  como especialidad, así que alguna ecografía para primaria se colará: es
+  preferible a perder los cursos de ecografía perioperatoria o POCUS.
 
 ---
 
@@ -141,9 +161,9 @@ python agenda.py
 Sube estos archivos a un repositorio de GitHub y se ejecutará solo:
 
 - **Cada lunes a las 8:00** → nivel 1 (las 12 principales)
-- **El primer lunes de mes** → niveles 1 y 2 (92 webs)
-- **En enero, abril, julio y octubre** → los tres niveles (168 webs)
-- **Cada tres meses** → verificación de que las 168 direcciones siguen vivas
+- **El primer lunes de mes** → niveles 1 y 2 (144 webs)
+- **En enero, abril, julio y octubre** → los tres niveles (211 webs)
+- **Cada tres meses** → verificación de que las 211 direcciones siguen vivas
 
 La ventana es siempre la misma, el próximo mes. Lo que cambia con la fecha es
 **a cuántas webs se visita**, no cuánto se mira hacia delante.
@@ -160,7 +180,7 @@ Para cada web, en este orden:
 1. **robots.txt** — si el sitio prohíbe el rastreo, se salta y lo avisa.
 2. **Busca un RSS** — el camino fiable.
 3. **Si no hay, lee el HTML** con un extractor genérico. No hay un programa a
-   medida para cada una de las 168: recorre los enlaces y mira el bloque de
+   medida para cada una de las 211: recorre los enlaces y mira el bloque de
    texto que rodea a cada uno. Si ahí hay una fecha y una palabra tipo "curso"
    o "congreso", es candidato.
 4. **Interpreta la fecha** — "12, 13 y 14 de noviembre de 2026", "del 27 al 29

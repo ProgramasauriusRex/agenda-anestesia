@@ -60,3 +60,64 @@ assert "Oncología" not in titulos_b, "filtro estricto debería descartar oncolo
 assert "Ecografía" in titulos_b and "dolor" in titulos_b.lower()
 assert len(b) == 2, f"esperados 2 eventos, obtenidos {len(b)}"
 print("Todas las comprobaciones OK ✓")
+
+
+# ---------------------------------------------------------------------------
+# Filtro de especialidad (webs generalistas: colegios, universidades...)
+# ---------------------------------------------------------------------------
+from agenda import limpia_titulo
+
+DEBE_PASAR = [
+    "Curso de Soporte Vital Avanzado (SVA) para médicos",
+    "Taller de manejo de la vía aérea difícil",
+    "Jornada de actualización en dolor crónico",
+    "Curso de ecografía clínica a pie de cama (POCUS)",
+    "Webinar: sedoanalgesia en la UCI",
+    "Curso de bloqueos nerviosos ecoguiados",
+    "XV Congreso Internacional SECPAL de cuidados paliativos",
+    "Jornada sobre el manejo del paciente crítico politraumatizado",
+    "Multidisciplinary World Pain Forum 2027",
+    "Euroanaesthesia Congress 2027",
+    "Jornada de neuroanestesia",
+    "Taller de ventilación mecánica no invasiva",
+    "XV Congreso Internacional SECPAL",
+    "Jornada SEDAR de residentes",
+    "22 Congreso de la Sociedad Española del Dolor SED",
+]
+NO_DEBE_PASAR = [
+    "Curso intensivo de inglés médico",
+    "Taller para reducir el estrés en consulta",
+    "Curso de pensamiento crítico y lectura de artículos",
+    "Curso de fiscalidad para médicos autónomos",
+    "Jornada sobre bloqueo AV y trastornos de la conducción",
+    "63 Congreso SECOT 2026",
+    "48 Congreso SEMERGEN 2026",
+    "Taller de conducción segura para residentes",
+    "International Congress in Spain on Dermatology",
+]
+for t in DEBE_PASAR:
+    assert es_relevante(t, "estricto"), f"debería pasar el filtro: {t}"
+for t in NO_DEBE_PASAR:
+    assert not es_relevante(t, "estricto"), f"no debería pasar el filtro: {t}"
+print(f"Filtro de especialidad: {len(DEBE_PASAR)} aciertos, {len(NO_DEBE_PASAR)} descartes ✓")
+
+# ---------------------------------------------------------------------------
+# Limpieza de títulos
+# ---------------------------------------------------------------------------
+for orig, frag, esperado in [
+    ("63 Congreso SECOT 2026 30 de septiembre de 2026 63 Congreso SECOT 2026",
+     "30 de septiembre de 2026", "63 Congreso SECOT 2026"),
+    ("Curso de Vía Aérea · 12, 13 y 14 de noviembre de 2026",
+     "12, 13 y 14 de noviembre de 2026", "Curso de Vía Aérea"),
+    ("Curso SVA Semipresencial del PNRCP-SEMICYUC", "28 de septiembre",
+     "Curso SVA Semipresencial del PNRCP-SEMICYUC"),
+    ("Jornada 17 de octubre", "17 de octubre", "Jornada 17 de octubre"),
+]:
+    r = limpia_titulo(orig, frag)
+    assert r == esperado, f"«{r}» ≠ «{esperado}»"
+print("Limpieza de títulos ✓")
+assert limpia_titulo("Curso de Soporte Vital Avanzado (SVA)", "26 de octubre") == \
+    "Curso de Soporte Vital Avanzado (SVA)", "no debe comerse el paréntesis"
+assert limpia_titulo("«Jornada de Dolor» 5 de mayo de 2027", "5 de mayo de 2027") == \
+    "«Jornada de Dolor»", "debe conservar las comillas"
+print("Paréntesis y comillas intactos ✓")
