@@ -5,9 +5,9 @@
 | Diagnóstico | Fuentes |
 |---|---|
 | PRODUCE | 16 |
-| FILTRO | 60 |
+| FILTRO | 61 |
 | FECHA EN LA FICHA | 8 |
-| SIN FECHAS | 53 |
+| SIN FECHAS | 52 |
 | SIN ENLACES | 21 |
 | FUERA DE VENTANA | 8 |
 | NO RESPONDE | 3 |
@@ -143,7 +143,7 @@ https://www.somiama.org/
     - _son de la especialidad pero sin fecha_: «Nueva actividad avalada por SOMIAMA»
 
 
-## FILTRO (60)
+## FILTRO (61)
 
 **Acadèmia de Ciències Mèdiques (Cataluña-Baleares)** · filtro estricto  
 https://www.academia.cat/  
@@ -162,7 +162,7 @@ https://comc-es.org/formacion/cursos-colegio/
 **Colegio de Médicos de Alicante** · filtro estricto  
 https://coma.es/servicio/formacion/  
 - feed: 12 entradas, 8 con fecha, 0 de la especialidad, 0 válidas
-- html: 44 enlaces, 28 con fecha, 0 de la especialidad, 0 válidas (1 fechas sueltas en la página)
+- html: 41 enlaces, 27 con fecha, 0 de la especialidad, 0 válidas (1 fechas sueltas en la página)
     - _tienen fecha pero el filtro los rechaza_: «Formación COMA»
     - _tienen fecha pero el filtro los rechaza_: «Formación COMA»
     - _tienen fecha pero el filtro los rechaza_: «Formación COMA»
@@ -565,6 +565,13 @@ https://www.unizar.es/
     - _tienen fecha pero el filtro los rechaza_: «¿Y si tu futuro fuera investigar? Jóvenes, ciencia e innovación con impacto»
     - _tienen fecha pero el filtro los rechaza_: «Educadores experimentan en el Pirineo oscense con los recursos pedagógicos que ofrece la n»
 
+**U. de les Illes Balears** · filtro estricto  
+https://www.uib.es/  
+- html: 12 enlaces, 5 con fecha, 0 de la especialidad, 0 válidas (2 fechas sueltas en la página)
+    - _tienen fecha pero el filtro los rechaza_: «23-09-2026 - Setmana Europea de l'Esport»
+    - _tienen fecha pero el filtro los rechaza_: «24-09-2026 - Acte d'obertura de l'any acadèmic 2026-27 de la seu d'Eivissa i Formentera»
+    - _tienen fecha pero el filtro los rechaza_: «25-09-2026 - Nit Europea de la Recerca»
+
 **U. del País Vasco / EHU** · filtro estricto  
 https://www.ehu.eus/  
 - html: 36 enlaces, 2 con fecha, 0 de la especialidad, 0 válidas (2 fechas sueltas en la página)
@@ -632,7 +639,7 @@ https://www.uax.com/
 - html: 108 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (2 fechas sueltas en la página)
 
 
-## SIN FECHAS (53)
+## SIN FECHAS (52)
 
 **ACIS — Axencia de Coñecemento en Saúde (Galicia)** · filtro estricto  
 https://acis.sergas.es/  
@@ -710,13 +717,6 @@ https://www.medicoslaspalmas.es/
 **Colegio de Médicos de Soria** · filtro estricto  
 https://www.comsor.es/agendaformacion.html  
 - html: 19 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-
-**Colegio de Médicos de Teruel** · filtro estricto  
-https://www.comteruel.es/  
-- feed: 0 entradas, 0 con fecha, 0 de la especialidad, 0 válidas
-- html: 50 enlaces, 0 con fecha, 2 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-    - _son de la especialidad pero sin fecha_: «Más información →»
-    - _son de la especialidad pero sin fecha_: «Más información →»
 
 **Colegio de Médicos de Zamora** · filtro estricto  
 https://www.colmeza.com/index.php/servicios/formacion/cursos  
@@ -1095,12 +1095,13 @@ https://www.svnrartd.com
 
 ## NO RESPONDE (3)
 
+**Colegio de Médicos de Teruel** · filtro estricto  
+https://www.comteruel.es/  
+- feed: 0 entradas, 0 con fecha, 0 de la especialidad, 0 válidas
+
 **Mutual Médica — Congresos** · filtro estricto  
 https://www.mutualmedica.com/post/mutualmedica/calendario-congresos-medicina-espana  
 
 **SESPA (Asturias)** · filtro estricto  
 https://www.astursalud.es/  
-
-**U. de les Illes Balears** · filtro estricto  
-https://www.uib.es/  
 
