@@ -214,5 +214,33 @@ _e = _ev[0]
 assert _e.via == "ficha"
 assert _e.inicio == "2026-12-10", f"debe coger la fecha de celebración, no la de publicación: {_e.inicio}"
 assert _e.lugar == "Sevilla", f"debe sacar la ciudad de la ficha: {_e.lugar}"
-assert "SEPSIS" in _e.titulo
+# El título venía gritado en la web y ahora se normaliza
+assert _e.titulo == "Diploma de Especialización en el Manejo de la Sepsis y Shock Séptico", _e.titulo
 print("Entrada en fichas: recupera el curso, ignora publicación, año pasado y no-cursos ✓")
+
+# ---------------------------------------------------------------------------
+# Mejoras del 23/09: meses abreviados, lugar y mayúsculas
+# ---------------------------------------------------------------------------
+from agenda import extrae_lugar, arregla_mayusculas
+
+for _txt in ["Curso el 15 oct 2026", "Jornada 3 nov. 2026", "Del 12 al 14 dic 2026",
+             "Taller 20 ene 2027", "Sesión 8 feb. 2027", "Congreso 5 de sept. de 2026"]:
+    assert _ef(_txt, hoy=date(2026, 9, 23))[0], f"mes abreviado no reconocido: {_txt}"
+# Un día y un mes sueltos, sin "de" ni año, NO son una fecha
+for _txt in ["Sala 3 marzo cerrada por obras", "Aula 2 junio disponible",
+             "Reunión de 15 mayores de edad"]:
+    assert not _ef(_txt, hoy=date(2026, 9, 23))[0], f"falso positivo: {_txt}"
+print("Meses abreviados ✓")
+
+assert extrae_lugar("Jornada en Valdepeñas (Ciudad Real)") == "Valdepeñas"
+assert extrae_lugar("Webinar 100% online desde Madrid") == "Online"
+assert extrae_lugar("Sede: Hotel Rafael, Atocha, Madrid") == "Madrid"
+assert extrae_lugar("Congreso en Las Palmas de Gran Canaria") == "Las Palmas de Gran Canaria"
+assert extrae_lugar("Curso de dolor crónico, plazas limitadas") == ""
+print("Detección de lugar ✓")
+
+assert arregla_mayusculas("CURSO DE SOPORTE VITAL AVANZADO (SVA) Y DEA") == \
+    "Curso de Soporte Vital Avanzado (SVA) y DEA"
+assert arregla_mayusculas("VI CONGRESO SEMDOR 2026") == "VI Congreso SEMDOR 2026"
+assert arregla_mayusculas("Curso de Ventilación Mecánica") == "Curso de Ventilación Mecánica"
+print("Títulos gritados ✓")

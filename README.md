@@ -211,7 +211,10 @@ Para cada web, en este orden:
    medida para cada una de las 211: recorre los enlaces y mira el bloque de
    texto que rodea a cada uno. Si ahí hay una fecha y una palabra tipo "curso"
    o "congreso", es candidato.
-4. **Interpreta la fecha** — "12, 13 y 14 de noviembre de 2026", "del 27 al 29
+4. **Interpreta la fecha** — con meses completos o abreviados («15 oct 2026»,
+   «3 nov. 2026», «del 12 al 14 dic»), con «de» o sin él. Un día y un mes
+   sueltos sin año ni «de» no cuentan como fecha: «Sala 3 marzo cerrada por
+   obras» no es un curso. También "12, 13 y 14 de noviembre de 2026", "del 27 al 29
    de mayo", "26-28 de Marzo" (sin año: lo deduce), "22/10/2026", rangos que
    cambian de mes y de año. También en catalán y gallego.
 5. **Quita duplicados** — un congreso aparece en varias webs a la vez.

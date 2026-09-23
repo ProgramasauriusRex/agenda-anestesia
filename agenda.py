@@ -361,6 +361,43 @@ def titulo_desde_url(url: str) -> str:
     return ruta[:1].upper() + ruta[1:]
 
 
+# Siglas y números romanos que deben seguir en mayúsculas al arreglar un
+# título que venía gritado
+SIGLAS_INTACTAS = {
+    "SVA", "SVB", "DEA", "RCP", "UCI", "URPA", "TIVA", "TCI", "POCUS", "DEU",
+    "SEDAR", "SEMICYUC", "SED", "SEMDOR", "SECPAL", "ESRA", "SECIP", "SEEIUC",
+    "FEEA", "EDAIC", "SEMES", "CERCP", "ONT", "IA", "EPOC", "SDRA", "VMNI",
+    "II", "III", "IV", "VI", "VII", "VIII", "IX", "XI", "XII", "XIII", "XIV",
+    "XV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI", "XXII", "XXIII", "XXIV",
+    "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX",
+}
+
+
+def arregla_mayusculas(titulo: str) -> str:
+    """
+    "DIPLOMA DE ESPECIALIZACIÓN EN EL MANEJO DE LA SEPSIS" grita en un post.
+    Si el título viene casi entero en mayúsculas se pasa a formato normal,
+    respetando siglas y números romanos. Si no, se deja como está: puede que
+    las mayúsculas sean intencionadas.
+    """
+    letras = [c for c in titulo if c.isalpha()]
+    if len(letras) < 12 or sum(c.isupper() for c in letras) / len(letras) < 0.8:
+        return titulo
+    MINUSCULAS = {"de", "del", "la", "las", "el", "los", "y", "e", "en", "a",
+                  "al", "con", "para", "por", "sobre", "un", "una", "the", "of"}
+    salida = []
+    for i, palabra in enumerate(titulo.split()):
+        nucleo = palabra.strip(".,;:()[]«»\"'")
+        if nucleo.upper() in SIGLAS_INTACTAS or (nucleo.isupper() and len(nucleo) <= 4
+                                                 and not nucleo.isalpha()):
+            salida.append(palabra)
+        elif i > 0 and nucleo.lower() in MINUSCULAS:
+            salida.append(palabra.lower())
+        else:
+            salida.append(palabra.capitalize())
+    return " ".join(salida)
+
+
 def recorta(titulo: str, maximo: int = 120) -> str:
     """Corta por separador o por palabra, nunca a mitad de una."""
     if len(titulo) <= maximo:
@@ -414,25 +451,56 @@ def limpia_titulo(titulo: str, frag: str) -> str:
 
 def extrae_lugar(texto: str) -> str:
     """
-    Heurística para la ciudad. Busca patrones 'en <Ciudad>' o una ciudad
-    conocida en el texto. Si no la encuentra, devuelve vacío para que se
-    revise a mano: mejor un hueco visible que un dato inventado.
+    Ciudad o modalidad del curso. En la primera tanda real, 12 de 27 cursos
+    salían sin lugar, así que aquí se mira en tres pasadas: primero si es
+    online, luego una etiqueta explícita ("Sede:", "Lugar:"), y por último
+    cualquier ciudad española reconocible.
+
+    Si no encuentra nada devuelve vacío. Nunca se deduce del organizador:
+    que un curso lo dé el Colegio de Málaga no significa que sea en Málaga,
+    y un hueco visible es preferible a un dato inventado.
     """
+    t = " " + re.sub(r"\s+", " ", texto) + " "
+
+    # 1. Modalidad a distancia, que gana a cualquier ciudad que se mencione
+    if re.search(r"\b(?:100%\s*)?(?:on-?line|en línea|virtual|streaming|"
+                 r"tele(?:formación|matic\w*)|a distancia)\b", t, re.I):
+        return "Online"
+
     CIUDADES = [
-        "Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza", "Málaga",
-        "Murcia", "Bilbao", "Alicante", "Córdoba", "Valladolid", "Vigo",
-        "Gijón", "Granada", "A Coruña", "Vitoria", "Vitoria-Gasteiz",
-        "Santa Cruz de Tenerife", "Las Palmas de Gran Canaria", "Pamplona",
-        "Santander", "Salamanca", "Toledo", "Badajoz", "Cáceres", "Oviedo",
-        "San Sebastián", "Donostia", "Palma", "Logroño", "Albacete",
-        "Ciudad Real", "Cádiz", "Huelva", "Jaén", "Almería", "León", "Burgos",
-        "Girona", "Lleida", "Tarragona", "Castellón", "Santiago de Compostela",
-        "Online", "Virtual",
+        "A Coruña", "Albacete", "Alcalá de Henares", "Algeciras", "Alicante",
+        "Almería", "Ávila", "Badajoz", "Badalona", "Barcelona", "Bilbao",
+        "Burgos", "Cáceres", "Cádiz", "Cartagena", "Castellón", "Ceuta",
+        "Ciudad Real", "Córdoba", "Cuenca", "Donostia", "Elche", "Ferrol",
+        "Getafe", "Gijón", "Girona", "Granada", "Guadalajara", "Huelva",
+        "Huesca", "Jaén", "Jerez de la Frontera", "Las Palmas de Gran Canaria",
+        "Las Palmas", "León", "Lleida", "Logroño", "Lugo", "Madrid", "Málaga",
+        "Marbella", "Melilla", "Mérida", "Móstoles", "Murcia", "Ourense",
+        "Oviedo", "Palencia", "Palma", "Pamplona", "Pontevedra", "Reus",
+        "Sabadell", "Salamanca", "San Sebastián", "Santander",
+        "Santa Cruz de Tenerife", "Santiago de Compostela", "Segovia",
+        "Sevilla", "Soria", "Tarragona", "Terrassa", "Teruel", "Toledo",
+        "Valdepeñas", "Valencia", "Valladolid", "Vigo", "Vitoria-Gasteiz",
+        "Vitoria", "Zamora", "Zaragoza", "Talavera de la Reina",
     ]
-    for c in sorted(CIUDADES, key=len, reverse=True):
-        if re.search(rf"\b{re.escape(c)}\b", texto, re.IGNORECASE):
-            return c
-    return ""
+
+    # 2. Etiqueta explícita: "Sede: Hotel X, Valencia" / "Lugar: Madrid"
+    etiqueta = re.search(r"\b(?:sede|lugar|ubicaci[oó]n|celebra(?:ci[oó]n)?\s+en|"
+                         r"tendr[aá]\s+lugar\s+en)\s*:?\s*([^.;|]{3,80})", t, re.I)
+    # Gana la que aparece ANTES en el texto, y a igualdad la más larga: en
+    # "Valdepeñas (Ciudad Real)" la sede es Valdepeñas y la provincia solo
+    # acompaña; en "Las Palmas de Gran Canaria" gana el nombre completo.
+    def primera(donde: str) -> str:
+        halladas = []
+        for c in CIUDADES:
+            m = re.search(rf"\b{re.escape(c)}\b", donde, re.I)
+            if m:
+                halladas.append((m.start(), -len(c), c))
+        return min(halladas)[2] if halladas else ""
+
+    if etiqueta and (c := primera(etiqueta.group(1))):
+        return c
+    return primera(t)
 
 
 def desde_feed(url_feed: str, fuente: dict) -> list[Evento]:
@@ -454,7 +522,7 @@ def desde_feed(url_feed: str, fuente: dict) -> list[Evento]:
         if not titulo_util(limpio):
             continue
         eventos.append(Evento(
-            titulo=recorta(limpio) + (" — plazas agotadas" if lleno else ""),
+            titulo=recorta(arregla_mayusculas(limpio)) + (" — plazas agotadas" if lleno else ""),
             fecha_texto=frag,
             inicio=ini.isoformat(), fin=fin.isoformat() if fin else None,
             lugar=extrae_lugar(conjunto),
@@ -597,7 +665,7 @@ def desde_html(url: str, html: str, fuente: dict) -> list[Evento]:
         vistos.add(clave)
 
         eventos.append(Evento(
-            titulo=recorta(limpio) + (" — plazas agotadas" if lleno else ""),
+            titulo=recorta(arregla_mayusculas(limpio)) + (" — plazas agotadas" if lleno else ""),
             fecha_texto=frag,
             inicio=ini.isoformat(), fin=fin.isoformat() if fin else None,
             lugar=extrae_lugar(conjunto),
@@ -620,7 +688,7 @@ def desde_html(url: str, html: str, fuente: dict) -> list[Evento]:
             continue
         vistos.add(clave)
         eventos.append(Evento(
-            titulo=recorta(limpio) + (" — plazas agotadas" if lleno else ""),
+            titulo=recorta(arregla_mayusculas(limpio)) + (" — plazas agotadas" if lleno else ""),
             fecha_texto=frag,
             inicio=ini.isoformat(), fin=fin.isoformat() if fin else None,
             lugar=extrae_lugar(f"{texto_enlace} {texto_ficha[:1500]}"),

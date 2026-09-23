@@ -21,9 +21,21 @@ MESES = {
     "desembre": 12,
     "xaneiro": 1, "febreiro": 2, "maio": 5, "xuno": 6, "xullo": 7, "agosto_gl": 8,
     "setembro": 9, "outubro": 10, "novembro": 11, "decembro": 12,
+    # Abreviados: "15 oct 2026", "3 nov. 2026", "del 12 al 14 dic". Es de las
+    # formas más habituales en los listados y no se reconocía ninguna.
+    "ene": 1, "feb": 2, "mar": 3, "abr": 4, "may": 5, "jun": 6, "jul": 7,
+    "ago": 8, "sep": 9, "sept": 9, "set": 9, "oct": 10, "nov": 11, "dic": 12,
+    "gen": 1, "febr": 2, "juny": 6, "jul_ca": 7, "des": 12,
+    "xan": 1, "xuñ": 6, "xul": 7, "out": 10, "dec": 12,
 }
 
 _MES_RE = "|".join(sorted(MESES.keys(), key=len, reverse=True))
+
+# El \b tras el mes evita que "mayo" case dentro de "mayores" ahora que el
+# "de" ya no es obligatorio; el punto opcional recoge "oct." y "sept."
+MES = rf"({_MES_RE})\b\.?"
+DE = r"\s+(?:de\s+)?"                       # "15 de octubre" y "15 octubre"
+ANIO = r"(?:\s*,?\s*(?:de(?:l)?\s+)?(\d{4}))?"   # "de 2026", ", 2026", "2026"
 
 
 def _normaliza(texto: str) -> str:
@@ -74,6 +86,18 @@ def _infiere_anio(mes: int, dia: int, hoy: date, texto: str = "") -> int:
     return hoy.year if candidato >= hoy else hoy.year + 1
 
 
+# Solo las abreviaturas son señal de fecha por sí solas. Un "3 marzo" suelto,
+# sin "de" y sin año, aparece en frases como "Sala 3 marzo cerrada por obras",
+# así que para una fecha suelta se exige "de", o año, o mes abreviado.
+ABREVIADOS = {"ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep",
+              "sept", "set", "oct", "nov", "dic", "gen", "febr", "juny",
+              "des", "xan", "xul", "out", "dec"}
+
+
+def _fecha_suelta_fiable(fragmento: str, mes: str, anio: str | None) -> bool:
+    return bool(anio) or " de " in fragmento or mes.strip(".") in ABREVIADOS
+
+
 def _fecha(dia: int, mes: int, anio: int) -> date | None:
     try:
         return date(anio, mes, dia)
@@ -85,27 +109,23 @@ def _fecha(dia: int, mes: int, anio: int) -> date | None:
 
 # "del 28 de septiembre al 2 de octubre de 2026"  (rango entre meses distintos)
 P_RANGO_2MESES = re.compile(
-    rf"(?:del\s+)?(\d{{1,2}})\s+de\s+({_MES_RE})\s*(?:de\s+(\d{{4}}))?\s*"
+    rf"(?:del\s+)?(\d{{1,2}}){DE}{MES}{ANIO}\s*"
     rf"(?:al?|a|hasta|[-–—])\s*"
-    rf"(\d{{1,2}})\s+de\s+({_MES_RE})\s*(?:de\s+)?(\d{{4}})?"
+    rf"(\d{{1,2}}){DE}{MES}{ANIO}"
 )
 
 # "12 al 14 de noviembre de 2026" / "26-28 de marzo" / "7–10 de junio de 2026"
 P_RANGO_1MES = re.compile(
-    rf"(?:del\s+)?(\d{{1,2}})\s*(?:al?|a|hasta|[-–—])\s*(\d{{1,2}})\s+de\s+({_MES_RE})"
-    rf"(?:\s+de(?:l)?\s+(\d{{4}}))?"
+    rf"(?:del\s+)?(\d{{1,2}})\s*(?:al?|a|hasta|[-–—])\s*(\d{{1,2}}){DE}{MES}{ANIO}"
 )
 
 # "15, 16 y 17 de mayo de 2026" / "12, 13 y 14 de noviembre"
 P_LISTA = re.compile(
-    rf"(\d{{1,2}})(?:\s*,\s*\d{{1,2}})*\s*y\s*(\d{{1,2}})\s+de\s+({_MES_RE})"
-    rf"(?:\s+de(?:l)?\s+(\d{{4}}))?"
+    rf"(\d{{1,2}})(?:\s*,\s*\d{{1,2}})*\s*y\s*(\d{{1,2}}){DE}{MES}{ANIO}"
 )
 
 # "22 de octubre de 2026" (fecha suelta)
-P_SIMPLE = re.compile(
-    rf"(\d{{1,2}})\s+de\s+({_MES_RE})(?:\s+de(?:l)?\s+(\d{{4}}))?"
-)
+P_SIMPLE = re.compile(rf"(\d{{1,2}}){DE}{MES}{ANIO}")
 
 # "22/10/2026", "22-10-26"
 P_NUMERICA = re.compile(r"\b(\d{1,2})[/.-](\d{1,2})[/.-](\d{2,4})\b")
@@ -114,7 +134,7 @@ P_NUMERICA = re.compile(r"\b(\d{1,2})[/.-](\d{1,2})[/.-](\d{2,4})\b")
 P_ISO = re.compile(r"\b(\d{4})-(\d{2})-(\d{2})\b")
 
 # "noviembre de 2026" (solo mes y año — peor que nada, pero mejor que vacío)
-P_MES_ANIO = re.compile(rf"\b({_MES_RE})\s+de(?:l)?\s+(\d{{4}})\b")
+P_MES_ANIO = re.compile(rf"\b{MES}\s+de(?:l)?\s+(\d{{4}})\b")
 
 
 def extrae_fechas(texto: str, hoy: date | None = None) -> tuple[date | None, date | None, str]:
@@ -162,7 +182,7 @@ def extrae_fechas(texto: str, hoy: date | None = None) -> tuple[date | None, dat
     if m := P_SIMPLE.search(t):
         d, mes, anio = m.groups()
         n = _mes_num(mes)
-        if n:
+        if n and _fecha_suelta_fiable(m.group(0), mes, anio):
             a = int(anio) if anio else _infiere_anio(n, int(d), hoy, t)
             f = _fecha(int(d), n, a)
             if f:
