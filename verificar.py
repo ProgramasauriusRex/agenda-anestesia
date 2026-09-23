@@ -112,12 +112,32 @@ def descarga(url: str, timeout: int = TIMEOUT):
 
 
 def robots_permite(url: str) -> bool | None:
-    """True permite, False prohíbe, None no se pudo comprobar."""
+    """
+    True permite, False prohíbe, None no se pudo comprobar.
+
+    Mismo criterio que agenda.py, y por el mismo motivo: `rp.read()` pide el
+    archivo con el User-Agent por defecto de Python, muchos cortafuegos le
+    responden 403, y la librería estándar convierte ese 403 en «prohibido todo
+    el sitio». Eso marcó como bloqueadas 27 webs que no prohibían nada.
+
+    Se sigue el RFC 9309: 200 → obedecer el archivo; 4xx → sin restricciones;
+    5xx → prohibido por prudencia; error de red → no se puede saber.
+    """
     p = urlparse(url)
+    url_robots = f"{p.scheme}://{p.netloc}/robots.txt"
+    r = descarga(url_robots, timeout=15)
+
+    if isinstance(r, Exception):
+        return None
+    if r.status_code >= 500:
+        return False
+    if r.status_code >= 400:
+        return True
+
     rp = robotparser.RobotFileParser()
-    rp.set_url(f"{p.scheme}://{p.netloc}/robots.txt")
+    rp.set_url(url_robots)
     try:
-        rp.read()
+        rp.parse(r.text.splitlines())
         return rp.can_fetch(USER_AGENT, url)
     except Exception:
         return None

@@ -185,17 +185,73 @@ class Evento:
 _robots_cache: dict[str, robotparser.RobotFileParser | None] = {}
 
 
+def _pide_robots(url_robots: str):
+    """Pide robots.txt con NUESTRAS cabeceras, y devuelve la respuesta tal cual
+    (con su código), sin tratar el 404 como un fallo."""
+    espera_turno(url_robots)
+    try:
+        r = requests.get(url_robots, headers=CAB_BOT, timeout=TIMEOUT)
+        if r.status_code in RECHAZO_POR_CABECERAS:
+            espera_turno(url_robots)
+            r = requests.get(url_robots, headers=CAB_NAVEGADOR, timeout=TIMEOUT)
+        return r
+    except Exception:
+        return None
+
+
+def _lee_robots(dominio: str) -> robotparser.RobotFileParser | None:
+    """
+    Descarga e interpreta el robots.txt de un dominio.
+
+    No se usa `rp.read()`, que es lo que hace todo el mundo, porque pide el
+    archivo con el User-Agent por defecto de Python. Muchos sitios con
+    cortafuegos delante (Cloudflare y similares) responden 403 a ese cliente,
+    y la librería estándar traduce ese 403 a «este sitio prohíbe todo».
+
+    Así fue como 27 de las 211 webs quedaron marcadas como bloqueadas sin que
+    ninguna lo prohibiera de verdad: al mirar sus robots.txt uno por uno, ni
+    uno solo tenía la regla que se les atribuía. La UCLM, la Universidad de
+    Extremadura, el CGCOM o la Universidad de Córdoba se limitaban a rechazar
+    a un cliente que no parecía un navegador.
+
+    El criterio que se sigue aquí es el del RFC 9309, el estándar vigente de
+    robots.txt:
+      - 200  → se obedece lo que diga el archivo.
+      - 4xx  → no hay archivo, o no se nos deja verlo: sin restricciones.
+      - 5xx  → el servidor falla: se asume prohibido, por prudencia.
+      - error de red → sin restricciones (no se puede paralizar el rastreo
+        entero porque una petición se caiga).
+
+    Devolver None significa «sin restricciones».
+    """
+    url_robots = urljoin(dominio, "/robots.txt")
+    r = _pide_robots(url_robots)
+
+    if r is None:
+        return None
+    if r.status_code >= 500:
+        rp = robotparser.RobotFileParser()
+        rp.disallow_all = True
+        return rp
+    if r.status_code >= 400:
+        return None
+
+    if "charset" not in r.headers.get("Content-Type", "").lower():
+        r.encoding = r.apparent_encoding or "utf-8"
+    rp = robotparser.RobotFileParser()
+    rp.set_url(url_robots)
+    try:
+        rp.parse(r.text.splitlines())
+    except Exception:
+        return None
+    return rp
+
+
 def robots_permite(url: str) -> bool:
     """Comprueba robots.txt. Ante la duda (error de red), permite."""
     dominio = f"{urlparse(url).scheme}://{urlparse(url).netloc}"
     if dominio not in _robots_cache:
-        rp = robotparser.RobotFileParser()
-        rp.set_url(urljoin(dominio, "/robots.txt"))
-        try:
-            rp.read()
-            _robots_cache[dominio] = rp
-        except Exception:
-            _robots_cache[dominio] = None
+        _robots_cache[dominio] = _lee_robots(dominio)
     rp = _robots_cache[dominio]
     if rp is None:
         return True

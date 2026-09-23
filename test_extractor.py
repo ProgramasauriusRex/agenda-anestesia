@@ -244,3 +244,61 @@ assert arregla_mayusculas("CURSO DE SOPORTE VITAL AVANZADO (SVA) Y DEA") == \
 assert arregla_mayusculas("VI CONGRESO SEMDOR 2026") == "VI Congreso SEMDOR 2026"
 assert arregla_mayusculas("Curso de Ventilación Mecánica") == "Curso de Ventilación Mecánica"
 print("Títulos gritados ✓")
+
+# ---------------------------------------------------------------------------
+# robots.txt: el 403 del cortafuegos no es una prohibición (RFC 9309)
+#
+# Esta prueba existe por un fallo real: 27 de las 211 webs figuraban como
+# "bloqueadas por robots.txt" y, al mirar sus archivos uno a uno, ninguna
+# prohibía nada. Lo que pasaba es que el servidor respondía 403 a la petición
+# del robots.txt, y la librería estándar de Python interpreta ese 403 como
+# "prohibido todo el sitio".
+# ---------------------------------------------------------------------------
+import agenda as _ag
+
+
+def _servidor_robots(codigo, cuerpo=""):
+    """Levanta un servidor que responde lo que se le diga en /robots.txt."""
+    class _H(http.server.BaseHTTPRequestHandler):
+        def do_GET(self):
+            if self.path == "/robots.txt":
+                self.send_response(codigo)
+                self.send_header("Content-Type", "text/plain; charset=utf-8")
+                self.end_headers()
+                self.wfile.write(cuerpo.encode("utf-8"))
+            else:
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.end_headers()
+                self.wfile.write(b"<html><body>ok</body></html>")
+
+        def log_message(self, *a):
+            pass
+
+    s = socketserver.TCPServer(("127.0.0.1", 0), _H)
+    threading.Thread(target=s.serve_forever, daemon=True).start()
+    return s, f"http://127.0.0.1:{s.server_address[1]}/cursos"
+
+
+_casos = [
+    # (código, contenido del robots.txt, ¿debe permitir?, descripción)
+    (403, "", True, "403 del cortafuegos: no es una regla, se permite"),
+    (404, "", True, "no hay robots.txt: se permite"),
+    (200, "User-agent: *\nDisallow: /", False, "prohibición real: se respeta"),
+    (200, "User-agent: *\nDisallow: /wp-admin/", True, "solo rutas concretas: se permite"),
+    (200, "User-agent: *\nDisallow:", True, "Disallow vacío: se permite"),
+    (200, "User-agent: CCBot\nDisallow: /", True, "prohibido a otro robot, no a nosotros"),
+    (500, "", False, "servidor caído: por prudencia, no se rastrea"),
+]
+
+for _cod, _cuerpo, _esperado, _desc in _casos:
+    _s, _u = _servidor_robots(_cod, _cuerpo)
+    try:
+        _ag._robots_cache.clear()
+        _r = _ag.robots_permite(_u)
+    finally:
+        _s.shutdown()
+    assert _r is _esperado, f"robots.txt — {_desc}: esperaba {_esperado}, dio {_r}"
+
+_ag._robots_cache.clear()
+print("Lectura de robots.txt ✓")
