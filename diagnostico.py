@@ -63,7 +63,7 @@ def analiza_html(url: str, html: str, fuente: dict, hoy: date) -> dict:
     """Recorre la página igual que el rastreador, pero contando en vez de extraer."""
     r = {"enlaces": 0, "con_fecha": 0, "relevantes": 0, "candidatos": 0,
          "finales": 0, "fechas_en_pagina": 0,
-         "ej_sin_filtro": [], "ej_sin_fecha": [], "ej_sin_titulo": []}
+         "ej_sin_filtro": [], "ej_sin_fecha": [], "ej_sin_titulo": [], "por_ficha": 0}
 
     sopa = BeautifulSoup(html, "lxml")
     for tag in sopa(["script", "style", "nav", "footer", "header"]):
@@ -181,6 +181,19 @@ def diagnostica(fuente: dict, hoy: date) -> dict:
     h = res["html"]
     res["via"] = res["via"] or "html"
 
+    # El recuento definitivo lo da el EXTRACTOR REAL, no la copia instrumentada
+    # de arriba. Esa copia sirve para ver por dónde se cae cada candidato, pero
+    # si además decidiera el resultado, cualquier mejora del extractor —como
+    # entrar en las fichas— quedaría invisible en el informe. Ya pasó una vez.
+    try:
+        reales = desde_html(url, r.text, fuente)
+    except Exception:
+        reales = []
+    en_ventana = [e for e in reales if e.inicio and hoy - timedelta(days=2)
+                  <= date.fromisoformat(e.inicio) <= hoy + timedelta(days=400)]
+    h["finales"] = len(en_ventana)
+    h["por_ficha"] = sum(1 for e in en_ventana if e.via == "ficha")
+
     # El orden importa: primero los motivos que se saben con certeza porque
     # hay evidencia (candidatos, enlaces con fecha), y solo al final los que
     # se deducen de una ausencia. Al revés, una web con pocos enlaces pero
@@ -206,7 +219,12 @@ def informe(rs: list[dict], hoy: date) -> str:
     cuenta = Counter(r["motivo"] for r in rs)
 
     L = [f"# Diagnóstico de rendimiento — {hoy.strftime('%d/%m/%Y')}", "",
-         f"{len(rs)} fuentes analizadas.", "", "| Diagnóstico | Fuentes |", "|---|---|"]
+         f"{len(rs)} fuentes analizadas.", ""]
+    cursos = sum((r["html"] or {}).get("finales", 0) + (r["feed"] or {}).get("finales", 0) for r in rs)
+    por_ficha = sum((r["html"] or {}).get("por_ficha", 0) for r in rs)
+    L += [f"**{cursos} cursos encontrados**" +
+          (f", de ellos **{por_ficha} entrando en la ficha** del curso." if por_ficha else "."), "",
+          "| Diagnóstico | Fuentes |", "|---|---|"]
     for m in orden:
         if cuenta[m]:
             L.append(f"| {m} | {cuenta[m]} |")
@@ -224,9 +242,10 @@ def informe(rs: list[dict], hoy: date) -> str:
                 cifras.append(f"feed: {f['entradas']} entradas, {f['con_fecha']} con fecha, "
                               f"{f['relevantes']} de la especialidad, {f['finales']} válidas")
             if h:
+                extra = f", {h['por_ficha']} entrando en la ficha" if h.get("por_ficha") else ""
                 cifras.append(f"html: {h['enlaces']} enlaces, {h['con_fecha']} con fecha, "
-                              f"{h['relevantes']} de la especialidad, {h['finales']} válidas "
-                              f"({h['fechas_en_pagina']} fechas sueltas en la página)")
+                              f"{h['relevantes']} de la especialidad, {h['finales']} válidas"
+                              f"{extra} ({h['fechas_en_pagina']} fechas sueltas en la página)")
             L.append(f"**{r['nombre']}** · filtro {r['filtro']}  ")
             L.append(f"{r['url']}  ")
             for c in cifras:
