@@ -466,6 +466,69 @@ def desde_feed(url_feed: str, fuente: dict) -> list[Evento]:
     return eventos
 
 
+# --- Entrar en la ficha del curso -----------------------------------------
+#
+# El diagnóstico del 23/09 dejó claro dónde se perdían los cursos: muchas webs
+# listan solo el título ("Diploma de especialización en el manejo de la sepsis
+# y shock séptico") y la fecha vive dentro de la ficha. Sin entrar, se pierden.
+#
+# Entrar cuesta una petición por curso, así que se hace con cuentagotas: solo
+# para enlaces cuyo PROPIO TEXTO ya delata la especialidad, y con tope por
+# fuente y global.
+
+SEGUIR_POR_FUENTE = 8
+SEGUIR_TOTAL = 250
+_seguidos = 0
+_candado_seguir = Lock()
+
+# Palabras que suelen preceder a la fecha del evento en la ficha, para no
+# quedarse con la fecha de publicación ni con el plazo de inscripción
+PISTAS_FECHA = ["se celebra", "se celebrara", "tendra lugar", "fecha", "fechas",
+                "dias", "cuando", "lugar y fecha", "del", "celebracion"]
+
+
+def _cupo_para_seguir() -> bool:
+    global _seguidos
+    with _candado_seguir:
+        if _seguidos >= SEGUIR_TOTAL:
+            return False
+        _seguidos += 1
+        return True
+
+
+def fecha_en_la_ficha(url: str) -> tuple[date | None, date | None, str, str]:
+    """
+    Abre la ficha de un curso y busca allí su fecha. Devuelve también el texto
+    de la ficha, que sirve para sacar la ciudad: el listado casi nunca la trae.
+    """
+    if not robots_permite(url) or not _cupo_para_seguir():
+        return None, None, "", ""
+    r = descarga(url)
+    if not r:
+        return None, None, "", ""
+    try:
+        sopa = BeautifulSoup(r.text, "lxml")
+    except Exception:
+        return None, None, "", ""
+    for tag in sopa(["script", "style", "nav", "footer", "header"]):
+        tag.decompose()
+    texto = sopa.get_text(" ", strip=True)[:6000]
+
+    hoy = date.today()
+    trozos = [texto[i:i + 300] for i in range(0, len(texto), 250)]
+    respaldo = None
+    for trozo in trozos:
+        ini, fin, frag = extrae_fechas(trozo)
+        if not ini or not (hoy - timedelta(days=2) <= ini <= hoy + timedelta(days=400)):
+            continue
+        # Con una pista delante, es la fecha del evento y no la de publicación
+        if any(p in normaliza(trozo) for p in PISTAS_FECHA):
+            return ini, fin, frag, texto
+        if respaldo is None:
+            respaldo = (ini, fin, frag, texto)
+    return respaldo or (None, None, "", "")
+
+
 def desde_html(url: str, html: str, fuente: dict) -> list[Evento]:
     """
     Extractor genérico. En lugar de un parser a medida por web, recorre los
@@ -477,6 +540,8 @@ def desde_html(url: str, html: str, fuente: dict) -> list[Evento]:
         tag.decompose()
 
     eventos, vistos = [], set()
+    sin_fecha: list[tuple[str, str]] = []   # candidatos a mirar en su ficha
+    dominio = urlparse(url).netloc
 
     for a in sopa.find_all("a", href=True):
         texto_enlace = a.get_text(" ", strip=True)
@@ -506,6 +571,16 @@ def desde_html(url: str, html: str, fuente: dict) -> list[Evento]:
             continue
         ini, fin, frag = extrae_fechas(conjunto)
         if not ini:
+            # Sin fecha al lado. Si el texto del enlace ya delata por sí solo
+            # que es un curso de la especialidad, vale la pena abrir su ficha.
+            destino = urljoin(url, a["href"])
+            anio = anio_en_texto(texto_enlace)
+            if (es_relevante(texto_enlace, "estricto")
+                    and titulo_util(texto_enlace)
+                    and urlparse(destino).netloc == dominio
+                    and not (anio and anio < date.today().year)
+                    and len(sin_fecha) < SEGUIR_POR_FUENTE):
+                sin_fecha.append((texto_enlace, destino))
             continue
 
         limpio, lleno = separa_sin_plazas(limpia_titulo(texto_enlace, frag))
@@ -530,6 +605,29 @@ def desde_html(url: str, html: str, fuente: dict) -> list[Evento]:
             url=urljoin(url, a["href"]),
             ambito=fuente.get("ambito", "mixto"),
             via="html",
+        ))
+
+    # Segunda pasada: los que no tenían fecha en el listado, se abren
+    for texto_enlace, destino in sin_fecha:
+        clave = normaliza(texto_enlace)[:70]
+        if clave in vistos:
+            continue
+        ini, fin, frag, texto_ficha = fecha_en_la_ficha(destino)
+        if not ini:
+            continue
+        limpio, lleno = separa_sin_plazas(limpia_titulo(texto_enlace, frag))
+        if not titulo_util(limpio):
+            continue
+        vistos.add(clave)
+        eventos.append(Evento(
+            titulo=recorta(limpio) + (" — plazas agotadas" if lleno else ""),
+            fecha_texto=frag,
+            inicio=ini.isoformat(), fin=fin.isoformat() if fin else None,
+            lugar=extrae_lugar(f"{texto_enlace} {texto_ficha[:1500]}"),
+            entidad=fuente["nombre"],
+            url=destino,
+            ambito=fuente.get("ambito", "mixto"),
+            via="ficha",
         ))
     return eventos
 

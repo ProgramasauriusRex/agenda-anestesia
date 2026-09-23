@@ -173,3 +173,46 @@ for _t in ["Curso de Soporte Vital Avanzado (SVA)",
            "Webinar – Del diagnóstico al tratamiento: hacia una analgesia individualizada en UCI"]:
     assert titulo_util(_t), _t
 print("Defectos reales del 21/09 corregidos ✓")
+
+
+# ---------------------------------------------------------------------------
+# Entrar en la ficha del curso (diagnóstico del 23/09: era la mayor pérdida)
+# ---------------------------------------------------------------------------
+import http.server, socketserver, threading, tempfile, os, shutil, csv, glob
+from agenda import desde_html, SEGUIR_POR_FUENTE
+
+_dir = tempfile.mkdtemp()
+open(os.path.join(_dir, "index.html"), "w", encoding="utf-8").write("""
+<html><body><ul>
+<li><a href="/d1.html">DIPLOMA DE ESPECIALIZACIÓN EN EL MANEJO DE LA SEPSIS Y SHOCK SÉPTICO</a></li>
+<li><a href="/d4.html">2021 - Curso de Simulación clínica en soporte vital</a></li>
+<li><a href="/d5.html">Presentación del libro "Cuentos y relatos de paz"</a></li>
+<li><a href="/d6.html">Formación tutores y residentes</a></li>
+</ul></body></html>""")
+# La ficha lleva primero la fecha de publicación: NO debe confundirse con ella
+open(os.path.join(_dir, "d1.html"), "w", encoding="utf-8").write(
+    '<html><body><p>Publicado el 2 de septiembre de 2026.</p>'
+    '<p>El curso se celebrará del 10 al 12 de diciembre de 2026 en Sevilla.</p></body></html>')
+for _n in ("d4", "d5", "d6"):
+    open(os.path.join(_dir, f"{_n}.html"), "w", encoding="utf-8").write(
+        "<html><body><p>Se celebró el 14 de mayo de 2021.</p></body></html>")
+
+_cwd = os.getcwd()
+os.chdir(_dir)
+_srv = socketserver.TCPServer(("127.0.0.1", 0), http.server.SimpleHTTPRequestHandler)
+_puerto = _srv.server_address[1]
+threading.Thread(target=_srv.serve_forever, daemon=True).start()
+try:
+    _base = f"http://127.0.0.1:{_puerto}/index.html"
+    _html = open("index.html", encoding="utf-8").read()
+    _ev = desde_html(_base, _html, {"nombre": "Prueba", "filtro": "evento", "ambito": "mixto"})
+finally:
+    _srv.shutdown(); os.chdir(_cwd); shutil.rmtree(_dir, ignore_errors=True)
+
+assert len(_ev) == 1, f"debería recuperar solo el diploma, recuperó {len(_ev)}"
+_e = _ev[0]
+assert _e.via == "ficha"
+assert _e.inicio == "2026-12-10", f"debe coger la fecha de celebración, no la de publicación: {_e.inicio}"
+assert _e.lugar == "Sevilla", f"debe sacar la ciudad de la ficha: {_e.lugar}"
+assert "SEPSIS" in _e.titulo
+print("Entrada en fichas: recupera el curso, ignora publicación, año pasado y no-cursos ✓")

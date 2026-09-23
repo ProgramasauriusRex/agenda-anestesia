@@ -216,6 +216,20 @@ Para cada web, en este orden:
    cambian de mes y de año. También en catalán y gallego.
 5. **Quita duplicados** — un congreso aparece en varias webs a la vez.
 
+### Cuando la fecha está dentro de la ficha
+
+Muchas webs listan solo el título y esconden la fecha dentro de cada curso.
+Cuando un enlace **por sí solo** delata que es de la especialidad ("Diploma de
+especialización en el manejo de la sepsis y shock séptico") pero no lleva fecha
+al lado, el programa abre esa ficha y la busca allí — y de paso saca la ciudad.
+
+Se hace con cuentagotas: como mucho 8 fichas por web y 250 en total por
+rastreo, solo dentro del mismo dominio, y nunca para enlaces cuyo título ya
+delata un año pasado. En la ficha prefiere la fecha que va precedida de "se
+celebrará", "tendrá lugar" o "fechas", para no quedarse con la de publicación.
+
+En el CSV, estos cursos salen con `via=ficha`.
+
 ### El detalle que más importa
 
 Al buscar el contexto de un enlace, el programa sube por el HTML **solo mientras
