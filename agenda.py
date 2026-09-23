@@ -46,7 +46,7 @@ import requests
 import yaml
 from bs4 import BeautifulSoup
 
-from fechas import extrae_fechas, formatea
+from fechas import extrae_fechas, formatea, anio_en_texto
 
 BASE = Path(__file__).parent
 SALIDA = BASE / "salida"
@@ -270,6 +270,108 @@ def es_relevante(texto: str, filtro: str) -> bool:
 
 _BORDES = ".,;:·-–—()[]|\"'«»"
 
+# Enlaces que no son un título aunque estén junto a una fecha: "Leer más",
+# "Ver programa"… Solo se descartan si el texto es corto; si no, se estaría
+# tirando un título legítimo que contenga la palabra ("Inscripción abierta:
+# Curso de…").
+NO_SON_TITULO = [
+    "leer mas", "ver mas", "saber mas", "ver y leer", "mas informacion",
+    "mas info", "ampliar informacion", "ver programa", "descargar programa",
+    "descargar", "pincha aqui", "clic aqui", "haz clic", "acceder",
+    "comunicaciones online", "ver detalle", "ver ficha", "continuar leyendo",
+]
+# Avisos de que el curso se ha llenado. No se descarta —que exista y se haya
+# llenado también es información— pero se saca del título y se deja como nota
+# al final, para que el título se lea limpio.
+SIN_PLAZAS = [
+    "plazas agotadas", "aforo completo", "inscripcion cerrada",
+    "curso completo", "matricula cerrada", "plazo cerrado", "completo",
+]
+
+# Muchas webs cuelgan la ficha entera dentro del enlace: "Curso X Nombre del
+# curso: … Día y hora: … Plazas: …". A partir de una de estas etiquetas ya no
+# hay título, hay formulario: se corta ahí. Se exige los dos puntos para no
+# cortar títulos legítimos, y que haya al menos tres palabras antes.
+ETIQUETAS_FICHA = [
+    "nombre del curso:", "dia y hora:", "dias y horas:", "fecha de inicio:",
+    "lugar de celebracion:", "horario:", "duracion:", "plazas:", "precio:",
+    "dirigido a:", "modalidad:", "matricula:", "objetivos:", "temario:",
+]
+# Etiquetas que quedan colgando al quitar la fecha ("...Medicina Intensiva Fecha")
+ETIQUETAS_FINALES = {"fecha", "fechas", "cuando", "horario", "inicio", "lugar", "sede"}
+
+
+def titulo_util(titulo: str) -> bool:
+    """¿Este texto sirve como título de un curso?"""
+    n = normaliza(titulo)
+    if len(n) < 12:
+        return False
+    if len(n) < 50 and any(p in n for p in NO_SON_TITULO):
+        return False
+    return True
+
+
+def corta_en_ficha(titulo: str) -> str:
+    """Corta el título donde empieza la ficha del curso."""
+    w = titulo.split()
+    norm = [normaliza(x) for x in w]
+    corte = None
+    for etiqueta in ETIQUETAS_FICHA:
+        trozo = etiqueta.split()
+        n = len(trozo)
+        for i in range(3, len(norm) - n + 1):
+            if norm[i:i + n] == trozo:
+                corte = i if corte is None else min(corte, i)
+                break
+    return " ".join(w[:corte]) if corte else titulo
+
+
+def separa_sin_plazas(titulo: str) -> tuple[str, bool]:
+    """
+    Saca del título los avisos de "plazas agotadas" y devuelve el título
+    limpio junto con la señal de si el curso está lleno.
+    """
+    lleno = False
+    limpio = titulo
+    for aviso in SIN_PLAZAS:
+        patron = re.compile(re.escape(aviso).replace(r"\ ", r"\s+"), re.IGNORECASE)
+        # Tolerante con tildes: "inscripción cerrada" y "matrícula cerrada"
+        patron_tildes = re.compile(
+            patron.pattern.replace("inscripcion", "inscripci[oó]n")
+                          .replace("matricula", "matr[ií]cula"), re.IGNORECASE)
+        if patron_tildes.search(limpio):
+            lleno = True
+            limpio = patron_tildes.sub(" ", limpio)
+    if lleno:
+        limpio = re.sub(r"\s+", " ", limpio).strip(" " + _BORDES)
+    return limpio, lleno
+
+
+def titulo_desde_url(url: str) -> str:
+    """
+    Último recurso cuando el enlace dice "Ver y leer más": la propia dirección
+    suele llevar el nombre. De .../70-reunion-anual-aaear-2026 sale un título
+    pobre pero informativo, que es mejor que perder el curso.
+    """
+    ruta = urlparse(url).path.rstrip("/").split("/")[-1]
+    ruta = re.sub(r"\.(html?|php|aspx?|jsp)$", "", ruta, flags=re.I)
+    ruta = re.sub(r"[-_]+", " ", ruta).strip()
+    if len(ruta) < 12 or ruta.replace(" ", "").isdigit():
+        return ""
+    return ruta[:1].upper() + ruta[1:]
+
+
+def recorta(titulo: str, maximo: int = 120) -> str:
+    """Corta por separador o por palabra, nunca a mitad de una."""
+    if len(titulo) <= maximo:
+        return titulo
+    trozo = titulo[:maximo]
+    corte = max(trozo.rfind(" · "), trozo.rfind(" | "), trozo.rfind(". "),
+                trozo.rfind(" – "), trozo.rfind(" - "))
+    if corte < maximo // 2:
+        corte = trozo.rfind(" ")
+    return trozo[:corte].rstrip(" " + _BORDES) + "…"
+
 
 def limpia_titulo(titulo: str, frag: str) -> str:
     """
@@ -278,6 +380,7 @@ def limpia_titulo(titulo: str, frag: str) -> str:
     2026". Quitamos la fecha (ya va en su columna) y la repetición. Si el
     resultado queda demasiado corto, devolvemos el título original.
     """
+    titulo = corta_en_ficha(titulo)
     palabras = titulo.split()
     # Los signos se ignoran solo para COMPARAR; el título conserva los suyos
     norm = [normaliza(p).strip(_BORDES) for p in palabras]
@@ -288,10 +391,19 @@ def limpia_titulo(titulo: str, frag: str) -> str:
         for i in range(len(norm) - n + 1):
             if norm[i:i + n] == trozo:
                 palabras = palabras[:i] + palabras[i + n:]
-                # Al quitar la fecha pueden quedar separadores colgando
-                # ("Curso X ·"); paréntesis y comillas se respetan
+                # Separadores colgando ("Curso X ·"); los paréntesis y las
+                # comillas se respetan
                 limpio = " ".join(palabras).strip(" -–—·|:,;")
                 break
+
+    # Etiquetas huérfanas al final ("…Medicina Intensiva Fecha"). Se hace
+    # siempre, no solo si la fecha estaba en el título: muchas webs la guardan
+    # en un atributo oculto y dejan la etiqueta suelta en el texto visible.
+    w = limpio.split()
+    while w and normaliza(w[-1]).strip(_BORDES) in ETIQUETAS_FINALES:
+        w.pop()
+    limpio = " ".join(w).strip(" -–—·|:,;")
+
     w = limpio.split()
     mitad = len(w) // 2
     if len(w) >= 4 and len(w) % 2 == 0 and \
@@ -338,8 +450,11 @@ def desde_feed(url_feed: str, fuente: dict) -> list[Evento]:
         ini, fin, frag = extrae_fechas(conjunto)
         if not ini:
             continue
+        limpio, lleno = separa_sin_plazas(limpia_titulo(titulo, frag) or resumen)
+        if not titulo_util(limpio):
+            continue
         eventos.append(Evento(
-            titulo=limpia_titulo(titulo, frag)[:180] or resumen[:120],
+            titulo=recorta(limpio) + (" — plazas agotadas" if lleno else ""),
             fecha_texto=frag,
             inicio=ini.isoformat(), fin=fin.isoformat() if fin else None,
             lugar=extrae_lugar(conjunto),
@@ -393,13 +508,21 @@ def desde_html(url: str, html: str, fuente: dict) -> list[Evento]:
         if not ini:
             continue
 
-        clave = normaliza(texto_enlace)[:70]
+        limpio, lleno = separa_sin_plazas(limpia_titulo(texto_enlace, frag))
+        if not titulo_util(limpio):
+            # "Ver y leer más sobre el congreso…" no dice nada, pero la
+            # dirección del enlace suele llevar el nombre del evento
+            limpio = titulo_desde_url(urljoin(url, a["href"]))
+            if not titulo_util(limpio):
+                continue
+
+        clave = normaliza(limpio)[:70]
         if clave in vistos:
             continue
         vistos.add(clave)
 
         eventos.append(Evento(
-            titulo=limpia_titulo(texto_enlace, frag)[:180],
+            titulo=recorta(limpio) + (" — plazas agotadas" if lleno else ""),
             fecha_texto=frag,
             inicio=ini.isoformat(), fin=fin.isoformat() if fin else None,
             lugar=extrae_lugar(conjunto),
@@ -478,12 +601,38 @@ _CAMPOS_EVENTO = {f.name for f in fields(Evento)}
 
 
 def carga_memoria() -> dict[str, dict]:
-    if MEMORIA.exists():
-        try:
-            return json.loads(MEMORIA.read_text(encoding="utf-8"))
-        except Exception:
-            return {}
-    return {}
+    if not MEMORIA.exists():
+        return {}
+    try:
+        return sanea_memoria(json.loads(MEMORIA.read_text(encoding="utf-8")))
+    except Exception:
+        return {}
+
+
+def sanea_memoria(memoria: dict[str, dict]) -> dict[str, dict]:
+    """
+    Revisa lo guardado con las reglas de HOY, no con las del día en que se
+    guardó. Cuando se afina un filtro o se corrige un fallo, la memoria
+    arrastraría los errores antiguos para siempre; así se limpian solos.
+
+    Quita dos cosas: lo que ya no pasaría el corte de títulos, y aquello cuyo
+    título delata un año anterior al de su fecha guardada — el caso del
+    "XVIII Congreso SED 2022" archivado como si fuese de octubre de 2026.
+    """
+    limpia = {}
+    for k, v in memoria.items():
+        titulo = v.get("titulo", "")
+        if not titulo_util(titulo):
+            continue
+        anio = anio_en_texto(titulo)
+        if anio and v.get("inicio") and anio < int(v["inicio"][:4]):
+            continue
+        # Guardado con un título sucio (ficha del curso dentro, avisos de
+        # plazas): se olvida para que el siguiente rastreo lo recoja limpio
+        if corta_en_ficha(titulo) != titulo or separa_sin_plazas(titulo)[1]:
+            continue
+        limpia[k] = v
+    return limpia
 
 
 def guarda_memoria(memoria: dict[str, dict]) -> None:

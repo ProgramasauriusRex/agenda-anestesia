@@ -162,6 +162,17 @@ El campo `feed` lo rellena solo el verificador; no lo escribas tú.
   como especialidad, así que alguna ecografía para primaria se colará: es
   preferible a perder los cursos de ecografía perioperatoria o POCUS.
 
+### Qué se descarta y qué no
+
+Los cursos **con las plazas agotadas sí aparecen** —que existan y se hayan
+llenado también es información—, con el título limpio y la nota
+"— plazas agotadas" al final.
+
+Sí se descartan: los enlaces que no son un título ("Ver y leer más…"), las
+páginas que no son un curso, y lo que ya ha pasado. Cuando una web mete la
+ficha entera dentro del enlace ("Curso X Nombre del curso: … Día y hora: …"),
+el título se corta donde empieza la ficha.
+
 ---
 
 ## Ponerlo en marcha

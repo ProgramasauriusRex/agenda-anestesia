@@ -38,11 +38,38 @@ def _mes_num(nombre: str) -> int | None:
     return MESES.get(nombre.strip())
 
 
-def _infiere_anio(mes: int, dia: int, hoy: date) -> int:
+_RE_ANIO_SUELTO = re.compile(r"\b(19\d{2}|20\d{2})\b")
+
+
+def _anio_del_texto(t: str) -> int | None:
     """
-    Si la web no pone año (muy común: "26-28 de Marzo"), asumimos el próximo
-    que tenga sentido: este año si la fecha aún no ha pasado, el siguiente si sí.
+    Año que aparezca en el texto aunque no forme parte de la fecha.
+
+    Existe por un caso real: una web anunciaba "XVIII Congreso SED 2022" y
+    justo debajo "26 al 29 de octubre", sin año. Al no verlo en la fecha se
+    asumía el próximo octubre y un congreso de 2022 se colaba en la agenda
+    como si estuviera por venir. Con esto se lee el 2022 del título, la fecha
+    queda en el pasado y el curso se descarta solo.
     """
+    m = _RE_ANIO_SUELTO.search(t)
+    return int(m.group(1)) if m else None
+
+
+def anio_en_texto(texto: str) -> int | None:
+    """Versión pública de lo anterior, para que agenda.py pueda revisar
+    registros viejos guardados en memoria."""
+    return _anio_del_texto(_normaliza(texto))
+
+
+def _infiere_anio(mes: int, dia: int, hoy: date, texto: str = "") -> int:
+    """
+    Si la web no pone año en la fecha, primero se busca uno en el resto del
+    texto. Solo si no hay ninguno se asume el próximo que tenga sentido:
+    este año si la fecha aún no ha pasado, el siguiente si ya pasó.
+    """
+    del_texto = _anio_del_texto(texto)
+    if del_texto is not None:
+        return del_texto
     candidato = date(hoy.year, mes, min(dia, 28))
     return hoy.year if candidato >= hoy else hoy.year + 1
 
@@ -104,7 +131,7 @@ def extrae_fechas(texto: str, hoy: date | None = None) -> tuple[date | None, dat
         d1, mes1, a1, d2, mes2, a2 = m.groups()
         n1, n2 = _mes_num(mes1), _mes_num(mes2)
         if n1 and n2:
-            anio_fin = int(a2) if a2 else (int(a1) if a1 else _infiere_anio(n2, int(d2), hoy))
+            anio_fin = int(a2) if a2 else (int(a1) if a1 else _infiere_anio(n2, int(d2), hoy, t))
             # si el rango cruza el fin de año (dic → ene), el inicio es del año anterior
             anio_ini = int(a1) if a1 else (anio_fin - 1 if n1 > n2 else anio_fin)
             f1, f2 = _fecha(int(d1), n1, anio_ini), _fecha(int(d2), n2, anio_fin)
@@ -116,7 +143,7 @@ def extrae_fechas(texto: str, hoy: date | None = None) -> tuple[date | None, dat
         d1, d2, mes, anio = m.groups()
         n = _mes_num(mes)
         if n:
-            a = int(anio) if anio else _infiere_anio(n, int(d1), hoy)
+            a = int(anio) if anio else _infiere_anio(n, int(d1), hoy, t)
             f1, f2 = _fecha(int(d1), n, a), _fecha(int(d2), n, a)
             if f1 and f2 and f2 >= f1:
                 return f1, f2, m.group(0)
@@ -126,7 +153,7 @@ def extrae_fechas(texto: str, hoy: date | None = None) -> tuple[date | None, dat
         d1, d2, mes, anio = m.groups()
         n = _mes_num(mes)
         if n:
-            a = int(anio) if anio else _infiere_anio(n, int(d1), hoy)
+            a = int(anio) if anio else _infiere_anio(n, int(d1), hoy, t)
             f1, f2 = _fecha(int(d1), n, a), _fecha(int(d2), n, a)
             if f1 and f2:
                 return f1, f2, m.group(0)
@@ -136,7 +163,7 @@ def extrae_fechas(texto: str, hoy: date | None = None) -> tuple[date | None, dat
         d, mes, anio = m.groups()
         n = _mes_num(mes)
         if n:
-            a = int(anio) if anio else _infiere_anio(n, int(d), hoy)
+            a = int(anio) if anio else _infiere_anio(n, int(d), hoy, t)
             f = _fecha(int(d), n, a)
             if f:
                 return f, f, m.group(0)

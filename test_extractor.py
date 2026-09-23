@@ -121,3 +121,55 @@ assert limpia_titulo("Curso de Soporte Vital Avanzado (SVA)", "26 de octubre") =
 assert limpia_titulo("«Jornada de Dolor» 5 de mayo de 2027", "5 de mayo de 2027") == \
     "«Jornada de Dolor»", "debe conservar las comillas"
 print("Paréntesis y comillas intactos ✓")
+
+
+# ---------------------------------------------------------------------------
+# Defectos reales detectados en la agenda del 21/09/2026
+# ---------------------------------------------------------------------------
+from agenda import titulo_util, titulo_desde_url, sanea_memoria, separa_sin_plazas
+from fechas import extrae_fechas as _ef
+
+# 1. Curso lleno: SÍ figura, pero con el título limpio y marcado.
+#    La ficha del curso que venía dentro del enlace se corta.
+_malaga = ("PLAZAS AGOTADAS | Curso de Soporte Vital Básico (SVB) y DEA Presencial y "
+           "online PLAZAS AGOTADAS Nombre del curso: Curso de Soporte Vital Básico "
+           "(SVB) y DEA. Día y hora: Martes de 1")
+_limpio, _lleno = separa_sin_plazas(limpia_titulo(_malaga, "6 de octubre de 2026"))
+assert _lleno, "debería detectar que está lleno"
+assert titulo_util(_limpio), "debería seguir figurando"
+assert _limpio == "Curso de Soporte Vital Básico (SVB) y DEA Presencial y online", _limpio
+assert "Nombre del curso" not in _limpio and "PLAZAS" not in _limpio
+
+# 1b. Un título legítimo no se corta por parecerse a una etiqueta de ficha
+assert limpia_titulo("Jornada sobre objetivos hemodinámicos en shock séptico", "") == \
+    "Jornada sobre objetivos hemodinámicos en shock séptico"
+
+# 2. Etiqueta "Fecha" huérfana cuando la fecha venía de un atributo oculto
+assert limpia_titulo("Congreso Panamericano e Ibérico de Medicina Intensiva Fecha",
+                     "2026-10-04") == "Congreso Panamericano e Ibérico de Medicina Intensiva"
+
+# 3. Enlace sin título: se recupera de la dirección
+assert not titulo_util("Ver y leer más sobre el congreso...")
+assert titulo_desde_url("https://www.aaear.es/70-reunion-anual-aaear-2026") == \
+    "70 reunion anual aaear 2026"
+
+# 4. Páginas que no son un curso
+assert not titulo_util("COMUNICACIONES ONLINE")
+
+# 5. Congreso de 2022 con fecha sin año: NO debe fecharse en el futuro
+_i, _f, _ = _ef("XVIII Congreso SED 2022 Valencia. 26 al 29 de octubre", hoy=date(2026, 9, 21))
+assert _i.year == 2022, f"debería quedarse en 2022, no en {_i.year}"
+
+# 6. La memoria se limpia sola con las reglas nuevas
+_m = {"a": {"titulo": "COMUNICACIONES ONLINE", "inicio": "2027-05-04"},
+      "d": {"titulo": "PLAZAS AGOTADAS | Curso X Nombre del curso: X", "inicio": "2026-12-01"},
+      "b": {"titulo": "XVIII Congreso SED 2022 Valencia", "inicio": "2026-10-26"},
+      "c": {"titulo": "Curso de Anestesia Regional Ecoguiada", "inicio": "2026-11-20"}}
+assert set(sanea_memoria(_m)) == {"c"}
+
+# Y lo bueno sigue pasando
+for _t in ["Curso de Soporte Vital Avanzado (SVA)",
+           "Cartagena: Acto Conmemorativo del Día Mundial de los Cuidados Paliativos",
+           "Webinar – Del diagnóstico al tratamiento: hacia una analgesia individualizada en UCI"]:
+    assert titulo_util(_t), _t
+print("Defectos reales del 21/09 corregidos ✓")
