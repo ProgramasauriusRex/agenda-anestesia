@@ -5,12 +5,12 @@
 | Diagnóstico | Fuentes |
 |---|---|
 | PRODUCE | 16 |
-| FILTRO | 61 |
+| FILTRO | 55 |
 | FECHA EN LA FICHA | 8 |
-| SIN FECHAS | 52 |
-| SIN ENLACES | 21 |
-| FUERA DE VENTANA | 8 |
-| NO RESPONDE | 3 |
+| SIN FECHAS | 35 |
+| SIN ENLACES | 46 |
+| FUERA DE VENTANA | 5 |
+| NO RESPONDE | 4 |
 | BLOQUEADA | 27 |
 | ROTA | 15 |
 
@@ -143,7 +143,7 @@ https://www.somiama.org/
     - _son de la especialidad pero sin fecha_: «Nueva actividad avalada por SOMIAMA»
 
 
-## FILTRO (61)
+## FILTRO (55)
 
 **Acadèmia de Ciències Mèdiques (Cataluña-Baleares)** · filtro estricto  
 https://www.academia.cat/  
@@ -166,11 +166,6 @@ https://coma.es/servicio/formacion/
     - _tienen fecha pero el filtro los rechaza_: «Formación COMA»
     - _tienen fecha pero el filtro los rechaza_: «Formación COMA»
     - _tienen fecha pero el filtro los rechaza_: «Formación COMA»
-
-**Colegio de Médicos de Barcelona** · filtro estricto  
-https://www.comb.cat/  
-- html: 42 enlaces, 1 con fecha, 0 de la especialidad, 0 válidas (1 fechas sueltas en la página)
-    - _tienen fecha pero el filtro los rechaza_: «+ informació»
 
 **Colegio de Médicos de Bizkaia** · filtro estricto  
 https://www.cmb.eus/  
@@ -312,28 +307,12 @@ https://www.calidadasistencial.es/
 - html: 43 enlaces, 1 con fecha, 0 de la especialidad, 0 válidas (3 fechas sueltas en la página)
     - _tienen fecha pero el filtro los rechaza_: «24 de septiembre – Jueves de Calidad “Modelo de acreditación SECAcredita de Unidades de Ca»
 
-**SECIP** · filtro evento  
-https://www.secip.com/  
-- html: 27 enlaces, 6 con fecha, 8 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-    - _tienen fecha pero el filtro los rechaza_: «Contrato de sustitución como médico adjunto del Servicio de Cuidados Intensivos Pediátrico»
-    - _tienen fecha pero el filtro los rechaza_: «Médicos Espacialistas en Pediatría perfil UCI pedríatrica | Hospital Universitario Blua Sa»
-    - _tienen fecha pero el filtro los rechaza_: «Clinical Fellow in Paediatric Critical Care Medicine»
-    - _son de la especialidad pero sin fecha_: «Más Información»
-    - _son de la especialidad pero sin fecha_: «Artículo completo»
-    - _son de la especialidad pero sin fecha_: «Formulario de difusión»
-
 **SES (Extremadura)** · filtro estricto  
 https://saludextremadura.ses.es/  
 - html: 70 enlaces, 5 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
     - _tienen fecha pero el filtro los rechaza_: «Actos con motivo del Día Mundial del Alzheimer La Federación de Alzheimer de Extremadura (»
     - _tienen fecha pero el filtro los rechaza_: «DIA MUNDIAL DE LA SEGURIDAD DEL PACIENTE 2026 El próximo 17 de septiembre se celebra el Dí»
     - _tienen fecha pero el filtro los rechaza_: «Enfermedades Raras: Protocolo para la acogida y atención de niños/as con enfermedades rara»
-
-**SETH (Trombosis y Hemostasia)** · filtro estricto  
-https://www.seth.es/  
-- html: 38 enlaces, 2 con fecha, 0 de la especialidad, 0 válidas (1 fechas sueltas en la página)
-    - _tienen fecha pero el filtro los rechaza_: «MÁS INFORMACIÓN»
-    - _tienen fecha pero el filtro los rechaza_: «MÁS INFORMACIÓN»
 
 **Sacyl — Jornadas y eventos (Castilla y León)** · filtro estricto  
 https://www.saludcastillayleon.es/profesionales/es/jornadas-eventos  
@@ -367,13 +346,6 @@ https://www.uam.es/
 - html: 23 enlaces, 1 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
     - _tienen fecha pero el filtro los rechaza_: «DESCARGAR PDF [599.43 KB]»
 
-**U. Camilo José Cela** · filtro estricto  
-https://www.ucjc.edu/  
-- html: 26 enlaces, 8 con fecha, 0 de la especialidad, 0 válidas (7 fechas sueltas en la página)
-    - _tienen fecha pero el filtro los rechaza_: «30% de descuento hasta el 30 de septiembre* 30% de descuento hasta el 30 de septiembre* Gr»
-    - _tienen fecha pero el filtro los rechaza_: «30% de descuento hasta el 30 de septiembre* 30% de descuento hasta el 30 de septiembre* Gr»
-    - _tienen fecha pero el filtro los rechaza_: «20% de descuento hasta el 30 de septiembre* 20% de descuento hasta el 30 de septiembre* Gr»
-
 **U. Católica de Murcia (UCAM)** · filtro estricto  
 https://www.ucam.edu/  
 - html: 182 enlaces, 4 con fecha, 0 de la especialidad, 0 válidas (2 fechas sueltas en la página)
@@ -385,13 +357,6 @@ https://www.ucam.edu/
 https://www.ucv.es/  
 - html: 148 enlaces, 1 con fecha, 0 de la especialidad, 0 válidas (1 fechas sueltas en la página)
     - _tienen fecha pero el filtro los rechaza_: «Más información»
-
-**U. Fernando Pessoa Canarias** · filtro estricto  
-https://www.ufpcanarias.es/  
-- html: 70 enlaces, 6 con fecha, 0 de la especialidad, 0 válidas (1 fechas sueltas en la página)
-    - _tienen fecha pero el filtro los rechaza_: «22 de septiembre de 2026»
-    - _tienen fecha pero el filtro los rechaza_: «22 de septiembre de 2026»
-    - _tienen fecha pero el filtro los rechaza_: «14 de septiembre de 2026»
 
 **U. Francisco de Vitoria** · filtro estricto  
 https://www.ufv.es/  
@@ -565,13 +530,6 @@ https://www.unizar.es/
     - _tienen fecha pero el filtro los rechaza_: «¿Y si tu futuro fuera investigar? Jóvenes, ciencia e innovación con impacto»
     - _tienen fecha pero el filtro los rechaza_: «Educadores experimentan en el Pirineo oscense con los recursos pedagógicos que ofrece la n»
 
-**U. de les Illes Balears** · filtro estricto  
-https://www.uib.es/  
-- html: 12 enlaces, 5 con fecha, 0 de la especialidad, 0 válidas (2 fechas sueltas en la página)
-    - _tienen fecha pero el filtro los rechaza_: «23-09-2026 - Setmana Europea de l'Esport»
-    - _tienen fecha pero el filtro los rechaza_: «24-09-2026 - Acte d'obertura de l'any acadèmic 2026-27 de la seu d'Eivissa i Formentera»
-    - _tienen fecha pero el filtro los rechaza_: «25-09-2026 - Nit Europea de la Recerca»
-
 **U. del País Vasco / EHU** · filtro estricto  
 https://www.ehu.eus/  
 - html: 36 enlaces, 2 con fecha, 0 de la especialidad, 0 válidas (2 fechas sueltas en la página)
@@ -588,6 +546,10 @@ https://www.combadajoz.com/formacion-fmc/
     - _tienen fecha pero el filtro los rechaza_: «ANUNCIO»
     - _tienen fecha pero el filtro los rechaza_: «DÍA MUNDIAL DEL ALZHEIMER 21 DE SEPTIEMBRE»
     - _tienen fecha pero el filtro los rechaza_: «DÍA MUNDIAL DE LA ÉTICA MÉDICA 18 DE SEPTIEMBRE»
+
+**Colegio de Médicos de Barcelona** · filtro estricto  
+https://www.comb.cat/  
+- html: 42 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (1 fechas sueltas en la página)
 
 **Colegio de Médicos de Navarra** · filtro estricto  
 https://colegiodemedicos.es/actividades/  
@@ -622,24 +584,17 @@ https://www.iacs.es/formacion/
 **SADARTD (Aragón)** · filtro evento  
 https://sadartd.wordpress.com  
 - feed: 2 entradas, 0 con fecha, 2 de la especialidad, 0 válidas
-- html: 25 enlaces, 0 con fecha, 6 de la especialidad, 0 válidas (1 fechas sueltas en la página)
+- html: 24 enlaces, 0 con fecha, 5 de la especialidad, 0 válidas (1 fechas sueltas en la página)
     - _son de la especialidad pero sin fecha_: «programa congreso sadar 2026. EL DEFINITIVO»
     - _son de la especialidad pero sin fecha_: «INFORMACIÓN CONGRESO»
     - _son de la especialidad pero sin fecha_: «PROGRAMA DEL VIII CONGRESO ARAGONÉS SADARTD»
-
-**SEMDOR** · filtro evento  
-https://www.congresosemdor.es/  
-- html: 8 enlaces, 0 con fecha, 4 de la especialidad, 0 válidas (1 fechas sueltas en la página)
-    - _son de la especialidad pero sin fecha_: «COMUNICACIONES»
-    - _son de la especialidad pero sin fecha_: «RESERVA TU PLAZA HOY»
-    - _son de la especialidad pero sin fecha_: «NO TE PIERDAS LAS MEJORES CHARLAS Y TALLERES»
 
 **U. Alfonso X el Sabio** · filtro estricto  
 https://www.uax.com/  
 - html: 108 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (2 fechas sueltas en la página)
 
 
-## SIN FECHAS (52)
+## SIN FECHAS (35)
 
 **ACIS — Axencia de Coñecemento en Saúde (Galicia)** · filtro estricto  
 https://acis.sergas.es/  
@@ -718,6 +673,13 @@ https://www.medicoslaspalmas.es/
 https://www.comsor.es/agendaformacion.html  
 - html: 19 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
 
+**Colegio de Médicos de Teruel** · filtro estricto  
+https://www.comteruel.es/  
+- feed: 0 entradas, 0 con fecha, 0 de la especialidad, 0 válidas
+- html: 50 enlaces, 0 con fecha, 2 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+    - _son de la especialidad pero sin fecha_: «Más información →»
+    - _son de la especialidad pero sin fecha_: «Más información →»
+
 **Colegio de Médicos de Zamora** · filtro estricto  
 https://www.colmeza.com/index.php/servicios/formacion/cursos  
 - feed: 4 entradas, 1 con fecha, 0 de la especialidad, 0 válidas
@@ -757,104 +719,6 @@ https://www.sclmicyuc.org
 - feed: 8 entradas, 1 con fecha, 2 de la especialidad, 0 válidas
 - html: 11 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
     - _son de la especialidad pero sin fecha_: «Eventos»
-
-**SEDAR · Ambulatoria** · filtro evento  
-https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/ambulatoria/formacion-ambulatoria  
-- html: 5 enlaces, 0 con fecha, 1 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-    - _son de la especialidad pero sin fecha_: «COBERTURA AUDIOVISUAL»
-
-**SEDAR · Calidad, Seguridad y Ética** · filtro evento  
-https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/seguridad-y-etica/formacion-calidad  
-- html: 5 enlaces, 0 con fecha, 2 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-    - _son de la especialidad pero sin fecha_: «https://sensar.org/curso-de-seguridad-del-paciente-en-anestesiologia/»
-    - _son de la especialidad pero sin fecha_: «https://sensar.org/docencia/»
-
-**SEDAR · Cardíaca, Vascular y Torácica** · filtro evento  
-https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/anestesia-cardiaca-vascular-y-toracica/formacion-cardiotoracica  
-- html: 5 enlaces, 0 con fecha, 1 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-    - _son de la especialidad pero sin fecha_: «Inscripción Proyecto Delphi Cirugía Torácica»
-
-**SEDAR · Cuidados Intensivos** · filtro evento  
-https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/cuidados-intensivos/formacion-cuidados-intensivos  
-- html: 5 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-
-**SEDAR · Docencia** · filtro evento  
-https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/docencia/formacion-docencia  
-- html: 6 enlaces, 0 con fecha, 3 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-    - _son de la especialidad pero sin fecha_: «ARTÍCULO DEL MES»
-    - _son de la especialidad pero sin fecha_: «Formación continuada»
-    - _son de la especialidad pero sin fecha_: «Formación tutores y residentes»
-
-**SEDAR · Docencia — Simulación** · filtro evento  
-https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/docencia/simulacion-docencia  
-- html: 15 enlaces, 0 con fecha, 3 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-    - _son de la especialidad pero sin fecha_: «DESCARGAR INFORMACIÓN RED DE CENTROS DE SIMULACIÓN»
-    - _son de la especialidad pero sin fecha_: «Formación continuada»
-    - _son de la especialidad pero sin fecha_: «Formación tutores y residentes»
-
-**SEDAR · Docencia — Tutores y residentes** · filtro evento  
-https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/docencia/formacion-tutores-docencia  
-- html: 21 enlaces, 0 con fecha, 2 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-    - _son de la especialidad pero sin fecha_: «Formación continuada»
-    - _son de la especialidad pero sin fecha_: «Formación tutores y residentes»
-
-**SEDAR · GT Cuidados Paliativos** · filtro evento  
-https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gt-cuidados-paliativos/formacion-gt-paliativos  
-- html: 5 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-
-**SEDAR · GT Donación y Trasplante** · filtro evento  
-https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gt-donacion-y-trasplante/formacion  
-- html: 5 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-
-**SEDAR · GT Enfermedades Raras** · filtro evento  
-https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gt-bloqueo-enfermedades-raras/formacion  
-- html: 8 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-
-**SEDAR · Hemostasia y Fluidoterapia** · filtro evento  
-https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/hemostasia/formacion-hemostasia  
-- html: 8 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-
-**SEDAR · Locorregional** · filtro evento  
-https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/locorregional/formacion-locorregional  
-- html: 6 enlaces, 0 con fecha, 1 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-    - _son de la especialidad pero sin fecha_: «Recursos sección»
-
-**SEDAR · Neurociencias** · filtro evento  
-https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/neurociencias/formacion-neurociencias  
-- html: 11 enlaces, 0 con fecha, 6 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-    - _son de la especialidad pero sin fecha_: «FORMACIÓN CONTINUADA»
-    - _son de la especialidad pero sin fecha_: «JORNADAS/FOROS DE DEBATE»
-    - _son de la especialidad pero sin fecha_: «ACCESO MÁSTER»
-
-**SEDAR · Obstetricia** · filtro evento  
-https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/obstetricia/formacion-obstetricia  
-- html: 7 enlaces, 0 con fecha, 2 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-    - _son de la especialidad pero sin fecha_: «https://www.soap.org/»
-    - _son de la especialidad pero sin fecha_: «https://www.oaa-anaes.ac.uk/ui/members/events/»
-
-**SEDAR · Pediátrica** · filtro evento  
-https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/pediatrica/formacion-pediatrica  
-- html: 26 enlaces, 0 con fecha, 2 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-    - _son de la especialidad pero sin fecha_: «ARTÍCULO DEL MES»
-    - _son de la especialidad pero sin fecha_: «Recursos sección»
-
-**SEDAR · RCP** · filtro evento  
-https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/rcp/formacion-rcp  
-- html: 8 enlaces, 0 con fecha, 2 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-    - _son de la especialidad pero sin fecha_: «Organización de cursos»
-    - _son de la especialidad pero sin fecha_: «General Instructor Course (GIC)»
-
-**SEDAR · SEDAR Joven — Cursos presenciales** · filtro evento  
-https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/sedar-joven/cursos-presenciales-sedarjoven  
-- html: 13 enlaces, 0 con fecha, 9 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-    - _son de la especialidad pero sin fecha_: «INSCRIPCIONES»
-    - _son de la especialidad pero sin fecha_: «Programa PDF»
-    - _son de la especialidad pero sin fecha_: «Programa PDF»
-
-**SEDAR · Vía Aérea** · filtro evento  
-https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/via-aerea/formacion-via  
-- html: 8 enlaces, 0 con fecha, 1 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-    - _son de la especialidad pero sin fecha_: «Guía práctica de bolsillo de la SAM»
 
 **SEEIUC** · filtro evento  
 https://seeiuc.org/  
@@ -935,11 +799,11 @@ https://vithas.es/
     - _tienen fecha pero el filtro los rechaza_: «Vithas Valencia 9 de Octubre inaugura una nueva UCI de adultos con tecnología avanzada y m»
 
 
-## SIN ENLACES (21)
+## SIN ENLACES (46)
 
 **Campus SEDAR** · filtro evento  
 https://www.sedarcampus.es/  
-- html: 2 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
 
 **Colegio de Médicos de Albacete** · filtro estricto  
 https://www.comalbacete.net/  
@@ -984,10 +848,6 @@ https://www.comtoledo.org/actividades/
 https://www.comz.org/  
 - html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
 
-**Colegio de Médicos de Ávila** · filtro estricto  
-https://www.icomav.es/comformacion.html  
-- html: 1 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-
 **ESRA-España** · filtro evento  
 https://www.esra-spain.org/  
 - html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
@@ -996,24 +856,118 @@ https://www.esra-spain.org/
 https://www.iavante.es/  
 - html: 3 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
 
+**SECIP** · filtro evento  
+https://www.secip.com/  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEDAR · Ambulatoria** · filtro evento  
+https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/ambulatoria/formacion-ambulatoria  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEDAR · Calidad, Seguridad y Ética** · filtro evento  
+https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/seguridad-y-etica/formacion-calidad  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEDAR · Cardíaca, Vascular y Torácica** · filtro evento  
+https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/anestesia-cardiaca-vascular-y-toracica/formacion-cardiotoracica  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEDAR · Cuidados Intensivos** · filtro evento  
+https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/cuidados-intensivos/formacion-cuidados-intensivos  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEDAR · Docencia** · filtro evento  
+https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/docencia/formacion-docencia  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEDAR · Docencia — Simulación** · filtro evento  
+https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/docencia/simulacion-docencia  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEDAR · Docencia — Tutores y residentes** · filtro evento  
+https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/docencia/formacion-tutores-docencia  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
 **SEDAR · Dolor** · filtro evento  
 https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/dolor/formacion-dolor  
-- html: 4 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEDAR · GT Cooperación Internacional** · filtro evento  
+https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gt-cooperacion-internacional/formacion-gtcooperacion  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEDAR · GT Cuidados Paliativos** · filtro evento  
+https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gt-cuidados-paliativos/formacion-gt-paliativos  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEDAR · GT Donación y Trasplante** · filtro evento  
+https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gt-donacion-y-trasplante/formacion  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEDAR · GT Enfermedades Raras** · filtro evento  
+https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gt-bloqueo-enfermedades-raras/formacion  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
 
 **SEDAR · GTipo** · filtro evento  
 https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gtipo/formacion-gtipo  
-- html: 4 enlaces, 0 con fecha, 2 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-    - _son de la especialidad pero sin fecha_: «PROGRAMA PDF»
-    - _son de la especialidad pero sin fecha_: «Formacion - cursos»
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
 
 **SEDAR · Gestión Clínica** · filtro evento  
 https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gestion-clinica/formacion-gestion-clinica  
-- html: 4 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEDAR · Hemostasia y Fluidoterapia** · filtro evento  
+https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/hemostasia/formacion-hemostasia  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEDAR · Locorregional** · filtro evento  
+https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/locorregional/formacion-locorregional  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEDAR · Neurociencias** · filtro evento  
+https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/neurociencias/formacion-neurociencias  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEDAR · Obstetricia** · filtro evento  
+https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/obstetricia/formacion-obstetricia  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEDAR · Pediátrica** · filtro evento  
+https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/pediatrica/formacion-pediatrica  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEDAR · RCP** · filtro evento  
+https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/rcp/formacion-rcp  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEDAR · SEDAR Joven — Cursos presenciales** · filtro evento  
+https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/sedar-joven/cursos-presenciales-sedarjoven  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEDAR · Vía Aérea** · filtro evento  
+https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/via-aerea/formacion-via  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEDAR — Congresos** · filtro evento  
+https://www.sedar.es/index.php/formacion/congresos  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
 
 **SEDAR — Convocatorias** · filtro evento  
 https://www.sedar.es/index.php/cientifico/convocatorias  
 - html: 2 enlaces, 0 con fecha, 1 de la especialidad, 0 válidas (0 fechas sueltas en la página)
     - _son de la especialidad pero sin fecha_: «MÁS INFORMACIÓN»
+
+**SEDAR — Noticias** · filtro evento  
+https://www.sedar.es/index.php/comunicacion/noticias  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SEMDOR** · filtro evento  
+https://www.congresosemdor.es/  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**SETH (Trombosis y Hemostasia)** · filtro estricto  
+https://www.seth.es/  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
 
 **SOCMIC (Cataluña)** · filtro evento  
 https://www.socmic.cat  
@@ -1024,6 +978,14 @@ https://www.sogamiuc.org
 - feed: 2 entradas, 0 con fecha, 0 de la especialidad, 0 válidas
 - html: 2 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
 
+**U. Camilo José Cela** · filtro estricto  
+https://www.ucjc.edu/  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
+**U. Fernando Pessoa Canarias** · filtro estricto  
+https://www.ufpcanarias.es/  
+- html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
+
 **U. de Salamanca** · filtro estricto  
 https://www.usal.es/  
 - html: 1 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
@@ -1033,7 +995,7 @@ https://www.uva.es/
 - html: 0 enlaces, 0 con fecha, 0 de la especialidad, 0 válidas (0 fechas sueltas en la página)
 
 
-## FUERA DE VENTANA (8)
+## FUERA DE VENTANA (5)
 
 **ANESTEX (Extremadura)** · filtro evento  
 http://anestex.com  
@@ -1065,25 +1027,6 @@ https://www.sarmicyuc.com
     - _son de la especialidad pero sin fecha_: «Sección en semicyuc.org»
     - _son de la especialidad pero sin fecha_: «Más información»
 
-**SEDAR · GT Cooperación Internacional** · filtro evento  
-https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/gt-cooperacion-internacional/formacion-gtcooperacion  
-- html: 9 enlaces, 1 con fecha, 5 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-    - _son de la especialidad pero sin fecha_: «PROGRAMA E INSCRIPCIÓN»
-    - _son de la especialidad pero sin fecha_: «PROGRAMA E INSCRIPCIÓN»
-    - _son de la especialidad pero sin fecha_: «PROGRAMA E INSCRIPCIÓN»
-
-**SEDAR — Congresos** · filtro evento  
-https://www.sedar.es/index.php/formacion/congresos  
-- html: 13 enlaces, 4 con fecha, 5 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-    - _son de la especialidad pero sin fecha_: «MÁS INFORMACIÓN»
-
-**SEDAR — Noticias** · filtro evento  
-https://www.sedar.es/index.php/comunicacion/noticias  
-- html: 19 enlaces, 18 con fecha, 3 de la especialidad, 0 válidas (0 fechas sueltas en la página)
-    - _tienen fecha pero el filtro los rechaza_: «LEER NOTICIA»
-    - _tienen fecha pero el filtro los rechaza_: «LEER NOTICIA»
-    - _tienen fecha pero el filtro los rechaza_: «LEER NOTICIA»
-
 **SVNARTD (País Vasco-Navarra)** · filtro evento  
 https://www.svnrartd.com  
 - feed: 0 entradas, 0 con fecha, 0 de la especialidad, 0 válidas
@@ -1093,15 +1036,17 @@ https://www.svnrartd.com
     - _son de la especialidad pero sin fecha_: «Agenda, Cursos y Congresos»
 
 
-## NO RESPONDE (3)
+## NO RESPONDE (4)
 
-**Colegio de Médicos de Teruel** · filtro estricto  
-https://www.comteruel.es/  
-- feed: 0 entradas, 0 con fecha, 0 de la especialidad, 0 válidas
+**Colegio de Médicos de Ávila** · filtro estricto  
+https://www.icomav.es/comformacion.html  
 
 **Mutual Médica — Congresos** · filtro estricto  
 https://www.mutualmedica.com/post/mutualmedica/calendario-congresos-medicina-espana  
 
 **SESPA (Asturias)** · filtro estricto  
 https://www.astursalud.es/  
+
+**U. de les Illes Balears** · filtro estricto  
+https://www.uib.es/  
 
