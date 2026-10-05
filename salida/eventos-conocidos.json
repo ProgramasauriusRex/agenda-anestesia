@@ -11,21 +11,7 @@
   "via": "feed",
   "id": "44a85c88236a7a",
   "descubierto": "2026-09-21",
-  "ultima_vez": "2026-09-28"
- },
- "7d2bc4fe834662": {
-  "titulo": "Curso SVA Semipresencial del PNRCP-SEMICYUC",
-  "fecha_texto": "28 de septiembre",
-  "inicio": "2026-09-28",
-  "fin": "2026-09-28",
-  "lugar": "Online",
-  "entidad": "SEMICYUC",
-  "url": "https://semicyuc.org/2026/09/sva-semicyuc/",
-  "ambito": "criticos",
-  "via": "feed",
-  "id": "7d2bc4fe834662",
-  "descubierto": "2026-09-21",
-  "ultima_vez": "2026-09-28"
+  "ultima_vez": "2026-10-05"
  },
  "b8c05d180e851a": {
   "titulo": "Webinar – Bienestar profesional en Medicina Intensiva",
@@ -39,7 +25,7 @@
   "via": "feed",
   "id": "b8c05d180e851a",
   "descubierto": "2026-09-21",
-  "ultima_vez": "2026-09-28"
+  "ultima_vez": "2026-10-05"
  },
  "022110b5d7757e": {
   "titulo": "Visión actual del dolor pélvico crónico",
@@ -53,7 +39,7 @@
   "via": "html",
   "id": "022110b5d7757e",
   "descubierto": "2026-09-21",
-  "ultima_vez": "2026-09-28"
+  "ultima_vez": "2026-10-05"
  },
  "0afac2a37edad7": {
   "titulo": "Ver en la web",
@@ -151,7 +137,7 @@
   "via": "html",
   "id": "16328ff188da3f",
   "descubierto": "2026-09-21",
-  "ultima_vez": "2026-09-28"
+  "ultima_vez": "2026-10-05"
  },
  "c61e0b107295a4": {
   "titulo": "II Jornada Enfermería de SEMDOR",
@@ -165,7 +151,7 @@
   "via": "html",
   "id": "c61e0b107295a4",
   "descubierto": "2026-09-21",
-  "ultima_vez": "2026-09-28"
+  "ultima_vez": "2026-10-05"
  },
  "abfd2350d5dd71": {
   "titulo": "VI Jornada de la Societat Catalana d'Anestesiologia, Reanimació i Terapèutica del Dolor",
@@ -179,7 +165,7 @@
   "via": "html",
   "id": "abfd2350d5dd71",
   "descubierto": "2026-09-21",
-  "ultima_vez": "2026-09-28"
+  "ultima_vez": "2026-10-05"
  },
  "7a8786b4101d24": {
   "titulo": "La ACMARTD Celebrará sus XI Jornadas el 17 de marzo en Valdepeñas",
@@ -193,7 +179,7 @@
   "via": "feed",
   "id": "7a8786b4101d24",
   "descubierto": "2026-09-21",
-  "ultima_vez": "2026-09-28"
+  "ultima_vez": "2026-10-05"
  },
  "f7a3f8e1d2b2b3": {
   "titulo": "Curso anual de “Tomando el pulso a la anestesiología” 2ª edición",
@@ -249,7 +235,7 @@
   "via": "feed",
   "id": "8c36d6194cf236",
   "descubierto": "2026-09-21",
-  "ultima_vez": "2026-09-28"
+  "ultima_vez": "2026-10-05"
  },
  "d9b7732ffb07d1": {
   "titulo": "Las IV Jornadas SEMPAL para Residentes finalizan el en Toledo",
@@ -263,7 +249,7 @@
   "via": "feed",
   "id": "d9b7732ffb07d1",
   "descubierto": "2026-09-21",
-  "ultima_vez": "2026-09-28"
+  "ultima_vez": "2026-10-05"
  },
  "c1db2609e049e6": {
   "titulo": "Las IV Jornadas SEMPAL para Residentes ‘Medicina Paliativa, un enfoque imprescindible’ continúan el en Dénia",
@@ -307,20 +293,6 @@
   "descubierto": "2026-09-21",
   "ultima_vez": "2026-09-21"
  },
- "485405d67a1302": {
-  "titulo": "Principios Teóricos de Ecografía Clínica en Urgencias",
-  "fecha_texto": "1 de octubre",
-  "inicio": "2026-10-01",
-  "fin": "2026-10-01",
-  "lugar": "Online",
-  "entidad": "Colegio de Médicos de Cantabria",
-  "url": "https://www.comcantabria.es/formacion/principios-teoricos-de-ecografia-clinica-en-urgencias-7a-ed/",
-  "ambito": "mixto",
-  "via": "html",
-  "id": "485405d67a1302",
-  "descubierto": "2026-09-21",
-  "ultima_vez": "2026-09-28"
- },
  "8ceaeb09319dd4": {
   "titulo": "La SED urge a reforzar recursos, coordinación y formación para combatir el dolor crónico en España",
   "fecha_texto": "del 28 al 30 de mayo",
@@ -333,7 +305,7 @@
   "via": "feed",
   "id": "8ceaeb09319dd4",
   "descubierto": "2026-09-28",
-  "ultima_vez": "2026-09-28"
+  "ultima_vez": "2026-10-05"
  },
  "78b1da9a6e5102": {
   "titulo": "Lee la carta",
@@ -347,7 +319,7 @@
   "via": "html",
   "id": "78b1da9a6e5102",
   "descubierto": "2026-09-28",
-  "ultima_vez": "2026-09-28"
+  "ultima_vez": "2026-10-05"
  },
  "e3b5c1c7bc1814": {
   "titulo": "Congressos i Jornades SCARTD",
@@ -361,7 +333,7 @@
   "via": "ficha",
   "id": "e3b5c1c7bc1814",
   "descubierto": "2026-09-28",
-  "ultima_vez": "2026-09-28"
+  "ultima_vez": "2026-10-05"
  },
  "9cbb9883390004": {
   "titulo": "Programa del VIII Congreso Aragonés Sadartd",
@@ -375,21 +347,7 @@
   "via": "ficha",
   "id": "9cbb9883390004",
   "descubierto": "2026-09-28",
-  "ultima_vez": "2026-09-28"
- },
- "fb34e271bcecae": {
-  "titulo": "Curso SIMUPICS: curso basado en simulación para la prevención del síndrome post-UCI (Ed.1)",
-  "fecha_texto": "del 1 octubre al 31 octubre 2026",
-  "inicio": "2026-10-01",
-  "fin": "2026-10-31",
-  "lugar": "",
-  "entidad": "SEEIUC",
-  "url": "https://seeiuc.org/cursos/simupics/",
-  "ambito": "criticos",
-  "via": "feed",
-  "id": "fb34e271bcecae",
-  "descubierto": "2026-09-28",
-  "ultima_vez": "2026-09-28"
+  "ultima_vez": "2026-10-05"
  },
  "e4c1d593852d79": {
   "titulo": "SOVAMICYUC con el “Día Internacional de la Reanimación Cardiopulmonar”",
@@ -403,7 +361,7 @@
   "via": "feed",
   "id": "e4c1d593852d79",
   "descubierto": "2026-09-28",
-  "ultima_vez": "2026-09-28"
+  "ultima_vez": "2026-10-05"
  },
  "c227b64fd30bc2": {
   "titulo": "Congreso Panamericano e Ibérico de Medicina Intensiva",
@@ -417,49 +375,7 @@
   "via": "html",
   "id": "c227b64fd30bc2",
   "descubierto": "2026-09-28",
-  "ultima_vez": "2026-09-28"
- },
- "943f4bf7d2e416": {
-  "titulo": "Enfermería Formación de Postgrado en Atención Enfermera en Cuidados Paliativos Semipresencial 30 Créditos ECTS Añadir a… — plazas agotadas",
-  "fecha_texto": "5/10/2026",
-  "inicio": "2026-10-05",
-  "fin": "2026-10-05",
-  "lugar": "Barcelona",
-  "entidad": "U. de Barcelona — IL3 (formación continuada)",
-  "url": "https://www.il3.ub.edu/postgrado-atencion-enfermera-cuidados-paliativos",
-  "ambito": "mixto",
-  "via": "ficha",
-  "id": "943f4bf7d2e416",
-  "descubierto": "2026-09-28",
-  "ultima_vez": "2026-09-28"
- },
- "590612a8c402f2": {
-  "titulo": "Plazas limitadas Máster en Entrenamiento para la Salud, Dolor y Patologías Matrícula : Abierta para el curso 2026/2027…",
-  "fecha_texto": "octubre de 2026",
-  "inicio": "2026-10-01",
-  "fin": "2026-10-01",
-  "lugar": "",
-  "entidad": "U. CEU Fernando III",
-  "url": "https://uf3ceu.es/estudios/titulos-propios/master-entrenamiento-salud/",
-  "ambito": "mixto",
-  "via": "ficha",
-  "id": "590612a8c402f2",
-  "descubierto": "2026-09-28",
-  "ultima_vez": "2026-09-28"
- },
- "ad512f72d5dc59": {
-  "titulo": "Plazas limitadas Máster en Ecografía Musculoesquelética e Intervencionismo Ecoguiado Matrícula : Abierta para el curso…",
-  "fecha_texto": "octubre de 2026",
-  "inicio": "2026-10-01",
-  "fin": "2026-10-01",
-  "lugar": "Online",
-  "entidad": "U. CEU Fernando III",
-  "url": "https://uf3ceu.es/estudios/titulos-propios/master-en-ecografia-musculoesqueletica/",
-  "ambito": "mixto",
-  "via": "ficha",
-  "id": "ad512f72d5dc59",
-  "descubierto": "2026-09-28",
-  "ultima_vez": "2026-09-28"
+  "ultima_vez": "2026-10-05"
  },
  "9debed54ed6755": {
   "titulo": "Ciudad Real reunirá a especialistas de toda España para actualizar el abordaje de la ventilación mecánica no invasiva",
@@ -473,49 +389,7 @@
   "via": "feed",
   "id": "9debed54ed6755",
   "descubierto": "2026-09-28",
-  "ultima_vez": "2026-09-28"
- },
- "3a60455e7f46ec": {
-  "titulo": "Curso de Soporte Vital Básico (SVB) y DEA Presencial y online — plazas agotadas",
-  "fecha_texto": "6 de octubre de 2026",
-  "inicio": "2026-10-06",
-  "fin": "2026-10-06",
-  "lugar": "Online",
-  "entidad": "Colegio de Médicos de Málaga",
-  "url": "https://commalaga.com/formacion-commalaga/curso-de-soporte-vital-basico-svb-y-dea-6-de-octubre-2/",
-  "ambito": "mixto",
-  "via": "html",
-  "id": "3a60455e7f46ec",
-  "descubierto": "2026-09-28",
-  "ultima_vez": "2026-09-28"
- },
- "5584b80b6c70f8": {
-  "titulo": "Anatomía, Exploración Clínica y Ecográfica, Diagnóstico y Tratamiento Intervencionista en Cadera y Rodilla",
-  "fecha_texto": "30 de septiembre",
-  "inicio": "2026-09-30",
-  "fin": "2026-09-30",
-  "lugar": "",
-  "entidad": "Colegio de Médicos de Murcia",
-  "url": "https://www.commurcia.es/ficha_formacion?id=1021",
-  "ambito": "mixto",
-  "via": "html",
-  "id": "5584b80b6c70f8",
-  "descubierto": "2026-09-28",
-  "ultima_vez": "2026-09-28"
- },
- "f6ebc96eb09f5a": {
-  "titulo": "Utilización de la Ventilación No Invasiva en la Insuficiencia Repiratoria Aguda",
-  "fecha_texto": "01 de octubre",
-  "inicio": "2026-10-01",
-  "fin": "2026-10-01",
-  "lugar": "",
-  "entidad": "Colegio de Médicos de Murcia",
-  "url": "https://www.commurcia.es/ficha_formacion?id=1027",
-  "ambito": "mixto",
-  "via": "html",
-  "id": "f6ebc96eb09f5a",
-  "descubierto": "2026-09-28",
-  "ultima_vez": "2026-09-28"
+  "ultima_vez": "2026-10-05"
  },
  "3d01b97dc76c66": {
   "titulo": "FUNDAMENTOS EN cuidados Críticos",
@@ -543,7 +417,7 @@
   "via": "html",
   "id": "334427d076b0ee",
   "descubierto": "2026-09-28",
-  "ultima_vez": "2026-09-28"
+  "ultima_vez": "2026-10-05"
  },
  "b166ba7a3d8ef7": {
   "titulo": "Soporte Vital Intermedio Pediátrico",
@@ -557,6 +431,174 @@
   "via": "html",
   "id": "b166ba7a3d8ef7",
   "descubierto": "2026-09-28",
-  "ultima_vez": "2026-09-28"
+  "ultima_vez": "2026-10-05"
+ },
+ "37ad718314615c": {
+  "titulo": "Curso SVA Semipresencial del PNRCP-SEMICYUC",
+  "fecha_texto": "28 de septiembre",
+  "inicio": "2027-09-28",
+  "fin": "2027-09-28",
+  "lugar": "Online",
+  "entidad": "SEMICYUC",
+  "url": "https://semicyuc.org/2026/09/sva-semicyuc/",
+  "ambito": "criticos",
+  "via": "feed",
+  "id": "37ad718314615c",
+  "descubierto": "2026-10-05",
+  "ultima_vez": "2026-10-05"
+ },
+ "888f21e87583e1": {
+  "titulo": "Ver en la web",
+  "fecha_texto": "12, 13 y 14 de mayo, 2027",
+  "inicio": "2027-05-12",
+  "fin": "2027-05-14",
+  "lugar": "Las Palmas de Gran Canaria",
+  "entidad": "Formación SED",
+  "url": "https://congresosedolor.es/",
+  "ambito": "dolor",
+  "via": "html",
+  "id": "888f21e87583e1",
+  "descubierto": "2026-10-05",
+  "ultima_vez": "2026-10-05"
+ },
+ "24b3646a9c6074": {
+  "titulo": "70 reunion anual aaear 2026",
+  "fecha_texto": "29 al 30 de octubre del 2026",
+  "inicio": "2026-10-29",
+  "fin": "2026-10-30",
+  "lugar": "Jerez de la Frontera",
+  "entidad": "AAEAR (Andalucía-Extremadura)",
+  "url": "https://www.aaear.es/70-reunion-anual-aaear-2026",
+  "ambito": "anestesia",
+  "via": "html",
+  "id": "24b3646a9c6074",
+  "descubierto": "2026-10-05",
+  "ultima_vez": "2026-10-05"
+ },
+ "6f321f1ee6e869": {
+  "titulo": "El XV Congreso Internacional de SECPAL combinará ciencia, innovación, humanismo y autocuidado para avanzar “hacia un…",
+  "fecha_texto": "del 8 al 10 de octubre",
+  "inicio": "2026-10-08",
+  "fin": "2026-10-10",
+  "lugar": "Cartagena",
+  "entidad": "SECPAL",
+  "url": "https://www.secpal.org/el-xv-congreso-internacional-de-secpal-combinara-ciencia-innovacion-humanismo-y-autocuidado-para-avanzar-hacia-un-mar-en-calma-en-el-final-de-la-vida/",
+  "ambito": "dolor",
+  "via": "feed",
+  "id": "6f321f1ee6e869",
+  "descubierto": "2026-10-05",
+  "ultima_vez": "2026-10-05"
+ },
+ "943f4bf7d2e416": {
+  "titulo": "Enfermería Formación de Postgrado en Atención Enfermera en Cuidados Paliativos Semipresencial 30 Créditos ECTS Añadir a… — plazas agotadas",
+  "fecha_texto": "5/10/2026",
+  "inicio": "2026-10-05",
+  "fin": "2026-10-05",
+  "lugar": "Barcelona",
+  "entidad": "U. de Barcelona — IL3 (formación continuada)",
+  "url": "https://www.il3.ub.edu/postgrado-atencion-enfermera-cuidados-paliativos",
+  "ambito": "mixto",
+  "via": "ficha",
+  "id": "943f4bf7d2e416",
+  "descubierto": "2026-10-05",
+  "ultima_vez": "2026-10-05"
+ },
+ "2f768b35109ce0": {
+  "titulo": "VIII Curso Avanzado de Ecografía en el Paciente Crítico – Octubre 2026.",
+  "fecha_texto": "27 de octubre de 2026",
+  "inicio": "2026-10-27",
+  "fin": "2026-10-27",
+  "lugar": "",
+  "entidad": "Colegio de Médicos de Burgos",
+  "url": "https://www.combu.es/eventos/cursos/viii-curso-avanzado-de-ecografia-en-el-paciente-critico-octubre-2026/",
+  "ambito": "mixto",
+  "via": "html",
+  "id": "2f768b35109ce0",
+  "descubierto": "2026-10-05",
+  "ultima_vez": "2026-10-05"
+ },
+ "4dc46c1544c3e7": {
+  "titulo": "Principios Teóricos de Ecografía Clínica en Urgencias",
+  "fecha_texto": "1 de octubre",
+  "inicio": "2027-10-01",
+  "fin": "2027-10-01",
+  "lugar": "Online",
+  "entidad": "Colegio de Médicos de Cantabria",
+  "url": "https://www.comcantabria.es/formacion/principios-teoricos-de-ecografia-clinica-en-urgencias-7a-ed/",
+  "ambito": "mixto",
+  "via": "html",
+  "id": "4dc46c1544c3e7",
+  "descubierto": "2026-10-05",
+  "ultima_vez": "2026-10-05"
+ },
+ "3a60455e7f46ec": {
+  "titulo": "Curso de Soporte Vital Básico (SVB) y DEA Presencial y online — plazas agotadas",
+  "fecha_texto": "6 de octubre de 2026",
+  "inicio": "2026-10-06",
+  "fin": "2026-10-06",
+  "lugar": "Online",
+  "entidad": "Colegio de Médicos de Málaga",
+  "url": "https://commalaga.com/formacion-commalaga/curso-de-soporte-vital-basico-svb-y-dea-6-de-octubre-2/",
+  "ambito": "mixto",
+  "via": "html",
+  "id": "3a60455e7f46ec",
+  "descubierto": "2026-10-05",
+  "ultima_vez": "2026-10-05"
+ },
+ "a3fbdebc05793b": {
+  "titulo": "Anatomía, Exploración Clínica y Ecográfica, Diagnóstico y Tratamiento Intervencionista en Cadera y Rodilla",
+  "fecha_texto": "30 de septiembre",
+  "inicio": "2027-09-30",
+  "fin": "2027-09-30",
+  "lugar": "",
+  "entidad": "Colegio de Médicos de Murcia",
+  "url": "https://www.commurcia.es/ficha_formacion?id=1021",
+  "ambito": "mixto",
+  "via": "html",
+  "id": "a3fbdebc05793b",
+  "descubierto": "2026-10-05",
+  "ultima_vez": "2026-10-05"
+ },
+ "08e154e25c3e19": {
+  "titulo": "Utilización de la Ventilación No Invasiva en la Insuficiencia Repiratoria Aguda",
+  "fecha_texto": "01 de octubre",
+  "inicio": "2027-10-01",
+  "fin": "2027-10-01",
+  "lugar": "",
+  "entidad": "Colegio de Médicos de Murcia",
+  "url": "https://www.commurcia.es/ficha_formacion?id=1027",
+  "ambito": "mixto",
+  "via": "html",
+  "id": "08e154e25c3e19",
+  "descubierto": "2026-10-05",
+  "ultima_vez": "2026-10-05"
+ },
+ "4ac1a6a2c513d8": {
+  "titulo": "FUNDAMENTOS EN cuidados Críticos",
+  "fecha_texto": "04 de octubre",
+  "inicio": "2027-10-04",
+  "fin": "2027-10-04",
+  "lugar": "",
+  "entidad": "Colegio de Médicos de Murcia",
+  "url": "https://www.commurcia.es/ficha_formacion?id=1012",
+  "ambito": "mixto",
+  "via": "html",
+  "id": "4ac1a6a2c513d8",
+  "descubierto": "2026-10-05",
+  "ultima_vez": "2026-10-05"
+ },
+ "2366d345b80b70": {
+  "titulo": "Seminario “hematología en Obstericia y Ginecología”.",
+  "fecha_texto": "26 de octubre",
+  "inicio": "2026-10-26",
+  "fin": "2026-10-26",
+  "lugar": "Pamplona",
+  "entidad": "Colegio de Médicos de Navarra",
+  "url": "https://colegiodemedicos.es/seminario-hematologia-en-obstericia/?utm_source=rss&utm_medium=rss&utm_campaign=seminario-hematologia-en-obstericia",
+  "ambito": "mixto",
+  "via": "feed",
+  "id": "2366d345b80b70",
+  "descubierto": "2026-10-05",
+  "ultima_vez": "2026-10-05"
  }
 }
