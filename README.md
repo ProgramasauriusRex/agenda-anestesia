@@ -1,6 +1,6 @@
 # Agenda Anestesia
 
-Rastrea automáticamente **209 webs** españolas y genera cada semana una tabla con
+Rastrea automáticamente **208 webs** españolas y genera cada semana una tabla con
 los cursos y congresos de Anestesiología, Cuidados Críticos y Dolor:
 
 **Título · Fechas · Lugar · Entidad organizadora**
@@ -13,9 +13,9 @@ No hace falta entenderlos todos. En la práctica solo tocarás el primero.
 
 | Archivo | Para qué sirve | ¿Lo tocas tú? |
 |---|---|---|
-| **`fuentes.yaml`** | La lista de las 209 webs | **Sí**, este es el tuyo |
+| **`fuentes.yaml`** | La lista de las 208 webs | **Sí**, este es el tuyo |
 | `agenda.py` | El programa que visita las webs y hace la tabla | No |
-| `verificar.py` | Comprueba que las 209 direcciones siguen vivas | No (lo ejecutas, no lo editas) |
+| `verificar.py` | Comprueba que las 208 direcciones siguen vivas | No (lo ejecutas, no lo editas) |
 | `fechas.py` | Entiende las fechas en español | No |
 | `test_extractor.py` | Control de calidad del programa | No |
 | `requirements.txt` | Lista de programas auxiliares a instalar | No |
@@ -29,7 +29,7 @@ No hace falta entenderlos todos. En la práctica solo tocarás el primero.
 ## Las tres órdenes que vas a usar
 
 ```bash
-python verificar.py      # comprueba que las 209 webs responden (al empezar, y cada 3-6 meses)
+python verificar.py      # comprueba que las 208 webs responden (al empezar, y cada 3-6 meses)
 python agenda.py         # los cursos NUEVOS del próximo mes  ← el del post semanal
 python agenda.py --todo --meses 6    # mirar sin más: no altera el post del lunes
 ```
@@ -85,7 +85,7 @@ Lo que verás en el informe:
 - **Con RSS** → las sólidas. Publican un canal pensado para máquinas, y no se
   rompen cuando la entidad rediseña su web. El verificador anota ese canal en
   el campo `feed`, y a partir de ahí el rastreo semanal va directo a él: es lo
-  que permite revisar las 209 cada lunes en un par de minutos.
+  que permite revisar las 208 cada lunes en un par de minutos.
 - **Páginas de agenda encontradas** → la dirección apuntaba a la portada y el
   verificador ha encontrado una página mejor (la sección "Cursos", "Agenda"…).
   Quedan anotadas en `fuentes.yaml` como comentario, para que las revises.
@@ -128,18 +128,38 @@ se respeta, y la prueba automática lo comprueba en siete escenarios distintos.
 Lo que se ha corregido es tratar un error del cortafuegos como si fuera una
 decisión de la entidad.
 
+El resultado de la corrección, medido: **de 27 bloqueadas se pasó a 3**, y las
+fuentes utilizables subieron de 170 a 195.
+
+### Cuando el servidor pide calma
+
+Hay dos respuestas que parecen un fallo y no lo son: el **429** ("vas muy
+rápido") y el **503** ("ahora mismo no puedo"). Antes se reintentaban al
+instante, lo que daba exactamente el mismo error y dejaba la web marcada como
+rota. Ahora se espera unos segundos antes de repetir. Lo mismo con las
+conexiones que se caen: un segundo intento.
+
+### Lo que no tiene arreglo desde aquí
+
+Cuatro webs (la UCLM, la Universidad de Extremadura, Deusto y el CGCOM)
+responden **403 a cualquier petición**, incluso presentándose como navegador.
+No es el `robots.txt` ni las cabeceras: bloquean por la dirección de origen, y
+GitHub ejecuta esto desde un centro de datos. Desde un ordenador doméstico se
+abren sin problema. Es el único grupo para el que no hay solución técnica por
+esta vía.
+
 ---
 
 ## Cómo está organizada la lista de webs
 
-**Las 209 se revisan todas cada lunes.** Los niveles siguen existiendo en
+**Las 208 se revisan todas cada lunes.** Los niveles siguen existiendo en
 `fuentes.yaml`, pero solo sirven para pedir una pasada parcial a mano
 (`python agenda.py --nivel 1`), no para decidir el rastreo automático.
 
 | Nivel | Cuántas | Qué hay |
 |---|---|---|
 | **1** | 12 | SEDAR, SEMICYUC, SED, SEMDOR, ESRA, AnestesiaR, Dolor.com |
-| **2** | 131 | Los **52 colegios de médicos**, grupos de trabajo de SEDAR, las 12 sociedades autonómicas de anestesia, las 11 de intensivos, agregadores y los portales de formación de los servicios autonómicos de salud |
+| **2** | 130 | Los **52 colegios de médicos**, grupos de trabajo de SEDAR, las 12 sociedades autonómicas de anestesia, las 11 de intensivos, agregadores y los portales de formación de los servicios autonómicos de salud |
 | **3** | 66 | 38 universidades públicas, 18 privadas, grupos hospitalarios privados y el Consejo General de Colegios |
 
 Las sociedades de intensivos del Norte (SNMIUC) y de Murcia (SOMIUC) no tienen
@@ -154,7 +174,7 @@ campo `feed`, si la web tiene canal RSS y cuál es — o `none` si no tiene. El
 rastreo semanal lee ese dato y va directo, en vez de sondear a ciegas trece
 direcciones buscando un canal que quizá no exista.
 
-La diferencia es de 21 segundos por web a 2, y es lo que convierte "las 209
+La diferencia es de 21 segundos por web a 2, y es lo que convierte "las 208
 cada lunes" en un par de minutos y unas 340 peticiones repartidas: dos por web
 y una vez por semana. Menos de lo que gasta una persona abriendo esa misma
 página en el navegador.
@@ -223,7 +243,7 @@ python agenda.py
 
 Sube estos archivos a un repositorio de GitHub y se ejecutará solo:
 
-- **Cada lunes a las 8:00** → las 209 webs, cursos del próximo mes
+- **Cada lunes a las 8:00** → las 208 webs, cursos del próximo mes
 - **Cada tres meses** → verificación de que las direcciones siguen vivas, y
   actualización del campo `feed` de cada una
 
@@ -242,7 +262,7 @@ Para cada web, en este orden:
 1. **robots.txt** — si el sitio prohíbe el rastreo, se salta y lo avisa.
 2. **Busca un RSS** — el camino fiable.
 3. **Si no hay, lee el HTML** con un extractor genérico. No hay un programa a
-   medida para cada una de las 209: recorre los enlaces y mira el bloque de
+   medida para cada una de las 208: recorre los enlaces y mira el bloque de
    texto que rodea a cada uno. Si ahí hay una fecha y una palabra tipo "curso"
    o "congreso", es candidato.
 4. **Interpreta la fecha** — con meses completos o abreviados («15 oct 2026»,

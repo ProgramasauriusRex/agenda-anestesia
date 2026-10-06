@@ -77,7 +77,13 @@ CAB_NAVEGADOR = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Accept-Language": "es-ES,es;q=0.9",
 }
-RECHAZO_POR_CABECERAS = (403, 406, 412, 429)
+RECHAZO_POR_CABECERAS = (403, 406, 412)
+
+# "Vas muy rápido" (429) y "ahora mismo no puedo" (503) no son una negativa:
+# son una petición de calma. Reintentarlos al instante, que es lo que se hacía,
+# devuelve exactamente el mismo error. Con una espera de por medio se recuperan.
+REINTENTO_LENTO = (429, 503)
+ESPERA_REINTENTO = 8
 
 
 # Reloj por dominio: varias webs a la vez, sí; varias peticiones seguidas al
@@ -227,6 +233,13 @@ def _lee_robots(dominio: str) -> robotparser.RobotFileParser | None:
     url_robots = urljoin(dominio, "/robots.txt")
     r = _pide_robots(url_robots)
 
+    # Un 5xx deja al sitio fuera del rastreo, así que antes de dar por buena
+    # esa conclusión se le da una segunda oportunidad: un error puntual del
+    # servidor no es una decisión de la entidad.
+    if r is not None and r.status_code >= 500:
+        time.sleep(ESPERA_REINTENTO)
+        r = _pide_robots(url_robots)
+
     if r is None:
         return None
     if r.status_code >= 500:
@@ -261,21 +274,46 @@ def robots_permite(url: str) -> bool:
         return True
 
 
-def descarga(url: str) -> requests.Response | None:
+def _una_peticion(url: str, cabeceras: dict):
     espera_turno(url)
     try:
-        r = requests.get(url, headers=CAB_BOT, timeout=TIMEOUT)
-        if r.status_code in RECHAZO_POR_CABECERAS:
-            espera_turno(url)
-            r = requests.get(url, headers=CAB_NAVEGADOR, timeout=TIMEOUT)
-        r.raise_for_status()
-        # Si el servidor no declara charset, requests asume ISO-8859-1 y
-        # destroza tildes y eñes. Detectamos la codificación real.
-        if "charset" not in r.headers.get("Content-Type", "").lower():
-            r.encoding = r.apparent_encoding or "utf-8"
-        return r
+        return requests.get(url, headers=cabeceras, timeout=TIMEOUT)
     except Exception:
         return None
+
+
+def descarga(url: str) -> requests.Response | None:
+    """
+    Pide una página, con dos redes de seguridad distintas.
+
+    1. Si el servidor rechaza al robot por sus cabeceras (403, 406, 412), se
+       repite una vez haciéndose pasar por navegador.
+    2. Si el servidor pide calma (429, 503) o la conexión se cae, se espera
+       unos segundos y se repite. Esta es nueva, y hacía falta: en la
+       verificación del 23/09 se perdieron por esto cuatro webs que funcionan
+       perfectamente (SAMIUC, el blog de Asturias-Cantabria, astursalud y la
+       Universitat de les Illes Balears).
+    """
+    r = _una_peticion(url, CAB_BOT)
+
+    if r is not None and r.status_code in RECHAZO_POR_CABECERAS:
+        r = _una_peticion(url, CAB_NAVEGADOR)
+
+    if r is None or r.status_code in REINTENTO_LENTO:
+        time.sleep(ESPERA_REINTENTO)
+        r = _una_peticion(url, CAB_NAVEGADOR)
+
+    if r is None:
+        return None
+    try:
+        r.raise_for_status()
+    except Exception:
+        return None
+    # Si el servidor no declara charset, requests asume ISO-8859-1 y
+    # destroza tildes y eñes. Detectamos la codificación real.
+    if "charset" not in r.headers.get("Content-Type", "").lower():
+        r.encoding = r.apparent_encoding or "utf-8"
+    return r
 
 
 # --- Descubrimiento de feeds ---------------------------------------------

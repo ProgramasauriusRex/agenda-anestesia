@@ -324,8 +324,8 @@ fuentes:
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: roto
-    feed: none
+    estado: pendiente
+    # dio 429 ("vas muy rápido"), no un error real
   - nombre: "SVNARTD (País Vasco-Navarra)"
     url: https://www.svnrartd.com
     nivel: 2
@@ -414,18 +414,18 @@ fuentes:
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: roto
-    feed: none
+    estado: ok
+    feed: https://www.ont.es/feed/
+    # sugerencia: https://www.ont.es/informacion-a-los-profesionales-4/formacion-cursos-y-eventos-4-10/
 
   # ---------- Medicina Intensiva — sociedades autonómicas ----------
   - nombre: "SAMIUC (Andalucía)"
-    url: https://www.samiuc.es/formacion-samiuc/
+    url: https://www.samiuc.es/
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: roto
-    feed: none
-    # la web estaba bien; tiene además plataforma propia en formacion.samiuc.es
+    estado: pendiente
+    # dio 503 puntual; tiene plataforma propia en formacion.samiuc.es
   - nombre: "SARMICYUC (Aragón)"
     url: https://www.sarmicyuc.com
     nivel: 2
@@ -539,7 +539,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://seth.es/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fseth.es%2F&format=xml
-    # sugerencia: https://seth.es/formacion/
+    # sugerencia: https://seth.es/evento/xvi-curso-internacional-de-formacion-continuada-en-hemofilia-y-otras-coagulopatias/
     # redirige a: https://seth.es/
   - nombre: "SEMPSPH (Seguridad del paciente)"
     url: https://www.sempsph.com/
@@ -605,7 +605,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.consalud.es/feed/
-    # sugerencia: https://www.consalud.es/formacion
+    # sugerencia: https://www.consalud.es/formacion/irca-y-la-uax-abren-la-ix-edicion-de-su-master-de-formacion-permanente-en-radiocirugia-del-sistema-nervioso-central.html
 
   # ---------- Servicios autonómicos de salud — formación (capa hospitalaria) ----------
   - nombre: "Sacyl — Jornadas y eventos (Castilla y León)"
@@ -674,12 +674,12 @@ fuentes:
     feed: none
     # redirige a: https://www.osakidetza.euskadi.eus/ataria/
   - nombre: "Comunidad de Madrid — Formación sanitaria"
-    url: https://www.comunidad.madrid/servicios/salud/formacion-continuada-profesionales-consejeria-sanidad
+    url: https://www.comunidad.madrid/salud/formacion-continuada-profesionales-consejeria-sanidad
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: roto
-    feed: none
+    estado: pendiente
+    # la dirección llevaba un /servicios/ de más
     # Madrid no publica catálogo abierto: la matrícula va por intranet
   - nombre: "SESCAM — Formación (Castilla-La Mancha)"
     url: https://sescam.jccm.es/sofos/matriculacion/agenda/areas.jsp
@@ -701,15 +701,11 @@ fuentes:
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: roto
-    feed: none
-  - nombre: "IDIVAL (Cantabria)"
-    url: https://www.idival.org/category/formacion/
-    nivel: 2
-    ambito: mixto
-    filtro: estricto
-    estado: roto
-    feed: none
+    estado: pendiente
+    # se agotó el tiempo de espera; merece otro intento
+  # IDIVAL queda fuera: su certificado de seguridad está mal montado y no se
+  # puede visitar sin desactivar comprobaciones, cosa que no vamos a hacer.
+  # Lo que publica se solapa con el Servicio Cántabro de Salud, que sí responde.
   - nombre: "Servicio Cántabro de Salud — Formación"
     url: https://www.scsalud.es/portal-formacion-continuada
     nivel: 2
@@ -790,7 +786,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.uma.es/feed/
-    # sugerencia: https://www.uma.es/masteres-oficiales/
+    # sugerencia: https://www.uma.es/micrositios/sala-de-prensa/noticias/una-nueva-microcredencial-formara-profesionales-sobre-modelos-de-turismo-mas-sostenibles/
   - nombre: "U. de Almería"
     url: https://www.ual.es/
     nivel: 3
@@ -814,7 +810,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.uhu.es/rss.xml
-    # sugerencia: https://www.uhu.es/gestion-academica/convocatorias/beca-uhu-santander-ayuda-economica-curso-20262027
+    # sugerencia: https://www.uhu.es/formacion-pdi/cursos/github-para-la-docencia-y-la-investigacion-desde-git-classroom-pasando-por-copilot
   - nombre: "U. de Zaragoza"
     url: https://www.unizar.es/
     nivel: 3
@@ -836,10 +832,8 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    feed: none
-    # sugerencia: https://www.uib.es/recerca
-    # redirige a: https://www.uib.es/inici
+    estado: pendiente
+    # se agotó el tiempo de espera; merece otro intento
   - nombre: "U. de Las Palmas de Gran Canaria"
     url: https://www.ulpgc.es/
     nivel: 3
@@ -856,7 +850,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.ull.es/feed/
-    # sugerencia: https://www.ull.es/portal/agenda/evento/i-jornada-de-formacion-a-representantes-estudiantiles/
+    # sugerencia: https://www.ull.es/portal/noticias/2026/la-ull-presenta-en-madeira-los-cursos-de-formacion-docente-del-proyecto-europeo-mathia/
   - nombre: "U. de Cantabria"
     url: https://web.unican.es/
     nivel: 3
@@ -934,8 +928,10 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: ok
     feed: none
+    # sugerencia: https://www.udg.edu/ca/viu/udgsalut/recursos
+    # redirige a: https://www.udg.edu/ca/
   - nombre: "U. Rovira i Virgili"
     url: https://www.urv.cat/
     nivel: 3
@@ -984,7 +980,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: none
-    # sugerencia: https://www.uji.es/com/sumari/agenda/
+    # sugerencia: https://www.uji.es/serveis/oipep/base/programes/ofertes-ocupacio/ocuparty/202627/mtservicios/
   - nombre: "U. de Extremadura"
     url: https://www.unex.es/
     nivel: 3
@@ -1032,7 +1028,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: none
-    # sugerencia: https://www.uah.es/es/admision-y-ayudas/formacion-permanente
+    # sugerencia: https://www.uah.es/es/admision-y-ayudas/formacion-permanente/
     # redirige a: https://www.uah.es/es/
   - nombre: "U. de Murcia"
     url: https://www.um.es/
@@ -1191,7 +1187,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.uloyola.es/blog/rss
-    # sugerencia: https://www.uloyola.es/blog/masteres/loyola-refuerza-su-colaboracion-con-el-colegio-de-registradores-de-espana-para-impulsar-la-formacion-y-la-investigacion-juridica
+    # sugerencia: https://www.uloyola.es/servicios/servicio-de-orientacion-e-informacion
   - nombre: "U. de Deusto"
     url: https://www.deusto.es/
     nivel: 3
@@ -1377,7 +1373,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.combu.es/feed/
-    # sugerencia: https://www.combu.es/eventos/cursos/x-congreso-nacional-de-la-sociedad-espanola-de-formacion-sanitaria-especializada-sefse-areda/
+    # sugerencia: https://www.combu.es/eventos/jornadas-y-congresos/xix-jornadas-salud-y-modos-de-vida-ediren/
   - nombre: "Colegio de Médicos de Cáceres"
     url: https://comeca.org/cursos-actividades/
     nivel: 2
@@ -1566,7 +1562,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://commalaga.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcommalaga.com%2F&format=xml
-    # sugerencia: https://commalaga.com/formacion-commalaga/taller-de-cirugia-dermatologica-para-atencion-primaria-iv-curso-de-dermatologia-para-ap-15-de-octubre/
+    # sugerencia: https://commalaga.com/formacion-commalaga/enfermedades-pilosebaceas-iv-curso-de-dermatologia-para-ap-1-al-31-de-octubre/
     # redirige a: https://commalaga.com/
   - nombre: "Colegio de Médicos de Melilla"
     url: https://commelilla.es/cursos-de-formacion/
@@ -1646,7 +1642,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://comsevilla.es/feed/
-    # sugerencia: https://comsevilla.es/el-22-de-octubre-nueva-sesion-del-curso-de-soporte-vital-basico-y-dea-dirigido-a-medicos-y-otros-profesionales/
+    # sugerencia: https://comsevilla.es/cursos-propios
     # redirige a: https://comsevilla.es/
   - nombre: "Colegio de Médicos de Soria"
     url: https://www.comsor.es/agendaformacion.html

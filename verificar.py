@@ -67,7 +67,11 @@ CAB_NAVEGADOR = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Accept-Language": "es-ES,es;q=0.9",
 }
-RECHAZO_POR_CABECERAS = (403, 406, 412, 429)
+RECHAZO_POR_CABECERAS = (403, 406, 412)
+
+# 429 ("vas muy rápido") y 503 ("ahora no puedo") piden espera, no insistencia.
+REINTENTO_LENTO = (429, 503)
+ESPERA_REINTENTO = 8
 
 
 # Palabras que delatan una página de agenda / formación
@@ -98,17 +102,38 @@ def normaliza(t: str) -> str:
     return re.sub(r"\s+", " ", t).strip()
 
 
-def descarga(url: str, timeout: int = TIMEOUT):
+def _peticion(url: str, cabeceras: dict, timeout: int):
     try:
-        r = requests.get(url, headers=CAB_BOT, timeout=timeout, allow_redirects=True)
-        if r.status_code in RECHAZO_POR_CABECERAS:
-            r = requests.get(url, headers=CAB_NAVEGADOR, timeout=timeout,
-                             allow_redirects=True)
-        if "charset" not in r.headers.get("Content-Type", "").lower():
-            r.encoding = r.apparent_encoding or "utf-8"
-        return r
+        return requests.get(url, headers=cabeceras, timeout=timeout,
+                            allow_redirects=True)
     except Exception as e:
         return e
+
+
+def descarga(url: str, timeout: int = TIMEOUT):
+    """
+    Igual que la de agenda.py: reintento con cabeceras de navegador si el
+    servidor rechaza al robot, y reintento con espera si pide calma o si la
+    conexión se cae. Devuelve la respuesta, o la excepción para poder
+    explicar en el informe qué ha pasado.
+    """
+    r = _peticion(url, CAB_BOT, timeout)
+
+    if not isinstance(r, Exception) and r.status_code in RECHAZO_POR_CABECERAS:
+        r = _peticion(url, CAB_NAVEGADOR, timeout)
+
+    if isinstance(r, Exception) or r.status_code in REINTENTO_LENTO:
+        time.sleep(ESPERA_REINTENTO)
+        segundo = _peticion(url, CAB_NAVEGADOR, timeout)
+        # si el segundo intento tampoco va, se informa del primer error
+        if not isinstance(segundo, Exception):
+            r = segundo
+
+    if isinstance(r, Exception):
+        return r
+    if "charset" not in r.headers.get("Content-Type", "").lower():
+        r.encoding = r.apparent_encoding or "utf-8"
+    return r
 
 
 def robots_permite(url: str) -> bool | None:
@@ -126,6 +151,12 @@ def robots_permite(url: str) -> bool | None:
     p = urlparse(url)
     url_robots = f"{p.scheme}://{p.netloc}/robots.txt"
     r = descarga(url_robots, timeout=15)
+
+    # Un 5xx deja la web fuera del rastreo; merece una segunda oportunidad
+    # antes de anotarla como bloqueada.
+    if not isinstance(r, Exception) and r.status_code >= 500:
+        time.sleep(ESPERA_REINTENTO)
+        r = descarga(url_robots, timeout=15)
 
     if isinstance(r, Exception):
         return None
