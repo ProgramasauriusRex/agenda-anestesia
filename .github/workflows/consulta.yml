@@ -1,0 +1,45 @@
+name: Consultar cursos (no cambia nada)
+
+# Esto NO se ejecuta solo. Es el botón para mirar la agenda cuando quieras,
+# con la ventana de meses que quieras, sin tocar el post del lunes.
+#
+# Por qué existe: el rastreo semanal apunta en memoria qué cursos ya te ha
+# enseñado, para no repetírtelos. Si lanzaras ese mismo rastreo a mano un
+# miércoles, los cursos quedarían marcados como "ya vistos" y el lunes
+# siguiente no aparecerían. Esta consulta usa --todo, que no apunta nada.
+on:
+  workflow_dispatch:
+    inputs:
+      meses:
+        description: "Cuántos meses hacia delante quieres ver"
+        required: true
+        default: "3"
+        type: choice
+        options: ["1", "2", "3", "6", "12"]
+
+jobs:
+  consultar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+
+      # La tabla se escribe en el RESUMEN de la ejecución, que GitHub muestra
+      # como una página normal. No hay que descargar nada ni abrir archivos.
+      - name: Consultar
+        run: |
+          echo "## Cursos de los próximos ${{ inputs.meses }} meses" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          python agenda.py --nivel 1 2 3 --todo --meses ${{ inputs.meses }} >> $GITHUB_STEP_SUMMARY
+
+      # Y de paso en CSV, por si quieres pasarlo a una hoja de cálculo.
+      - name: Dejarlo descargable
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: consulta-${{ github.run_number }}
+          path: salida/
