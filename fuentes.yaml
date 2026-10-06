@@ -69,7 +69,7 @@ fuentes:
     filtro: evento
     estado: ok
     feed: https://sedolor.es/feed/
-    # sugerencia: https://sedolor.es/evento/curso-de-radiofrecuencia-en-dolor-nivel-3-malaga/
+    # sugerencia: https://sedolor.es/evento/23-congreso-de-la-sociedad-espanola-del-dolor/
   - nombre: "Formación SED"
     url: https://formaciondolor.com/
     nivel: 1
@@ -77,7 +77,7 @@ fuentes:
     filtro: evento
     estado: ok
     feed: https://formaciondolor.com/feed/
-    # sugerencia: https://formaciondolor.com/congresos/congreso-vitoria-2026/
+    # sugerencia: https://formaciondolor.com/#proximas
   - nombre: "Congreso SED"
     url: https://congresosedolor.es/
     nivel: 1
@@ -108,7 +108,7 @@ fuentes:
     nivel: 1
     ambito: anestesia
     filtro: evento
-    estado: ok
+    estado: roto
     feed: none
     nota: "Bloquea el rastreo automatizado (robots.txt). El programa lo detecta y lo salta."
   - nombre: "Dolor.com — Congresos y jornadas"
@@ -324,7 +324,9 @@ fuentes:
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: pendiente
+    estado: ok
+    feed: http://anestesiaasturiascantabria.blogspot.com/feeds/posts/default
+    # sugerencia: http://anestesiaasturiascantabria.blogspot.com/p/actividades-cientificas.html
     # dio 429 ("vas muy rápido"), no un error real
   - nombre: "SVNARTD (País Vasco-Navarra)"
     url: https://www.svnrartd.com
@@ -424,7 +426,8 @@ fuentes:
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: pendiente
+    estado: roto
+    feed: none
     # dio 503 puntual; tiene plataforma propia en formacion.samiuc.es
   - nombre: "SARMICYUC (Aragón)"
     url: https://www.sarmicyuc.com
@@ -449,6 +452,7 @@ fuentes:
     filtro: evento
     estado: ok
     feed: none
+    # sugerencia: https://socamicyuc.com/noticias
     # el dominio real es .com, no .org
   - nombre: "SCLMICYUC (Castilla y León)"
     url: https://www.sclmicyuc.org
@@ -499,9 +503,8 @@ fuentes:
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: ok
-    feed: https://www.somiama.org/WordPress/?feed=rss2
-    # sugerencia: https://www.somiama.org/WordPress/?page_id=166
+    estado: roto
+    feed: none
   # La Sociedad Norte (SNMIUC) y la de Murcia (SOMIUC) no tienen web propia:
   # anuncian sus cursos a través de SEMICYUC, que ya está en la lista.
   - nombre: "SOVAMICYUC (C. Valenciana)"
@@ -539,7 +542,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://seth.es/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fseth.es%2F&format=xml
-    # sugerencia: https://seth.es/evento/xvi-curso-internacional-de-formacion-continuada-en-hemofilia-y-otras-coagulopatias/
+    # sugerencia: https://seth.es/formacion/
     # redirige a: https://seth.es/
   - nombre: "SEMPSPH (Seguridad del paciente)"
     url: https://www.sempsph.com/
@@ -605,7 +608,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.consalud.es/feed/
-    # sugerencia: https://www.consalud.es/formacion/irca-y-la-uax-abren-la-ix-edicion-de-su-master-de-formacion-permanente-en-radiocirugia-del-sistema-nervioso-central.html
+    # sugerencia: https://www.consalud.es/formacion
 
   # ---------- Servicios autonómicos de salud — formación (capa hospitalaria) ----------
   - nombre: "Sacyl — Jornadas y eventos (Castilla y León)"
@@ -678,7 +681,8 @@ fuentes:
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
     # la dirección llevaba un /servicios/ de más
     # Madrid no publica catálogo abierto: la matrícula va por intranet
   - nombre: "SESCAM — Formación (Castilla-La Mancha)"
@@ -701,7 +705,8 @@ fuentes:
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
     # se agotó el tiempo de espera; merece otro intento
   # IDIVAL queda fuera: su certificado de seguridad está mal montado y no se
   # puede visitar sin desactivar comprobaciones, cosa que no vamos a hacer.
@@ -744,7 +749,7 @@ fuentes:
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: roto
     feed: none
 
   # ---------- Universidades públicas ----------
@@ -786,7 +791,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.uma.es/feed/
-    # sugerencia: https://www.uma.es/micrositios/sala-de-prensa/noticias/una-nueva-microcredencial-formara-profesionales-sobre-modelos-de-turismo-mas-sostenibles/
+    # sugerencia: https://www.uma.es/micrositios/sala-de-prensa/noticias/la-uma-pone-en-marcha-la-primera-microcredencial-universitaria-en-tecnologias-de-hidrogeno/
   - nombre: "U. de Almería"
     url: https://www.ual.es/
     nivel: 3
@@ -794,7 +799,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: none
-    # sugerencia: https://www.ual.es/cursosdeverano
+    # sugerencia: https://www.ual.es/universidad/organosgobierno/vestudiantes/noticias/detalle/30189
   - nombre: "U. de Jaén"
     url: https://www.ujaen.es/
     nivel: 3
@@ -810,7 +815,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.uhu.es/rss.xml
-    # sugerencia: https://www.uhu.es/formacion-pdi/cursos/github-para-la-docencia-y-la-investigacion-desde-git-classroom-pasando-por-copilot
+    # sugerencia: https://www.uhu.es/noticias/la-uhu-participa-en-un-encuentro-nacional-sobre-los-nuevos-retos-de-la-desinformacion
   - nombre: "U. de Zaragoza"
     url: https://www.unizar.es/
     nivel: 3
@@ -832,7 +837,8 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
     # se agotó el tiempo de espera; merece otro intento
   - nombre: "U. de Las Palmas de Gran Canaria"
     url: https://www.ulpgc.es/
@@ -850,7 +856,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.ull.es/feed/
-    # sugerencia: https://www.ull.es/portal/noticias/2026/la-ull-presenta-en-madeira-los-cursos-de-formacion-docente-del-proyecto-europeo-mathia/
+    # sugerencia: https://www.ull.es/portal/agenda/evento/i-seminario-internacional-siglo-de-oro-lope-antes-de-lope-hacia-la-formacion-de-la-comedia-nueva/
   - nombre: "U. de Cantabria"
     url: https://web.unican.es/
     nivel: 3
@@ -882,7 +888,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: none
-    # redirige a: https://www.uva.es/export/sites/uva/
+    # sugerencia: http://www.uva.es/export/sites/uva/1.lauva/1.04.secretariageneral/1.04.08.proteccion_datos/index.html
   - nombre: "U. de Burgos"
     url: https://www.ubu.es/
     nivel: 3
@@ -905,7 +911,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
-    feed: none
+    feed: https://www.il3.ub.edu/blog/feed/
     # www.ub.edu rechaza conexiones que no vengan de un navegador; IL3 sí responde
   - nombre: "U. Autònoma de Barcelona"
     url: https://www.uab.cat/
@@ -980,7 +986,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: none
-    # sugerencia: https://www.uji.es/serveis/oipep/base/programes/ofertes-ocupacio/ocuparty/202627/mtservicios/
+    # sugerencia: https://www.uji.es/com/sumari/agenda/
   - nombre: "U. de Extremadura"
     url: https://www.unex.es/
     nivel: 3
@@ -1028,7 +1034,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: none
-    # sugerencia: https://www.uah.es/es/admision-y-ayudas/formacion-permanente/
+    # sugerencia: https://www.uah.es/es/admision-y-ayudas/formacion-permanente
     # redirige a: https://www.uah.es/es/
   - nombre: "U. de Murcia"
     url: https://www.um.es/
@@ -1210,7 +1216,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://ufpcanarias.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fufpcanarias.com%2F&format=xml&lang=es
-    # sugerencia: https://ufpcanarias.com/formacion-permanente/
+    # sugerencia: https://ufpcanarias.com/nuevas-jornadas-de-formacion-fecyt-5/
     # redirige a: https://ufpcanarias.com/
 
   # ---------- Grupos hospitalarios privados ----------
@@ -1373,7 +1379,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.combu.es/feed/
-    # sugerencia: https://www.combu.es/eventos/jornadas-y-congresos/xix-jornadas-salud-y-modos-de-vida-ediren/
+    # sugerencia: https://www.combu.es/eventos/cursos/x-congreso-nacional-de-la-sociedad-espanola-de-formacion-sanitaria-especializada-sefse-areda/
   - nombre: "Colegio de Médicos de Cáceres"
     url: https://comeca.org/cursos-actividades/
     nivel: 2
@@ -1562,7 +1568,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://commalaga.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcommalaga.com%2F&format=xml
-    # sugerencia: https://commalaga.com/formacion-commalaga/enfermedades-pilosebaceas-iv-curso-de-dermatologia-para-ap-1-al-31-de-octubre/
+    # sugerencia: https://commalaga.com/formacion-commalaga/taller-de-cirugia-dermatologica-para-atencion-primaria-iv-curso-de-dermatologia-para-ap-15-de-octubre/
     # redirige a: https://commalaga.com/
   - nombre: "Colegio de Médicos de Melilla"
     url: https://commelilla.es/cursos-de-formacion/
@@ -1619,7 +1625,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: none
-    # sugerencia: https://comsalamanca.es/formacion?temaFormacion=2
+    # sugerencia: https://comsalamanca.es/formacion/151257-iii-congreso-internacional-en-innovacion-investigacion-formacion-y-transferencia-del-conocimiento-en-ciencias-de-la-salud
   - nombre: "Colegio de Médicos de Santa Cruz de Tenerife"
     url: https://medicostenerife.es/calendario-de-eventos-y-cursos/
     nivel: 2
@@ -1642,7 +1648,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://comsevilla.es/feed/
-    # sugerencia: https://comsevilla.es/cursos-propios
+    # sugerencia: https://comsevilla.es/el-22-de-octubre-nueva-sesion-del-curso-de-soporte-vital-basico-y-dea-dirigido-a-medicos-y-otros-profesionales/
     # redirige a: https://comsevilla.es/
   - nombre: "Colegio de Médicos de Soria"
     url: https://www.comsor.es/agendaformacion.html
@@ -1684,7 +1690,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.comv.es/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.comv.es%2F&format=xml
-    # sugerencia: https://www.comv.es/informacion-ofertas-empleo/
+    # sugerencia: https://www.comv.es/actualidad/el-icomv-colabora-en-la-17a-edicion-del-master-de-formacion-permanente-en-medicina-estetica-de-la-universitat-de-valencia/
   - nombre: "Colegio de Médicos de Valladolid"
     url: https://medicosva.es/
     nivel: 2
