@@ -216,6 +216,64 @@ El campo `feed` lo rellena solo el verificador; no lo escribas tú.
   como especialidad, así que alguna ecografía para primaria se colará: es
   preferible a perder los cursos de ecografía perioperatoria o POCUS.
 
+### Que la tabla se pueda publicar tal cual
+
+Las primeras tablas reales (28/09 y 05/10) salieron con 18 cursos cada una, y
+al mirarlas con intención de publicarlas aparecieron cuatro problemas. Los
+cuatro están corregidos, y las pruebas automáticas guardan cada caso concreto:
+
+- **Texto de interfaz dentro del título.** "Plazas limitadas Máster en
+  Ecografía Musculoesquelética e Intervencionismo Ecoguiado Matrícula :
+  Abierta para el curso 2026/2027". Ahora el título se corta donde empieza el
+  texto de la web ("Añadir a favoritos", "Créditos ECTS", "Matrícula:"), y las
+  etiquetas de estado pegadas delante se quitan — pero solo si lo que queda
+  sigue siendo un título: de "Enfermería en cuidados críticos" no se toca nada.
+
+- **Mayúsculas descolocadas.** "FUNDAMENTOS EN cuidados Críticos", "…paciente
+  pediátrico en URGENCIAS", "70 reunion anual aaear 2026". Antes solo se
+  arreglaba el título que gritaba entero; ahora también las palabras sueltas, y
+  las siglas de las sociedades escritas en minúscula se suben a AAEAR, SCARTD…
+
+- **Cursos repetidos.** Dos casos distintos. El mismo congreso enlazado dos
+  veces en la misma página (misma dirección web: es el mismo acto), y el
+  titular de una noticia junto al congreso que anuncia — "El XV Congreso
+  Internacional de SECPAL combinará ciencia, innovación…" es el mismo acto que
+  "XV Congreso Internacional SECPAL". Se juntan cuando empiezan el mismo día y
+  todas las palabras con peso del título corto están en el largo. Gana el
+  título corto, que es el oficial, pero se queda con lo que sabía el otro: la
+  ciudad y el día de cierre. Y si el título nombra a otra de las entidades, esa
+  pasa a ser la organizadora: para un congreso de SECPAL, mejor firma "SECPAL"
+  que "Dolor.com".
+
+- **Páginas de sección colándose como cursos.** "Congressos i Jornades SCARTD"
+  es el índice de congresos, no un congreso. Se descartan por nombre de
+  apartado y solo si el título es corto, para no llevarse por delante "VI
+  Jornada de la Societat Catalana d'Anestesiologia…".
+
+Resultado sobre la tabla real del 05/10: de 18 filas a 15, sin perder ningún
+curso — las tres que se fueron eran dos repeticiones y un índice.
+
+### La ciudad, cuando solo está dentro de la ficha
+
+Ocho de quince cursos salían con el hueco de lugar vacío. No era un fallo del
+detector: la ciudad no está en el listado, solo dentro de la página del curso.
+Así que al final del rastreo se abren esas fichas y se busca allí, con tope de
+50 por rastreo. Lo que se encuentra se guarda en memoria, para no volver a
+pedirlo cada lunes. Si la ficha no lo dice, el hueco se queda vacío: sigue
+siendo preferible a una ciudad inventada.
+
+### La memoria se cura, ya no se tira
+
+En la tabla del 05/10 seguía apareciendo "Congreso Panamericano e Ibérico de
+Medicina Intensiva **Fecha**", con la etiqueta suelta al final. El limpiador
+que corta eso existe desde el 23/09, pero ese registro se había capturado el
+18/09 y la memoria lo arrastraba tal cual.
+
+Antes, un título sucio en memoria hacía que se borrara el registro, confiando
+en que el siguiente rastreo lo recogiera limpio. Con una fuente trimestral eso
+significa que el curso desaparece durante meses. Ahora el título se vuelve a
+pasar por el limpiador de hoy y el registro se queda.
+
 ### Qué se descarta y qué no
 
 Los cursos **con las plazas agotadas sí aparecen** —que existan y se hayan

@@ -165,7 +165,18 @@ _m = {"a": {"titulo": "COMUNICACIONES ONLINE", "inicio": "2027-05-04"},
       "d": {"titulo": "PLAZAS AGOTADAS | Curso X Nombre del curso: X", "inicio": "2026-12-01"},
       "b": {"titulo": "XVIII Congreso SED 2022 Valencia", "inicio": "2026-10-26"},
       "c": {"titulo": "Curso de Anestesia Regional Ecoguiada", "inicio": "2026-11-20"}}
-assert set(sanea_memoria(_m)) == {"c"}
+_limpia = sanea_memoria(_m)
+# "a" no es un curso y "b" es de 2022: fuera. "d" ya no se tira, se CURA:
+# antes se borraba el registro y, si la fuente era trimestral, el curso
+# desaparecía durante meses. Ahora se le arregla el título y se queda.
+assert set(_limpia) == {"c", "d"}, set(_limpia)
+assert _limpia["d"]["titulo"] == "Curso X — plazas agotadas", _limpia["d"]["titulo"]
+assert _limpia["c"]["titulo"] == "Curso de Anestesia Regional Ecoguiada"
+# El defecto real del 05/10: un título guardado el 18/09 con la etiqueta suelta
+_viejo = {"z": {"titulo": "Congreso Panamericano e Ibérico de Medicina Intensiva Fecha",
+                "inicio": "2026-10-04"}}
+assert sanea_memoria(_viejo)["z"]["titulo"] == \
+    "Congreso Panamericano e Ibérico de Medicina Intensiva"
 
 # Y lo bueno sigue pasando
 for _t in ["Curso de Soporte Vital Avanzado (SVA)",
@@ -302,3 +313,126 @@ for _cod, _cuerpo, _esperado, _desc in _casos:
 
 _ag._robots_cache.clear()
 print("Lectura de robots.txt ✓")
+
+# ---------------------------------------------------------------------------
+# Defectos reales de la tabla del 05/10 — la primera que se miró con intención
+# de publicarla. Todos los casos de abajo salieron de ahí tal cual.
+# ---------------------------------------------------------------------------
+from agenda import (pule_titulo, es_pagina_de_seccion, unifica, recura_titulo,
+                    recorta, limpia_titulo, separa_sin_plazas, titulo_util,
+                    arregla_mayusculas, Evento)
+
+
+def _pulido(t):
+    limpio, lleno = separa_sin_plazas(pule_titulo(limpia_titulo(t, "")))
+    return recorta(arregla_mayusculas(limpio)) + (" — plazas agotadas" if lleno else "")
+
+
+# 1. Texto de interfaz metido dentro del enlace
+assert _pulido("Plazas limitadas Máster en Ecografía Musculoesquelética e "
+               "Intervencionismo Ecoguiado Matrícula : Abierta para el curso 2026/2027") == \
+    "Máster en Ecografía Musculoesquelética e Intervencionismo Ecoguiado"
+assert _pulido("Enfermería Formación de Postgrado en Atención Enfermera en Cuidados "
+               "Paliativos Semipresencial 30 Créditos ECTS Añadir a favoritos") == \
+    "Formación de Postgrado en Atención Enfermera en Cuidados Paliativos Semipresencial"
+
+# 2. Mayúsculas sueltas, y siglas escritas en minúscula
+assert _pulido("FUNDAMENTOS EN cuidados Críticos") == "Fundamentos en cuidados Críticos"
+assert _pulido("analgesia y sedación en el paciente pediátrico en URGENCIAS") == \
+    "Analgesia y sedación en el paciente pediátrico en Urgencias"
+assert _pulido("70 reunion anual aaear 2026") == "70 Reunion anual AAEAR 2026"
+
+# 3. Páginas de sección: el índice de congresos no es un congreso
+assert es_pagina_de_seccion("Congressos i Jornades SCARTD")
+assert es_pagina_de_seccion("Próximos eventos")
+assert not titulo_util("Congressos i Jornades SCARTD")
+# ...pero una jornada de verdad de la misma sociedad sí entra
+assert not es_pagina_de_seccion(
+    "VI Jornada de la Societat Catalana d'Anestesiologia, Reanimació i Terapèutica del Dolor")
+assert not es_pagina_de_seccion("Congreso Nacional de Cuidados Paliativos 2026")
+
+# 4. No recortar la cabeza si lo que queda ya no es un título
+assert _pulido("Enfermería en cuidados críticos y urgencias") == \
+    "Enfermería en cuidados críticos y urgencias"
+print("Títulos de la tabla real del 05/10 ✓")
+
+
+# ---------------------------------------------------------------------------
+# Unificar lo que es el mismo curso contado dos veces
+# ---------------------------------------------------------------------------
+def _ev(titulo, inicio, entidad, url, lugar="", fin=None):
+    return Evento(titulo=titulo, fecha_texto="", inicio=inicio, fin=fin,
+                  lugar=lugar, entidad=entidad, url=url, ambito="mixto")
+
+
+# a) Misma dirección = mismo curso; gana el título corto
+_u = unifica([
+    _ev("Congreso Panamericano e Ibérico de Medicina Intensiva Fecha", "2026-10-04",
+        "DimeCongresos", "https://dimecongresos.com/congresos/panamericano/"),
+    _ev("Congreso Panamericano e Ibérico de Medicina Intensiva", "2026-10-04",
+        "DimeCongresos", "https://dimecongresos.com/congresos/panamericano/", lugar="Madrid"),
+])
+assert len(_u) == 1, _u
+assert _u[0].titulo == "Congreso Panamericano e Ibérico de Medicina Intensiva"
+assert _u[0].lugar == "Madrid", "al unir no se pierde la ciudad que traía el otro"
+
+# b) El titular de la noticia y el congreso son el mismo acto
+_u = unifica([
+    _ev("XV Congreso Internacional SECPAL", "2026-10-08",
+        "Dolor.com — Congresos y jornadas", "https://www.dolor.com/xv-secpal"),
+    _ev("El XV Congreso Internacional de SECPAL combinará ciencia, innovación, "
+        "humanismo y autocuidado", "2026-10-08", "SECPAL",
+        "https://www.secpal.org/noticia-xv-congreso", lugar="Cartagena", fin="2026-10-10"),
+])
+assert len(_u) == 1, [e.titulo for e in _u]
+assert _u[0].titulo == "XV Congreso Internacional SECPAL"
+assert _u[0].lugar == "Cartagena"
+assert _u[0].fin == "2026-10-10"
+assert _u[0].entidad == "SECPAL", f"el título nombra a SECPAL: {_u[0].entidad}"
+
+# c) Dos cursos distintos el mismo día NO se juntan
+_u = unifica([
+    _ev("Curso de Ventilación Mecánica no Invasiva", "2026-11-10", "SEMICYUC",
+        "https://semicyuc.org/a"),
+    _ev("Curso de Ecografía en el Paciente Crítico", "2026-11-10", "SEMICYUC",
+        "https://semicyuc.org/b"),
+])
+assert len(_u) == 2, [e.titulo for e in _u]
+print("Unificación de repetidos ✓")
+
+
+# ---------------------------------------------------------------------------
+# Rellenar la ciudad abriendo la ficha
+# En la tabla del 05/10, nueve de quince cursos salían sin lugar porque la
+# ciudad solo aparece dentro de la página del curso, no en el listado.
+# ---------------------------------------------------------------------------
+from agenda import completa_lugares
+
+_d2 = tempfile.mkdtemp()
+open(os.path.join(_d2, "ficha.html"), "w", encoding="utf-8").write(
+    '<html><body><h1>VIII Curso Avanzado de Ecografía en el Paciente Crítico</h1>'
+    '<p>Lugar de celebración: Hospital Universitario, Burgos.</p></body></html>')
+open(os.path.join(_d2, "muda.html"), "w", encoding="utf-8").write(
+    '<html><body><p>Inscripción abierta. Plazas limitadas.</p></body></html>')
+
+_cwd2 = os.getcwd()
+os.chdir(_d2)
+_srv2 = socketserver.TCPServer(("127.0.0.1", 0), http.server.SimpleHTTPRequestHandler)
+_p2 = _srv2.server_address[1]
+threading.Thread(target=_srv2.serve_forever, daemon=True).start()
+try:
+    _con = _ev("VIII Curso Avanzado de Ecografía en el Paciente Crítico", "2026-10-27",
+               "Colegio de Médicos de Burgos", f"http://127.0.0.1:{_p2}/ficha.html")
+    _sin = _ev("Soporte Vital Intermedio Pediátrico", "2026-11-02",
+               "Colegio de Médicos de Murcia", f"http://127.0.0.1:{_p2}/muda.html")
+    _ya = _ev("Visión actual del dolor pélvico crónico", "2026-10-29",
+              "Formación SED", f"http://127.0.0.1:{_p2}/ficha.html", lugar="Online")
+    _n = completa_lugares([_con, _sin, _ya])
+finally:
+    _srv2.shutdown(); os.chdir(_cwd2); shutil.rmtree(_d2, ignore_errors=True)
+
+assert _con.lugar == "Burgos", f"debe sacar la ciudad de la ficha: {_con.lugar!r}"
+assert _sin.lugar == "", "si la ficha no dice la ciudad, se deja el hueco vacío"
+assert _ya.lugar == "Online", "no se toca el que ya tenía lugar"
+assert _n == 1, _n
+print("Relleno de lugares desde la ficha ✓")

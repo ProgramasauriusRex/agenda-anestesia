@@ -394,6 +394,49 @@ ETIQUETAS_FICHA = [
 # Etiquetas que quedan colgando al quitar la fecha ("...Medicina Intensiva Fecha")
 ETIQUETAS_FINALES = {"fecha", "fechas", "cuando", "horario", "inicio", "lugar", "sede"}
 
+# Texto de interfaz que varias webs meten DENTRO del enlace del curso, detrás
+# del título. Salió de la tabla real del 05/10: "Máster en Entrenamiento para
+# la Salud, Dolor y Patologías Matrícula : Abierta para el curso 2026/2027
+# Añadir a favoritos". El título de verdad acaba justo donde empieza esto.
+COLA_RUIDO = [
+    "anadir a favoritos", "anadir al calendario", "anadir a mi agenda",
+    "matricula :", "matricula:", "mas informacion", "mas info",
+    "solicita informacion", "solicitar informacion", "pedir informacion",
+    "creditos ects", "credits ects", "inscribirse", "inscripcion :",
+    "inscripcion:", "descargar folleto", "descargar el folleto", "ver ficha",
+    "ficha del curso", "leer mas", "compartir en", "precio :", "precio:",
+]
+
+# Y pegadas DELANTE: etiquetas de estado o de categoría, no parte del título.
+CABEZA_RUIDO = [
+    "plazas limitadas", "plazas disponibles", "ultimas plazas",
+    "inscripcion abierta", "matricula abierta", "abierto el plazo",
+    "proximamente", "novedad", "destacado", "nuevo curso", "nuevo",
+    "en directo", "online", "presencial", "semipresencial", "enfermeria",
+    "formacion continuada",
+]
+
+# Palabras que, si quedan al principio tras recortar, delatan que nos hemos
+# llevado por delante parte del título. Entonces no se recorta.
+_ARRANQUE_MALO = {"de", "del", "la", "las", "el", "los", "y", "e", "en", "a",
+                  "al", "con", "para", "por", "sobre", "un", "una", "al"}
+
+# "… Semipresencial 30 Créditos ECTS": el número va delante, así que la marca
+# fija no basta para cortar en el sitio correcto.
+_RE_CREDITOS = re.compile(r"\b\d{1,3}\s*(?:creditos?|credits?)\s*ects\b")
+
+# Páginas de sección: su título es el nombre del apartado, no un curso.
+# "Congressos i Jornades SCARTD" no es un congreso, es el índice de congresos.
+SON_SECCION = [
+    "congresos y jornadas", "congressos i jornades", "cursos y congresos",
+    "cursos i congressos", "congresos y cursos", "proximos eventos",
+    "proximas actividades", "agenda de cursos", "agenda formativa",
+    "formacion continuada", "titulos propios", "estudios propios",
+    "cursos y talleres", "oferta formativa", "calendario de cursos",
+    "actividades formativas", "eventos y congresos", "cursos online",
+    "todos los cursos", "ver todos los cursos", "jornadas y congresos",
+]
+
 
 def titulo_util(titulo: str) -> bool:
     """¿Este texto sirve como título de un curso?"""
@@ -401,6 +444,8 @@ def titulo_util(titulo: str) -> bool:
     if len(n) < 12:
         return False
     if len(n) < 50 and any(p in n for p in NO_SON_TITULO):
+        return False
+    if es_pagina_de_seccion(titulo):
         return False
     return True
 
@@ -418,6 +463,65 @@ def corta_en_ficha(titulo: str) -> str:
                 corte = i if corte is None else min(corte, i)
                 break
     return " ".join(w[:corte]) if corte else titulo
+
+
+def es_pagina_de_seccion(titulo: str) -> bool:
+    """
+    ¿Es el nombre de un apartado en vez de un curso?
+
+    "Congressos i Jornades SCARTD" apareció en la tabla del 05/10 como si
+    fuera un congreso; es el índice de congresos de la sociedad. Se pide que
+    el título sea corto además de empezar por el nombre del apartado, para no
+    descartar "VI Jornada de la Societat Catalana d'Anestesiologia…".
+    """
+    n = normaliza(titulo).strip(" .:·-")
+    if len(n) > 48:
+        return False
+    return any(n.startswith(s) for s in SON_SECCION)
+
+
+def pule_titulo(titulo: str) -> str:
+    """
+    Quita el texto de interfaz que la web ha metido dentro del enlace, por
+    delante y por detrás del título.
+
+    Todos los casos vienen de la tabla real del 05/10, que es la primera que
+    se miró con intención de publicarla.
+    """
+    limpio = titulo
+
+    # 1. Cola: se corta en la primera marca de ruido, si deja título suficiente
+    norm = normaliza(limpio)
+    corte = None
+    for marca in COLA_RUIDO:
+        i = norm.find(marca)
+        if i > 15:
+            corte = i if corte is None else min(corte, i)
+    # Los créditos van con su número delante: "… 30 Créditos ECTS"
+    if m := _RE_CREDITOS.search(norm):
+        if m.start() > 15:
+            corte = m.start() if corte is None else min(corte, m.start())
+    if corte is not None:
+        limpio = limpio[:corte]
+
+    # 2. Cabeza: etiquetas de estado o modalidad pegadas delante. Solo se
+    #    quitan si lo que queda sigue pareciendo un título por sí mismo.
+    cambiado = True
+    while cambiado:
+        cambiado = False
+        n = normaliza(limpio).lstrip(" .:·-")
+        for marca in CABEZA_RUIDO:
+            if not n.startswith(marca):
+                continue
+            # cuántas palabras ocupa la marca
+            saltar = len(marca.split())
+            resto = " ".join(limpio.split()[saltar:]).lstrip(" .:·-–—|,;")
+            primera = normaliza(resto.split()[0]) if resto.split() else ""
+            if len(resto) >= 20 and primera not in _ARRANQUE_MALO:
+                limpio, cambiado = resto, True
+            break
+
+    return limpio.strip(" .:·-–—|,;") or titulo
 
 
 def separa_sin_plazas(titulo: str) -> tuple[str, bool]:
@@ -461,6 +565,13 @@ SIGLAS_INTACTAS = {
     "SVA", "SVB", "DEA", "RCP", "UCI", "URPA", "TIVA", "TCI", "POCUS", "DEU",
     "SEDAR", "SEMICYUC", "SED", "SEMDOR", "SECPAL", "ESRA", "SECIP", "SEEIUC",
     "FEEA", "EDAIC", "SEMES", "CERCP", "ONT", "IA", "EPOC", "SDRA", "VMNI",
+    # Sociedades autonómicas y afines: en varias webs el título las escribe en
+    # minúscula ("70 reunion anual aaear 2026", de la tabla del 05/10).
+    "AAEAR", "AGARYD", "ANESTEX", "ACMARTD", "SCARTD", "SOCARTD", "SVNARTD",
+    "SADARTD", "SOCLARTD", "SAMIUC", "SARMICYUC", "SBMICIUC", "SOCAMICYUC",
+    "SCLMICYUC", "SOMIUCAM", "SOMIAMA", "SOCMIC", "SOGAMIUC", "SOVAMICYUC",
+    "SEXMICYUC", "SEMPSPH", "SETH", "SETRI", "SEOR", "SEMG", "SEMFYC",
+    "ESAIC", "WFSA", "EACTAIC", "ERC", "AHA", "OMS", "AEP", "ESICM",
     "II", "III", "IV", "VI", "VII", "VIII", "IX", "XI", "XII", "XIII", "XIV",
     "XV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI", "XXII", "XXIII", "XXIV",
     "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX",
@@ -474,22 +585,52 @@ def arregla_mayusculas(titulo: str) -> str:
     respetando siglas y números romanos. Si no, se deja como está: puede que
     las mayúsculas sean intencionadas.
     """
-    letras = [c for c in titulo if c.isalpha()]
-    if len(letras) < 12 or sum(c.isupper() for c in letras) / len(letras) < 0.8:
-        return titulo
     MINUSCULAS = {"de", "del", "la", "las", "el", "los", "y", "e", "en", "a",
                   "al", "con", "para", "por", "sobre", "un", "una", "the", "of"}
+
+    def _primera_mayuscula(t: str) -> str:
+        """La primera letra del título, en mayúscula. 'analgesia y sedación…'
+        apareció así en la tabla del 05/10."""
+        for i, c in enumerate(t):
+            if c.isalpha():
+                return t[:i] + c.upper() + t[i + 1:]
+        return t
+
+    letras = [c for c in titulo if c.isalpha()]
+    if not letras:
+        return titulo
+
+    # Caso 1: el título entero grita. Se reescribe completo.
+    if len(letras) >= 12 and sum(c.isupper() for c in letras) / len(letras) >= 0.8:
+        salida = []
+        for i, palabra in enumerate(titulo.split()):
+            nucleo = palabra.strip(".,;:()[]«»\"'")
+            if nucleo.upper() in SIGLAS_INTACTAS or (nucleo.isupper() and len(nucleo) <= 4
+                                                     and not nucleo.isalpha()):
+                salida.append(palabra)
+            elif i > 0 and nucleo.lower() in MINUSCULAS:
+                salida.append(palabra.lower())
+            else:
+                salida.append(palabra.capitalize())
+        return _primera_mayuscula(" ".join(salida))
+
+    # Caso 2: solo gritan algunas palabras — "FUNDAMENTOS EN cuidados Críticos",
+    # "…pediátrico en URGENCIAS". Se baja esa palabra y se deja el resto igual.
+    # Y al revés: una sigla conocida escrita en minúscula se sube ("aaear").
     salida = []
     for i, palabra in enumerate(titulo.split()):
         nucleo = palabra.strip(".,;:()[]«»\"'")
-        if nucleo.upper() in SIGLAS_INTACTAS or (nucleo.isupper() and len(nucleo) <= 4
-                                                 and not nucleo.isalpha()):
+        if not nucleo.isalpha():
             salida.append(palabra)
-        elif i > 0 and nucleo.lower() in MINUSCULAS:
+        elif nucleo.upper() in SIGLAS_INTACTAS:
+            salida.append(palabra.replace(nucleo, nucleo.upper()))
+        elif nucleo.isupper() and nucleo.lower() in MINUSCULAS and i > 0:
             salida.append(palabra.lower())
+        elif nucleo.isupper() and len(nucleo) >= 5:
+            salida.append(palabra.replace(nucleo, nucleo.capitalize()))
         else:
-            salida.append(palabra.capitalize())
-    return " ".join(salida)
+            salida.append(palabra)
+    return _primera_mayuscula(" ".join(salida))
 
 
 def recorta(titulo: str, maximo: int = 120) -> str:
@@ -612,7 +753,7 @@ def desde_feed(url_feed: str, fuente: dict) -> list[Evento]:
         ini, fin, frag = extrae_fechas(conjunto)
         if not ini:
             continue
-        limpio, lleno = separa_sin_plazas(limpia_titulo(titulo, frag) or resumen)
+        limpio, lleno = separa_sin_plazas(pule_titulo(limpia_titulo(titulo, frag) or resumen))
         if not titulo_util(limpio):
             continue
         eventos.append(Evento(
@@ -745,7 +886,7 @@ def desde_html(url: str, html: str, fuente: dict) -> list[Evento]:
                 sin_fecha.append((texto_enlace, destino))
             continue
 
-        limpio, lleno = separa_sin_plazas(limpia_titulo(texto_enlace, frag))
+        limpio, lleno = separa_sin_plazas(pule_titulo(limpia_titulo(texto_enlace, frag)))
         if not titulo_util(limpio):
             # "Ver y leer más sobre el congreso…" no dice nada, pero la
             # dirección del enlace suele llevar el nombre del evento
@@ -777,7 +918,7 @@ def desde_html(url: str, html: str, fuente: dict) -> list[Evento]:
         ini, fin, frag, texto_ficha = fecha_en_la_ficha(destino)
         if not ini:
             continue
-        limpio, lleno = separa_sin_plazas(limpia_titulo(texto_enlace, frag))
+        limpio, lleno = separa_sin_plazas(pule_titulo(limpia_titulo(texto_enlace, frag)))
         if not titulo_util(limpio):
             continue
         vistos.add(clave)
@@ -869,6 +1010,152 @@ def carga_memoria() -> dict[str, dict]:
         return {}
 
 
+_SIN_PESO = {"de", "del", "la", "las", "el", "los", "y", "e", "en", "a", "al",
+             "con", "para", "por", "sobre", "un", "una", "i", "the", "of",
+             "curso", "jornada", "jornadas", "congreso", "taller", "webinar",
+             "seminario", "edicion", "ed", "online"}
+
+
+def _palabras_con_peso(titulo: str) -> set[str]:
+    """Las palabras del título que de verdad lo identifican."""
+    # El umbral es 2 y no 3 a propósito: con 3, "XV Congreso Internacional
+    # SECPAL" se quedaba en dos palabras con peso y no llegaba al mínimo para
+    # poder unificarse con su propia noticia. Bajarlo no afloja el criterio,
+    # lo aprieta: añade palabras que el título largo también tiene que tener.
+    return {p for p in re.split(r"[^\wáéíóúñü]+", normaliza(titulo))
+            if len(p) >= 2 and p not in _SIN_PESO}
+
+
+def unifica(eventos: list[Evento]) -> list[Evento]:
+    """
+    Junta los que son el mismo curso contado dos veces.
+
+    Dos casos, los dos vistos en la tabla real del 05/10:
+
+    1. **La misma dirección web.** "Congreso Panamericano e Ibérico de Medicina
+       Intensiva Fecha" y "Congreso Panamericano e Ibérico de Medicina
+       Intensiva" eran dos enlaces distintos de la misma página apuntando al
+       mismo congreso. Si la URL coincide, es el mismo acto.
+
+    2. **El titular de una noticia y el curso.** "El XV Congreso Internacional
+       de SECPAL combinará ciencia, innovación, humanismo…" es el mismo
+       congreso que "XV Congreso Internacional SECPAL", anunciado uno en la web
+       de SECPAL y el otro en Dolor.com. Se juntan cuando empiezan el mismo día
+       y todas las palabras con peso del título corto están en el largo.
+
+    Gana el título más corto, que es casi siempre el oficial. Y si el nombre de
+    otra de las entidades aparece dentro de ese título, se adopta esa entidad:
+    para un congreso de la SECPAL es mejor firma "SECPAL" que "Dolor.com".
+    """
+    # 1. Misma URL
+    por_url: dict[str, Evento] = {}
+    for e in eventos:
+        clave = (e.url or "").rstrip("/")
+        if not clave:
+            por_url[f"__sin_url_{id(e)}"] = e
+            continue
+        previo = por_url.get(clave)
+        if previo is None:
+            por_url[clave] = e
+        elif len(e.titulo) < len(previo.titulo):
+            por_url[clave] = _adopta_entidad(_completa_desde(e, previo), [previo])
+        else:
+            por_url[clave] = _adopta_entidad(_completa_desde(previo, e), [e])
+    lista = list(por_url.values())
+
+    # 2. Mismo día y un título contenido en el otro
+    lista.sort(key=lambda e: len(e.titulo))
+    salida: list[Evento] = []
+    for e in lista:
+        peso_e = _palabras_con_peso(e.titulo)
+        absorbido = False
+        for guardado in salida:
+            if guardado.inicio != e.inicio or not e.inicio:
+                continue
+            corto = _palabras_con_peso(guardado.titulo)
+            if len(corto) >= 3 and corto <= peso_e:
+                # Gana el título corto, pero no se tira lo que el otro sabía:
+                # la noticia del congreso de SECPAL traía la ciudad y el día
+                # de cierre, y el título oficial no.
+                if not guardado.lugar and e.lugar:
+                    guardado.lugar = e.lugar
+                if e.fin and (not guardado.fin or e.fin > guardado.fin):
+                    guardado.fin = e.fin
+                if not guardado.fecha_texto and e.fecha_texto:
+                    guardado.fecha_texto = e.fecha_texto
+                absorbido = True
+                break
+        if not absorbido:
+            salida.append(e)
+    return [_adopta_entidad(e, lista) for e in salida]
+
+
+def _completa_desde(destino: Evento, otro: Evento) -> Evento:
+    """Rellena los huecos del que se queda con lo que sabía el que se va."""
+    if not destino.lugar and otro.lugar:
+        destino.lugar = otro.lugar
+    if otro.fin and (not destino.fin or otro.fin > destino.fin):
+        destino.fin = otro.fin
+    if not destino.fecha_texto and otro.fecha_texto:
+        destino.fecha_texto = otro.fecha_texto
+    return destino
+
+
+LUGARES_POR_RASTREO = 50
+
+
+def completa_lugares(eventos: list[Evento]) -> int:
+    """
+    Abre la ficha de los cursos que salen sin ciudad y la busca allí.
+
+    En la tabla del 05/10, nueve de quince cursos tenían el hueco vacío. No es
+    un fallo del detector de ciudades: es que en el listado la ciudad no está,
+    solo aparece dentro de la página del curso. Este es el mismo truco que ya
+    se usaba para las fechas, aplicado al lugar.
+
+    Es la última pasada del rastreo y la más prescindible, así que va con tope
+    y en silencio: si una ficha no responde, ese curso se queda sin ciudad y no
+    pasa nada. Un hueco vacío es mejor que una ciudad inventada.
+    """
+    pendientes = [e for e in eventos if not e.lugar and e.url][:LUGARES_POR_RASTREO]
+    if not pendientes:
+        return 0
+
+    def mira(e: Evento) -> bool:
+        if not robots_permite(e.url) or not _cupo_para_seguir():
+            return False
+        r = descarga(e.url)
+        if not r:
+            return False
+        try:
+            sopa = BeautifulSoup(r.text, "lxml")
+            for tag in sopa(["script", "style", "nav", "footer", "header"]):
+                tag.decompose()
+            lugar = extrae_lugar(sopa.get_text(" ", strip=True)[:2500])
+        except Exception:
+            return False
+        if lugar:
+            e.lugar = lugar
+            return True
+        return False
+
+    with ThreadPoolExecutor(max_workers=HILOS) as ex:
+        return sum(ex.map(mira, pendientes))
+
+
+def _adopta_entidad(e: Evento, candidatos: list[Evento]) -> Evento:
+    """Si el título nombra a otra de las entidades, esa es la organizadora."""
+    n = normaliza(e.titulo)
+    for otro in candidatos:
+        if otro is e or not otro.entidad:
+            continue
+        sigla = normaliza(otro.entidad).split(" —")[0].split("(")[0].strip()
+        if len(sigla) >= 3 and sigla in n and normaliza(e.entidad) != sigla:
+            e.entidad = otro.entidad
+            break
+    return e
+
+
 def sanea_memoria(memoria: dict[str, dict]) -> dict[str, dict]:
     """
     Revisa lo guardado con las reglas de HOY, no con las del día en que se
@@ -881,18 +1168,35 @@ def sanea_memoria(memoria: dict[str, dict]) -> dict[str, dict]:
     """
     limpia = {}
     for k, v in memoria.items():
-        titulo = v.get("titulo", "")
+        titulo = recura_titulo(v.get("titulo", ""))
         if not titulo_util(titulo):
             continue
         anio = anio_en_texto(titulo)
         if anio and v.get("inicio") and anio < int(v["inicio"][:4]):
             continue
-        # Guardado con un título sucio (ficha del curso dentro, avisos de
-        # plazas): se olvida para que el siguiente rastreo lo recoja limpio
-        if corta_en_ficha(titulo) != titulo or separa_sin_plazas(titulo)[1]:
-            continue
+        # Antes se tiraba el registro con el título sucio y se esperaba a que
+        # el rastreo lo recogiera limpio. Pero una fuente trimestral no se
+        # vuelve a visitar en meses, así que el curso desaparecía. Ahora el
+        # título se corrige aquí mismo y el registro se queda.
+        v = dict(v, titulo=titulo)
         limpia[k] = v
     return limpia
+
+
+def recura_titulo(titulo: str) -> str:
+    """
+    Vuelve a pasar por el limpiador un título guardado hace semanas.
+
+    Hace falta porque la memoria es más vieja que las reglas: en la tabla del
+    05/10 seguía saliendo "Congreso Panamericano e Ibérico de Medicina
+    Intensiva Fecha", capturado el 18/09 con un limpiador que todavía no
+    cortaba esa etiqueta. El registro era bueno; el título, de otra época.
+    """
+    agotado = "plazas agotadas" in normaliza(titulo)
+    base = re.sub(r"\s*[—–-]\s*plazas agotadas\s*$", "", titulo, flags=re.I)
+    limpio, lleno = separa_sin_plazas(pule_titulo(limpia_titulo(base, "")))
+    limpio = recorta(arregla_mayusculas(limpio))
+    return limpio + (" — plazas agotadas" if (agotado or lleno) else "")
 
 
 def guarda_memoria(memoria: dict[str, dict]) -> None:
@@ -992,8 +1296,8 @@ def main() -> int:
         if e.id not in unicos:
             unicos[e.id] = e
     # Lo recién encontrado, hasta el horizonte (un año por defecto)
-    frescos = [e for e in unicos.values()
-               if e.inicio and margen <= date.fromisoformat(e.inicio) <= horizonte]
+    frescos = unifica([e for e in unicos.values()
+                       if e.inicio and margen <= date.fromisoformat(e.inicio) <= horizonte])
 
     # Se suma a la memoria de cursos conocidos y se olvida lo ya pasado
     memoria = carga_memoria()
@@ -1004,13 +1308,24 @@ def main() -> int:
         memoria[e.id] = d
     memoria = {k: v for k, v in memoria.items()
                if v.get("inicio") and date.fromisoformat(v["inicio"]) >= margen}
-    if not args.todo:
-        guarda_memoria(memoria)
 
     # El post sale de la memoria, no solo de lo visitado hoy: así entran los
     # cursos de fuentes mensuales y trimestrales cuando les llega su momento.
-    eventos = [evento_desde_memoria(d) for d in memoria.values()
-               if margen <= date.fromisoformat(d["inicio"]) <= limite]
+    # Se vuelve a unificar aquí, no solo sobre lo de hoy: la memoria puede
+    # arrastrar dos versiones del mismo congreso guardadas en semanas distintas.
+    eventos = unifica([evento_desde_memoria(d) for d in memoria.values()
+                       if margen <= date.fromisoformat(d["inicio"]) <= limite])
+
+    # Última pasada: a los que salen sin ciudad se les abre la ficha. Solo se
+    # hace sobre la ventana del post, que es lo que se va a publicar, y lo
+    # encontrado se guarda en memoria para no volver a pedirlo cada lunes.
+    rellenados = completa_lugares(eventos)
+    for e in eventos:
+        if e.lugar and e.id in memoria and not memoria[e.id].get("lugar"):
+            memoria[e.id]["lugar"] = e.lugar
+
+    if not args.todo:
+        guarda_memoria(memoria)
 
     # Solo lo nuevo.
     #
@@ -1041,6 +1356,8 @@ def main() -> int:
     if eventos:
         (SALIDA / f"agenda-{sello}.csv").write_text(a_csv(eventos), encoding="utf-8")
 
+    if rellenados:
+        print(f"\n{rellenados} ciudades recuperadas abriendo la ficha", file=sys.stderr)
     print(f"\n{len(frescos)} cursos encontrados hoy · {len(memoria)} en memoria · "
           f"{len(eventos)} en la ventana del post · {len(nuevos)} nuevos",
           file=sys.stderr)
