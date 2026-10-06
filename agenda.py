@@ -1356,6 +1356,17 @@ def main() -> int:
     if eventos:
         (SALIDA / f"agenda-{sello}.csv").write_text(a_csv(eventos), encoding="utf-8")
 
+    # Además del archivo con fecha, uno de nombre fijo con lo mismo. Así hay
+    # UNA dirección que siempre lleva a la tabla de esta semana y se puede
+    # guardar en favoritos, en vez de ir a buscar cada lunes el más reciente.
+    # Solo lo escribe el rastreo de verdad: una consulta con --todo no debe
+    # cambiar lo que esa dirección enseña.
+    if not args.todo:
+        (SALIDA / "AGENDA-ACTUAL.md").write_text(
+            a_markdown(eventos, hoy), encoding="utf-8")
+        if eventos:
+            (SALIDA / "AGENDA-ACTUAL.csv").write_text(a_csv(eventos), encoding="utf-8")
+
     if rellenados:
         print(f"\n{rellenados} ciudades recuperadas abriendo la ficha", file=sys.stderr)
     print(f"\n{len(frescos)} cursos encontrados hoy · {len(memoria)} en memoria · "

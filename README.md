@@ -34,6 +34,36 @@ python agenda.py         # los cursos NUEVOS del próximo mes  ← el del post s
 python agenda.py --todo --meses 6    # mirar sin más: no altera el post del lunes
 ```
 
+### Cómo consultar los cursos (sin tocar nada)
+
+Hay dos formas, y la diferencia importa.
+
+**1. El lunes, que llega solo.** El rastreo corre a las 8:00 y deja la tabla en
+el repositorio. Siempre en la misma dirección, para guardar en favoritos:
+
+```
+salida/AGENDA-ACTUAL.md
+```
+
+Ese archivo se reescribe cada lunes con la tabla de la semana, así que no hay
+que ir buscando cuál es el más reciente. Al lado queda `AGENDA-ACTUAL.csv` para
+abrir en una hoja de cálculo, y los archivos con fecha (`agenda-2026-10-05.md`)
+como histórico.
+
+Además, al terminar la ejecución, GitHub muestra en el resumen de ese lunes la
+tabla de **cursos nuevos** — que es exactamente el contenido del post.
+
+**2. Cualquier otro día: el botón de consulta.** En la pestaña **Actions** del
+repositorio, **Consultar cursos (no cambia nada)** → *Run workflow* → elige
+cuántos meses quieres ver → *Run*. En un par de minutos la tabla aparece en el
+resumen de la ejecución, en pantalla, sin descargar nada.
+
+> **Lo que no hay que hacer:** lanzar a mano el workflow **Agenda semanal**. Ese
+> apunta en memoria lo que te ha enseñado, para no repetírtelo. Si lo lanzas un
+> miércoles, esos cursos quedan marcados como vistos y el lunes siguiente ya no
+> saldrán como nuevos. Para mirar, usa siempre el de consulta: ese no apunta
+> nada.
+
 ### Cómo encaja con tu rutina
 
 Cada lunes, `python agenda.py` te da **los cursos nuevos del próximo mes**: los
