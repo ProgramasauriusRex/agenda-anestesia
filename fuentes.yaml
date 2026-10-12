@@ -108,9 +108,9 @@ fuentes:
     nivel: 1
     ambito: anestesia
     filtro: evento
-    estado: pendiente
-    # la sección padre dio 404; el listado vivo está en /congreso/
+    estado: ok
     feed: none
+    # la sección padre dio 404; el listado vivo está en /congreso/
     nota: "Bloquea el rastreo automatizado (robots.txt). El programa lo detecta y lo salta."
   - nombre: "Dolor.com — Congresos y jornadas"
     url: https://www.dolor.com/formacion/congresos-y-jornadas
@@ -444,7 +444,7 @@ fuentes:
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: ok
+    estado: roto
     feed: none
   - nombre: "SOCAMICYUC (Canarias)"
     url: https://socamicyuc.com/cursos-congresos
@@ -504,8 +504,9 @@ fuentes:
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: roto
-    feed: none
+    estado: ok
+    feed: https://www.somiama.org/WordPress/?feed=rss2
+    # sugerencia: https://www.somiama.org/WordPress/?page_id=166
   # La Sociedad Norte (SNMIUC) y la de Murcia (SOMIUC) no tienen web propia:
   # anuncian sus cursos a través de SEMICYUC, que ya está en la lista.
   - nombre: "SOVAMICYUC (C. Valenciana)"
@@ -759,9 +760,8 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
-    feed: https://www.us.es/rss.xml
-    # sugerencia: https://www.us.es/trabaja-en-la-us/profesorado/informacion-general
+    estado: bloqueada
+    feed: none
   - nombre: "U. de Granada"
     url: https://www.ugr.es/
     nivel: 3
@@ -784,7 +784,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.uca.es/feed/
-    # sugerencia: https://www.uca.es/evento/curso-formacion-y-concienciacion-en-ciberseguridad-en-inteligencia-artificial/
+    # sugerencia: https://www.uca.es/evento/escuela-de-formacion-teatral-modulo-1-contacto-con-tacto/
   - nombre: "U. de Málaga"
     url: https://www.uma.es/
     nivel: 3
@@ -792,7 +792,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.uma.es/feed/
-    # sugerencia: https://www.uma.es/micrositios/sala-de-prensa/noticias/la-uma-pone-en-marcha-la-primera-microcredencial-universitaria-en-tecnologias-de-hidrogeno/
+    # sugerencia: https://www.uma.es/masteres-oficiales/
   - nombre: "U. de Almería"
     url: https://www.ual.es/
     nivel: 3
@@ -857,7 +857,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.ull.es/feed/
-    # sugerencia: https://www.ull.es/portal/agenda/evento/i-seminario-internacional-siglo-de-oro-lope-antes-de-lope-hacia-la-formacion-de-la-comedia-nueva/
+    # sugerencia: https://www.ull.es/portal/noticias/2026/vanguardia-estudios-medievales-renancetistas/
   - nombre: "U. de Cantabria"
     url: https://web.unican.es/
     nivel: 3
@@ -1209,7 +1209,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.usj.es/rss.xml
-    # sugerencia: https://www.usj.es/noticias-agenda/jornadas-formar-transformar-centro-formacion-casco-viejo-centro-san-valero
+    # sugerencia: https://www.usj.es/noticias-agenda/jornada-formar-transformar-reune-comunidad-educativa-celebrar-25-anos-centro-formacion-casco-viejo
   - nombre: "U. Fernando Pessoa Canarias"
     url: https://www.ufpcanarias.es/
     nivel: 3
@@ -1228,7 +1228,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: none
-    # sugerencia: https://www.quironsalud.com/es/comunicacion/eventos
+    # sugerencia: https://www.quironsalud.com/es/comunicacion/actualidad/quironsalud-impulsa-formacion-profesionales-dar-respuesta-n
   - nombre: "HM Hospitales"
     url: https://www.hmhospitales.com/
     nivel: 3
@@ -1269,7 +1269,7 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
+    estado: bloqueada
     feed: none
   - nombre: "Hospitales Ruber"
     url: https://www.ruber.es/
@@ -1386,9 +1386,8 @@ fuentes:
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    feed: https://comeca.org/feed/
-    # sugerencia: https://comeca.org/formacion-fumeca/jornadas-divulgacion-cientifica/
+    estado: roto
+    feed: none
   - nombre: "Colegio de Médicos de Cádiz"
     url: https://comcadiz.es/
     nivel: 2
@@ -1441,8 +1440,8 @@ fuentes:
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    feed: https://comc-es.org/feed/
+    estado: roto
+    feed: none
   - nombre: "Colegio de Médicos de Cuenca"
     url: https://comcuenca.org/el-colegio/vocalias/formacion-y-o-posgrado/
     nivel: 2
@@ -1472,9 +1471,8 @@ fuentes:
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
-    feed: https://comgranada.com/feed/
-    # sugerencia: https://comgranada.com/category/formacion/congresos-y-jornadas/
+    estado: roto
+    feed: none
   - nombre: "Colegio de Médicos de Guadalajara"
     url: https://www.comguada.es/
     nivel: 2
@@ -1640,7 +1638,7 @@ fuentes:
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
+    estado: roto
     feed: none
   - nombre: "Colegio de Médicos de Sevilla"
     url: https://www.comsevilla.es/
@@ -1656,9 +1654,8 @@ fuentes:
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: ok
+    estado: roto
     feed: none
-    # sugerencia: https://www.comsor.es/congresos.html
   - nombre: "Colegio de Médicos de Tarragona"
     url: https://comt.cat/comt-formacio/
     nivel: 2
@@ -1674,7 +1671,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://comteruel.com/index.php?format=feed&type=rss
-    # sugerencia: https://comteruel.com/index.php/colegiados/noticias/exito-de-la-i-edicion-del-curso-de-formacion-en-manejo-de-heridas-en-urgencias-para-medicos-mir-3
+    # sugerencia: https://comteruel.com/index.php/formacion/cursos-del-colegio/cursos-on-line
     # redirige a: https://comteruel.com/
   - nombre: "Colegio de Médicos de Toledo"
     url: https://www.comtoledo.org/actividades/
@@ -1725,25 +1722,33 @@ fuentes:
     nivel: 2
     ambito: dolor
     filtro: evento
-    estado: pendiente
+    estado: ok
+    feed: https://asociacionandaluzadeldolor.es/feed/
+    # sugerencia: https://asociacionandaluzadeldolor.es/xix-jornadas-de-formacion-basica-en-dolor/
   - nombre: "SCD — Societat Catalana de Dolor"
     url: https://www.scdolor.cat/?p=page/html/activitats/ca
     nivel: 2
     ambito: dolor
     filtro: evento
-    estado: pendiente
+    estado: ok
+    feed: none
+    # sugerencia: https://www.scdolor.cat/?p=page/html/altres-activitats/ca
   - nombre: "VALDOLOR (C. Valenciana)"
     url: https://valdolor.com/index.php?seccion=eventos&subSeccion=eventos
     nivel: 2
     ambito: dolor
     filtro: evento
-    estado: pendiente
+    estado: ok
+    feed: none
+    # sugerencia: https://valdolor.com/index.php?seccion=noticias&subSeccion=prensa
   - nombre: "SMD — Sociedad Murciana del Dolor"
     url: https://smdolor.com/
     nivel: 2
     ambito: dolor
     filtro: evento
-    estado: pendiente
+    estado: ok
+    feed: https://smdolor.com/feed/
+    # sugerencia: https://smdolor.com/master-cursos-tratamiento-dolor/
     # su robots.txt prohíbe el rastreo; se respeta, queda como referencia
   # Sin web activa, difunden a través de la SED (que ya está en nivel 1):
   # Sociedad Aragonesa del Dolor, Sociedade Galega da Dor, Sociedad Madrileña
@@ -1758,61 +1763,77 @@ fuentes:
     nivel: 2
     ambito: dolor
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://sociedadandaluzadecuidadospaliativos.com/feed/
   - nombre: "CUSIRAR (Aragón) — Paliativos"
     url: https://cusirar.org/formate-con-cusirar
     nivel: 2
     ambito: dolor
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://cusirar.org/feed
+    # sugerencia: https://cusirar.org/noticias
   - nombre: "IllesPal (Baleares) — Paliativos"
     url: https://illespal.org/es/inici-espanol/
     nivel: 2
     ambito: dolor
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://illespal.org/es/feed/
   - nombre: "SOCPAL (Cantabria) — Paliativos"
     url: https://sociedadcantabrapaliativos.com/
     nivel: 2
     ambito: dolor
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://sociedadcantabrapaliativos.com/feed/
+    # sugerencia: https://sociedadcantabrapaliativos.com/jornada/
   - nombre: "SCBCP (Cataluña-Baleares) — Paliativos"
     url: https://scbcp.cat/?p=page/html/activitats
     nivel: 2
     ambito: dolor
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
+    # sugerencia: https://scbcp.cat/?p=page/html/extracademiques
   - nombre: "ARINDUZ (País Vasco) — Paliativos"
     url: https://www.arinduz.org/cursos-y-formacion
     nivel: 2
     ambito: dolor
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
+    # sugerencia: https://www.arinduz.org/recursos
   - nombre: "SOGACOPAL (Galicia) — Paliativos"
     url: https://www.sogacopal.com/eventos/
     nivel: 2
     ambito: dolor
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://www.sogacopal.com/feed/
+    # sugerencia: https://www.sogacopal.com/eventos/#content
   - nombre: "AMCP (Madrid) — Paliativos"
     url: https://www.paliativosmadrid.org/?seccion=formacion&subSeccion=cursosYtalleres
     nivel: 2
     ambito: dolor
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
+    # sugerencia: https://www.paliativosmadrid.org/?seccion=gruposTrabajo&subSeccion=grupoInvestigacion
   - nombre: "PALIAN (Navarra) — Paliativos"
     url: https://www.paliativosnavarra.com/
     nivel: 2
     ambito: dolor
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
   - nombre: "SVMP (C. Valenciana) — Paliativos"
     url: https://www.svmpaliativa.org/category/formacion/
     nivel: 2
     ambito: dolor
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://www.svmpaliativa.org/feed/
   # Sin web propia: SACPAL (Asturias), PACyL (Castilla y León),
   # ASCAMPAL (Castilla-La Mancha, solo X), APALEX (Extremadura, solo Facebook)
   # y SOMUCPAL (Murcia). Difunden por SECPAL, que ya está en nivel 1.
@@ -1823,13 +1844,16 @@ fuentes:
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: pendiente
+    estado: ok
+    feed: https://www.anestesiologosmadrid.es/feed/
+    # sugerencia: https://www.anestesiologosmadrid.es/categorías/noticas/
   - nombre: "SOMIUC (Murcia)"
     url: http://www.somiuc.es/
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: pendiente
+    estado: roto
+    feed: none
     # existe y responde, pero solo por http: su https redirige a http
   # Siguen sin web: SAMI (Asturias) y SNMIUC (norte: País Vasco, Navarra,
   # Cantabria y La Rioja). Las dos difunden vía SEMICYUC.
@@ -1840,61 +1864,79 @@ fuentes:
     nivel: 2
     ambito: criticos
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://www.semes.org/feed/
+    # sugerencia: https://www.semes.org/formacion/
   - nombre: "ASECMA — Cirugía Mayor Ambulatoria"
     url: https://www.asecma.org/cursos-y-congresos_1.aspx
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: pendiente
+    estado: ok
+    feed: none
+    # sugerencia: https://www.asecma.org/cursos-y-congresos_3.aspx
   - nombre: "GERM / ERAS España — Rehabilitación multimodal"
     url: https://grupogerm.es/noticias/
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "SET — Sociedad Española de Trasplante"
     url: https://www.setrasplante.org/events
     nivel: 2
     ambito: criticos
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
+    # sugerencia: https://www.setrasplante.org/events/event/xviii-curso-de-formacion-en-trasplante-renal-de-donante-vivo
   - nombre: "AEP — Perfusionistas (circulación extracorpórea)"
     url: https://www.aep.es/agenda
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: pendiente
+    estado: ok
+    feed: none
+    # sugerencia: https://www.aep.es/agenda/123/Reunión de formación continuada. 
   - nombre: "SEUP — Urgencias de Pediatría"
     url: https://seup.org/
     nivel: 2
     ambito: criticos
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://seup.org/feed/
+    # sugerencia: https://seup.org/proximos-cursos-svap/
   - nombre: "SENeo — Neonatología (intensivos neonatales)"
     url: https://seneo.es/formacion/cursos-y-congresos
     nivel: 2
     ambito: criticos
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "PEDPAL — Paliativos pediátricos"
     url: https://pedpal.es/actividades-y-cursos/
     nivel: 2
     ambito: dolor
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://pedpal.es/feed/
+    # sugerencia: https://pedpal.es/congresos-y-jornadas/
   - nombre: "AECPAL — Enfermería en Paliativos"
     url: https://www.secpal.org/aecpal/
     nivel: 2
     ambito: dolor
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://www.secpal.org/feed/
+    # sugerencia: https://www.secpal.org/wp-content/uploads/2023/03/19-Actualidad-Secpal-Enero-Marzo-2023.pdf
   - nombre: "SEEUE — Enfermería de Urgencias y Emergencias"
     url: https://enfermeriadeurgencias.org/
     nivel: 2
     ambito: criticos
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://enfermeriadeurgencias.org/feed/
+    # sugerencia: https://enfermeriadeurgencias.org/nuestros-cursos/
 
   # ---------- Universidades con Grado en Medicina que faltaban ----------
   # Auditoría del 07/10 contra el BOE: cuatro grados nuevos, tres de ellos
@@ -1904,22 +1946,30 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
   - nombre: "U. Politècnica de Catalunya — UPC School"
     url: https://www.talent.upc.edu/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://upcschool.upc.edu/esp/agenda/rss/
+    # sugerencia: https://upcschool.upc.edu/blog/nuevo-posgrado-en-liderazgo-y-transformacion-universitaria-impulsado-por-la-catedra-unesco-de-direccion-universitaria/?lang=es
+    # redirige a: https://upcschool.upc.edu/esp/
   - nombre: "U. Europea de Canarias"
     url: https://universidadeuropea.com/masters-canarias/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
+    # sugerencia: https://universidadeuropea.com/cursos-universitarios/
   - nombre: "U. del Atlántico Medio (UNIDAM)"
     url: https://www.universidadatlanticomedio.es/planestudios?tipoestudio=pg
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
+    # sugerencia: https://www.universidadatlanticomedio.es/admision/aspirante
