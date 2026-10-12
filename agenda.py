@@ -148,7 +148,12 @@ PATRONES_ESPECIALIDAD = [
     r"\b(?:sedar|semicyuc|seeiuc|secip|semdor|secpal|setri|esra|esaic|edaic|feea"
     r"|aaear|scartd|sbartd|agaryd|sadartd|acmartd|socartd|soclartd|svnartd"
     r"|samiuc|sarmicyuc|sbmiuc|socamicyuc|sclmicyuc|somiucam|socmic|sexmicyuc"
-    r"|sogamiuc|somiama|snmiuc|sovamicyuc|somiuc|pnrcp|cercp)\b",
+    r"|sogamiuc|somiama|snmiuc|sovamicyuc|somiuc|pnrcp|cercp"
+    # Incorporadas en la auditoría del 07/10, con las 30 fuentes nuevas:
+    # dolor y paliativos autonómicos, y las nacionales que faltaban.
+    r"|aacm|aad|valdolor|sacpa|cusirar|illespal|socpal|pacyl|ascampal|scbcp"
+    r"|arinduz|apalex|sogacopal|amcp|somucpal|palian|svmp|semes|asecma|seup"
+    r"|seneo|pedpal|aecpal|sempal|seeue|aseedar)\b",
 ]
 _RE_ESPECIALIDAD = re.compile("|".join(PATRONES_ESPECIALIDAD))
 
@@ -1366,6 +1371,15 @@ def main() -> int:
             a_markdown(eventos, hoy), encoding="utf-8")
         if eventos:
             (SALIDA / "AGENDA-ACTUAL.csv").write_text(a_csv(eventos), encoding="utf-8")
+
+        # Y el post de Instagram ya montado: prompts de imagen + el texto de
+        # cada diapositiva. Si post.py no estuviera, el rastreo sigue igual.
+        try:
+            import post
+            if ruta_post := post.genera(hoy):
+                print(f"→ {ruta_post.relative_to(BASE)}", file=sys.stderr)
+        except Exception as e:
+            print(f"(el post no se ha podido generar: {e})", file=sys.stderr)
 
     if rellenados:
         print(f"\n{rellenados} ciudades recuperadas abriendo la ficha", file=sys.stderr)

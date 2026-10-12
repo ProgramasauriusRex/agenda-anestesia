@@ -104,11 +104,12 @@ fuentes:
 
   # ---------- Agregadores especializados ----------
   - nombre: "AnestesiaR — Cursos y Congresos"
-    url: https://anestesiar.org/Blog/otras-secciones/cursos-congresos/
+    url: https://anestesiar.org/Blog/otras-secciones/cursos-congresos/congreso/
     nivel: 1
     ambito: anestesia
     filtro: evento
-    estado: roto
+    estado: pendiente
+    # la sección padre dio 404; el listado vivo está en /congreso/
     feed: none
     nota: "Bloquea el rastreo automatizado (robots.txt). El programa lo detecta y lo salta."
   - nombre: "Dolor.com — Congresos y jornadas"
@@ -1714,3 +1715,211 @@ fuentes:
     estado: ok
     feed: none
     # sugerencia: https://www.comz.org/asesoria-acreditacion-formacion-continuada
+
+  # ---------- Dolor — sociedades autonómicas ----------
+  # Auditoría del 07/10: la lista no tenía NI UNA. Se pidieron "todas las
+  # sociedades relacionadas con la anestesiología, cuidados críticos o dolor"
+  # y las autonómicas de dolor se quedaron fuera por completo.
+  - nombre: "AAD — Asociación Andaluza del Dolor"
+    url: https://asociacionandaluzadeldolor.es/eventos/
+    nivel: 2
+    ambito: dolor
+    filtro: evento
+    estado: pendiente
+  - nombre: "SCD — Societat Catalana de Dolor"
+    url: https://www.scdolor.cat/?p=page/html/activitats/ca
+    nivel: 2
+    ambito: dolor
+    filtro: evento
+    estado: pendiente
+  - nombre: "VALDOLOR (C. Valenciana)"
+    url: https://valdolor.com/index.php?seccion=eventos&subSeccion=eventos
+    nivel: 2
+    ambito: dolor
+    filtro: evento
+    estado: pendiente
+  - nombre: "SMD — Sociedad Murciana del Dolor"
+    url: https://smdolor.com/
+    nivel: 2
+    ambito: dolor
+    filtro: evento
+    estado: pendiente
+    # su robots.txt prohíbe el rastreo; se respeta, queda como referencia
+  # Sin web activa, difunden a través de la SED (que ya está en nivel 1):
+  # Sociedad Aragonesa del Dolor, Sociedade Galega da Dor, Sociedad Madrileña
+  # del Dolor y Sociedad Canaria del Dolor.
+
+  # ---------- Cuidados paliativos — sociedades autonómicas ----------
+  # Las 15 federadas de SECPAL tampoco estaban. Van con filtro estricto: solo
+  # aportan cuando el curso menciona dolor, analgesia, sedación o paliativos.
+  # Si quieres TODO lo que publican, cambia su filtro a "evento".
+  - nombre: "SACPA (Andalucía) — Paliativos"
+    url: https://sociedadandaluzadecuidadospaliativos.com/category/formacion/
+    nivel: 2
+    ambito: dolor
+    filtro: estricto
+    estado: pendiente
+  - nombre: "CUSIRAR (Aragón) — Paliativos"
+    url: https://cusirar.org/formate-con-cusirar
+    nivel: 2
+    ambito: dolor
+    filtro: estricto
+    estado: pendiente
+  - nombre: "IllesPal (Baleares) — Paliativos"
+    url: https://illespal.org/es/inici-espanol/
+    nivel: 2
+    ambito: dolor
+    filtro: estricto
+    estado: pendiente
+  - nombre: "SOCPAL (Cantabria) — Paliativos"
+    url: https://sociedadcantabrapaliativos.com/
+    nivel: 2
+    ambito: dolor
+    filtro: estricto
+    estado: pendiente
+  - nombre: "SCBCP (Cataluña-Baleares) — Paliativos"
+    url: https://scbcp.cat/?p=page/html/activitats
+    nivel: 2
+    ambito: dolor
+    filtro: estricto
+    estado: pendiente
+  - nombre: "ARINDUZ (País Vasco) — Paliativos"
+    url: https://www.arinduz.org/cursos-y-formacion
+    nivel: 2
+    ambito: dolor
+    filtro: estricto
+    estado: pendiente
+  - nombre: "SOGACOPAL (Galicia) — Paliativos"
+    url: https://www.sogacopal.com/eventos/
+    nivel: 2
+    ambito: dolor
+    filtro: estricto
+    estado: pendiente
+  - nombre: "AMCP (Madrid) — Paliativos"
+    url: https://www.paliativosmadrid.org/?seccion=formacion&subSeccion=cursosYtalleres
+    nivel: 2
+    ambito: dolor
+    filtro: estricto
+    estado: pendiente
+  - nombre: "PALIAN (Navarra) — Paliativos"
+    url: https://www.paliativosnavarra.com/
+    nivel: 2
+    ambito: dolor
+    filtro: estricto
+    estado: pendiente
+  - nombre: "SVMP (C. Valenciana) — Paliativos"
+    url: https://www.svmpaliativa.org/category/formacion/
+    nivel: 2
+    ambito: dolor
+    filtro: estricto
+    estado: pendiente
+  # Sin web propia: SACPAL (Asturias), PACyL (Castilla y León),
+  # ASCAMPAL (Castilla-La Mancha, solo X), APALEX (Extremadura, solo Facebook)
+  # y SOMUCPAL (Murcia). Difunden por SECPAL, que ya está en nivel 1.
+
+  # ---------- Anestesia e intensivos: los dos huecos autonómicos ----------
+  - nombre: "AACM — Anestesiólogos de la Comunidad de Madrid"
+    url: https://www.anestesiologosmadrid.es/noticias/
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SOMIUC (Murcia)"
+    url: http://www.somiuc.es/
+    nivel: 2
+    ambito: criticos
+    filtro: evento
+    estado: pendiente
+    # existe y responde, pero solo por http: su https redirige a http
+  # Siguen sin web: SAMI (Asturias) y SNMIUC (norte: País Vasco, Navarra,
+  # Cantabria y La Rioja). Las dos difunden vía SEMICYUC.
+
+  # ---------- Nacionales que faltaban ----------
+  - nombre: "SEMES — Urgencias y Emergencias"
+    url: https://www.semes.org/eventos/
+    nivel: 2
+    ambito: criticos
+    filtro: estricto
+    estado: pendiente
+  - nombre: "ASECMA — Cirugía Mayor Ambulatoria"
+    url: https://www.asecma.org/cursos-y-congresos_1.aspx
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "GERM / ERAS España — Rehabilitación multimodal"
+    url: https://grupogerm.es/noticias/
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SET — Sociedad Española de Trasplante"
+    url: https://www.setrasplante.org/events
+    nivel: 2
+    ambito: criticos
+    filtro: estricto
+    estado: pendiente
+  - nombre: "AEP — Perfusionistas (circulación extracorpórea)"
+    url: https://www.aep.es/agenda
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+  - nombre: "SEUP — Urgencias de Pediatría"
+    url: https://seup.org/
+    nivel: 2
+    ambito: criticos
+    filtro: estricto
+    estado: pendiente
+  - nombre: "SENeo — Neonatología (intensivos neonatales)"
+    url: https://seneo.es/formacion/cursos-y-congresos
+    nivel: 2
+    ambito: criticos
+    filtro: estricto
+    estado: pendiente
+  - nombre: "PEDPAL — Paliativos pediátricos"
+    url: https://pedpal.es/actividades-y-cursos/
+    nivel: 2
+    ambito: dolor
+    filtro: estricto
+    estado: pendiente
+  - nombre: "AECPAL — Enfermería en Paliativos"
+    url: https://www.secpal.org/aecpal/
+    nivel: 2
+    ambito: dolor
+    filtro: estricto
+    estado: pendiente
+  - nombre: "SEEUE — Enfermería de Urgencias y Emergencias"
+    url: https://enfermeriadeurgencias.org/
+    nivel: 2
+    ambito: criticos
+    filtro: estricto
+    estado: pendiente
+
+  # ---------- Universidades con Grado en Medicina que faltaban ----------
+  # Auditoría del 07/10 contra el BOE: cuatro grados nuevos, tres de ellos
+  # aprobados en 2025-2026, que no existían cuando se montó la lista.
+  - nombre: "U. de La Rioja"
+    url: https://www.unirioja.es/titulos-propios-de-posgrados/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Politècnica de Catalunya — UPC School"
+    url: https://www.talent.upc.edu/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. Europea de Canarias"
+    url: https://universidadeuropea.com/masters-canarias/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "U. del Atlántico Medio (UNIDAM)"
+    url: https://www.universidadatlanticomedio.es/planestudios?tipoestudio=pg
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente

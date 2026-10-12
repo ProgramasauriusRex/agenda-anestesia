@@ -1,6 +1,6 @@
 # Agenda Anestesia
 
-Rastrea automáticamente **208 webs** españolas y genera cada semana una tabla con
+Rastrea automáticamente **238 webs** españolas y genera cada semana una tabla con
 los cursos y congresos de Anestesiología, Cuidados Críticos y Dolor:
 
 **Título · Fechas · Lugar · Entidad organizadora**
@@ -13,15 +13,18 @@ No hace falta entenderlos todos. En la práctica solo tocarás el primero.
 
 | Archivo | Para qué sirve | ¿Lo tocas tú? |
 |---|---|---|
-| **`fuentes.yaml`** | La lista de las 208 webs | **Sí**, este es el tuyo |
+| **`fuentes.yaml`** | La lista de las 238 webs | **Sí**, este es el tuyo |
 | `agenda.py` | El programa que visita las webs y hace la tabla | No |
-| `verificar.py` | Comprueba que las 208 direcciones siguen vivas | No (lo ejecutas, no lo editas) |
+| `verificar.py` | Comprueba que las 238 direcciones siguen vivas | No (lo ejecutas, no lo editas) |
 | `fechas.py` | Entiende las fechas en español | No |
+| **`post.py`** | Monta el post de Instagram: prompts + texto de cada diapositiva | No |
 | `test_extractor.py` | Control de calidad del programa | No |
 | `requirements.txt` | Lista de programas auxiliares a instalar | No |
 | `.github/workflows/` | El despertador: hace que todo corra solo | No |
 | `estado.json` | Recuerda qué cursos ya te enseñó, para no repetirlos (se crea solo) | No |
 | `salida/eventos-conocidos.json` | Memoria de cursos encontrados hasta un año vista (se crea sola) | No |
+| `salida/AGENDA-ACTUAL.md` | La tabla de esta semana, siempre en la misma dirección | No |
+| `salida/POST-ACTUAL.md` | El post de Instagram listo: prompts y textos | No |
 | `salida/` | Aquí aparecen las tablas (se crea sola) | No |
 
 ---
@@ -29,10 +32,35 @@ No hace falta entenderlos todos. En la práctica solo tocarás el primero.
 ## Las tres órdenes que vas a usar
 
 ```bash
-python verificar.py      # comprueba que las 208 webs responden (al empezar, y cada 3-6 meses)
+python verificar.py      # comprueba que las 238 webs responden (al empezar, y cada 3-6 meses)
 python agenda.py         # los cursos NUEVOS del próximo mes  ← el del post semanal
 python agenda.py --todo --meses 6    # mirar sin más: no altera el post del lunes
 ```
+
+### El post de Instagram, ya montado
+
+Cada lunes, junto a la tabla, aparece también esto:
+
+```
+salida/POST-ACTUAL.md
+```
+
+Dentro está todo lo que hace falta para publicar: los dos prompts de imagen,
+el texto de cada diapositiva listo para pegar y el pie con los hashtags.
+
+**El reparto del trabajo es a propósito: la IA hace el fondo, el texto lo
+pones tú encima.** No es una pereza de este programa, es que las IA de imagen
+no saben escribir: doce títulos en español con tildes, comillas y números
+romanos salen convertidos en garabatos. Por eso los dos prompts piden
+explícitamente *no text, no letters, no numbers* y dejan reservado el hueco
+donde va la lista. Es el mismo reparto que ya usas en la carátula de iVoox.
+
+Los prompts no cambian nunca: el de portada se genera una vez al mes y el de
+fondo de lista, una vez y ya. Lo que cambia cada semana es el texto, y de eso
+se encarga `post.py` solo.
+
+Formato 4:5 vertical (1080 × 1350), cuatro cursos por diapositiva. Con seis
+hay que achinar los ojos en el móvil.
 
 ### Cómo consultar los cursos (sin tocar nada)
 
@@ -115,7 +143,7 @@ Lo que verás en el informe:
 - **Con RSS** → las sólidas. Publican un canal pensado para máquinas, y no se
   rompen cuando la entidad rediseña su web. El verificador anota ese canal en
   el campo `feed`, y a partir de ahí el rastreo semanal va directo a él: es lo
-  que permite revisar las 208 cada lunes en un par de minutos.
+  que permite revisar las 238 cada lunes en un par de minutos.
 - **Páginas de agenda encontradas** → la dirección apuntaba a la portada y el
   verificador ha encontrado una página mejor (la sección "Cursos", "Agenda"…).
   Quedan anotadas en `fuentes.yaml` como comentario, para que las revises.
@@ -182,15 +210,41 @@ esta vía.
 
 ## Cómo está organizada la lista de webs
 
-**Las 208 se revisan todas cada lunes.** Los niveles siguen existiendo en
+**Las 238 se revisan todas cada lunes.** Los niveles siguen existiendo en
 `fuentes.yaml`, pero solo sirven para pedir una pasada parcial a mano
 (`python agenda.py --nivel 1`), no para decidir el rastreo automático.
 
 | Nivel | Cuántas | Qué hay |
 |---|---|---|
 | **1** | 12 | SEDAR, SEMICYUC, SED, SEMDOR, ESRA, AnestesiaR, Dolor.com |
-| **2** | 130 | Los **52 colegios de médicos**, grupos de trabajo de SEDAR, las 12 sociedades autonómicas de anestesia, las 11 de intensivos, agregadores y los portales de formación de los servicios autonómicos de salud |
-| **3** | 66 | 38 universidades públicas, 18 privadas, grupos hospitalarios privados y el Consejo General de Colegios |
+| **2** | 156 | Los **52 colegios de médicos**, grupos de trabajo de SEDAR, 13 sociedades autonómicas de anestesia, 12 de intensivos, **4 de dolor**, **10 de paliativos**, 25 nacionales, agregadores y los portales de formación de los servicios autonómicos de salud |
+| **3** | 70 | 40 universidades públicas, 22 privadas, grupos hospitalarios privados y el Consejo General de Colegios |
+
+### La auditoría del 07/10
+
+Se comprobó la lista contra lo que de verdad existe, y aparecieron dos huecos
+grandes que llevaban semanas ahí sin que se notaran:
+
+- **Ninguna sociedad autonómica de dolor.** Se habían pedido "todas las
+  sociedades relacionadas con la anestesiología, los cuidados críticos o el
+  dolor" y de dolor solo estaban las nacionales. Ahora están las cuatro que
+  tienen web: Andalucía, Cataluña, C. Valenciana y Murcia.
+- **Ninguna de las 15 federadas de SECPAL.** Están las diez que tienen web,
+  con filtro estricto: solo aportan cuando el curso menciona dolor, analgesia,
+  sedación o paliativos. Si quieres todo lo que publican, cambia su `filtro`
+  a `evento`.
+
+Más: once sociedades nacionales que faltaban (SEMES, ASECMA, GERM/ERAS, SET,
+Perfusionistas, SEUP, SENeo, PEDPAL, AECPAL, SEEUE), la asociación de
+anestesiólogos de Madrid, la sociedad de intensivos de Murcia, y cuatro
+universidades cuyo Grado en Medicina se aprobó en 2025-2026 y por tanto no
+existía cuando se montó la lista (La Rioja, UPC, Europea de Canarias y
+Atlántico Medio).
+
+Siete sociedades que existen **no tienen web**, así que no hay nada que
+rastrear: SAMI (Asturias) y SNMIUC (norte) en intensivos; las sociedades del
+dolor de Aragón, Galicia, Madrid y Canarias; y cinco federadas de SECPAL. Todas
+difunden a través de su sociedad nacional, que sí está en la lista.
 
 Las sociedades de intensivos del Norte (SNMIUC) y de Murcia (SOMIUC) no tienen
 web propia: anuncian por SEMICYUC, que ya está en la lista. IMED Hospitales no
@@ -204,7 +258,7 @@ campo `feed`, si la web tiene canal RSS y cuál es — o `none` si no tiene. El
 rastreo semanal lee ese dato y va directo, en vez de sondear a ciegas trece
 direcciones buscando un canal que quizá no exista.
 
-La diferencia es de 21 segundos por web a 2, y es lo que convierte "las 208
+La diferencia es de 21 segundos por web a 2, y es lo que convierte "las 238
 cada lunes" en un par de minutos y unas 340 peticiones repartidas: dos por web
 y una vez por semana. Menos de lo que gasta una persona abriendo esa misma
 página en el navegador.
@@ -331,7 +385,7 @@ python agenda.py
 
 Sube estos archivos a un repositorio de GitHub y se ejecutará solo:
 
-- **Cada lunes a las 8:00** → las 208 webs, cursos del próximo mes
+- **Cada lunes a las 8:00** → las 238 webs, cursos del próximo mes
 - **Cada tres meses** → verificación de que las direcciones siguen vivas, y
   actualización del campo `feed` de cada una
 
@@ -350,7 +404,7 @@ Para cada web, en este orden:
 1. **robots.txt** — si el sitio prohíbe el rastreo, se salta y lo avisa.
 2. **Busca un RSS** — el camino fiable.
 3. **Si no hay, lee el HTML** con un extractor genérico. No hay un programa a
-   medida para cada una de las 208: recorre los enlaces y mira el bloque de
+   medida para cada una de las 238: recorre los enlaces y mira el bloque de
    texto que rodea a cada uno. Si ahí hay una fecha y una palabra tipo "curso"
    o "congreso", es candidato.
 4. **Interpreta la fecha** — con meses completos o abreviados («15 oct 2026»,
