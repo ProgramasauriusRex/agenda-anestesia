@@ -83,7 +83,12 @@ RECHAZO_POR_CABECERAS = (403, 406, 412)
 # son una petición de calma. Reintentarlos al instante, que es lo que se hacía,
 # devuelve exactamente el mismo error. Con una espera de por medio se recuperan.
 REINTENTO_LENTO = (429, 503)
-ESPERA_REINTENTO = 8
+# Dos reintentos con espera creciente, no uno. Al pasar de 208 a 238 fuentes,
+# la verificación del 12/10 dio tiempo de espera agotado en cinco colegios que
+# la semana anterior respondían, y un 429 en la Universidad de La Rioja. No se
+# habían roto: tardan más de lo que esperábamos y un único reintento a los
+# ocho segundos caía en el mismo momento malo.
+ESPERAS_REINTENTO = (8, 20)
 
 
 # Reloj por dominio: varias webs a la vez, sí; varias peticiones seguidas al
@@ -241,8 +246,10 @@ def _lee_robots(dominio: str) -> robotparser.RobotFileParser | None:
     # Un 5xx deja al sitio fuera del rastreo, así que antes de dar por buena
     # esa conclusión se le da una segunda oportunidad: un error puntual del
     # servidor no es una decisión de la entidad.
-    if r is not None and r.status_code >= 500:
-        time.sleep(ESPERA_REINTENTO)
+    for espera in ESPERAS_REINTENTO:
+        if r is None or r.status_code < 500:
+            break
+        time.sleep(espera)
         r = _pide_robots(url_robots)
 
     if r is None:
@@ -304,8 +311,10 @@ def descarga(url: str) -> requests.Response | None:
     if r is not None and r.status_code in RECHAZO_POR_CABECERAS:
         r = _una_peticion(url, CAB_NAVEGADOR)
 
-    if r is None or r.status_code in REINTENTO_LENTO:
-        time.sleep(ESPERA_REINTENTO)
+    for espera in ESPERAS_REINTENTO:
+        if r is not None and r.status_code not in REINTENTO_LENTO:
+            break
+        time.sleep(espera)
         r = _una_peticion(url, CAB_NAVEGADOR)
 
     if r is None:
@@ -423,12 +432,54 @@ CABEZA_RUIDO = [
 
 # Palabras que, si quedan al principio tras recortar, delatan que nos hemos
 # llevado por delante parte del título. Entonces no se recorta.
-_ARRANQUE_MALO = {"de", "del", "la", "las", "el", "los", "y", "e", "en", "a",
-                  "al", "con", "para", "por", "sobre", "un", "una", "al"}
+# Solo preposiciones y conjunciones: si al recortar la cabeza el título queda
+# empezando por una de estas, nos hemos llevado parte del nombre del curso
+# ("Enfermería | en cuidados críticos"). Los artículos NO entran: "El nueva
+# sesión del Curso de Soporte Vital Básico" es un título perfectamente válido,
+# y con "el" en esta lista la etiqueta "¡Últimas plazas!" no se quitaba.
+_ARRANQUE_MALO = {"de", "del", "y", "e", "en", "a", "al", "con", "para",
+                  "por", "sobre", "segun", "desde", "hasta", "entre"}
 
 # "… Semipresencial 30 Créditos ECTS": el número va delante, así que la marca
 # fija no basta para cortar en el sitio correcto.
 _RE_CREDITOS = re.compile(r"\b\d{1,3}\s*(?:creditos?|credits?)\s*ects\b")
+
+# Verbos conjugados que delatan un TITULAR DE NOTICIA, no un curso.
+#
+# El rastreo del 12/10 trajo tres de dieciséis: "El COM Cantabria y el
+# Ayuntamiento de Santander CELEBRAN la Semana del Corazón", "Icoma y el
+# Ayuntamiento ORGANIZAN la X edición de BihotzAraba", "Menos de la mitad de
+# las facultades de Medicina IMPARTEN formación en…". Las tres son noticias de
+# la web de un colegio, y las tres mencionaban palabras de la especialidad, así
+# que el filtro las dejó pasar.
+#
+# La señal que las separa es gramatical y es muy fiable: el título de un curso
+# es un sustantivo ("Curso de ecografía", "VI Jornada de la SCARTD"), mientras
+# que un titular es una oración con verbo conjugado. Buscar el verbo acierta
+# donde falla exigir la palabra "curso": "Soporte Vital Intermedio Pediátrico"
+# no lleva ninguna de las dos, y es un curso de verdad.
+VERBOS_DE_NOTICIA = {
+    "celebra", "celebran", "celebrara", "celebraran", "organiza", "organizan",
+    "organizara", "organizaran", "imparte", "imparten", "impartira",
+    "presenta", "presentan", "presentara", "acoge", "acogen", "acogera",
+    "reune", "reunen", "reunira", "inaugura", "inauguran", "inaugurara",
+    "convoca", "convocan", "convocara", "abre", "abren", "abrira",
+    "combina", "combinara", "participa", "participan", "participara",
+    "destaca", "destacan", "advierte", "advierten", "denuncia", "denuncian",
+    "exige", "exigen", "reclama", "reclaman", "firma", "firman",
+    "entrega", "entregan", "recibe", "reciben", "elige", "eligen",
+    "aprueba", "aprueban", "analiza", "analizan", "debate", "debaten",
+    "lanza", "lanzan", "lanzara", "cierra", "cierran", "logra", "consigue",
+    "alcanza", "supera", "aumenta", "crece", "fallece", "nombra", "nombran",
+    "visita", "visitan", "clausura", "clausuran", "homenajea", "renueva",
+}
+
+
+def parece_noticia(titulo: str) -> bool:
+    """¿Es el titular de una noticia en vez del nombre de una actividad?"""
+    palabras = {p.strip(".,;:()[]«»\"'¡!¿?")
+                for p in normaliza(titulo).split()}
+    return bool(palabras & VERBOS_DE_NOTICIA)
 
 # Páginas de sección: su título es el nombre del apartado, no un curso.
 # "Congressos i Jornades SCARTD" no es un congreso, es el índice de congresos.
@@ -451,6 +502,8 @@ def titulo_util(titulo: str) -> bool:
     if len(n) < 50 and any(p in n for p in NO_SON_TITULO):
         return False
     if es_pagina_de_seccion(titulo):
+        return False
+    if parece_noticia(titulo):
         return False
     return True
 
@@ -514,13 +567,17 @@ def pule_titulo(titulo: str) -> str:
     cambiado = True
     while cambiado:
         cambiado = False
-        n = normaliza(limpio).lstrip(" .:·-")
+        # Los signos de apertura cuentan como adorno, no como primera letra:
+        # "¡Últimas plazas! El nueva sesión del Curso…" apareció el 12/10 y
+        # la etiqueta no se quitaba porque el "¡" rompía la comparación.
+        n = normaliza(limpio).lstrip(" .:·-¡¿\"'«(")
         for marca in CABEZA_RUIDO:
             if not n.startswith(marca):
                 continue
             # cuántas palabras ocupa la marca
             saltar = len(marca.split())
-            resto = " ".join(limpio.split()[saltar:]).lstrip(" .:·-–—|,;")
+            resto = " ".join(limpio.lstrip(" .:·-¡¿\"'«(").split()[saltar:]
+                             ).lstrip(" .:·-–—|,;!?»)\"'")
             primera = normaliza(resto.split()[0]) if resto.split() else ""
             if len(resto) >= 20 and primera not in _ARRANQUE_MALO:
                 limpio, cambiado = resto, True

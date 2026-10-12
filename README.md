@@ -194,17 +194,52 @@ fuentes utilizables subieron de 170 a 195.
 Hay dos respuestas que parecen un fallo y no lo son: el **429** ("vas muy
 rápido") y el **503** ("ahora mismo no puedo"). Antes se reintentaban al
 instante, lo que daba exactamente el mismo error y dejaba la web marcada como
-rota. Ahora se espera unos segundos antes de repetir. Lo mismo con las
-conexiones que se caen: un segundo intento.
+rota. Ahora se espera antes de repetir, y se repite **dos veces**, a los 8 y a
+los 20 segundos. Lo mismo con las conexiones que se caen.
+
+Fueron dos reintentos y no uno por lo que pasó al crecer de 208 a 238 fuentes:
+la verificación del 12/10 dio tiempo agotado en cinco colegios (A Coruña,
+Cáceres, Granada, Segovia, Soria) que la semana anterior respondían sin
+problema, y un 429 en la Universidad de La Rioja. No se habían roto: un único
+reintento caía en el mismo mal momento.
+
+Y ojo con esto, porque es fácil que pase desapercibido: **una fuente marcada
+`roto` deja de visitarse los lunes**. Un fallo pasajero en la verificación la
+saca del rastreo hasta la siguiente verificación, tres meses después. Por eso
+esas siete se devolvieron a `pendiente` a mano.
 
 ### Lo que no tiene arreglo desde aquí
 
-Cuatro webs (la UCLM, la Universidad de Extremadura, Deusto y el CGCOM)
-responden **403 a cualquier petición**, incluso presentándose como navegador.
-No es el `robots.txt` ni las cabeceras: bloquean por la dirección de origen, y
-GitHub ejecuta esto desde un centro de datos. Desde un ordenador doméstico se
-abren sin problema. Es el único grupo para el que no hay solución técnica por
-esta vía.
+Nueve webs bloquean por la dirección de origen, y GitHub ejecuta esto desde un
+centro de datos. Cuatro responden **403 a todo**, incluso presentándose como
+navegador (UCLM, Universidad de Extremadura, Deusto y el CGCOM), y cinco dejan
+la conexión colgada sin responder (Navarra Salud, astursalud, la UIB,
+SOMIAMA y, con un 503 fijo, SAMIUC). Han fallado igual en todas las
+verificaciones desde septiembre, así que no es mala suerte.
+
+Desde un ordenador doméstico se abren sin problema. La única forma de
+recuperarlas sería ejecutar el rastreo desde un ordenador en casa en vez de
+desde GitHub.
+
+### Titulares de noticias
+
+El 12/10 se colaron tres noticias de webs de colegios como si fueran cursos:
+"El COM Cantabria y el Ayuntamiento de Santander **celebran** la Semana del
+Corazón", "Icoma y el Ayuntamiento **organizan** la X edición de BihotzAraba" y
+"Menos de la mitad de las facultades de Medicina **imparten** formación en…".
+Las tres mencionaban palabras de la especialidad, así que el filtro las dejó
+pasar.
+
+Lo que las delata es gramatical: el título de un curso es un sustantivo ("Curso
+de ecografía", "VI Jornada de la SCARTD") y un titular es una oración con un
+verbo conjugado. El programa busca esos verbos y descarta el título que los
+lleva.
+
+Se eligió buscar el verbo, y no exigir la palabra "curso" o "jornada", por un
+caso concreto de la misma tabla: "Soporte Vital Intermedio Pediátrico" no lleva
+ninguna de esas palabras y es un curso de verdad. Exigir el sustantivo lo
+habría tirado; buscar el verbo, no. Sobre los dieciséis de ese lunes, se van
+exactamente las tres noticias y se quedan los trece cursos.
 
 ---
 

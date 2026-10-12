@@ -71,7 +71,10 @@ RECHAZO_POR_CABECERAS = (403, 406, 412)
 
 # 429 ("vas muy rápido") y 503 ("ahora no puedo") piden espera, no insistencia.
 REINTENTO_LENTO = (429, 503)
-ESPERA_REINTENTO = 8
+# Dos reintentos con espera creciente: ver el comentario de agenda.py. Al
+# crecer a 238 fuentes aparecieron tiempos de espera agotados en webs que
+# respondían bien la semana anterior.
+ESPERAS_REINTENTO = (8, 20)
 
 
 # Palabras que delatan una página de agenda / formación
@@ -122,12 +125,14 @@ def descarga(url: str, timeout: int = TIMEOUT):
     if not isinstance(r, Exception) and r.status_code in RECHAZO_POR_CABECERAS:
         r = _peticion(url, CAB_NAVEGADOR, timeout)
 
-    if isinstance(r, Exception) or r.status_code in REINTENTO_LENTO:
-        time.sleep(ESPERA_REINTENTO)
-        segundo = _peticion(url, CAB_NAVEGADOR, timeout)
-        # si el segundo intento tampoco va, se informa del primer error
-        if not isinstance(segundo, Exception):
-            r = segundo
+    for espera in ESPERAS_REINTENTO:
+        if not isinstance(r, Exception) and r.status_code not in REINTENTO_LENTO:
+            break
+        time.sleep(espera)
+        otro = _peticion(url, CAB_NAVEGADOR, timeout)
+        # si el reintento tampoco va, se informa del primer error
+        if not isinstance(otro, Exception):
+            r = otro
 
     if isinstance(r, Exception):
         return r
@@ -154,8 +159,10 @@ def robots_permite(url: str) -> bool | None:
 
     # Un 5xx deja la web fuera del rastreo; merece una segunda oportunidad
     # antes de anotarla como bloqueada.
-    if not isinstance(r, Exception) and r.status_code >= 500:
-        time.sleep(ESPERA_REINTENTO)
+    for espera in ESPERAS_REINTENTO:
+        if isinstance(r, Exception) or r.status_code < 500:
+            break
+        time.sleep(espera)
         r = descarga(url_robots, timeout=15)
 
     if isinstance(r, Exception):

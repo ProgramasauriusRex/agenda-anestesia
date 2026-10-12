@@ -189,7 +189,7 @@ print("Defectos reales del 21/09 corregidos ✓")
 # ---------------------------------------------------------------------------
 # Entrar en la ficha del curso (diagnóstico del 23/09: era la mayor pérdida)
 # ---------------------------------------------------------------------------
-import http.server, socketserver, threading, tempfile, os, shutil, csv, glob
+import http.server, socketserver, threading, tempfile, os, shutil, csv, glob, pathlib
 from agenda import desde_html, SEGUIR_POR_FUENTE
 
 _dir = tempfile.mkdtemp()
@@ -436,3 +436,86 @@ assert _sin.lugar == "", "si la ficha no dice la ciudad, se deja el hueco vacío
 assert _ya.lugar == "Online", "no se toca el que ya tenía lugar"
 assert _n == 1, _n
 print("Relleno de lugares desde la ficha ✓")
+
+
+# ---------------------------------------------------------------------------
+# El post de Instagram
+# ---------------------------------------------------------------------------
+import post as _post
+
+_dp = tempfile.mkdtemp()
+_salida_real = _post.SALIDA
+_post.SALIDA = pathlib.Path(_dp)
+try:
+    with open(os.path.join(_dp, "AGENDA-ACTUAL.csv"), "w", encoding="utf-8",
+              newline="") as _f:
+        _w = csv.writer(_f)
+        _w.writerow(["titulo", "fecha_texto", "inicio", "fin", "lugar",
+                     "entidad", "url", "ambito", "via", "id"])
+        _w.writerow(["XV Congreso Internacional SECPAL", "", "2026-10-08",
+                     "2026-10-10", "Cartagena", "SECPAL", "u", "dolor", "html", "1"])
+        _w.writerow(["Curso de Soporte Vital Básico (SVB) y DEA — plazas agotadas",
+                     "", "2026-10-06", "2026-10-06", "Online",
+                     "Colegio de Médicos de Málaga", "u", "mixto", "html", "2"])
+        _w.writerow(["VI Jornada de la Societat Catalana d'Anestesiologia, "
+                     "Reanimació i Terapèutica del Dolor", "", "2026-11-05",
+                     "", "", "SCARTD (Cataluña)", "u", "anestesia", "html", "3"])
+    _ruta = _post.genera(date(2026, 10, 7))
+    _txt = _ruta.read_text(encoding="utf-8")
+finally:
+    _post.SALIDA = _salida_real
+    shutil.rmtree(_dp, ignore_errors=True)
+
+# El mes que domina la tanda manda en la portada
+assert "OCTUBRE" in _txt and "agenda de octubre 2026" in _txt
+# Los prompts tienen que prohibir el texto: es lo único que la IA no sabe hacer
+assert _txt.count("no text") >= 1 and "no letters, no numbers" in _txt
+assert "--ar 4:5" in _txt, "formato vertical de feed"
+# Rango de fechas abreviado, y el aviso de plazas fuera del título
+assert "8-10 oct · Cartagena · SECPAL" in _txt, _txt
+assert "[COMPLETO]" in _txt
+assert "plazas agotadas" not in _txt.split("## 2.")[1], \
+    "en la diapositiva el aviso va como etiqueta, no dentro del título"
+# El título larguísimo se acorta, pero se sigue entendiendo qué es
+assert "VI Jornada de la Societat Catalana d'Anestesiologia…" in _txt, _txt
+assert "#anestesiologia" in _txt
+print("Post de Instagram ✓")
+
+
+# ---------------------------------------------------------------------------
+# Titulares de noticias — defectos reales del rastreo del 12/10
+#
+# Tres de los dieciséis cursos de ese lunes eran noticias de la web de un
+# colegio, no cursos. La señal que las separa es gramatical: el título de una
+# actividad es un sustantivo, un titular es una oración con verbo conjugado.
+# ---------------------------------------------------------------------------
+from agenda import parece_noticia
+
+for _t in ["Menos de la mitad de las facultades de Medicina imparten formación "
+           "en cuidados paliativos",
+           "El COM Cantabria y el Ayuntamiento de Santander celebran la Semana del Corazón",
+           "Icoma y el Ayuntamiento organizan la X edición de “BihotzAraba”",
+           "El XV Congreso Internacional de SECPAL combinará ciencia e innovación"]:
+    assert parece_noticia(_t), f"titular no detectado: {_t}"
+    assert not titulo_util(_t), f"debería descartarse: {_t}"
+
+# Y lo que NO debe confundirse con una noticia. Ojo a los dos últimos: no
+# llevan la palabra "curso" ni "jornada", así que exigir un sustantivo de
+# actividad los habría tirado. Por eso la regla busca el verbo, no el nombre.
+for _t in ["Curso del Colegio: Manejo Vía Aérea",
+           "VIII Curso Avanzado de Ecografía en el Paciente Crítico",
+           "XV Congreso de la Sociedad Murciana de Medicina Intensiva",
+           "VI Jornada de la Societat Catalana d'Anestesiologia",
+           "70 Reunion anual AAEAR 2026",
+           "Soporte Vital Intermedio Pediátrico",
+           "Visión actual del dolor pélvico crónico"]:
+    assert not parece_noticia(_t), f"falso titular: {_t}"
+    assert titulo_util(_t), f"debería quedarse: {_t}"
+
+# La etiqueta con signos de apertura, que antes no se quitaba
+assert _pulido("¡Últimas plazas! El nueva sesión del Curso de Soporte Vital Básico") == \
+    "El nueva sesión del Curso de Soporte Vital Básico"
+# ...pero sin llevarse parte del título cuando lo que queda es una preposición
+assert _pulido("Enfermería en cuidados críticos y urgencias") == \
+    "Enfermería en cuidados críticos y urgencias"
+print("Titulares de noticias del 12/10 ✓")
