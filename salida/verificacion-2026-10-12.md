@@ -1,9 +1,9 @@
 # Verificación de fuentes — 12/10/2026
 
-- **Funcionan:** 215 de 238
-- **Con RSS** (las fiables): 104
-- **Bloqueadas** por robots.txt: 4
-- **No responden:** 19
+- **Funcionan:** 222 de 238
+- **Con RSS** (las fiables): 107
+- **Bloqueadas** por robots.txt: 3
+- **No responden:** 13
 
 ## Fuentes con RSS — las sólidas
 
@@ -22,6 +22,7 @@ la entidad rediseña su web.
 | Anestesia Clínico Valencia | https://www.anestesiaclinicovalencia.org/feed/ |
 | CERCP | https://cercp.org/feed/ |
 | CUSIRAR (Aragón) — Paliativos | https://cusirar.org/feed |
+| Colegio de Médicos de A Coruña | https://comc-es.org/feed/ |
 | Colegio de Médicos de Alicante | https://coma.es/feed/ |
 | Colegio de Médicos de Badajoz | https://www.combadajoz.com/feed/ |
 | Colegio de Médicos de Burgos | https://www.combu.es/feed/ |
@@ -29,8 +30,10 @@ la entidad rediseña su web.
 | Colegio de Médicos de Ceuta | https://comceuta.es/feed/ |
 | Colegio de Médicos de Ciudad Real | https://comciudadreal.es/feed/ |
 | Colegio de Médicos de Cuenca | https://comcuenca.org/feed/ |
+| Colegio de Médicos de Cáceres | https://comeca.org/feed/ |
 | Colegio de Médicos de Cádiz | https://comcadiz.es/feed/ |
 | Colegio de Médicos de Córdoba | https://www.comcordoba.com/feed/ |
+| Colegio de Médicos de Granada | https://comgranada.com/feed/ |
 | Colegio de Médicos de Guadalajara | https://www.comguada.es/feed/ |
 | Colegio de Médicos de Huelva | https://comhuelva.com/feed/ |
 | Colegio de Médicos de Huesca | https://colegiomedicoshuesca.es/feed/ |
@@ -150,10 +153,12 @@ una página más concreta. Revísalas y, si son correctas, cámbialas en
 | Colegio de Médicos de Cantabria | https://www.comcantabria.es/formacion/como-dar-malas-noticias-recursos-ante-enfermedades-complejas-y-duelo-complicado/ |
 | Colegio de Médicos de Ceuta | https://comceuta.es/noticias-y-eventos/ |
 | Colegio de Médicos de Ciudad Real | https://comciudadreal.es/formacion-2/ |
+| Colegio de Médicos de Cáceres | https://comeca.org/formacion-fumeca/jornadas-divulgacion-cientifica/ |
 | Colegio de Médicos de Cádiz | https://comcadiz.es/2026/07/09/el-colegio-de-medicos-de-cadiz-y-la-uca-refuerzan-su-colaboracion-en-formacion-docencia-e-investigacion/ |
 | Colegio de Médicos de Córdoba | https://www.comcordoba.com/formacion-emergencias-comcordoba/ |
 | Colegio de Médicos de Gipuzkoa | https://www.comgi.eus/es_documentos_de_interes.aspx |
 | Colegio de Médicos de Girona | https://www.comg.cat/col-legiats/formacio/cursos-que-et-poden-interessar-2 |
+| Colegio de Médicos de Granada | https://comgranada.com/category/formacion/congresos-y-jornadas/ |
 | Colegio de Médicos de Guadalajara | http://www.comguada.es/formacion/ |
 | Colegio de Médicos de Huelva | https://comhuelva.com/noticias-de-actualidad/ |
 | Colegio de Médicos de Huesca | https://colegiomedicoshuesca.es/formacion/ |
@@ -172,6 +177,7 @@ una página más concreta. Revísalas y, si son correctas, cámbialas en
 | Colegio de Médicos de Salamanca | https://comsalamanca.es/formacion/151257-iii-congreso-internacional-en-innovacion-investigacion-formacion-y-transferencia-del-conocimiento-en-ciencias-de-la-salud |
 | Colegio de Médicos de Santa Cruz de Tenerife | https://medicostenerife.es/formacion/ |
 | Colegio de Médicos de Sevilla | https://comsevilla.es/el-22-de-octubre-nueva-sesion-del-curso-de-soporte-vital-basico-y-dea-dirigido-a-medicos-y-otros-profesionales/ |
+| Colegio de Médicos de Soria | https://www.comsor.es/congresos.html |
 | Colegio de Médicos de Tarragona | https://comt.cat/es/comt-formacion/ |
 | Colegio de Médicos de Teruel | https://comteruel.com/index.php/formacion/cursos-del-colegio/cursos-on-line |
 | Colegio de Médicos de Toledo | https://www.comtoledo.org/formacion-y-o-posgrado/ |
@@ -292,7 +298,6 @@ una página más concreta. Revísalas y, si son correctas, cámbialas en
 El sitio prohíbe el rastreo automatizado y el programa lo respeta.
 Para estas, la vía es el boletín de socio o sus redes sociales.
 
-- **Grupo Recoletas** — https://www.recoletas.es/
 - **SOCLARTD (Castilla y León)** — http://soclartd.org
 - **U. de Córdoba** — https://www.uco.es/
 - **U. de Sevilla** — https://www.us.es/
@@ -306,16 +311,10 @@ o una caída puntual. Búscalas en Google y corrige la dirección en
 | Fuente | Dirección | Qué ha pasado |
 |---|---|---|
 | CGCOM (Consejo General) | https://www.cgcom.es/ | HTTP 403 |
-| Colegio de Médicos de A Coruña | https://comc-es.org/formacion/cursos-colegio/ | ConnectTimeout: HTTPSConnectionPool(host='comc-es.org', port=443): Max retries exceede |
-| Colegio de Médicos de Cáceres | https://comeca.org/cursos-actividades/ | ConnectTimeout: HTTPSConnectionPool(host='comeca.org', port=443): Max retries exceeded |
-| Colegio de Médicos de Granada | https://comgranada.com/formacion/ | ReadTimeout: HTTPSConnectionPool(host='comgranada.com', port=443): Read timed out.  |
-| Colegio de Médicos de Segovia | https://www.comsegovia.com/ | ConnectTimeout: HTTPSConnectionPool(host='www.comsegovia.com', port=443): Max retries  |
-| Colegio de Médicos de Soria | https://www.comsor.es/agendaformacion.html | ConnectTimeout: HTTPSConnectionPool(host='www.comsor.es', port=443): Max retries excee |
 | Comunidad de Madrid — Formación sanitaria | https://www.comunidad.madrid/salud/formacion-continuada-profesionales-consejeria-sanidad | HTTP 404 |
 | Navarra — Salud, formación | https://www.navarra.es/es/web/salud | ConnectTimeout: HTTPSConnectionPool(host='www.navarra.es', port=443): Max retries exce |
 | PALIAN (Navarra) — Paliativos | https://www.paliativosnavarra.com/ | ConnectionError: HTTPSConnectionPool(host='www.paliativosnavarra.com', port=443): Max r |
 | SAMIUC (Andalucía) | https://www.samiuc.es/ | HTTP 503 |
-| SBMICIUC (Baleares) | http://www.sbmiuc.org/ | ConnectTimeout: HTTPConnectionPool(host='www.sbmiuc.org', port=80): Max retries exceed |
 | SEMPSPH (Seguridad del paciente) | https://www.sempsph.com/ | TooManyRedirects: Exceeded 30 redirects. |
 | SESPA (Asturias) | https://www.astursalud.es/ | ConnectTimeout: HTTPSConnectionPool(host='www.astursalud.es', port=443): Max retries e |
 | SOMIUC (Murcia) | http://www.somiuc.es/ | ConnectionError: HTTPConnectionPool(host='www.somiuc.es', port=80): Max retries exceede |

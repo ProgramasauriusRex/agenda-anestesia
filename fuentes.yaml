@@ -444,9 +444,9 @@ fuentes:
     nivel: 2
     ambito: criticos
     filtro: evento
-    estado: pendiente
-    # 12/10: tiempo de espera o 429, no rota; se reintenta
+    estado: ok
     feed: none
+    # 12/10: tiempo de espera o 429, no rota; se reintenta
   - nombre: "SOCAMICYUC (Canarias)"
     url: https://socamicyuc.com/cursos-congresos
     nivel: 2
@@ -1270,7 +1270,7 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
+    estado: ok
     feed: none
   - nombre: "Hospitales Ruber"
     url: https://www.ruber.es/
@@ -1387,9 +1387,10 @@ fuentes:
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://comeca.org/feed/
+    # sugerencia: https://comeca.org/formacion-fumeca/jornadas-divulgacion-cientifica/
     # 12/10: tiempo de espera o 429, no rota; se reintenta
-    feed: none
   - nombre: "Colegio de Médicos de Cádiz"
     url: https://comcadiz.es/
     nivel: 2
@@ -1442,9 +1443,9 @@ fuentes:
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://comc-es.org/feed/
     # 12/10: tiempo de espera o 429, no rota; se reintenta
-    feed: none
   - nombre: "Colegio de Médicos de Cuenca"
     url: https://comcuenca.org/el-colegio/vocalias/formacion-y-o-posgrado/
     nivel: 2
@@ -1474,9 +1475,10 @@ fuentes:
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://comgranada.com/feed/
+    # sugerencia: https://comgranada.com/category/formacion/congresos-y-jornadas/
     # 12/10: tiempo de espera o 429, no rota; se reintenta
-    feed: none
   - nombre: "Colegio de Médicos de Guadalajara"
     url: https://www.comguada.es/
     nivel: 2
@@ -1642,9 +1644,9 @@ fuentes:
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: pendiente
-    # 12/10: tiempo de espera o 429, no rota; se reintenta
+    estado: ok
     feed: none
+    # 12/10: tiempo de espera o 429, no rota; se reintenta
   - nombre: "Colegio de Médicos de Sevilla"
     url: https://www.comsevilla.es/
     nivel: 2
@@ -1659,9 +1661,10 @@ fuentes:
     nivel: 2
     ambito: mixto
     filtro: estricto
-    estado: pendiente
-    # 12/10: tiempo de espera o 429, no rota; se reintenta
+    estado: ok
     feed: none
+    # sugerencia: https://www.comsor.es/congresos.html
+    # 12/10: tiempo de espera o 429, no rota; se reintenta
   - nombre: "Colegio de Médicos de Tarragona"
     url: https://comt.cat/comt-formacio/
     nivel: 2
@@ -1952,9 +1955,9 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
-    # 12/10: tiempo de espera o 429, no rota; se reintenta
+    estado: roto
     feed: none
+    # 12/10: tiempo de espera o 429, no rota; se reintenta
   - nombre: "U. Politècnica de Catalunya — UPC School"
     url: https://www.talent.upc.edu/
     nivel: 3
