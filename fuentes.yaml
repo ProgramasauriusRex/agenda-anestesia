@@ -756,13 +756,15 @@ fuentes:
     feed: none
 
   # ---------- Universidades públicas ----------
-  - nombre: "U. de Sevilla"
-    url: https://www.us.es/
+  - nombre: "U. de Sevilla — Centro de Formación Permanente"
+    url: https://cfp.us.es/cursos/cursos-en-convocatoria
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
-    feed: none
+    estado: pendiente
+    # 12/10: la portada www.us.es salía bloqueada por robots.txt. Los cursos
+    # no están en la portada sino en el CFP, que es otro subdominio y tiene
+    # su propio robots.txt.
   - nombre: "U. de Granada"
     url: https://www.ugr.es/
     nivel: 3
@@ -771,13 +773,15 @@ fuentes:
     estado: ok
     feed: https://www.ugr.es/rss.xml
     # sugerencia: https://www.ugr.es/estudiantes/informacion-general
-  - nombre: "U. de Córdoba"
-    url: https://www.uco.es/
+  - nombre: "U. de Córdoba — Facultad de Medicina y Enfermería"
+    url: https://www.uco.es/medicinayenfermeria/es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: bloqueada
-    feed: none
+    estado: pendiente
+    # 12/10: la portada salía bloqueada por robots.txt. Se prueba con la
+    # facultad; si vuelve a salir bloqueada, el veto es de todo el dominio
+    # y hay que respetarlo.
   - nombre: "U. de Cádiz"
     url: https://www.uca.es/
     nivel: 3

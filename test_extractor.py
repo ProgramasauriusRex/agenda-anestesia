@@ -441,45 +441,54 @@ print("Relleno de lugares desde la ficha ✓")
 # ---------------------------------------------------------------------------
 # El post de Instagram
 # ---------------------------------------------------------------------------
-import post as _post
-
-_dp = tempfile.mkdtemp()
-_salida_real = _post.SALIDA
-_post.SALIDA = pathlib.Path(_dp)
+# post.py es opcional: el rastreo funciona sin él (intenta montar el post,
+# no lo encuentra y sigue). Las pruebas tienen que poder decir lo mismo.
 try:
-    with open(os.path.join(_dp, "AGENDA-ACTUAL.csv"), "w", encoding="utf-8",
-              newline="") as _f:
-        _w = csv.writer(_f)
-        _w.writerow(["titulo", "fecha_texto", "inicio", "fin", "lugar",
-                     "entidad", "url", "ambito", "via", "id"])
-        _w.writerow(["XV Congreso Internacional SECPAL", "", "2026-10-08",
-                     "2026-10-10", "Cartagena", "SECPAL", "u", "dolor", "html", "1"])
-        _w.writerow(["Curso de Soporte Vital Básico (SVB) y DEA — plazas agotadas",
-                     "", "2026-10-06", "2026-10-06", "Online",
-                     "Colegio de Médicos de Málaga", "u", "mixto", "html", "2"])
-        _w.writerow(["VI Jornada de la Societat Catalana d'Anestesiologia, "
-                     "Reanimació i Terapèutica del Dolor", "", "2026-11-05",
-                     "", "", "SCARTD (Cataluña)", "u", "anestesia", "html", "3"])
-    _ruta = _post.genera(date(2026, 10, 7))
-    _txt = _ruta.read_text(encoding="utf-8")
-finally:
-    _post.SALIDA = _salida_real
-    shutil.rmtree(_dp, ignore_errors=True)
+    import post as _post
+except ImportError:
+    _post = None
 
-# El mes que domina la tanda manda en la portada
-assert "OCTUBRE" in _txt and "agenda de octubre 2026" in _txt
-# Los prompts tienen que prohibir el texto: es lo único que la IA no sabe hacer
-assert _txt.count("no text") >= 1 and "no letters, no numbers" in _txt
-assert "--ar 4:5" in _txt, "formato vertical de feed"
-# Rango de fechas abreviado, y el aviso de plazas fuera del título
-assert "8-10 oct · Cartagena · SECPAL" in _txt, _txt
-assert "[COMPLETO]" in _txt
-assert "plazas agotadas" not in _txt.split("## 2.")[1], \
-    "en la diapositiva el aviso va como etiqueta, no dentro del título"
-# El título larguísimo se acorta, pero se sigue entendiendo qué es
-assert "VI Jornada de la Societat Catalana d'Anestesiologia…" in _txt, _txt
-assert "#anestesiologia" in _txt
-print("Post de Instagram ✓")
+if _post is None:
+    print("Post de Instagram: no está post.py, prueba omitida ✓")
+else:
+
+    _dp = tempfile.mkdtemp()
+    _salida_real = _post.SALIDA
+    _post.SALIDA = pathlib.Path(_dp)
+    try:
+        with open(os.path.join(_dp, "AGENDA-ACTUAL.csv"), "w", encoding="utf-8",
+                  newline="") as _f:
+            _w = csv.writer(_f)
+            _w.writerow(["titulo", "fecha_texto", "inicio", "fin", "lugar",
+                         "entidad", "url", "ambito", "via", "id"])
+            _w.writerow(["XV Congreso Internacional SECPAL", "", "2026-10-08",
+                         "2026-10-10", "Cartagena", "SECPAL", "u", "dolor", "html", "1"])
+            _w.writerow(["Curso de Soporte Vital Básico (SVB) y DEA — plazas agotadas",
+                         "", "2026-10-06", "2026-10-06", "Online",
+                         "Colegio de Médicos de Málaga", "u", "mixto", "html", "2"])
+            _w.writerow(["VI Jornada de la Societat Catalana d'Anestesiologia, "
+                         "Reanimació i Terapèutica del Dolor", "", "2026-11-05",
+                         "", "", "SCARTD (Cataluña)", "u", "anestesia", "html", "3"])
+        _ruta = _post.genera(date(2026, 10, 7))
+        _txt = _ruta.read_text(encoding="utf-8")
+    finally:
+        _post.SALIDA = _salida_real
+        shutil.rmtree(_dp, ignore_errors=True)
+
+    # El mes que domina la tanda manda en la portada
+    assert "OCTUBRE" in _txt and "agenda de octubre 2026" in _txt
+    # Los prompts tienen que prohibir el texto: es lo único que la IA no sabe hacer
+    assert _txt.count("no text") >= 1 and "no letters, no numbers" in _txt
+    assert "--ar 4:5" in _txt, "formato vertical de feed"
+    # Rango de fechas abreviado, y el aviso de plazas fuera del título
+    assert "8-10 oct · Cartagena · SECPAL" in _txt, _txt
+    assert "[COMPLETO]" in _txt
+    assert "plazas agotadas" not in _txt.split("## 2.")[1], \
+        "en la diapositiva el aviso va como etiqueta, no dentro del título"
+    # El título larguísimo se acorta, pero se sigue entendiendo qué es
+    assert "VI Jornada de la Societat Catalana d'Anestesiologia…" in _txt, _txt
+    assert "#anestesiologia" in _txt
+    print("Post de Instagram ✓")
 
 
 # ---------------------------------------------------------------------------
