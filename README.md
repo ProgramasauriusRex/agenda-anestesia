@@ -1,6 +1,6 @@
 # Agenda Anestesia
 
-Rastrea automáticamente **238 webs** españolas y genera cada semana una tabla con
+Rastrea automáticamente **297 webs** españolas y genera cada semana una tabla con
 los cursos y congresos de Anestesiología, Cuidados Críticos y Dolor:
 
 **Título · Fechas · Lugar · Entidad organizadora**
@@ -13,9 +13,9 @@ No hace falta entenderlos todos. En la práctica solo tocarás el primero.
 
 | Archivo | Para qué sirve | ¿Lo tocas tú? |
 |---|---|---|
-| **`fuentes.yaml`** | La lista de las 238 webs | **Sí**, este es el tuyo |
+| **`fuentes.yaml`** | La lista de las 297 webs | **Sí**, este es el tuyo |
 | `agenda.py` | El programa que visita las webs y hace la tabla | No |
-| `verificar.py` | Comprueba que las 238 direcciones siguen vivas | No (lo ejecutas, no lo editas) |
+| `verificar.py` | Comprueba que las 297 direcciones siguen vivas | No (lo ejecutas, no lo editas) |
 | `fechas.py` | Entiende las fechas en español | No |
 | **`post.py`** | Monta el post de Instagram: prompts + texto de cada diapositiva | No |
 | `test_extractor.py` | Control de calidad del programa | No |
@@ -32,7 +32,7 @@ No hace falta entenderlos todos. En la práctica solo tocarás el primero.
 ## Las tres órdenes que vas a usar
 
 ```bash
-python verificar.py      # comprueba que las 238 webs responden (al empezar, y cada 3-6 meses)
+python verificar.py      # comprueba que las 297 webs responden (al empezar, y cada 3-6 meses)
 python agenda.py         # los cursos NUEVOS del próximo mes  ← el del post semanal
 python agenda.py --todo --meses 6    # mirar sin más: no altera el post del lunes
 ```
@@ -143,7 +143,7 @@ Lo que verás en el informe:
 - **Con RSS** → las sólidas. Publican un canal pensado para máquinas, y no se
   rompen cuando la entidad rediseña su web. El verificador anota ese canal en
   el campo `feed`, y a partir de ahí el rastreo semanal va directo a él: es lo
-  que permite revisar las 238 cada lunes en un par de minutos.
+  que permite revisar las 297 cada lunes en un par de minutos.
 - **Páginas de agenda encontradas** → la dirección apuntaba a la portada y el
   verificador ha encontrado una página mejor (la sección "Cursos", "Agenda"…).
   Quedan anotadas en `fuentes.yaml` como comentario, para que las revises.
@@ -245,15 +245,15 @@ exactamente las tres noticias y se quedan los trece cursos.
 
 ## Cómo está organizada la lista de webs
 
-**Las 238 se revisan todas cada lunes.** Los niveles siguen existiendo en
+**Las 297 se revisan todas cada lunes.** Los niveles siguen existiendo en
 `fuentes.yaml`, pero solo sirven para pedir una pasada parcial a mano
 (`python agenda.py --nivel 1`), no para decidir el rastreo automático.
 
 | Nivel | Cuántas | Qué hay |
 |---|---|---|
 | **1** | 12 | SEDAR, SEMICYUC, SED, SEMDOR, ESRA, AnestesiaR, Dolor.com |
-| **2** | 156 | Los **52 colegios de médicos**, grupos de trabajo de SEDAR, 13 sociedades autonómicas de anestesia, 12 de intensivos, **4 de dolor**, **10 de paliativos**, 25 nacionales, agregadores y los portales de formación de los servicios autonómicos de salud |
-| **3** | 70 | 40 universidades públicas, 22 privadas, grupos hospitalarios privados y el Consejo General de Colegios |
+| **2** | 155 | Los **52 colegios de médicos**, grupos de trabajo de SEDAR, 13 sociedades autonómicas de anestesia, 12 de intensivos, **4 de dolor**, **10 de paliativos**, 24 nacionales, agregadores y los portales de formación de los servicios autonómicos de salud |
+| **3** | 130 | 40 universidades públicas, 22 privadas, **60 hospitales universitarios y plataformas de formación hospitalaria**, grupos hospitalarios privados y el Consejo General de Colegios |
 
 ### La auditoría del 07/10
 
@@ -293,16 +293,65 @@ campo `feed`, si la web tiene canal RSS y cuál es — o `none` si no tiene. El
 rastreo semanal lee ese dato y va directo, en vez de sondear a ciegas trece
 direcciones buscando un canal que quizá no exista.
 
-La diferencia es de 21 segundos por web a 2, y es lo que convierte "las 238
-cada lunes" en un par de minutos y unas 340 peticiones repartidas: dos por web
+La diferencia es de 21 segundos por web a 2, y es lo que convierte "las 297
+cada lunes" en unos minutos y unas 600 peticiones repartidas: dos por web
 y una vez por semana. Menos de lo que gasta una persona abriendo esa misma
 página en el navegador.
 
-**Sobre los hospitales:** en vez de perseguir 840 webs de hospital, el nivel 2
-incluye los **portales de formación de los servicios autonómicos de salud**
-(Sacyl, IAVANTE, ACIS, EVES, IACS, Acadèmia de Ciències Mèdiques…). Cada uno
-agrupa los cursos de todos los hospitales de su comunidad. Diecisiete
-direcciones en lugar de cientos, y con mejor cobertura.
+**Sobre los hospitales.** Hay dos capas.
+
+La primera son los **portales de formación de los servicios autonómicos de
+salud** (Sacyl, IAVANTE, ACIS, EVES, IACS, Acadèmia de Ciències Mèdiques…), que
+recogen lo que cada hospital publica a través de su comunidad.
+
+La segunda, añadida el 14/10, son **los hospitales universitarios con unidad
+docente de Anestesiología**, apuntando siempre a la página donde anuncian sus
+cursos y nunca a la portada. Lo que más se encontró no fueron páginas sueltas,
+sino plataformas que agrupan a muchos hospitales a la vez:
+
+- **Madrid**: cada hospital público tiene la misma página de actividades
+  dentro de comunidad.madrid. Entran quince, más los institutos de
+  investigación del Marañón, Ramón y Cajal y La Princesa.
+- **Andalucía**: **GesForma**, el portal de formación de cada hospital del
+  SAS. Se ve sin iniciar sesión y lista título, fechas e inscripción. Quince
+  hospitales, más ibs.GRANADA e IBIMA.
+- **Cataluña**: **Assistents Actes**, la plataforma de la Generalitat, que en
+  una sola dirección recoge actos de Trueta, Moisès Broggi, Mataró, Reus,
+  Tortosa o Vic. Más las agendas propias de Vall d'Hebron, Clínic, Bellvitge,
+  Sant Pau, Germans Trias, el Mar, Parc Taulí y otros, y el catálogo de
+  **Sant Joan de Déu ya filtrado a anestesiología pediátrica**.
+- **Comunitat Valenciana**: La Fe y su instituto, el Clínico, el General, el
+  de Alicante (ISABIAL), Elche, Gandia y el catálogo **eformacio** de La
+  Ribera.
+- Castilla y León, Castilla-La Mancha y Cruces, en el País Vasco: cinco más.
+
+Donde no se encontró nada, casi siempre es porque no lo hay. **Murcia** solo
+publica la formación de sus hospitales en una intranet. En **Asturias y
+Navarra**, las webs de los hospitales cuelgan de dominios que bloquean al
+rastreador. Y en **Galicia, Aragón, Baleares, Extremadura, Cantabria, La Rioja
+y Canarias** la búsqueda no pudo confirmar ninguna página de cursos propia.
+Ahí quedan los portales autonómicos de la primera capa.
+
+### Varias fuentes en el mismo dominio
+
+Con quince hospitales dentro de comunidad.madrid y trece dentro del portal del
+SAS aparecieron dos problemas que antes no existían, y los dos están
+corregidos.
+
+**El canal equivocado.** Para buscar un RSS, el programa probaba las rutas
+típicas en la raíz del sitio. Con una sociedad que tiene web propia está
+bien: el canal de su portada es el suyo. Pero el de la portada de
+comunidad.madrid es el de la Consejería entera, y se habría asignado a los
+quince hospitales, que habrían leído las noticias del gobierno regional en vez
+de su agenda. Ahora, cuando varias fuentes comparten dominio, el canal solo
+vale si cuelga de la misma sección que la fuente. Ya pasaba a pequeña escala:
+AECPAL, que vive dentro de la web de SECPAL, leía el canal de SECPAL.
+
+**La pausa que faltaba.** El rastreo semanal espera 1,5 segundos entre dos
+peticiones al mismo servidor desde el primer día. El verificador no lo hacía:
+con seis hilos, los quince hospitales de Madrid habrían recibido hasta seis
+peticiones a la vez, y el servidor habría contestado 429. Ahora el
+verificador espera igual que el rastreo.
 
 ---
 
@@ -420,7 +469,7 @@ python agenda.py
 
 Sube estos archivos a un repositorio de GitHub y se ejecutará solo:
 
-- **Cada lunes a las 8:00** → las 238 webs, cursos del próximo mes
+- **Cada lunes a las 8:00** → las 297 webs, cursos del próximo mes
 - **Cada tres meses** → verificación de que las direcciones siguen vivas, y
   actualización del campo `feed` de cada una
 
@@ -439,7 +488,7 @@ Para cada web, en este orden:
 1. **robots.txt** — si el sitio prohíbe el rastreo, se salta y lo avisa.
 2. **Busca un RSS** — el camino fiable.
 3. **Si no hay, lee el HTML** con un extractor genérico. No hay un programa a
-   medida para cada una de las 238: recorre los enlaces y mira el bloque de
+   medida para cada una de las 297: recorre los enlaces y mira el bloque de
    texto que rodea a cada uno. Si ahí hay una fecha y una palabra tipo "curso"
    o "congreso", es candidato.
 4. **Interpreta la fecha** — con meses completos o abreviados («15 oct 2026»,

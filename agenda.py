@@ -33,7 +33,7 @@ import sys
 import time
 import unicodedata
 import urllib.robotparser as robotparser
-from collections import defaultdict
+from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, asdict, field, fields
 from datetime import date, timedelta
@@ -339,6 +339,50 @@ RUTAS_FEED = [
 ]
 
 
+# Dominios en los que viven varias fuentes a la vez: comunidad.madrid (quince
+# hospitales), el portal del SAS (trece), saludcastillayleon.es… Se calcula al
+# arrancar, a partir de fuentes.yaml.
+DOMINIOS_COMPARTIDOS: set[str] = set()
+
+
+def _seccion(url: str) -> str:
+    """'/hospital/lapaz' para .../hospital/lapaz/ciudadanos/actividades."""
+    partes = [s for s in urlparse(url).path.split("/") if s][:2]
+    return "/" + "/".join(partes)
+
+
+def feed_es_propio(url_fuente: str, url_feed: str) -> bool:
+    """
+    ¿Ese canal es de ESTA fuente, o del sitio entero que la aloja?
+
+    Con una sociedad que tiene su propia web, el canal de la portada es el
+    suyo y vale. Pero con quince hospitales dentro de comunidad.madrid, el
+    canal de la portada es el de la Consejería entera: asignárselo a cada
+    hospital haría que los quince leyeran las noticias del gobierno regional
+    y nunca su propia página de actividades. Ya pasaba a pequeña escala:
+    AECPAL, que vive dentro de la web de SECPAL, leía el canal de SECPAL.
+
+    En un dominio compartido, el canal solo se acepta si cuelga de la misma
+    sección que la fuente.
+    """
+    pf, pc = urlparse(url_fuente), urlparse(url_feed)
+    if pf.netloc not in DOMINIOS_COMPARTIDOS or not pf.path.strip("/"):
+        return True
+    if pc.netloc and pc.netloc != pf.netloc:
+        return False
+    return pc.path.startswith(_seccion(url_fuente))
+
+
+def _candidatos_feed(url: str) -> list[str]:
+    """Dónde probar a ciegas. En dominio compartido, solo bajo la sección."""
+    p = urlparse(url)
+    if p.netloc in DOMINIOS_COMPARTIDOS and p.path.strip("/"):
+        base = f"{p.scheme}://{p.netloc}{p.path}".rstrip("/")
+        return [base + "/feed/", base + "/rss", base + "/rss.xml"]
+    raiz = f"{p.scheme}://{p.netloc}"
+    return [urljoin(raiz, ruta) for ruta in RUTAS_FEED]
+
+
 def busca_feed(url: str, html: str | None = None) -> str | None:
     """
     Intenta localizar un RSS/Atom. Primero en el <head> de la página
@@ -349,11 +393,11 @@ def busca_feed(url: str, html: str | None = None) -> str | None:
         for link in sopa.find_all("link", rel=lambda v: v and "alternate" in v):
             tipo = (link.get("type") or "").lower()
             if "rss" in tipo or "atom" in tipo or "xml" in tipo:
-                return urljoin(url, link.get("href", ""))
+                cand = urljoin(url, link.get("href", ""))
+                if feed_es_propio(url, cand):
+                    return cand
 
-    raiz = f"{urlparse(url).scheme}://{urlparse(url).netloc}"
-    for ruta in RUTAS_FEED:
-        candidato = urljoin(raiz, ruta)
+    for candidato in _candidatos_feed(url):
         r = descarga(candidato)
         if r and ("xml" in r.headers.get("Content-Type", "").lower()
                   or r.text.lstrip()[:200].lower().startswith(("<?xml", "<rss", "<feed"))):
@@ -1011,6 +1055,8 @@ def rastrea(fuente: dict, verbose: bool = True) -> tuple[list[Evento], str]:
     # sabemos que no tienen canal, es la diferencia entre 21 segundos y 2 por
     # fuente: justo lo que permite revisarlas todas cada lunes.
     conocido = str(fuente.get("feed") or "").strip()
+    if conocido and conocido.lower() != "none" and not feed_es_propio(url, conocido):
+        conocido = ""          # canal del sitio entero, no de esta fuente
     if conocido and conocido.lower() != "none":
         ev = desde_feed(conocido, fuente)
         if ev:
@@ -1327,6 +1373,9 @@ def main() -> int:
     margen = hoy - timedelta(days=2)
 
     cfg = yaml.safe_load((BASE / "fuentes.yaml").read_text(encoding="utf-8"))
+    global DOMINIOS_COMPARTIDOS
+    cuenta = Counter(urlparse(f["url"]).netloc for f in cfg["fuentes"])
+    DOMINIOS_COMPARTIDOS = {d for d, n in cuenta.items() if n >= 2}
     fuentes = [f for f in cfg["fuentes"] if f.get("nivel", 1) in args.nivel]
 
     # Las marcadas como rotas por verificar.py se saltan: no tiene sentido

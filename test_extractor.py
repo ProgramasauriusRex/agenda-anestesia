@@ -528,3 +528,42 @@ assert _pulido("¡Últimas plazas! El nueva sesión del Curso de Soporte Vital B
 assert _pulido("Enfermería en cuidados críticos y urgencias") == \
     "Enfermería en cuidados críticos y urgencias"
 print("Titulares de noticias del 12/10 ✓")
+
+
+# ---------------------------------------------------------------------------
+# Canales en dominios compartidos — 14/10, al añadir los hospitales
+#
+# Quince hospitales viven dentro de comunidad.madrid y trece dentro del portal
+# del SAS. El canal de la portada de esos sitios es el de la Consejería entera,
+# no el de cada hospital: si se les asignara, los quince leerían las noticias
+# del gobierno regional en vez de su propia agenda.
+# ---------------------------------------------------------------------------
+import agenda as _ag2
+
+_guardado = set(_ag2.DOMINIOS_COMPARTIDOS)
+_ag2.DOMINIOS_COMPARTIDOS = {"www.comunidad.madrid", "www.secpal.org"}
+try:
+    _paz = "https://www.comunidad.madrid/hospital/lapaz/ciudadanos/actividades"
+    # El canal del hospital, sí
+    assert _ag2.feed_es_propio(_paz,
+        "https://www.comunidad.madrid/hospital/lapaz/rss/latest-events.xml")
+    # El de la Consejería entera, no
+    assert not _ag2.feed_es_propio(_paz, "https://www.comunidad.madrid/rss.xml")
+    # Y el de OTRO hospital del mismo sitio, tampoco
+    assert not _ag2.feed_es_propio(_paz,
+        "https://www.comunidad.madrid/hospital/12octubre/rss/latest-events.xml")
+    # AECPAL vive dentro de la web de SECPAL: no debe leer el canal de SECPAL
+    assert not _ag2.feed_es_propio("https://www.secpal.org/aecpal/",
+                                   "https://www.secpal.org/feed/")
+    # ...pero SECPAL, que está en la raíz de su propia web, sí
+    assert _ag2.feed_es_propio("https://www.secpal.org/", "https://www.secpal.org/feed/")
+    # Una sociedad con web propia no cambia nada: su canal de portada es el suyo
+    assert _ag2.feed_es_propio("https://sovamicyuc.es/cursos-jornadas/",
+                               "https://sovamicyuc.es/feed/")
+    # Al sondear a ciegas en dominio compartido, solo bajo la sección
+    _c = _ag2._candidatos_feed(_paz)
+    assert all(x.startswith(_paz) for x in _c), _c
+    assert "https://www.comunidad.madrid/feed/" not in _c
+finally:
+    _ag2.DOMINIOS_COMPARTIDOS = _guardado
+print("Canales en dominios compartidos ✓")

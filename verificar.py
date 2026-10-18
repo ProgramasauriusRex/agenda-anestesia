@@ -31,6 +31,8 @@ import time
 import unicodedata
 import urllib.robotparser as robotparser
 from concurrent.futures import ThreadPoolExecutor
+from collections import Counter, defaultdict
+from threading import Lock
 from datetime import date
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
@@ -105,7 +107,29 @@ def normaliza(t: str) -> str:
     return re.sub(r"\s+", " ", t).strip()
 
 
+# Reloj por dominio. El rastreo semanal lo tenía desde el principio, el
+# verificador no: con seis hilos, quince hospitales seguidos de
+# comunidad.madrid recibían hasta seis peticiones a la vez, y cada uno además
+# probaba trece rutas buscando un canal. Es la receta exacta para que el
+# servidor conteste 429 y la fuente se marque como rota sin estarlo.
+PAUSA = 1.5
+_ultimo_acceso: dict[str, float] = defaultdict(float)
+_candado = Lock()
+
+
+def espera_turno(url: str) -> None:
+    dominio = urlparse(url).netloc
+    while True:
+        with _candado:
+            falta = PAUSA - (time.monotonic() - _ultimo_acceso[dominio])
+            if falta <= 0:
+                _ultimo_acceso[dominio] = time.monotonic()
+                return
+        time.sleep(min(falta, 0.5))
+
+
 def _peticion(url: str, cabeceras: dict, timeout: int):
+    espera_turno(url)
     try:
         return requests.get(url, headers=cabeceras, timeout=timeout,
                             allow_redirects=True)
@@ -181,6 +205,37 @@ def robots_permite(url: str) -> bool | None:
         return None
 
 
+# Se rellena en main(): dominios que alojan varias fuentes. Ver
+# feed_es_propio() en agenda.py, que sigue el mismo criterio.
+DOMINIOS_COMPARTIDOS: set[str] = set()
+
+
+def _seccion(url: str) -> str:
+    partes = [s for s in urlparse(url).path.split("/") if s][:2]
+    return "/" + "/".join(partes)
+
+
+def feed_es_propio(url_fuente: str, url_feed: str) -> bool:
+    """En un dominio compartido, el canal tiene que colgar de la sección de
+    la fuente. Si no, es el del sitio entero (la Consejería, la web de SECPAL)
+    y no el del hospital o la asociación que estamos verificando."""
+    pf, pc = urlparse(url_fuente), urlparse(url_feed)
+    if pf.netloc not in DOMINIOS_COMPARTIDOS or not pf.path.strip("/"):
+        return True
+    if pc.netloc and pc.netloc != pf.netloc:
+        return False
+    return pc.path.startswith(_seccion(url_fuente))
+
+
+def _candidatos_feed(url: str) -> list[str]:
+    p = urlparse(url)
+    if p.netloc in DOMINIOS_COMPARTIDOS and p.path.strip("/"):
+        base = f"{p.scheme}://{p.netloc}{p.path}".rstrip("/")
+        return [base + "/feed/", base + "/rss", base + "/rss.xml"]
+    raiz = f"{p.scheme}://{p.netloc}"
+    return [urljoin(raiz, ruta) for ruta in RUTAS_FEED]
+
+
 def busca_feed(url: str, html: str) -> str | None:
     try:
         sopa = BeautifulSoup(html, "lxml")
@@ -188,15 +243,12 @@ def busca_feed(url: str, html: str) -> str | None:
             tipo = (link.get("type") or "").lower()
             if any(x in tipo for x in ("rss", "atom", "xml")):
                 href = link.get("href", "")
-                if href:
+                if href and feed_es_propio(url, urljoin(url, href)):
                     return urljoin(url, href)
     except Exception:
         pass
 
-    p = urlparse(url)
-    raiz = f"{p.scheme}://{p.netloc}"
-    for ruta in RUTAS_FEED:
-        cand = urljoin(raiz, ruta)
+    for cand in _candidatos_feed(url):
         r = descarga(cand, timeout=12)
         if isinstance(r, Exception) or r.status_code != 200:
             continue
@@ -405,6 +457,9 @@ def main() -> int:
 
     cfg = yaml.safe_load(YAML_PATH.read_text(encoding="utf-8"))
     fuentes = cfg["fuentes"]
+    global DOMINIOS_COMPARTIDOS
+    cuenta = Counter(urlparse(f["url"]).netloc for f in fuentes)
+    DOMINIOS_COMPARTIDOS = {d for d, n in cuenta.items() if n >= 2}
     if args.nivel:
         fuentes = [f for f in fuentes if f.get("nivel", 1) in args.nivel]
 

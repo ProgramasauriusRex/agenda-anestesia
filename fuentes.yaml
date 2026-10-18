@@ -622,7 +622,8 @@ fuentes:
     estado: ok
     feed: none
   - nombre: "Acadèmia de Ciències Mèdiques (Cataluña-Baleares)"
-    url: https://www.academia.cat/
+    url: https://academia.cat/agenda
+    # 14/10: antes apuntaba a la portada; la agenda es donde están los actos.
     nivel: 2
     ambito: mixto
     filtro: estricto
@@ -672,22 +673,17 @@ fuentes:
     feed: none
     # sugerencia: https://www.ffis.es/ffis/buscadorCursos.jsf
   - nombre: "Osakidetza — Formación (País Vasco)"
-    url: https://www.osakidetza.euskadi.eus/
+    url: https://www.osakidetza.euskadi.eus/jornadas-congresos/
+    # 14/10: antes apuntaba a la portada. Esta es la agenda común a la que
+    # enlazan todos los hospitales vascos, con jornadas y congresos fechados.
     nivel: 2
     ambito: mixto
     filtro: estricto
     estado: ok
     feed: none
     # redirige a: https://www.osakidetza.euskadi.eus/ataria/
-  - nombre: "Comunidad de Madrid — Formación sanitaria"
-    url: https://www.comunidad.madrid/salud/formacion-continuada-profesionales-consejeria-sanidad
-    nivel: 2
-    ambito: mixto
-    filtro: estricto
-    estado: roto
-    feed: none
-    # la dirección llevaba un /servicios/ de más
-    # Madrid no publica catálogo abierto: la matrícula va por intranet
+  # 14/10: retirada "Comunidad de Madrid — Formación sanitaria" (404, sin
+  # catálogo público). La sustituyen las agendas de sus 15 hospitales, abajo.
   - nombre: "SESCAM — Formación (Castilla-La Mancha)"
     url: https://sescam.jccm.es/sofos/matriculacion/agenda/areas.jsp
     nivel: 2
@@ -1872,14 +1868,8 @@ fuentes:
   # Cantabria y La Rioja). Las dos difunden vía SEMICYUC.
 
   # ---------- Nacionales que faltaban ----------
-  - nombre: "SEMES — Urgencias y Emergencias"
-    url: https://www.semes.org/eventos/
-    nivel: 2
-    ambito: criticos
-    filtro: estricto
-    estado: ok
-    feed: https://www.semes.org/feed/
-    # sugerencia: https://www.semes.org/formacion/
+  # 14/10: retirado un duplicado de SEMES añadido el 07/10. SEMES ya estaba
+  # en la lista desde el principio (sección de sociedades nacionales).
   - nombre: "ASECMA — Cirugía Mayor Ambulatoria"
     url: https://www.asecma.org/cursos-y-congresos_1.aspx
     nivel: 2
@@ -1987,3 +1977,403 @@ fuentes:
     estado: ok
     feed: none
     # sugerencia: https://www.universidadatlanticomedio.es/admision/aspirante
+
+  # ======================================================================
+  # HOSPITALES UNIVERSITARIOS — añadidos el 14/10
+  # Hospitales públicos con unidad docente acreditada de Anestesiología, y
+  # siempre la página donde anuncian cursos, nunca la portada.
+  # ======================================================================
+
+  # ---------- Hospitales universitarios — Madrid ----------
+  # Cada hospital público de la Comunidad tiene la misma página de actividades
+  # dentro de comunidad.madrid. Varias mezclan actividades para pacientes; el
+  # filtro estricto se queda solo con las de la especialidad.
+  - nombre: "H. U. La Paz"
+    url: https://www.comunidad.madrid/hospital/lapaz/ciudadanos/actividades
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. G. U. Gregorio Marañón"
+    url: https://www.comunidad.madrid/hospital/gregoriomaranon/ciudadanos/actividades
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Ramón y Cajal"
+    url: https://www.comunidad.madrid/hospital/ramonycajal/ciudadanos/actividades
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. 12 de Octubre"
+    url: https://www.comunidad.madrid/hospital/12octubre/ciudadanos/actividades
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. Clínico San Carlos"
+    url: https://www.comunidad.madrid/hospital/clinicosancarlos/comunicacion/agenda
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Puerta de Hierro"
+    url: https://www.comunidad.madrid/hospital/puertadehierro/ciudadanos/actividades
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Fundación Alcorcón"
+    url: https://www.comunidad.madrid/hospital/fundacionalcorcon/ciudadanos/actividades
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. de Getafe"
+    url: https://www.comunidad.madrid/hospital/getafe/ciudadanos/actividades
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Príncipe de Asturias"
+    url: https://www.comunidad.madrid/hospital/principeasturias/ciudadanos/actividades
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. de Fuenlabrada"
+    url: https://www.comunidad.madrid/hospital/fuenlabrada/ciudadanos/actividades
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Severo Ochoa"
+    url: https://www.comunidad.madrid/hospital/severoochoa/ciudadanos/actividades
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Infanta Sofía"
+    url: https://www.comunidad.madrid/hospital/infantasofia/ciudadanos/actividades
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. de Móstoles"
+    url: https://www.comunidad.madrid/hospital/mostoles/ciudadanos/actividades
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Infanta Leonor"
+    url: https://www.comunidad.madrid/hospital/infantaleonor/ciudadanos/actividades
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. del Henares"
+    url: https://www.comunidad.madrid/hospital/henares/ciudadanos/actividades
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "IiSGM — cursos propios (Gregorio Marañón)"
+    url: https://www.iisgm.com/formacion/cursos-propios
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "IRYCIS — cursos (Ramón y Cajal)"
+    url: https://www.irycis.org/es/formacion/cursos/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "IIS-Princesa — formación (La Princesa)"
+    url: https://www.iis-princesa.org/formacion/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+
+  # ---------- Hospitales universitarios — Andalucía (GesForma) ----------
+  # GesForma es el portal de formación de cada hospital del SAS. Se ve sin
+  # iniciar sesión y lista título, fechas, plazo de inscripción y plazas. Son
+  # sobre todo cursos internos y mucha enfermería: filtro estricto.
+  - nombre: "H. U. Virgen del Rocío — GesForma"
+    url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/huvr/gesforma/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. R. U. de Málaga — GesForma"
+    url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hrum/gesforma/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Virgen Macarena — GesForma"
+    url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/huvm/gesforma/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Reina Sofía (Córdoba) — GesForma"
+    url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hurs/gesforma/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Virgen de las Nieves — GesForma"
+    url: https://huvn.granadasalud.es/gesforma/faces/index.xhtml
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Clínico San Cecilio — GesForma"
+    url: https://husc.granadasalud.es/gesforma/faces/index.xhtml
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. de Valme — GesForma"
+    url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/agsss/gesforma/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. de Jerez — GesForma"
+    url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/agsnc/gesforma/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Puerta del Mar — GesForma"
+    url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hupm/gesforma/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. de Puerto Real — GesForma"
+    url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hupr/gesforma/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. de Jaén — GesForma"
+    url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/chj/gesforma/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Torrecárdenas — GesForma"
+    url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/cht/gesforma/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Virgen de la Victoria — GesForma"
+    url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/huvv/gesforma/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Costa del Sol — GesForma"
+    url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/ascs/gesforma/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Juan Ramón Jiménez — GesForma"
+    url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/ahjrj/gesforma/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "ibs.GRANADA — jornadas y cursos"
+    url: https://www.ibsgranada.es/formacion/jornadas-y-cursos/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "IBIMA — formación continua (Málaga)"
+    url: https://ibima.eu/es/formacion-continua/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+
+  # ---------- Hospitales universitarios — Cataluña ----------
+  # Assistents Actes es la plataforma de inscripción de la Generalitat: recoge
+  # actos de Trueta, Moisès Broggi, Mataró, Reus, Tortosa, Vic y otros, en una
+  # sola dirección. El resto son las agendas propias de cada hospital.
+  - nombre: "Generalitat — Assistents Actes de Salut"
+    url: https://assistentsactes.salut.gencat.cat/agenda
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Vall d'Hebron — agenda"
+    url: https://www.vallhebron.com/actualitat/agenda
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Hospital Clínic — Aula Clínic"
+    url: https://www.aulaclinic.com/cursos
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. de Bellvitge — agenda"
+    url: https://bellvitgehospital.cat/ca/agenda/tots
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. de la Santa Creu i Sant Pau — cursos"
+    url: https://www.santpau.cat/web/public/cursos
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Germans Trias i Pujol — agenda"
+    url: https://www.germanstrias.org/ca/agenda
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Hospital del Mar — agenda"
+    url: https://www.hospitaldelmar.cat/ca/agenda?CATEGORY2=26
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Parc Taulí — agenda"
+    url: https://www.tauli.cat/en/actualitat/agenda/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "ICS Lleida — jornades (Arnau de Vilanova)"
+    url: https://icsgsslleidapirineu.cat/docencia-i-formacio/jornades/visio-general
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "ICS Camp de Tarragona — agenda (Joan XXIII)"
+    url: https://icscampdetarragona.cat/agenda/llista/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Mútua Terrassa — agenda"
+    url: https://www.mutuaterrassa.com/ca/agenda
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Consorci Sanitari de Terrassa — agenda"
+    url: https://cst.cat/agenda/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+
+  # ---------- Hospitales universitarios — Comunitat Valenciana ----------
+  # eformacio.gva.es es el catálogo público de cada departamento de salud,
+  # distinto de la EVES. Se incluye La Ribera (departamento 94), el único con
+  # el catálogo comprobado.
+  - nombre: "H. U. i Politècnic La Fe — agenda"
+    url: https://lafe.san.gva.es/es/agenda-la-fe
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "IIS La Fe — cursos y jornadas"
+    url: https://www.iislafe.es/es/talento/formacion/cursos-y-jornadas
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. Clínic Universitari València — docencia"
+    url: https://clinicomalvarrosa.san.gva.es/va/web/docencia/noticias
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "ISABIAL — formación continuada (H. G. U. Alicante)"
+    url: https://isabial.es/cursos-formacion-continuada-sanitarios/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "Consorci H. General Universitari València — agenda"
+    url: https://chguv.san.gva.es/agenda
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. G. U. de Elche — agenda docente"
+    url: https://elche.san.gva.es/ca/web/profesional/agenda-docent
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. Francesc de Borja (Gandia) — jornadas y cursos"
+    url: https://gandia.san.gva.es/ca/jornadas-cursos-sesiones
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "eformacio — Departament de La Ribera"
+    url: https://eformacio.gva.es/zona-publica/listado-ediciones-organizacion/94?lang=es&dates=1&datesEnroll=1
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+
+  # ---------- Hospitales universitarios — Castillas y País Vasco ----------
+  # Las de Castilla y León van en el mismo dominio que el portal de Sacyl, que
+  # sí responde al rastreador. No se pudieron abrir durante la búsqueda: el
+  # verificador dirá si sirven.
+  - nombre: "H. G. U. de Ciudad Real — blog de docencia"
+    url: https://docenciu.blogspot.com/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Río Hortega — formación continuada"
+    url: https://www.saludcastillayleon.es/ProfesionalesHRH/es/formacion-continuada
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "C. A. U. de Salamanca — formación continuada"
+    url: https://www.saludcastillayleon.es/CASalamanca/es/formacion-continuada
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. Clínico U. de Valladolid — formación continuada"
+    url: https://www.saludcastillayleon.es/ProfesionalesHCUV/es/formacion-continuada
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+  - nombre: "H. U. Cruces — formación especializada"
+    url: https://osieec.osakidetza.eus/formacion-especializada-cruces/eventos/
+    nivel: 3
+    ambito: mixto
+    filtro: estricto
+    estado: pendiente
+
+  # Sant Joan de Déu tiene su catálogo filtrado por especialidad: esta
+  # dirección ya es solo anestesiología pediátrica, así que va sin filtro.
+  - nombre: "H. Sant Joan de Déu Barcelona — Anestesiología pediátrica"
+    url: https://formacion.sjdhospitalbarcelona.org/es/especialidades/anestesiologia-pediatrica
+    nivel: 2
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
