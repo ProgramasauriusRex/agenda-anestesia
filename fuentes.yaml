@@ -53,7 +53,6 @@ fuentes:
     filtro: evento
     estado: ok
     feed: none
-    # redirige a: https://campussedar.es
   - nombre: "SEMICYUC"
     url: https://semicyuc.org/
     nivel: 1
@@ -92,8 +91,7 @@ fuentes:
     ambito: dolor
     filtro: evento
     estado: ok
-    feed: https://www.congresosemdor.es/feed/
-    # sugerencia: https://www.congresosemdor.es/inicio-2026/
+    feed: none
   - nombre: "ESRA-España"
     url: https://www.esra-spain.org/
     nivel: 1
@@ -300,7 +298,6 @@ fuentes:
     filtro: evento
     estado: ok
     feed: none
-    # sugerencia: https://www.sbartd.es/cursos.html
     # redirige a: https://www.sbartd.es/
   - nombre: "Anestesia Clínico Valencia"
     url: http://www.anestesiaclinicovalencia.org
@@ -375,8 +372,8 @@ fuentes:
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: bloqueada
-    feed: none
+    estado: ok
+    feed: http://soclartd.org/index.php/feed/
     # solo responde por http; su https está mal configurado
 
   # ---------- Medicina Intensiva — nacional ----------
@@ -394,9 +391,7 @@ fuentes:
     ambito: criticos
     filtro: evento
     estado: ok
-    feed: https://secip.com/feed/
-    # sugerencia: https://secip.com/proximos-cursos/
-    # redirige a: https://secip.com/
+    feed: none
   - nombre: "SEMES"
     url: https://www.semes.org/
     nivel: 2
@@ -544,9 +539,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
-    feed: https://seth.es/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fseth.es%2F&format=xml
-    # sugerencia: https://seth.es/formacion/
-    # redirige a: https://seth.es/
+    feed: none
   - nombre: "SEMPSPH (Seguridad del paciente)"
     url: https://www.sempsph.com/
     nivel: 2
@@ -629,7 +622,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: none
-    # sugerencia: https://www.academia.cat/agenda
+    # sugerencia: https://academia.cat/activitats-dia
   - nombre: "IAVANTE (Andalucía)"
     url: https://www.iavante.es/
     nivel: 2
@@ -681,7 +674,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: none
-    # redirige a: https://www.osakidetza.euskadi.eus/ataria/
+    # sugerencia: https://www.osakidetza.euskadi.eus/informacion-sobre/webosk00-meicon/es/
   # 14/10: retirada "Comunidad de Madrid — Formación sanitaria" (404, sin
   # catálogo público). La sustituyen las agendas de sus 15 hospitales, abajo.
   - nombre: "SESCAM — Formación (Castilla-La Mancha)"
@@ -757,7 +750,9 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
+    # redirige a: https://cfp.us.es/cursos/oferta-cursos-convocatoria
     # 12/10: la portada www.us.es salía bloqueada por robots.txt. Los cursos
     # no están en la portada sino en el CFP, que es otro subdominio y tiene
     # su propio robots.txt.
@@ -774,7 +769,8 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: bloqueada
+    feed: none
     # 12/10: la portada salía bloqueada por robots.txt. Se prueba con la
     # facultad; si vuelve a salir bloqueada, el veto es de todo el dominio
     # y hay que respetarlo.
@@ -801,7 +797,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: none
-    # sugerencia: https://www.ual.es/universidad/organosgobierno/vestudiantes/noticias/detalle/30189
+    # sugerencia: https://www.ual.es/cursosdeverano
   - nombre: "U. de Jaén"
     url: https://www.ujaen.es/
     nivel: 3
@@ -817,7 +813,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.uhu.es/rss.xml
-    # sugerencia: https://www.uhu.es/noticias/la-uhu-participa-en-un-encuentro-nacional-sobre-los-nuevos-retos-de-la-desinformacion
+    # sugerencia: https://www.uhu.es/oferta-academica/masteres-oficiales
   - nombre: "U. de Zaragoza"
     url: https://www.unizar.es/
     nivel: 3
@@ -858,7 +854,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.ull.es/feed/
-    # sugerencia: https://www.ull.es/portal/noticias/2026/vanguardia-estudios-medievales-renancetistas/
+    # sugerencia: https://www.ull.es/portal/noticias/2026/latidos-vida-saludable/
   - nombre: "U. de Cantabria"
     url: https://web.unican.es/
     nivel: 3
@@ -866,14 +862,15 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://web.unican.es/_vti_bin/spsdisco.aspx
-    # sugerencia: https://web.unican.es/admision
+    # sugerencia: https://web.unican.es/cursosdeverano/propuestas-de-cursos
   - nombre: "U. de Castilla-La Mancha"
     url: https://www.uclm.es/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: ok
     feed: none
+    # sugerencia: https://www.uclm.es/es/Misiones/Estudios/QueEstudiar/FormacionPermanente
   - nombre: "U. de Salamanca"
     url: https://www.usal.es/
     nivel: 3
@@ -988,7 +985,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: none
-    # sugerencia: https://www.uji.es/com/sumari/agenda/
+    # sugerencia: https://www.uji.es/com/investigacio/arxiu/noticies/2026/10/informacio-falsa-campanyes-electorals/
   - nombre: "U. de Extremadura"
     url: https://www.unex.es/
     nivel: 3
@@ -1089,7 +1086,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: none
-    # sugerencia: https://www.uchceu.es/grado-fisica
+    # sugerencia: https://www.uchceu.es/eventos/semana-de-la-transformacion-social_2
   - nombre: "U. CEU Fernando III"
     url: https://uf3ceu.es/estudios/titulos-propios/
     nivel: 3
@@ -1144,8 +1141,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
-    feed: https://www.ucjc.edu/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.ucjc.edu%2F&format=xml
-    # sugerencia: https://www.ucjc.edu/curso-formacion-permanente/
+    feed: none
   - nombre: "U. Internacional de Catalunya"
     url: https://www.uic.es/
     nivel: 3
@@ -1217,9 +1213,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
-    feed: https://ufpcanarias.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fufpcanarias.com%2F&format=xml&lang=es
-    # sugerencia: https://ufpcanarias.com/nuevas-jornadas-de-formacion-fecyt-5/
-    # redirige a: https://ufpcanarias.com/
+    feed: none
 
   # ---------- Grupos hospitalarios privados ----------
   - nombre: "Quirónsalud"
@@ -1229,7 +1223,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: none
-    # sugerencia: https://www.quironsalud.com/es/comunicacion/actualidad/quironsalud-impulsa-formacion-profesionales-dar-respuesta-n
+    # sugerencia: https://www.quironsalud.com/es/comunicacion/eventos
   - nombre: "HM Hospitales"
     url: https://www.hmhospitales.com/
     nivel: 3
@@ -1573,7 +1567,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://commalaga.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcommalaga.com%2F&format=xml
-    # sugerencia: https://commalaga.com/formacion-commalaga/taller-de-cirugia-dermatologica-para-atencion-primaria-iv-curso-de-dermatologia-para-ap-15-de-octubre/
+    # sugerencia: https://commalaga.com/formacion-commalaga/enfermedades-sistemicas-con-manifestaciones-cutaneas-y-ets-iv-curso-de-dermatologia-para-ap-1-al-30-de-noviembre/
     # redirige a: https://commalaga.com/
   - nombre: "Colegio de Médicos de Melilla"
     url: https://commelilla.es/cursos-de-formacion/
@@ -1630,7 +1624,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: none
-    # sugerencia: https://comsalamanca.es/formacion/151257-iii-congreso-internacional-en-innovacion-investigacion-formacion-y-transferencia-del-conocimiento-en-ciencias-de-la-salud
+    # sugerencia: https://comsalamanca.es/formacion/151273-jornadas-de-formacion-en-cooperacion-sanitaria
   - nombre: "Colegio de Médicos de Santa Cruz de Tenerife"
     url: https://medicostenerife.es/calendario-de-eventos-y-cursos/
     nivel: 2
@@ -1654,7 +1648,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://comsevilla.es/feed/
-    # sugerencia: https://comsevilla.es/el-22-de-octubre-nueva-sesion-del-curso-de-soporte-vital-basico-y-dea-dirigido-a-medicos-y-otros-profesionales/
+    # sugerencia: https://comsevilla.es/el-colegio-de-medicos-de-sevilla-reafirma-su-compromiso-con-la-formacion-en-reanimacion-cardiopulmonar/
     # redirige a: https://comsevilla.es/
   - nombre: "Colegio de Médicos de Soria"
     url: https://www.comsor.es/agendaformacion.html
@@ -1755,9 +1749,8 @@ fuentes:
     nivel: 2
     ambito: dolor
     filtro: evento
-    estado: ok
-    feed: https://smdolor.com/feed/
-    # sugerencia: https://smdolor.com/master-cursos-tratamiento-dolor/
+    estado: roto
+    feed: none
     # su robots.txt prohíbe el rastreo; se respeta, queda como referencia
   # Sin web activa, difunden a través de la SED (que ya está en nivel 1):
   # Sociedad Aragonesa del Dolor, Sociedade Galega da Dor, Sociedad Madrileña
@@ -1828,14 +1821,15 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: none
-    # sugerencia: https://www.paliativosmadrid.org/?seccion=gruposTrabajo&subSeccion=grupoInvestigacion
+    # sugerencia: https://www.paliativosmadrid.org/?seccion=gruposTrabajo&subSeccion=grupoFormacionAcreditacion
   - nombre: "PALIAN (Navarra) — Paliativos"
     url: https://www.paliativosnavarra.com/
     nivel: 2
     ambito: dolor
     filtro: estricto
-    estado: roto
+    estado: ok
     feed: none
+    # redirige a: https://87-gift.com/
   - nombre: "SVMP (C. Valenciana) — Paliativos"
     url: https://www.svmpaliativa.org/category/formacion/
     nivel: 2
@@ -1930,8 +1924,8 @@ fuentes:
     ambito: dolor
     filtro: estricto
     estado: ok
-    feed: https://www.secpal.org/feed/
-    # sugerencia: https://www.secpal.org/wp-content/uploads/2023/03/19-Actualidad-Secpal-Enero-Marzo-2023.pdf
+    feed: https://www.secpal.org/aecpal/feed/
+    # sugerencia: https://www.secpal.org/secpal-advierte-de-que-el-reto-actual-de-los-cuidados-paliativos-es-garantizar-la-formacion-y-el-reconocimiento-de-sus-mas-de-4-000-profesionales/
   - nombre: "SEEUE — Enfermería de Urgencias y Emergencias"
     url: https://enfermeriadeurgencias.org/
     nivel: 2
@@ -1993,109 +1987,128 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
   - nombre: "H. G. U. Gregorio Marañón"
     url: https://www.comunidad.madrid/hospital/gregoriomaranon/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
   - nombre: "H. U. Ramón y Cajal"
     url: https://www.comunidad.madrid/hospital/ramonycajal/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
   - nombre: "H. U. 12 de Octubre"
     url: https://www.comunidad.madrid/hospital/12octubre/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
   - nombre: "H. Clínico San Carlos"
     url: https://www.comunidad.madrid/hospital/clinicosancarlos/comunicacion/agenda
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
   - nombre: "H. U. Puerta de Hierro"
     url: https://www.comunidad.madrid/hospital/puertadehierro/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
   - nombre: "H. U. Fundación Alcorcón"
     url: https://www.comunidad.madrid/hospital/fundacionalcorcon/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
   - nombre: "H. U. de Getafe"
     url: https://www.comunidad.madrid/hospital/getafe/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
   - nombre: "H. U. Príncipe de Asturias"
     url: https://www.comunidad.madrid/hospital/principeasturias/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
   - nombre: "H. U. de Fuenlabrada"
     url: https://www.comunidad.madrid/hospital/fuenlabrada/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
   - nombre: "H. U. Severo Ochoa"
     url: https://www.comunidad.madrid/hospital/severoochoa/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
   - nombre: "H. U. Infanta Sofía"
     url: https://www.comunidad.madrid/hospital/infantasofia/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
   - nombre: "H. U. de Móstoles"
     url: https://www.comunidad.madrid/hospital/mostoles/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
   - nombre: "H. U. Infanta Leonor"
     url: https://www.comunidad.madrid/hospital/infantaleonor/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
   - nombre: "H. U. del Henares"
     url: https://www.comunidad.madrid/hospital/henares/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
   - nombre: "IiSGM — cursos propios (Gregorio Marañón)"
     url: https://www.iisgm.com/formacion/cursos-propios
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "IRYCIS — cursos (Ramón y Cajal)"
     url: https://www.irycis.org/es/formacion/cursos/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "IIS-Princesa — formación (La Princesa)"
     url: https://www.iis-princesa.org/formacion/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://www.iis-princesa.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.iis-princesa.org%2Fformacion%2F&format=xml
+    # sugerencia: https://www.iis-princesa.org/formacion/recursos-informaticos-para-investigacion-exclusivo-para-residentes/
 
   # ---------- Hospitales universitarios — Andalucía (GesForma) ----------
   # GesForma es el portal de formación de cada hospital del SAS. Se ve sin
@@ -2106,103 +2119,120 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "H. R. U. de Málaga — GesForma"
     url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hrum/gesforma/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "H. U. Virgen Macarena — GesForma"
     url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/huvm/gesforma/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "H. U. Reina Sofía (Córdoba) — GesForma"
     url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hurs/gesforma/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "H. U. Virgen de las Nieves — GesForma"
     url: https://huvn.granadasalud.es/gesforma/faces/index.xhtml
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "H. U. Clínico San Cecilio — GesForma"
     url: https://husc.granadasalud.es/gesforma/faces/index.xhtml
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "H. U. de Valme — GesForma"
     url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/agsss/gesforma/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "H. U. de Jerez — GesForma"
     url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/agsnc/gesforma/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
   - nombre: "H. U. Puerta del Mar — GesForma"
     url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hupm/gesforma/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "H. U. de Puerto Real — GesForma"
     url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hupr/gesforma/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "H. U. de Jaén — GesForma"
     url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/chj/gesforma/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "H. U. Torrecárdenas — GesForma"
     url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/cht/gesforma/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "H. U. Virgen de la Victoria — GesForma"
     url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/huvv/gesforma/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "H. U. Costa del Sol — GesForma"
     url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/ascs/gesforma/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "H. U. Juan Ramón Jiménez — GesForma"
     url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/ahjrj/gesforma/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "ibs.GRANADA — jornadas y cursos"
     url: https://www.ibsgranada.es/formacion/jornadas-y-cursos/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://www.ibsgranada.es/feed/
   - nombre: "IBIMA — formación continua (Málaga)"
     url: https://ibima.eu/es/formacion-continua/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://ibima.eu/es/feed/
 
   # ---------- Hospitales universitarios — Cataluña ----------
   # Assistents Actes es la plataforma de inscripción de la Generalitat: recoge
@@ -2213,73 +2243,92 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
+    # sugerencia: https://assistentsactes.salut.gencat.cat/agenda/detall/628
   - nombre: "H. U. Vall d'Hebron — agenda"
     url: https://www.vallhebron.com/actualitat/agenda
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://www.vallhebron.com/rss.xml
   - nombre: "Hospital Clínic — Aula Clínic"
     url: https://www.aulaclinic.com/cursos
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
+    # redirige a: https://www.aulaclinic.com/cursos/cat/1/cursos-de-medicina
   - nombre: "H. U. de Bellvitge — agenda"
     url: https://bellvitgehospital.cat/ca/agenda/tots
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://bellvitgehospital.cat/rss.xml
   - nombre: "H. de la Santa Creu i Sant Pau — cursos"
     url: https://www.santpau.cat/web/public/cursos
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
+    # redirige a: https://www.santpau.cat/ca/aprenentatge/cursos
   - nombre: "H. U. Germans Trias i Pujol — agenda"
     url: https://www.germanstrias.org/ca/agenda
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "Hospital del Mar — agenda"
     url: https://www.hospitaldelmar.cat/ca/agenda?CATEGORY2=26
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
+    # redirige a: https://www.hospitaldelmar.cat/?CATEGORY2=26
   - nombre: "Parc Taulí — agenda"
     url: https://www.tauli.cat/en/actualitat/agenda/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: roto
+    feed: none
   - nombre: "ICS Lleida — jornades (Arnau de Vilanova)"
     url: https://icsgsslleidapirineu.cat/docencia-i-formacio/jornades/visio-general
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://icsgsslleidapirineu.cat/rss.xml
   - nombre: "ICS Camp de Tarragona — agenda (Joan XXIII)"
     url: https://icscampdetarragona.cat/agenda/llista/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://icscampdetarragona.cat/feed/
+    # sugerencia: https://icscampdetarragona.cat/docencia/
+    # redirige a: https://icscampdetarragona.cat/agenda/?tribe_redirected=1
   - nombre: "H. U. Mútua Terrassa — agenda"
     url: https://www.mutuaterrassa.com/ca/agenda
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "Consorci Sanitari de Terrassa — agenda"
     url: https://cst.cat/agenda/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://cst.cat/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcst.cat%2Fagenda%2F&format=xml
+    # sugerencia: https://cst.cat/informacions-i-recomanacions-per-lautocura/
 
   # ---------- Hospitales universitarios — Comunitat Valenciana ----------
   # eformacio.gva.es es el catálogo público de cada departamento de salud,
@@ -2290,49 +2339,61 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "IIS La Fe — cursos y jornadas"
     url: https://www.iislafe.es/es/talento/formacion/cursos-y-jornadas
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "H. Clínic Universitari València — docencia"
     url: https://clinicomalvarrosa.san.gva.es/va/web/docencia/noticias
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "ISABIAL — formación continuada (H. G. U. Alicante)"
     url: https://isabial.es/cursos-formacion-continuada-sanitarios/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://isabial.es/feed/
+    # sugerencia: https://isabial.es/cursos-formacion-continuada-sanitarios/formacion-continuada-isabial-2025/
   - nombre: "Consorci H. General Universitari València — agenda"
     url: https://chguv.san.gva.es/agenda
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
+    # sugerencia: https://chguv.san.gva.es/rrhh/informacion-sindical
   - nombre: "H. G. U. de Elche — agenda docente"
     url: https://elche.san.gva.es/ca/web/profesional/agenda-docent
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
+    # redirige a: https://elche.san.gva.es/va/web/profesional/agenda-docent
   - nombre: "H. Francesc de Borja (Gandia) — jornadas y cursos"
     url: https://gandia.san.gva.es/ca/jornadas-cursos-sesiones
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
+    # redirige a: https://gandia.san.gva.es/va/jornadas-cursos-sesiones
   - nombre: "eformacio — Departament de La Ribera"
     url: https://eformacio.gva.es/zona-publica/listado-ediciones-organizacion/94?lang=es&dates=1&datesEnroll=1
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
 
   # ---------- Hospitales universitarios — Castillas y País Vasco ----------
   # Las de Castilla y León van en el mismo dominio que el portal de Sacyl, que
@@ -2343,31 +2404,37 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://docenciu.blogspot.com/feeds/posts/default
+    # sugerencia: https://docenciu.blogspot.com/2026/01/cursos-para-tutores-2025.html
   - nombre: "H. U. Río Hortega — formación continuada"
     url: https://www.saludcastillayleon.es/ProfesionalesHRH/es/formacion-continuada
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "C. A. U. de Salamanca — formación continuada"
     url: https://www.saludcastillayleon.es/CASalamanca/es/formacion-continuada
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "H. Clínico U. de Valladolid — formación continuada"
     url: https://www.saludcastillayleon.es/ProfesionalesHCUV/es/formacion-continuada
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: none
   - nombre: "H. U. Cruces — formación especializada"
     url: https://osieec.osakidetza.eus/formacion-especializada-cruces/eventos/
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
+    estado: ok
+    feed: https://osieec.osakidetza.eus/formacion-especializada-cruces/feed/
 
   # Sant Joan de Déu tiene su catálogo filtrado por especialidad: esta
   # dirección ya es solo anestesiología pediátrica, así que va sin filtro.
@@ -2376,4 +2443,5 @@ fuentes:
     nivel: 2
     ambito: anestesia
     filtro: evento
-    estado: pendiente
+    estado: ok
+    feed: https://formacion.sjdhospitalbarcelona.org/rss.xml
