@@ -567,3 +567,83 @@ try:
 finally:
     _ag2.DOMINIOS_COMPARTIDOS = _guardado
 print("Canales en dominios compartidos ✓")
+
+
+# ---------------------------------------------------------------------------
+# El 404 disfrazado — 18/10
+#
+# La Comunidad de Madrid contestó "404, no existe" a los quince hospitales,
+# cuando las páginas existen y traen jornadas fechadas. Un bloqueo que se hace
+# pasar por página inexistente. Aquí se simula un servidor así: 404 al robot,
+# 200 al navegador, y 404 de verdad a una página que no existe.
+# ---------------------------------------------------------------------------
+import agenda as _ag3
+
+
+class _Disfrazado(http.server.BaseHTTPRequestHandler):
+    def do_GET(self):
+        navegador = "Mozilla" in (self.headers.get("User-Agent") or "")
+        if self.path == "/robots.txt":
+            codigo, cuerpo = 404, b""
+        elif self.path.startswith("/no-existe"):
+            codigo, cuerpo = 404, b"no"
+        elif navegador:
+            codigo, cuerpo = 200, b"<html><body>Jornada de anestesia</body></html>"
+        else:
+            codigo, cuerpo = 404, b"no"           # al robot, siempre 404
+        self.send_response(codigo)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.end_headers()
+        self.wfile.write(cuerpo)
+
+    def log_message(self, *a):
+        pass
+
+
+_s3 = socketserver.TCPServer(("127.0.0.1", 0), _Disfrazado)
+threading.Thread(target=_s3.serve_forever, daemon=True).start()
+_b3 = f"http://127.0.0.1:{_s3.server_address[1]}"
+_dom3 = f"127.0.0.1:{_s3.server_address[1]}"
+try:
+    _ag3._PIDE_NAVEGADOR.discard(_dom3)
+    # Sin el reintento, la página "no existe"
+    assert _ag3.descarga(_b3 + "/hospital/lapaz/actividades") is None
+    assert _dom3 not in _ag3._PIDE_NAVEGADOR
+    # Con el reintento, aparece
+    _r = _ag3.descarga(_b3 + "/hospital/lapaz/actividades", reintenta_404=True)
+    assert _r is not None and "anestesia" in _r.text, "debe abrirla como navegador"
+    # ...y el dominio queda aprendido: la ficha del curso ya entra a la primera
+    assert _dom3 in _ag3._PIDE_NAVEGADOR
+    assert _ag3.descarga(_b3 + "/hospital/lapaz/actividad/120376") is not None
+    # Un 404 de verdad sigue siendo un 404
+    assert _ag3.descarga(_b3 + "/no-existe", reintenta_404=True) is None
+finally:
+    _s3.shutdown()
+    _ag3._PIDE_NAVEGADOR.discard(_dom3)
+
+# Y un 404 de verdad NO enseña al programa a disfrazarse en ese dominio
+_s4 = socketserver.TCPServer(("127.0.0.1", 0), _Disfrazado)
+threading.Thread(target=_s4.serve_forever, daemon=True).start()
+_b4 = f"http://127.0.0.1:{_s4.server_address[1]}"
+try:
+    assert _ag3.descarga(_b4 + "/no-existe", reintenta_404=True) is None
+    assert f"127.0.0.1:{_s4.server_address[1]}" not in _ag3._PIDE_NAVEGADOR
+finally:
+    _s4.shutdown()
+print("404 disfrazado ✓")
+
+
+# ---------------------------------------------------------------------------
+# oEmbed no es un canal — encontrado el 18/10 en seis fuentes
+# ---------------------------------------------------------------------------
+_html_wp = """<html><head>
+<link rel="alternate" type="application/json+oembed" href="https://x.es/wp-json/oembed/1.0/embed?url=a">
+<link rel="alternate" type="text/xml+oembed" href="https://x.es/wp-json/oembed/1.0/embed?url=a&format=xml">
+<link rel="alternate" type="application/rss+xml" href="https://x.es/feed/">
+</head><body></body></html>"""
+_ag3.DOMINIOS_COMPARTIDOS = set()
+assert _ag3.busca_feed("https://x.es/", _html_wp) == "https://x.es/feed/", \
+    "debe saltarse el oEmbed y quedarse con el RSS de verdad"
+assert _ag3.es_oembed("https://cst.cat/wp-json/oembed/1.0/embed?url=x&format=xml")
+assert not _ag3.es_oembed("https://cst.cat/feed/")
+print("oEmbed descartado como canal ✓")

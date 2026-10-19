@@ -137,17 +137,29 @@ def _peticion(url: str, cabeceras: dict, timeout: int):
         return e
 
 
-def descarga(url: str, timeout: int = TIMEOUT):
+_PIDE_NAVEGADOR: set[str] = set()
+
+
+def descarga(url: str, timeout: int = TIMEOUT, reintenta_404: bool = False):
     """
     Igual que la de agenda.py: reintento con cabeceras de navegador si el
     servidor rechaza al robot, y reintento con espera si pide calma o si la
     conexión se cae. Devuelve la respuesta, o la excepción para poder
     explicar en el informe qué ha pasado.
-    """
-    r = _peticion(url, CAB_BOT, timeout)
 
-    if not isinstance(r, Exception) and r.status_code in RECHAZO_POR_CABECERAS:
+    `reintenta_404` es solo para la página principal de la fuente: la
+    Comunidad de Madrid contesta 404 al robot en páginas que existen.
+    """
+    dominio = urlparse(url).netloc
+    primera = CAB_NAVEGADOR if dominio in _PIDE_NAVEGADOR else CAB_BOT
+    r = _peticion(url, primera, timeout)
+
+    rechazo = RECHAZO_POR_CABECERAS + ((404,) if reintenta_404 else ())
+    if (primera is CAB_BOT and not isinstance(r, Exception)
+            and r.status_code in rechazo):
         r = _peticion(url, CAB_NAVEGADOR, timeout)
+        if not isinstance(r, Exception) and r.status_code < 400:
+            _PIDE_NAVEGADOR.add(dominio)
 
     for espera in ESPERAS_REINTENTO:
         if not isinstance(r, Exception) and r.status_code not in REINTENTO_LENTO:
@@ -241,10 +253,16 @@ def busca_feed(url: str, html: str) -> str | None:
         sopa = BeautifulSoup(html, "lxml")
         for link in sopa.find_all("link", rel=lambda v: v and "alternate" in v):
             tipo = (link.get("type") or "").lower()
+            # WordPress declara un "text/xml+oembed" en cada página: lleva
+            # "xml" en el tipo pero no es un canal (ver es_oembed en agenda.py)
+            if "oembed" in tipo:
+                continue
             if any(x in tipo for x in ("rss", "atom", "xml")):
                 href = link.get("href", "")
-                if href and feed_es_propio(url, urljoin(url, href)):
-                    return urljoin(url, href)
+                cand = urljoin(url, href)
+                if href and feed_es_propio(url, cand) and not (
+                        "oembed" in cand.lower() or "/wp-json/" in cand.lower()):
+                    return cand
     except Exception:
         pass
 
@@ -315,7 +333,7 @@ def verifica(f: dict) -> dict:
         res["detalle"] = "robots.txt prohíbe el rastreo automatizado"
         return res
 
-    r = descarga(url)
+    r = descarga(url, reintenta_404=True)
     if isinstance(r, Exception):
         res["detalle"] = f"{type(r).__name__}: {str(r)[:70]}"
         return res

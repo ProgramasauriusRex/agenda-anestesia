@@ -294,7 +294,14 @@ def _una_peticion(url: str, cabeceras: dict):
         return None
 
 
-def descarga(url: str) -> requests.Response | None:
+# Dominios que ya han demostrado que solo atienden a un navegador. Se aprende
+# sobre la marcha: si la portada de una fuente rechaza al robot y acepta al
+# navegador, el resto de peticiones a ese servidor (fichas de cursos, lugares)
+# van directamente con cabeceras de navegador, sin gastar un intento perdido.
+_PIDE_NAVEGADOR: set[str] = set()
+
+
+def descarga(url: str, reintenta_404: bool = False) -> requests.Response | None:
     """
     Pide una página, con dos redes de seguridad distintas.
 
@@ -305,11 +312,23 @@ def descarga(url: str) -> requests.Response | None:
        verificación del 23/09 se perdieron por esto cuatro webs que funcionan
        perfectamente (SAMIUC, el blog de Asturias-Cantabria, astursalud y la
        Universitat de les Illes Balears).
-    """
-    r = _una_peticion(url, CAB_BOT)
 
-    if r is not None and r.status_code in RECHAZO_POR_CABECERAS:
+    Con `reintenta_404`, un 404 también se repite como navegador. Es para la
+    página principal de cada fuente, no para todo: la Comunidad de Madrid
+    contestó "404, no existe" a los quince hospitales el 18/10, cuando las
+    páginas existen y tienen jornadas fechadas. Un bloqueo disfrazado de
+    página inexistente. Hacerlo en cada sondeo de RSS duplicaría cientos de
+    peticiones a rutas que de verdad no existen.
+    """
+    dominio = urlparse(url).netloc
+    primera = CAB_NAVEGADOR if dominio in _PIDE_NAVEGADOR else CAB_BOT
+    r = _una_peticion(url, primera)
+
+    rechazo = RECHAZO_POR_CABECERAS + ((404,) if reintenta_404 else ())
+    if primera is CAB_BOT and r is not None and r.status_code in rechazo:
         r = _una_peticion(url, CAB_NAVEGADOR)
+        if r is not None and r.status_code < 400:
+            _PIDE_NAVEGADOR.add(dominio)
 
     for espera in ESPERAS_REINTENTO:
         if r is not None and r.status_code not in REINTENTO_LENTO:
@@ -383,6 +402,20 @@ def _candidatos_feed(url: str) -> list[str]:
     return [urljoin(raiz, ruta) for ruta in RUTAS_FEED]
 
 
+def es_oembed(url: str) -> bool:
+    """
+    WordPress declara en cada página un enlace "alternate" de tipo
+    text/xml+oembed. Lleva "xml" en el tipo, así que se aceptaba como si fuera
+    un RSS. No lo es: es la ficha técnica para incrustar la página en otra web,
+    y no trae ni un solo curso. Seis fuentes lo tenían apuntado como canal,
+    alguna desde septiembre. No rompía nada, porque al no salir ningún curso
+    el programa volvía a leer la página, pero inflaba el recuento de fuentes
+    con RSS y gastaba una petición cada lunes.
+    """
+    u = url.lower()
+    return "oembed" in u or "/wp-json/" in u
+
+
 def busca_feed(url: str, html: str | None = None) -> str | None:
     """
     Intenta localizar un RSS/Atom. Primero en el <head> de la página
@@ -392,9 +425,11 @@ def busca_feed(url: str, html: str | None = None) -> str | None:
         sopa = BeautifulSoup(html, "lxml")
         for link in sopa.find_all("link", rel=lambda v: v and "alternate" in v):
             tipo = (link.get("type") or "").lower()
+            if "oembed" in tipo:
+                continue      # ver es_oembed()
             if "rss" in tipo or "atom" in tipo or "xml" in tipo:
                 cand = urljoin(url, link.get("href", ""))
-                if feed_es_propio(url, cand):
+                if feed_es_propio(url, cand) and not es_oembed(cand):
                     return cand
 
     for candidato in _candidatos_feed(url):
@@ -1055,15 +1090,16 @@ def rastrea(fuente: dict, verbose: bool = True) -> tuple[list[Evento], str]:
     # sabemos que no tienen canal, es la diferencia entre 21 segundos y 2 por
     # fuente: justo lo que permite revisarlas todas cada lunes.
     conocido = str(fuente.get("feed") or "").strip()
-    if conocido and conocido.lower() != "none" and not feed_es_propio(url, conocido):
-        conocido = ""          # canal del sitio entero, no de esta fuente
+    if conocido and conocido.lower() != "none" and (
+            not feed_es_propio(url, conocido) or es_oembed(conocido)):
+        conocido = ""          # no es un canal de esta fuente
     if conocido and conocido.lower() != "none":
         ev = desde_feed(conocido, fuente)
         if ev:
             return ev, f"feed ({len(ev)})"
         # El canal puede haber muerto o no traer eventos: seguimos por HTML
 
-    r = descarga(url)
+    r = descarga(url, reintenta_404=True)
     if not r:
         return [], "no responde / error de red"
 

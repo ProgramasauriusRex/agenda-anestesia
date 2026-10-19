@@ -332,7 +332,6 @@ fuentes:
     ambito: anestesia
     filtro: evento
     estado: ok
-    feed: https://www.svnrartd.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.svnrartd.com%2F&format=xml
     # sugerencia: https://www.svnrartd.com/cat/agenda-cursos-y-congresos
   - nombre: "AGARYD (Galicia)"
     url: https://agaryd.com/otros-eventos/
@@ -1543,7 +1542,6 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
-    feed: https://www.comll.cat/es/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.comll.cat%2Fes%2F&format=xml
     # sugerencia: https://www.comll.cat/es/servicios/formacion/
   - nombre: "Colegio de Médicos de Lugo"
     url: https://comlugo.org/
@@ -1566,7 +1564,6 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
-    feed: https://commalaga.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcommalaga.com%2F&format=xml
     # sugerencia: https://commalaga.com/formacion-commalaga/enfermedades-sistemicas-con-manifestaciones-cutaneas-y-ets-iv-curso-de-dermatologia-para-ap-1-al-30-de-noviembre/
     # redirige a: https://commalaga.com/
   - nombre: "Colegio de Médicos de Melilla"
@@ -1690,7 +1687,6 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
-    feed: https://www.comv.es/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.comv.es%2F&format=xml
     # sugerencia: https://www.comv.es/actualidad/el-icomv-colabora-en-la-17a-edicion-del-master-de-formacion-permanente-en-medicina-estetica-de-la-universitat-de-valencia/
   - nombre: "Colegio de Médicos de Valladolid"
     url: https://medicosva.es/
@@ -1749,7 +1745,8 @@ fuentes:
     nivel: 2
     ambito: dolor
     filtro: evento
-    estado: roto
+    estado: pendiente
+    # 18/10: fallo pasajero (tiempo agotado o 503); se reintenta
     feed: none
     # su robots.txt prohíbe el rastreo; se respeta, queda como referencia
   # Sin web activa, difunden a través de la SED (que ya está en nivel 1):
@@ -1987,105 +1984,120 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
     feed: none
   - nombre: "H. G. U. Gregorio Marañón"
     url: https://www.comunidad.madrid/hospital/gregoriomaranon/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
     feed: none
   - nombre: "H. U. Ramón y Cajal"
     url: https://www.comunidad.madrid/hospital/ramonycajal/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
     feed: none
   - nombre: "H. U. 12 de Octubre"
     url: https://www.comunidad.madrid/hospital/12octubre/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
     feed: none
   - nombre: "H. Clínico San Carlos"
     url: https://www.comunidad.madrid/hospital/clinicosancarlos/comunicacion/agenda
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
     feed: none
   - nombre: "H. U. Puerta de Hierro"
     url: https://www.comunidad.madrid/hospital/puertadehierro/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
     feed: none
   - nombre: "H. U. Fundación Alcorcón"
     url: https://www.comunidad.madrid/hospital/fundacionalcorcon/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
     feed: none
   - nombre: "H. U. de Getafe"
     url: https://www.comunidad.madrid/hospital/getafe/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
     feed: none
   - nombre: "H. U. Príncipe de Asturias"
     url: https://www.comunidad.madrid/hospital/principeasturias/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
     feed: none
   - nombre: "H. U. de Fuenlabrada"
     url: https://www.comunidad.madrid/hospital/fuenlabrada/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
     feed: none
   - nombre: "H. U. Severo Ochoa"
     url: https://www.comunidad.madrid/hospital/severoochoa/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
     feed: none
   - nombre: "H. U. Infanta Sofía"
     url: https://www.comunidad.madrid/hospital/infantasofia/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
     feed: none
   - nombre: "H. U. de Móstoles"
     url: https://www.comunidad.madrid/hospital/mostoles/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
     feed: none
   - nombre: "H. U. Infanta Leonor"
     url: https://www.comunidad.madrid/hospital/infantaleonor/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
     feed: none
   - nombre: "H. U. del Henares"
     url: https://www.comunidad.madrid/hospital/henares/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
     feed: none
   - nombre: "IiSGM — cursos propios (Gregorio Marañón)"
     url: https://www.iisgm.com/formacion/cursos-propios
@@ -2107,7 +2119,6 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
-    feed: https://www.iis-princesa.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.iis-princesa.org%2Fformacion%2F&format=xml
     # sugerencia: https://www.iis-princesa.org/formacion/recursos-informaticos-para-investigacion-exclusivo-para-residentes/
 
   # ---------- Hospitales universitarios — Andalucía (GesForma) ----------
@@ -2168,7 +2179,8 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
+    # 18/10: fallo pasajero (tiempo agotado o 503); se reintenta
     feed: none
   - nombre: "H. U. Puerta del Mar — GesForma"
     url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hupm/gesforma/
@@ -2296,7 +2308,8 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
+    # 18/10: fallo pasajero (tiempo agotado o 503); se reintenta
     feed: none
   - nombre: "ICS Lleida — jornades (Arnau de Vilanova)"
     url: https://icsgsslleidapirineu.cat/docencia-i-formacio/jornades/visio-general
@@ -2327,7 +2340,6 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
-    feed: https://cst.cat/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fcst.cat%2Fagenda%2F&format=xml
     # sugerencia: https://cst.cat/informacions-i-recomanacions-per-lautocura/
 
   # ---------- Hospitales universitarios — Comunitat Valenciana ----------

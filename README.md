@@ -353,6 +353,34 @@ con seis hilos, los quince hospitales de Madrid habrían recibido hasta seis
 peticiones a la vez, y el servidor habría contestado 429. Ahora el
 verificador espera igual que el rastreo.
 
+### El 404 disfrazado
+
+La verificación del 18/10 dio **404, "no existe"**, en los quince hospitales de
+Madrid. Pero esas páginas existen: abiertas desde un navegador, la de La Paz
+muestra tres jornadas con fecha. La Comunidad de Madrid contesta "no existe"
+al robot en vez de decir "no te dejo pasar".
+
+Ahora, si la página principal de una fuente da 404, se pide otra vez como
+navegador. Si así responde, el programa apunta ese servidor y le habla como
+navegador el resto del rastreo, también al abrir las fichas de los cursos. Si
+vuelve a dar 404, es que la página no existe de verdad y se queda como está.
+
+Esto solo se hace con la página principal de cada fuente. Hacerlo en cada
+sondeo de RSS duplicaría cientos de peticiones a rutas que de verdad no
+existen.
+
+Si aun así Madrid sigue en 404, es que el bloqueo es por la dirección de
+origen, como en el grupo de las nueve, y no por cómo nos presentamos.
+
+### oEmbed no es un RSS
+
+WordPress declara en cada página un enlace de tipo `text/xml+oembed`. Lleva
+"xml" en el nombre, así que el programa lo aceptaba como canal RSS. No lo es:
+es la ficha técnica para incrustar la página en otra web, y no trae ni un
+curso. Seis fuentes lo tenían apuntado como canal, alguna desde septiembre.
+No rompía nada, porque al no salir cursos se volvía a leer la página, pero
+inflaba el recuento: las fuentes con RSS de verdad eran 107, no 113.
+
 ---
 
 ## Añadir una web nueva
