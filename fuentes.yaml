@@ -332,6 +332,7 @@ fuentes:
     ambito: anestesia
     filtro: evento
     estado: ok
+    feed: https://www.svnrartd.com/feed/
     # sugerencia: https://www.svnrartd.com/cat/agenda-cursos-y-congresos
   - nombre: "AGARYD (Galicia)"
     url: https://agaryd.com/otros-eventos/
@@ -482,9 +483,7 @@ fuentes:
     ambito: criticos
     filtro: evento
     estado: ok
-    feed: https://sexmicyuc.com/feed/
-    # sugerencia: https://sexmicyuc.com/noticias/formacion/
-    # redirige a: https://sexmicyuc.com/
+    feed: none
   - nombre: "SOGAMIUC (Galicia)"
     url: https://www.sogamiuc.org
     nivel: 2
@@ -788,7 +787,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.uma.es/feed/
-    # sugerencia: https://www.uma.es/masteres-oficiales/
+    # sugerencia: https://www.uma.es/micrositios/sala-de-prensa/noticias/la-uma-celebro-el-dia-mundial-del-diccionario-con-las-vi-jornadas-malacitanas-sobre-lexicografia-historica/
   - nombre: "U. de Almería"
     url: https://www.ual.es/
     nivel: 3
@@ -826,9 +825,8 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: ok
+    estado: roto
     feed: none
-    # sugerencia: https://www.uniovi.es/estudia/masteres/informacion
   - nombre: "U. de les Illes Balears"
     url: https://www.uib.es/
     nivel: 3
@@ -984,7 +982,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: none
-    # sugerencia: https://www.uji.es/com/investigacio/arxiu/noticies/2026/10/informacio-falsa-campanyes-electorals/
+    # sugerencia: https://www.uji.es/com/sumari/agenda/
   - nombre: "U. de Extremadura"
     url: https://www.unex.es/
     nivel: 3
@@ -1085,7 +1083,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: none
-    # sugerencia: https://www.uchceu.es/eventos/semana-de-la-transformacion-social_2
+    # sugerencia: https://www.uchceu.es/grado-fisica
   - nombre: "U. CEU Fernando III"
     url: https://uf3ceu.es/estudios/titulos-propios/
     nivel: 3
@@ -1117,7 +1115,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://www.ufv.es/feed/
-    # sugerencia: https://www.ufv.es/estudiar-en-ufv/otras-formaciones/
+    # sugerencia: https://www.ufv.es/la-escuela-de-postgrado-y-educacion-ejecutiva-da-la-bienvenida-a-sus-nuevos-alumnos-con-una-llamada-a-liderar-la-transformacion/
   - nombre: "U. Alfonso X el Sabio"
     url: https://www.uax.com/
     nivel: 3
@@ -1542,6 +1540,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: https://www.comll.cat/feed/
     # sugerencia: https://www.comll.cat/es/servicios/formacion/
   - nombre: "Colegio de Médicos de Lugo"
     url: https://comlugo.org/
@@ -1564,6 +1563,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: https://commalaga.com/feed/
     # sugerencia: https://commalaga.com/formacion-commalaga/enfermedades-sistemicas-con-manifestaciones-cutaneas-y-ets-iv-curso-de-dermatologia-para-ap-1-al-30-de-noviembre/
     # redirige a: https://commalaga.com/
   - nombre: "Colegio de Médicos de Melilla"
@@ -1671,7 +1671,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: https://comteruel.com/index.php?format=feed&type=rss
-    # sugerencia: https://comteruel.com/index.php/formacion/cursos-del-colegio/cursos-on-line
+    # sugerencia: https://comteruel.com/index.php/colegiados/noticias/exito-de-la-i-edicion-del-curso-de-formacion-en-manejo-de-heridas-en-urgencias-para-medicos-mir-3
     # redirige a: https://comteruel.com/
   - nombre: "Colegio de Médicos de Toledo"
     url: https://www.comtoledo.org/actividades/
@@ -1687,6 +1687,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: https://www.comv.es/feed/
     # sugerencia: https://www.comv.es/actualidad/el-icomv-colabora-en-la-17a-edicion-del-master-de-formacion-permanente-en-medicina-estetica-de-la-universitat-de-valencia/
   - nombre: "Colegio de Médicos de Valladolid"
     url: https://medicosva.es/
@@ -1745,9 +1746,9 @@ fuentes:
     nivel: 2
     ambito: dolor
     filtro: evento
-    estado: pendiente
-    # 18/10: fallo pasajero (tiempo agotado o 503); se reintenta
+    estado: roto
     feed: none
+    # 18/10: fallo pasajero (tiempo agotado o 503); se reintenta
     # su robots.txt prohíbe el rastreo; se respeta, queda como referencia
   # Sin web activa, difunden a través de la SED (que ya está en nivel 1):
   # Sociedad Aragonesa del Dolor, Sociedade Galega da Dor, Sociedad Madrileña
@@ -1826,7 +1827,7 @@ fuentes:
     filtro: estricto
     estado: ok
     feed: none
-    # redirige a: https://87-gift.com/
+    # redirige a: https://webmedikal.com/
   - nombre: "SVMP (C. Valenciana) — Paliativos"
     url: https://www.svmpaliativa.org/category/formacion/
     nivel: 2
@@ -1875,7 +1876,8 @@ fuentes:
     ambito: anestesia
     filtro: evento
     estado: ok
-    feed: none
+    feed: https://grupogerm.es/feed/
+    # sugerencia: https://grupogerm.es/courses/curso-imprica/
   - nombre: "SET — Sociedad Española de Trasplante"
     url: https://www.setrasplante.org/events
     nivel: 2
@@ -1984,121 +1986,121 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
-    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
+    estado: ok
     feed: none
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
   - nombre: "H. G. U. Gregorio Marañón"
     url: https://www.comunidad.madrid/hospital/gregoriomaranon/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
-    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
+    estado: ok
     feed: none
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
   - nombre: "H. U. Ramón y Cajal"
     url: https://www.comunidad.madrid/hospital/ramonycajal/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
-    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
+    estado: ok
     feed: none
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
   - nombre: "H. U. 12 de Octubre"
     url: https://www.comunidad.madrid/hospital/12octubre/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
-    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
+    estado: ok
     feed: none
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
   - nombre: "H. Clínico San Carlos"
     url: https://www.comunidad.madrid/hospital/clinicosancarlos/comunicacion/agenda
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
-    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
+    estado: ok
     feed: none
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
   - nombre: "H. U. Puerta de Hierro"
     url: https://www.comunidad.madrid/hospital/puertadehierro/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
-    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
+    estado: ok
     feed: none
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
   - nombre: "H. U. Fundación Alcorcón"
     url: https://www.comunidad.madrid/hospital/fundacionalcorcon/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
-    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
+    estado: ok
     feed: none
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
   - nombre: "H. U. de Getafe"
     url: https://www.comunidad.madrid/hospital/getafe/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
-    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
+    estado: ok
     feed: none
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
   - nombre: "H. U. Príncipe de Asturias"
     url: https://www.comunidad.madrid/hospital/principeasturias/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
-    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
+    estado: ok
     feed: none
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
   - nombre: "H. U. de Fuenlabrada"
     url: https://www.comunidad.madrid/hospital/fuenlabrada/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
-    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
+    estado: ok
     feed: none
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
   - nombre: "H. U. Severo Ochoa"
     url: https://www.comunidad.madrid/hospital/severoochoa/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
-    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
+    estado: ok
     feed: none
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
   - nombre: "H. U. Infanta Sofía"
     url: https://www.comunidad.madrid/hospital/infantasofia/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
-    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
+    estado: ok
     feed: none
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
   - nombre: "H. U. de Móstoles"
     url: https://www.comunidad.madrid/hospital/mostoles/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
-    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
+    estado: ok
     feed: none
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
   - nombre: "H. U. Infanta Leonor"
     url: https://www.comunidad.madrid/hospital/infantaleonor/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
-    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
+    estado: ok
     feed: none
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
   - nombre: "H. U. del Henares"
     url: https://www.comunidad.madrid/hospital/henares/ciudadanos/actividades
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
-    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
+    estado: ok
     feed: none
+    # 18/10: 404 al robot en una página que existe; se reintenta como navegador
   - nombre: "IiSGM — cursos propios (Gregorio Marañón)"
     url: https://www.iisgm.com/formacion/cursos-propios
     nivel: 3
@@ -2119,6 +2121,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: https://www.iis-princesa.org/feed/atom/
     # sugerencia: https://www.iis-princesa.org/formacion/recursos-informaticos-para-investigacion-exclusivo-para-residentes/
 
   # ---------- Hospitales universitarios — Andalucía (GesForma) ----------
@@ -2179,9 +2182,9 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
-    # 18/10: fallo pasajero (tiempo agotado o 503); se reintenta
+    estado: ok
     feed: none
+    # 18/10: fallo pasajero (tiempo agotado o 503); se reintenta
   - nombre: "H. U. Puerta del Mar — GesForma"
     url: https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hupm/gesforma/
     nivel: 3
@@ -2308,9 +2311,9 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: pendiente
-    # 18/10: fallo pasajero (tiempo agotado o 503); se reintenta
+    estado: roto
     feed: none
+    # 18/10: fallo pasajero (tiempo agotado o 503); se reintenta
   - nombre: "ICS Lleida — jornades (Arnau de Vilanova)"
     url: https://icsgsslleidapirineu.cat/docencia-i-formacio/jornades/visio-general
     nivel: 3
@@ -2340,6 +2343,7 @@ fuentes:
     ambito: mixto
     filtro: estricto
     estado: ok
+    feed: https://cst.cat/feed/
     # sugerencia: https://cst.cat/informacions-i-recomanacions-per-lautocura/
 
   # ---------- Hospitales universitarios — Comunitat Valenciana ----------
