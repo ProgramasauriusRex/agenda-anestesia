@@ -647,3 +647,31 @@ assert _ag3.busca_feed("https://x.es/", _html_wp) == "https://x.es/feed/", \
 assert _ag3.es_oembed("https://cst.cat/wp-json/oembed/1.0/embed?url=x&format=xml")
 assert not _ag3.es_oembed("https://cst.cat/feed/")
 print("oEmbed descartado como canal ✓")
+
+
+# ---------------------------------------------------------------------------
+# Tabla del 19/10: noticias, boletines y cursos para otro público
+#
+# El primer rastreo con los hospitales dio 25 cursos. Cinco no eran para un
+# anestesiólogo: dos titulares de noticia, un boletín, dos cursos de RCP para la
+# población general y un máster de fisioterapia. Probado además contra los 95
+# títulos que han salido alguna vez: estas reglas no quitan ningún curso real.
+# ---------------------------------------------------------------------------
+for _t in ["Ocupadas todas las plazas de los cursos gratuitos en RCP para la "
+           "ciudadanía de la Quincena del corazón",
+           "Talavera aprende a salvar vidas el próximo",
+           "Toledo se forma en reanimación cardiopulmonar y primeros auxilios el próximo",
+           "Número 18 de ‘Actualidad SECPAL’",
+           "Máster Universitario en Terapia Manual Ortopédica en el Tratamiento del Dolor"]:
+    assert not titulo_util(_t), f"debería descartarse: {_t}"
+
+# Y lo que se queda, de esa misma tabla
+for _t in ["Publicar y no morir en el intento. Un webinar de la revista Medicina Intensiva",
+           "Abordaje interdisciplinar del dolor crónico pediátrico",
+           "Curso de Soporte Vital Inmediato",
+           "Seminario On-Line Actualización en el manejo de la agitación",
+           "Tratamiento del dolor agudo adaptado a cada paciente, 2ª edición",
+           "Instructor en Soporte Vital Básico y DEA",
+           "Cartagena: Acto Conmemorativo del Día Mundial de los Cuidados Paliativos"]:
+    assert titulo_util(_t), f"debería quedarse: {_t}"
+print("Tabla del 19/10: noticias, boletines y otro público ✓")

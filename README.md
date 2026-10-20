@@ -379,7 +379,29 @@ WordPress declara en cada página un enlace de tipo `text/xml+oembed`. Lleva
 es la ficha técnica para incrustar la página en otra web, y no trae ni un
 curso. Seis fuentes lo tenían apuntado como canal, alguna desde septiembre.
 No rompía nada, porque al no salir cursos se volvía a leer la página, pero
-inflaba el recuento: las fuentes con RSS de verdad eran 107, no 113.
+inflaba el recuento: las fuentes con RSS de verdad eran 107, no 113. Al quitarlo
+apareció otra cosa: en las seis, el oEmbed estaba tapando un RSS de verdad que
+la página también declaraba. Ahora lo tienen, y el recuento vuelve a ser 113,
+esta vez todos reales.
+
+### Cursos que no son para un anestesiólogo
+
+El primer rastreo con los hospitales (19/10) dio 25 cursos, y cinco sobraban:
+
+- **Titulares de noticia** con verbos que todavía no estaban en la lista:
+  "Talavera **aprende** a salvar vidas", "Toledo **se forma** en reanimación…".
+  La forma reflexiva va aparte, porque "forma" suelta aparece en títulos de
+  cursos de verdad y "se forma" solo en titulares.
+- **Boletines**: "Número 18 de 'Actualidad SECPAL'".
+- **Cursos para la población general**: RCP "para la ciudadanía", "primeros
+  auxilios". Existen y son de salud, pero no son para tu audiencia.
+- **Otras profesiones**: un máster de fisioterapia en terapia manual que
+  entraba por mencionar el dolor.
+
+Antes de dar por buenas estas reglas se probaron contra los 95 títulos
+distintos que han salido alguna vez en una tabla o en la memoria. Quitan seis:
+los cinco de arriba y "Cudeca se suma al Día Mundial de Cuidados Paliativos con
+dos webinars…", que también es un titular. Ningún curso de verdad.
 
 ---
 

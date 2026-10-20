@@ -825,7 +825,8 @@ fuentes:
     nivel: 3
     ambito: mixto
     filtro: estricto
-    estado: roto
+    estado: pendiente
+    # 19/10: tiempo de lectura agotado; respondía antes, se reintenta
     feed: none
   - nombre: "U. de les Illes Balears"
     url: https://www.uib.es/

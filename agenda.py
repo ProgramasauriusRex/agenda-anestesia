@@ -551,14 +551,43 @@ VERBOS_DE_NOTICIA = {
     "lanza", "lanzan", "lanzara", "cierra", "cierran", "logra", "consigue",
     "alcanza", "supera", "aumenta", "crece", "fallece", "nombra", "nombran",
     "visita", "visitan", "clausura", "clausuran", "homenajea", "renueva",
+    # 19/10: "Talavera APRENDE a salvar vidas", "OCUPADAS todas las plazas de
+    # los cursos gratuitos…", y los de boletines y aniversarios
+    "aprende", "aprenden", "ocupadas", "publica", "publican", "edita",
+    "cumple", "cumplen", "felicita", "felicitan", "agradece", "agradecen",
+    "recuerda", "recuerdan", "conmemora", "conmemoran",
 }
+
+# Y en forma reflexiva, que no se puede tratar como palabra suelta: "forma"
+# sola aparece en títulos de cursos, "se forma" solo en titulares ("Toledo SE
+# FORMA en reanimación cardiopulmonar…", 19/10).
+FRASES_DE_NOTICIA = [" se forma ", " se forman ", " se celebra", " se presenta",
+                     " se reune", " se une ", " se unen ", " se suma "]
 
 
 def parece_noticia(titulo: str) -> bool:
     """¿Es el titular de una noticia en vez del nombre de una actividad?"""
-    palabras = {p.strip(".,;:()[]«»\"'¡!¿?")
-                for p in normaliza(titulo).split()}
-    return bool(palabras & VERBOS_DE_NOTICIA)
+    norm = normaliza(titulo)
+    palabras = {p.strip(".,;:()[]«»\"'¡!¿?") for p in norm.split()}
+    if palabras & VERBOS_DE_NOTICIA:
+        return True
+    return any(f in f" {norm} " for f in FRASES_DE_NOTICIA)
+
+
+# Cursos que existen y son de salud, pero no para un anestesiólogo.
+#
+# La tabla del 19/10 trajo tres cursos de RCP para la población general ("para
+# la ciudadanía", "primeros auxilios") y un máster de fisioterapia en terapia
+# manual que entraba por mencionar el dolor. Se miran en el título.
+PUBLICO_GENERAL = ["ciudadania", "poblacion general", "primeros auxilios",
+                   "para pacientes", "para familiares", "escolares", "alumnado"]
+OTRAS_PROFESIONES = ["fisioterap", "terapia manual", "osteopat", "podolog",
+                     "odontolog", "veterinar", "logopedi"]
+
+
+def es_para_otro_publico(titulo: str) -> bool:
+    n = normaliza(titulo)
+    return any(p in n for p in PUBLICO_GENERAL + OTRAS_PROFESIONES)
 
 # Páginas de sección: su título es el nombre del apartado, no un curso.
 # "Congressos i Jornades SCARTD" no es un congreso, es el índice de congresos.
@@ -570,6 +599,8 @@ SON_SECCION = [
     "cursos y talleres", "oferta formativa", "calendario de cursos",
     "actividades formativas", "eventos y congresos", "cursos online",
     "todos los cursos", "ver todos los cursos", "jornadas y congresos",
+    # 19/10: "Número 18 de 'Actualidad SECPAL'" es un boletín, no un acto
+    "numero ", "boletin", "newsletter",
 ]
 
 
@@ -583,6 +614,8 @@ def titulo_util(titulo: str) -> bool:
     if es_pagina_de_seccion(titulo):
         return False
     if parece_noticia(titulo):
+        return False
+    if es_para_otro_publico(titulo):
         return False
     return True
 
