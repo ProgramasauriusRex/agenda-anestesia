@@ -17,14 +17,17 @@ No hace falta entenderlos todos. En la práctica solo tocarás el primero.
 | `agenda.py` | El programa que visita las webs y hace la tabla | No |
 | `verificar.py` | Comprueba que las 297 direcciones siguen vivas | No (lo ejecutas, no lo editas) |
 | `fechas.py` | Entiende las fechas en español | No |
-| **`post.py`** | Monta el post de Instagram: prompts + texto de cada diapositiva | No |
+| **`imagen.py`** | Convierte la tabla en las imágenes del post de Instagram | No |
+| **`plantilla/`** | El aspecto del post: `estilo.css` y las tipografías | Solo si cambias el diseño |
+| **`descartes.txt`** | Cursos que no quieres ver ni en la tabla ni en el post | **Sí** |
 | `test_extractor.py` | Control de calidad del programa | No |
 | `requirements.txt` | Lista de programas auxiliares a instalar | No |
 | `.github/workflows/` | El despertador: hace que todo corra solo | No |
 | `estado.json` | Recuerda qué cursos ya te enseñó, para no repetirlos (se crea solo) | No |
 | `salida/eventos-conocidos.json` | Memoria de cursos encontrados hasta un año vista (se crea sola) | No |
 | `salida/AGENDA-ACTUAL.md` | La tabla de esta semana, siempre en la misma dirección | No |
-| `salida/POST-ACTUAL.md` | El post de Instagram listo: prompts y textos | No |
+| `salida/post/` | El post del lunes: imágenes, pie y sello con la fecha (se crea solo) | No |
+| `salida/CONSULTA.csv` | El resultado de la última consulta, para pedir un post a demanda | No |
 | `salida/` | Aquí aparecen las tablas (se crea sola) | No |
 
 ---
@@ -37,30 +40,60 @@ python agenda.py         # los cursos NUEVOS del próximo mes  ← el del post s
 python agenda.py --todo --meses 6    # mirar sin más: no altera el post del lunes
 ```
 
-### El post de Instagram, ya montado
+### El post de Instagram
 
-Cada lunes, junto a la tabla, aparece también esto:
+Una portada y, detrás, un carrusel con cada curso: **nombre, entidad
+organizadora, lugar y fecha**. Formato 4:5 vertical (1080 × 1350).
 
-```
-salida/POST-ACTUAL.md
-```
+**Cada lunes, solo.** El post lleva **todos los cursos del próximo mes**
+(decisión de Luis, 26/10) y se monta en dos tiempos:
 
-Dentro está todo lo que hace falta para publicar: los dos prompts de imagen,
-el texto de cada diapositiva listo para pegar y el pie con los hashtags.
+1. **Por la mañana, GitHub.** Justo después del rastreo, el mismo workflow
+   "Agenda semanal" compone las imágenes a partir de `AGENDA-ACTUAL.csv` y
+   las guarda en `salida/post/`: la portada, las diapositivas, el texto del
+   pie (`pie-del-post.txt`) y un sello con la fecha (`generado.txt`). Si algo
+   fallara al hacer las imágenes, la agenda se guarda igual.
+2. **Por la tarde (16:00 en invierno, 17:00 en verano), Claude.** Una tarea
+   programada comprueba que el post es de ese mismo día, revisa cada imagen
+   (que no se haya colado una noticia, un boletín o un curso para otra
+   profesión), lo corrige si hace falta y te lo envía con aviso al móvil y el
+   pie listo para copiar. Si GitHub no ha terminado o algo ha fallado, te lo
+   dice en vez de mandarte el post de la semana anterior: para eso está el
+   sello con la fecha.
 
-**El reparto del trabajo es a propósito: la IA hace el fondo, el texto lo
-pones tú encima.** No es una pereza de este programa, es que las IA de imagen
-no saben escribir: doce títulos en español con tildes, comillas y números
-romanos salen convertidos en garabatos. Por eso los dos prompts piden
-explícitamente *no text, no letters, no numbers* y dejan reservado el hueco
-donde va la lista. Es el mismo reparto que ya usas en la carátula de iVoox.
+Las imágenes viejas se borran siempre, también una semana sin cursos, así que
+en `salida/post/` nunca queda un post que no sea el último.
 
-Los prompts no cambian nunca: el de portada se genera una vez al mes y el de
-fondo de lista, una vez y ya. Lo que cambia cada semana es el texto, y de eso
-se encarga `post.py` solo.
+**Cualquier otro día, a demanda.** Lanza **Consultar cursos (no cambia nada)**
+con los meses que quieras y pídele a Claude el post. Lee `salida/CONSULTA.csv`,
+que la consulta deja guardado, y genera las imágenes y el pie. La consulta solo
+guarda esos dos archivos (`CONSULTA.csv` y `CONSULTA.md`): no toca la memoria
+de cursos, ni lo ya enseñado, ni la tabla del lunes, ni el histórico.
 
-Formato 4:5 vertical (1080 × 1350), cuatro cursos por diapositiva. Con seis
-hay que achinar los ojos en el móvil.
+**Por qué el texto no lo escribe una IA de imagen.** El contenido del post es
+texto, y esas herramientas escriben mal: un congreso con el nombre cambiado es
+peor que no publicarlo. `imagen.py` compone las imágenes con tipografía de
+verdad, letra a letra como viene de la web del organizador.
+
+**Cómo decide cuántos cursos van en cada imagen.** No a ojo: mide cada imagen
+tal y como va a quedar y mete los que caben, hasta cinco. Luego reparte a
+partes iguales: 20 cursos salen en 5 imágenes de 4, no en 5-5-5-4-1. Un título
+de más de tres líneas se corta con puntos suspensivos. Instagram admite 20
+imágenes por carrusel; si salieran más, avisa.
+
+**La entidad organizadora, no la web donde se encontró.** Cuando un curso sale
+de un agregador (Dolor.com, DimeCongresos, AnestesiaR…) y el título nombra a
+una sociedad, figura la sociedad: "II Jornada Enfermería de SEMDOR", recogida
+por Dolor.com, aparece como de SEMDOR.
+
+**Cambiar el aspecto.** Todo está en `plantilla/estilo.css`: colores,
+tipografías y tamaños, con las variables arriba del todo. Para cambiar el
+diseño no hace falta tocar `imagen.py`.
+
+**Quitar un curso.** Si sale uno que no es para tu audiencia, añade un trozo
+de su título como línea nueva en `descartes.txt`. Desaparece de la tabla y del
+post para siempre. Para quitarlo solo de un post concreto, basta con decírselo
+a Claude al pedirlo.
 
 ### Cómo consultar los cursos (sin tocar nada)
 
@@ -563,7 +596,7 @@ python agenda.py
 
 Sube estos archivos a un repositorio de GitHub y se ejecutará solo:
 
-- **Cada lunes a las 8:00** → las 297 webs, cursos del próximo mes
+- **Cada lunes a las 7:13** (8:13 en verano) → las 297 webs, cursos del próximo mes y el post de Instagram
 - **Cada tres meses** → verificación de que las direcciones siguen vivas, y
   actualización del campo `feed` de cada una
 

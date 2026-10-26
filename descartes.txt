@@ -1,0 +1,7 @@
+# Cursos que no quieres ver ni en la tabla ni en el post.
+#
+# Una línea por curso, con un trozo de su título. Da igual mayúsculas o
+# tildes: "hematologia" quita "Seminario “hematología en Obstericia…”".
+# Las líneas que empiezan por # no cuentan.
+
+hematología en Obstericia

@@ -1,0 +1,279 @@
+/*
+  Estilo del post de Instagram de la agenda formativa.
+
+  TODO lo que cambia el aspecto está en este archivo. Para adaptar el post a
+  otra estética (los resúmenes del podcast, por ejemplo) basta con tocar las
+  variables de aquí abajo: colores, tipografías y tamaños. La estructura y los
+  datos los pone imagen.py y no hace falta tocarlo.
+
+  Versión provisional: sigue la familia visual de la carátula de iVoox
+  (quirófano oscuro, paleta teal y acero, un acento ámbar) a la espera de
+  ajustarla a la plantilla de los resúmenes.
+*/
+
+:root {
+  /* Colores */
+  --fondo-arriba:   #0E2A33;   /* teal profundo, donde "cuelgan" las lámparas */
+  --fondo-abajo:    #061317;   /* casi negro, el suelo */
+  --texto:          #EEF4F5;
+  --texto-suave:    #9DB7BE;
+  --acento:         #F2A541;   /* ámbar: fechas y detalles */
+  --linea:          rgba(157, 183, 190, .20);
+  --insignia-fondo: rgba(242, 165, 65, .14);
+
+  /* Tipografías */
+  --titular: 'Montserrat', sans-serif;
+  --cuerpo:  'Inter', sans-serif;
+
+  /* Tamaños (en píxeles de una imagen de 1080 × 1350) */
+  --margen:          84px;
+  --curso-titulo:    35px;
+  --curso-detalle:   25px;
+  --fecha-dia:       54px;
+  --fecha-mes:       22px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { width: 1080px; height: 1350px; }
+
+body {
+  position: relative;
+  overflow: hidden;
+  color: var(--texto);
+  font-family: var(--cuerpo);
+  background: linear-gradient(180deg, var(--fondo-arriba) 0%, var(--fondo-abajo) 78%);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Las dos lámparas de quirófano: dos halos de luz arriba, uno a cada lado,
+   con el ámbar de la izquierda que lleva la carátula. Solo CSS, sin imagen. */
+body::before, body::after {
+  content: "";
+  position: absolute;
+  top: -260px;
+  width: 760px; height: 760px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+body::before {
+  left: -300px;
+  background: radial-gradient(closest-side, rgba(242, 165, 65, .20), transparent);
+}
+body::after {
+  right: -300px;
+  background: radial-gradient(closest-side, rgba(170, 214, 224, .16), transparent);
+}
+
+/* Si se le pasa un fondo generado por IA, va debajo de todo, oscurecido para
+   que el texto se lea siempre. */
+.fondo-imagen {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  opacity: .38;
+}
+
+.diapositiva {
+  position: relative;
+  z-index: 1;
+  width: 1080px; height: 1350px;
+  padding: var(--margen);
+  display: flex; flex-direction: column;
+}
+
+/* --- Marca y pie, comunes a todas ---------------------------------------- */
+
+.marca {
+  font-family: var(--titular);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+.marca b { color: var(--acento); font-weight: 800; }
+
+.pie {
+  margin-top: auto;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  font-size: 22px;
+  color: var(--texto-suave);
+}
+.pie .usuario { font-weight: 600; color: var(--texto); }
+.pie .aviso   { max-width: 560px; text-align: right; line-height: 1.35; font-size: 19px; }
+
+/* --- Portada ------------------------------------------------------------- */
+
+.portada .bloque {
+  margin-top: 210px;
+}
+.portada .antetitulo {
+  font-family: var(--titular);
+  font-weight: 600;
+  font-size: 30px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--acento);
+}
+.portada h1 {
+  margin-top: 26px;
+  font-family: var(--titular);
+  font-weight: 800;
+  font-size: 128px;
+  line-height: .98;
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+}
+.portada .regla {
+  width: 140px; height: 8px;
+  margin: 46px 0 40px;
+  background: var(--acento);
+  border-radius: 4px;
+}
+.portada .periodo {
+  font-family: var(--titular);
+  font-weight: 600;
+  font-size: 54px;
+}
+.portada .areas {
+  margin-top: 22px;
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--texto-suave);
+}
+.portada .cifra {
+  margin-top: 70px;
+  font-size: 34px;
+  font-weight: 500;
+}
+.portada .cifra b {
+  font-family: var(--titular);
+  font-weight: 800;
+  font-size: 92px;
+  color: var(--acento);
+  margin-right: 18px;
+  vertical-align: -10px;
+}
+.portada .desliza {
+  font-family: var(--titular);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--acento);
+}
+
+/* --- Diapositivas de lista ----------------------------------------------- */
+
+.lista .cabecera {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-bottom: 28px;
+  border-bottom: 2px solid var(--acento);
+}
+.lista .cabecera .seccion {
+  font-family: var(--titular);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+.lista .cabecera .pagina {
+  font-family: var(--titular);
+  font-weight: 600;
+  font-size: 24px;
+  color: var(--texto-suave);
+}
+
+.cursos { list-style: none; margin-top: 8px; }
+/* Con tres o más cursos la lista ocupa toda la altura disponible y el aire
+   se reparte entre las filas, en vez de quedarse todo abajo. */
+.cursos.llena {
+  flex: 1;
+  display: flex; flex-direction: column; justify-content: space-evenly;
+  margin-bottom: 24px;
+}
+
+.curso {
+  display: flex; gap: 34px;
+  padding: 34px 0;
+  border-bottom: 1px solid var(--linea);
+}
+.curso:last-child { border-bottom: none; }
+
+.curso .fecha {
+  flex: 0 0 138px;
+  text-align: center;
+  padding-top: 4px;
+}
+.curso .fecha .dia {
+  display: block;
+  font-family: var(--titular);
+  font-weight: 800;
+  font-size: var(--fecha-dia);
+  line-height: 1;
+  color: var(--acento);
+  white-space: nowrap;
+}
+.curso .fecha .dia.largo { font-size: 40px; }     /* "30 OCT – 2" */
+.curso .fecha .mes {
+  display: block;
+  margin-top: 10px;
+  font-family: var(--titular);
+  font-weight: 700;
+  font-size: var(--fecha-mes);
+  letter-spacing: .2em;
+  color: var(--texto-suave);
+}
+
+.curso .fecha .hasta {
+  display: block;
+  margin-top: 10px;
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--acento);
+  white-space: nowrap;
+}
+
+.curso .datos { flex: 1; min-width: 0; }
+
+.curso .titulo {
+  font-family: var(--titular);
+  font-weight: 700;
+  font-size: var(--curso-titulo);
+  line-height: 1.22;
+  /* como mucho tres líneas; si no cabe, puntos suspensivos */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.curso .entidad {
+  margin-top: 14px;
+  font-size: var(--curso-detalle);
+  font-weight: 600;
+}
+.curso .lugar {
+  margin-top: 6px;
+  font-size: var(--curso-detalle);
+  font-weight: 400;
+  color: var(--texto-suave);
+}
+.curso .lugar svg {
+  width: 22px; height: 22px;
+  vertical-align: -3px;
+  margin-right: 8px;
+  fill: var(--acento);
+}
+.insignia {
+  display: inline-block;
+  margin-left: 14px;
+  padding: 3px 12px;
+  border-radius: 6px;
+  font-family: var(--titular);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: .14em;
+  color: var(--acento);
+  background: var(--insignia-fondo);
+  vertical-align: 3px;
+}

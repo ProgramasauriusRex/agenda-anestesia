@@ -439,59 +439,6 @@ print("Relleno de lugares desde la ficha ✓")
 
 
 # ---------------------------------------------------------------------------
-# El post de Instagram
-# ---------------------------------------------------------------------------
-# post.py es opcional: el rastreo funciona sin él (intenta montar el post,
-# no lo encuentra y sigue). Las pruebas tienen que poder decir lo mismo.
-try:
-    import post as _post
-except ImportError:
-    _post = None
-
-if _post is None:
-    print("Post de Instagram: no está post.py, prueba omitida ✓")
-else:
-
-    _dp = tempfile.mkdtemp()
-    _salida_real = _post.SALIDA
-    _post.SALIDA = pathlib.Path(_dp)
-    try:
-        with open(os.path.join(_dp, "AGENDA-ACTUAL.csv"), "w", encoding="utf-8",
-                  newline="") as _f:
-            _w = csv.writer(_f)
-            _w.writerow(["titulo", "fecha_texto", "inicio", "fin", "lugar",
-                         "entidad", "url", "ambito", "via", "id"])
-            _w.writerow(["XV Congreso Internacional SECPAL", "", "2026-10-08",
-                         "2026-10-10", "Cartagena", "SECPAL", "u", "dolor", "html", "1"])
-            _w.writerow(["Curso de Soporte Vital Básico (SVB) y DEA — plazas agotadas",
-                         "", "2026-10-06", "2026-10-06", "Online",
-                         "Colegio de Médicos de Málaga", "u", "mixto", "html", "2"])
-            _w.writerow(["VI Jornada de la Societat Catalana d'Anestesiologia, "
-                         "Reanimació i Terapèutica del Dolor", "", "2026-11-05",
-                         "", "", "SCARTD (Cataluña)", "u", "anestesia", "html", "3"])
-        _ruta = _post.genera(date(2026, 10, 7))
-        _txt = _ruta.read_text(encoding="utf-8")
-    finally:
-        _post.SALIDA = _salida_real
-        shutil.rmtree(_dp, ignore_errors=True)
-
-    # El mes que domina la tanda manda en la portada
-    assert "OCTUBRE" in _txt and "agenda de octubre 2026" in _txt
-    # Los prompts tienen que prohibir el texto: es lo único que la IA no sabe hacer
-    assert _txt.count("no text") >= 1 and "no letters, no numbers" in _txt
-    assert "--ar 4:5" in _txt, "formato vertical de feed"
-    # Rango de fechas abreviado, y el aviso de plazas fuera del título
-    assert "8-10 oct · Cartagena · SECPAL" in _txt, _txt
-    assert "[COMPLETO]" in _txt
-    assert "plazas agotadas" not in _txt.split("## 2.")[1], \
-        "en la diapositiva el aviso va como etiqueta, no dentro del título"
-    # El título larguísimo se acorta, pero se sigue entendiendo qué es
-    assert "VI Jornada de la Societat Catalana d'Anestesiologia…" in _txt, _txt
-    assert "#anestesiologia" in _txt
-    print("Post de Instagram ✓")
-
-
-# ---------------------------------------------------------------------------
 # Titulares de noticias — defectos reales del rastreo del 12/10
 #
 # Tres de los dieciséis cursos de ese lunes eran noticias de la web de un
@@ -724,3 +671,77 @@ assert recura_titulo("Cambio de fecha | Las IV Jornadas Sempal para Residentes a
 assert recura_titulo("Inscripción abierta: Curso de ecografía en el paciente crítico") == \
     "Curso de ecografía en el paciente crítico"
 print("Tabla del 26/10 y filtro de paliativos ✓")
+
+
+# ---------------------------------------------------------------------------
+# El post de Instagram: imagen.py (26/10)
+#
+# Aquí se prueba lo que decide qué sale en cada imagen. La composición en sí
+# necesita un navegador y se revisa mirando las imágenes.
+# ---------------------------------------------------------------------------
+import imagen as _im
+
+# Fechas: la que cruza de mes no cabe en una sola línea grande
+assert _im.fecha_corta({"inicio": "2026-10-27", "fin": "2026-10-27"}) == ("27", "OCT", "")
+assert _im.fecha_corta({"inicio": "2026-11-12", "fin": "2026-11-14"}) == ("12-14", "NOV", "")
+assert _im.fecha_corta({"inicio": "2026-10-26", "fin": "2026-12-01"}) == ("26", "OCT", "hasta 1 DIC")
+
+assert _im.periodo([{"inicio": "2026-10-27"}, {"inicio": "2026-11-22"}]) == "Octubre – Noviembre 2026"
+assert _im.periodo([{"inicio": "2026-12-10"}, {"inicio": "2027-01-15"}]) == "Diciembre 2026 – Enero 2027"
+
+# La entidad que organiza, no la web donde se encontró
+assert _im.organizador({"entidad": "Dolor.com — Congresos y jornadas",
+                        "titulo": "II Jornada Enfermería de SEMDOR"}) == "SEMDOR"
+assert _im.organizador({"entidad": "H. U. i Politècnic La Fe — agenda",
+                        "titulo": "Curso de Soporte Vital Inmediato"}) == "H. U. i Politècnic La Fe"
+assert _im.organizador({"entidad": "Colegio de Médicos de Burgos",
+                        "titulo": "VIII Curso Avanzado de Ecografía"}) == "Colegio de Médicos de Burgos"
+# Si el agregador no nombra a ninguna sociedad, se queda el agregador
+assert _im.organizador({"entidad": "DimeCongresos",
+                        "titulo": "Congreso Panamericano e Ibérico de Medicina Intensiva"}) == "DimeCongresos"
+
+assert _im.separa_agotado("Curso de SVB y DEA — plazas agotadas") == ("Curso de SVB y DEA", True)
+
+# Reparto: con 21 cursos y sitio para 4 por imagen, a partes iguales
+_cabe4 = lambda g: len(g) <= 4
+_rep = _im.reparte([{"i": i} for i in range(21)], _cabe4)
+assert [len(g) for g in _rep] == [4, 4, 4, 3, 3, 3], [len(g) for g in _rep]
+_rep = _im.reparte([{"i": i} for i in range(8)], _cabe4)
+assert [len(g) for g in _rep] == [4, 4], [len(g) for g in _rep]
+assert sum(len(g) for g in _im.reparte([{"i": i} for i in range(13)], _cabe4)) == 13
+print("Post de Instagram: fechas, organizador y reparto ✓")
+
+# ---------------------------------------------------------------------------
+# Títulos con palabras colgando y descartes.txt (26/10)
+# ---------------------------------------------------------------------------
+assert recura_titulo("Nueva sesión del Curso de Soporte Vital Básico y DEA dirigido a "
+                     "médicos y otros profesionales, el") == \
+    "Nueva sesión del Curso de Soporte Vital Básico y DEA dirigido a médicos y otros profesionales"
+
+import agenda as _ag5
+_antes = list(_ag5.DESCARTES)
+_ag5.DESCARTES = [_ag5.normaliza("hematología en Obstericia")]
+try:
+    assert not _ag5.titulo_util("Seminario “hematología en Obstericia y Ginecología”")
+    assert _ag5.titulo_util("Curso de anestesia en obstetricia")
+finally:
+    _ag5.DESCARTES = _antes
+print("Palabras colgando y descartes.txt ✓")
+
+# Una semana sin cursos: se borra el post viejo y queda constancia, sin error.
+# Si el post de la semana anterior se quedara en la carpeta, podría publicarse
+# creyendo que es el nuevo.
+_dp = pathlib.Path(tempfile.mkdtemp())
+try:
+    (_dp / "post").mkdir()
+    (_dp / "post" / "02-cursos.png").write_bytes(b"viejo")
+    (_dp / "vacia.csv").write_text("titulo,fecha_texto,inicio,fin,lugar,entidad,url,ambito,via,id\n",
+                                   encoding="utf-8")
+    assert _im.genera(_dp / "vacia.csv", _dp / "post") == []
+    assert not list((_dp / "post").glob("*.png")), "el post viejo debe desaparecer"
+    assert (_dp / "post" / "SIN-CURSOS.txt").exists()
+    _sello = (_dp / "post" / "generado.txt").read_text(encoding="utf-8")
+    assert f"fecha: {date.today().isoformat()}" in _sello and "cursos: 0" in _sello
+finally:
+    shutil.rmtree(_dp, ignore_errors=True)
+print("Post: semana sin cursos ✓")

@@ -500,6 +500,11 @@ ETIQUETAS_FICHA = [
     "dirigido a:", "modalidad:", "matricula:", "objetivos:", "temario:",
 ]
 # Etiquetas que quedan colgando al quitar la fecha ("...Medicina Intensiva Fecha")
+# Al quitar la fecha de "…y otros profesionales, el 18 de noviembre" quedaba
+# "…y otros profesionales, el" (26/10). Ninguna de estas palabras puede cerrar
+# el título de un curso.
+COLGANTES = {"el", "la", "los", "las", "del", "de", "a", "al", "en", "y", "para",
+             "proximo", "proxima", "dia", "dias", "desde", "hasta", "con"}
 ETIQUETAS_FINALES = {"fecha", "fechas", "cuando", "horario", "inicio", "lugar", "sede",
                      # 26/10: PEDPAL pega su categoría al final del título
                      "webinars"}
@@ -515,6 +520,9 @@ COLA_RUIDO = [
     "creditos ects", "credits ects", "inscribirse", "inscripcion :",
     "inscripcion:", "descargar folleto", "descargar el folleto", "ver ficha",
     "ficha del curso", "leer mas", "compartir en", "precio :", "precio:",
+    # 26/10: "Instructor en Soporte Vital Básico y DEA | Presencial y online".
+    # La modalidad ya va en el lugar ("Online"); en el título sobra.
+    "| presencial", "| online", "| semipresencial", "| on-line",
 ]
 
 # Y pegadas DELANTE: etiquetas de estado o de categoría, no parte del título.
@@ -663,9 +671,29 @@ SOLO_ETIQUETA = {"inscripciones", "inscripcion", "programa", "agenda", "noticias
                  "convocatorias", "novedades"}
 
 
+def _carga_descartes() -> list[str]:
+    """
+    descartes.txt: una línea por curso que no quieres ver, con un trozo de su
+    título. Para los que el programa no puede saber que sobran, como el
+    "Seminario de hematología en Obstetricia" del Colegio de Navarra: no hay
+    regla que lo quite sin llevarse por delante cursos de anestesia obstétrica,
+    pero tú sabes que no es para tu audiencia. Las líneas con # se ignoran.
+    """
+    ruta = BASE / "descartes.txt"
+    if not ruta.exists():
+        return []
+    return [normaliza(l.strip()) for l in ruta.read_text(encoding="utf-8").splitlines()
+            if l.strip() and not l.strip().startswith("#")]
+
+
+DESCARTES = _carga_descartes()
+
+
 def titulo_util(titulo: str) -> bool:
     """¿Este texto sirve como título de un curso?"""
     n = normaliza(titulo)
+    if any(d in n for d in DESCARTES):
+        return False
     if n.strip(" .:·-") in SOLO_ETIQUETA:
         return False
     if len(n) < 12:
@@ -907,7 +935,7 @@ def limpia_titulo(titulo: str, frag: str) -> str:
     # siempre, no solo si la fecha estaba en el título: muchas webs la guardan
     # en un atributo oculto y dejan la etiqueta suelta en el texto visible.
     w = limpio.split()
-    while w and normaliza(w[-1]).strip(_BORDES) in ETIQUETAS_FINALES:
+    while w and normaliza(w[-1]).strip(_BORDES) in ETIQUETAS_FINALES | COLGANTES:
         w.pop()
     limpio = " ".join(w).strip(" -–—·|:,;")
 
@@ -1620,36 +1648,31 @@ def main() -> int:
 
     SALIDA.mkdir(exist_ok=True)
     sello = hoy.isoformat()
-    (SALIDA / f"agenda-{sello}.md").write_text(a_markdown(eventos, hoy), encoding="utf-8")
-    if eventos:
-        (SALIDA / f"agenda-{sello}.csv").write_text(a_csv(eventos), encoding="utf-8")
-
-    # Además del archivo con fecha, uno de nombre fijo con lo mismo. Así hay
-    # UNA dirección que siempre lleva a la tabla de esta semana y se puede
-    # guardar en favoritos, en vez de ir a buscar cada lunes el más reciente.
-    # Solo lo escribe el rastreo de verdad: una consulta con --todo no debe
-    # cambiar lo que esa dirección enseña.
-    if not args.todo:
-        (SALIDA / "AGENDA-ACTUAL.md").write_text(
-            a_markdown(eventos, hoy), encoding="utf-8")
+    if args.todo:
+        # Una consulta deja su resultado con nombre fijo, CONSULTA.csv y
+        # CONSULTA.md, y NO escribe los archivos con fecha ni AGENDA-ACTUAL:
+        # así una consulta un miércoles no pisa la tabla del lunes ni el
+        # histórico. De CONSULTA.csv sale el post de Instagram (imagen.py).
+        (SALIDA / "CONSULTA.md").write_text(a_markdown(eventos, hoy), encoding="utf-8")
+        (SALIDA / "CONSULTA.csv").write_text(a_csv(eventos), encoding="utf-8")
+        destino = "salida/CONSULTA.md"
+    else:
+        (SALIDA / f"agenda-{sello}.md").write_text(a_markdown(eventos, hoy), encoding="utf-8")
+        if eventos:
+            (SALIDA / f"agenda-{sello}.csv").write_text(a_csv(eventos), encoding="utf-8")
+        # Además del archivo con fecha, uno de nombre fijo con lo mismo: UNA
+        # dirección que siempre lleva a la tabla de esta semana.
+        (SALIDA / "AGENDA-ACTUAL.md").write_text(a_markdown(eventos, hoy), encoding="utf-8")
         if eventos:
             (SALIDA / "AGENDA-ACTUAL.csv").write_text(a_csv(eventos), encoding="utf-8")
-
-        # Y el post de Instagram ya montado: prompts de imagen + el texto de
-        # cada diapositiva. Si post.py no estuviera, el rastreo sigue igual.
-        try:
-            import post
-            if ruta_post := post.genera(hoy):
-                print(f"→ {ruta_post.relative_to(BASE)}", file=sys.stderr)
-        except Exception as e:
-            print(f"(el post no se ha podido generar: {e})", file=sys.stderr)
+        destino = f"salida/agenda-{sello}.md"
 
     if rellenados:
         print(f"\n{rellenados} ciudades recuperadas abriendo la ficha", file=sys.stderr)
     print(f"\n{len(frescos)} cursos encontrados hoy · {len(memoria)} en memoria · "
           f"{len(eventos)} en la ventana del post · {len(nuevos)} nuevos",
           file=sys.stderr)
-    print(f"→ salida/agenda-{sello}.md\n", file=sys.stderr)
+    print(f"→ {destino}\n", file=sys.stderr)
 
     if args.diagnostico:
         print("\n--- Salud de las fuentes ---", file=sys.stderr)
