@@ -7,15 +7,23 @@ name: Consultar cursos (no cambia nada)
 # enseñado, para no repetírtelos. Si lanzaras ese mismo rastreo a mano un
 # miércoles, los cursos quedarían marcados como "ya vistos" y el lunes
 # siguiente no aparecerían. Esta consulta usa --todo, que no apunta nada.
+#
+# Lo único que guarda en el repositorio son dos archivos con nombre fijo,
+# salida/CONSULTA.csv y salida/CONSULTA.md, para poder generar el post de
+# Instagram a partir de ellos. No toca la memoria de cursos, ni la lista de
+# lo ya enseñado, ni la tabla del lunes, ni el histórico.
 on:
   workflow_dispatch:
     inputs:
       meses:
         description: "Cuántos meses hacia delante quieres ver"
         required: true
-        default: "3"
+        default: "1"
         type: choice
         options: ["1", "2", "3", "6", "12"]
+
+permissions:
+  contents: write
 
 jobs:
   consultar:
@@ -36,10 +44,19 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           python agenda.py --nivel 1 2 3 --todo --meses ${{ inputs.meses }} >> $GITHUB_STEP_SUMMARY
 
-      # Y de paso en CSV, por si quieres pasarlo a una hoja de cálculo.
-      - name: Dejarlo descargable
+      # Solo los dos archivos de la consulta, nada más.
+      - name: Guardar la consulta para el post
+        run: |
+          git config user.name "agenda-bot"
+          git config user.email "agenda-bot@users.noreply.github.com"
+          git add salida/CONSULTA.csv salida/CONSULTA.md
+          git diff --staged --quiet || git commit -m "Consulta $(date +%Y-%m-%d) · ${{ inputs.meses }} meses"
+          git pull --rebase --autostash
+          git push
+
+      - name: Dejarlo también descargable
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: consulta-${{ github.run_number }}
-          path: salida/
+          path: salida/CONSULTA.*
