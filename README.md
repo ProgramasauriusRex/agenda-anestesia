@@ -403,6 +403,48 @@ distintos que han salido alguna vez en una tabla o en la memoria. Quitan seis:
 los cinco de arriba y "Cudeca se suma al Día Mundial de Cuidados Paliativos con
 dos webinars…", que también es un titular. Ningún curso de verdad.
 
+### El primer rastreo con todo (26/10)
+
+29 cursos, los 29 con ciudad, con los hospitales de Madrid ya dentro. Ocho
+filas sobraban, y se corrigió cada causa:
+
+- **Encabezados y boletines** que algunos canales publican como si fueran una
+  entrada más: "Últimos artículos" (IACS), "E-Bellvitge 755" (el boletín
+  interno de Bellvitge), "Inscripciones" a secas.
+- **Nombres de fichero** como título: "18 Actualidad SECPAL Octubre Diciembre
+  2022.pdf". Ahora se limpian en vez de descartarse, porque al probar la regla
+  de descartarlos contra el histórico se llevaba dos cursos reales ("Programa
+  VII Curso Eco Pulmonar Seneo 2026v0.pdf" pasa a "VII Curso Eco Pulmonar
+  Seneo 2026").
+- **Un título de 2022 con fecha de 2026.** La memoria ya los limpiaba, pero
+  solo al cargarla, una semana después: el registro nuevo salía en la tabla
+  de esa misma semana. Ahora se mira también en lo recién encontrado.
+- **Fuera de ámbito**: ecocardiografía fetal y neuropediatría. La cirugía
+  fetal no se excluye, que su anestesia sí es de la especialidad.
+- **Sant Joan de Déu**: el verificador le asignó el canal de toda la formación
+  del hospital, no solo anestesia. Pasa a filtro estricto.
+
+### Filtro "dolor" para los paliativos
+
+Tres filas de aquel lunes eran de paliativos sin relación con el dolor:
+espiritualidad y alzhéimer, la dimensión espiritual de los paliativos, un
+webinar de paliativos perinatales. Entraban porque "paliativo" cuenta como
+palabra de la especialidad, así que el filtro estricto apenas restringía a las
+sociedades de paliativos.
+
+Decisión de Luis: las 13 fuentes de paliativos (SECPAL, sus diez autonómicas,
+PEDPAL y AECPAL) llevan ahora filtro `dolor`. Solo aportan un curso si su
+**título** habla de dolor, analgesia, opioides, sedación, anestesia o
+críticos, o nombra a la sociedad, para que su congreso siga entrando. Los
+paliativos que vengan de un hospital no cambian: la "V Jornada de Cuidados
+Paliativos de la Comunidad de Madrid" del Ramón y Cajal se queda.
+
+Para que una de esas fuentes vuelva a aportar todo, cambia su `filtro` a
+`estricto` (todo lo de paliativos) o a `evento` (absolutamente todo).
+
+Sobre los 110 títulos del histórico, las reglas actuales descartan 28: 17 que
+no eran cursos, 3 de un año anterior a su fecha y 8 de paliativos sin dolor.
+
 ---
 
 ## Añadir una web nueva
@@ -422,7 +464,9 @@ El campo `feed` lo rellena solo el verificador; no lo escribas tú.
 
 - `nivel`: solo para pasadas parciales a mano; el rastreo automático las visita todas
 - `ambito`: `anestesia`, `criticos`, `dolor` o `mixto`
-- `filtro`: `evento` en webs ya específicas de la especialidad;
+- `filtro`: `dolor` en las fuentes de cuidados paliativos (solo cursos de
+  dolor, analgesia, sedación o anestesia, mirando el título);
+  `evento` en webs ya específicas de la especialidad;
   `estricto` en webs generalistas (colegios, universidades, hospitales,
   agregadores), donde además exige que el texto mencione la especialidad. Sin
   eso, la tabla se te llena de congresos de traumatología.

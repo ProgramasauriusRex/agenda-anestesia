@@ -162,6 +162,21 @@ PATRONES_ESPECIALIDAD = [
 ]
 _RE_ESPECIALIDAD = re.compile("|".join(PATRONES_ESPECIALIDAD))
 
+# Filtro "dolor", para las fuentes de cuidados paliativos (decisión de Luis,
+# 26/10). Con el filtro estricto entraba cualquier curso de paliativos, porque
+# "paliativo" cuenta como palabra de la especialidad: ese lunes salieron
+# "Espiritualidad y alzhéimer", "La dimensión espiritual en cuidados
+# paliativos" y un webinar de paliativos perinatales. Con este filtro, una
+# fuente de paliativos solo aporta un curso si su TÍTULO habla de dolor,
+# analgesia, opioides, sedación, anestesia o críticos, o nombra a la sociedad
+# (así el congreso de SECPAL sigue entrando).
+_RE_DOLOR = re.compile("|".join(p for p in PATRONES_ESPECIALIDAD
+                                if "paliativ" not in p and "palliative" not in p))
+
+
+def es_de_dolor(titulo: str) -> bool:
+    return bool(_RE_DOLOR.search(normaliza(titulo)))
+
 # Ruido típico de menús y pies de página que nunca es un evento
 RUIDO = [
     "politica de privacidad", "aviso legal", "politica de cookies", "hazte socio",
@@ -450,7 +465,7 @@ def es_relevante(texto: str, filtro: str) -> bool:
     if any(r in t for r in RUIDO) and len(t) < 60:
         return False
     tiene_evento = any(p in t for p in PALABRAS_EVENTO)
-    if filtro == "estricto":
+    if filtro in ("estricto", "dolor"):
         return tiene_evento and bool(_RE_ESPECIALIDAD.search(t))
     return tiene_evento
 
@@ -485,7 +500,9 @@ ETIQUETAS_FICHA = [
     "dirigido a:", "modalidad:", "matricula:", "objetivos:", "temario:",
 ]
 # Etiquetas que quedan colgando al quitar la fecha ("...Medicina Intensiva Fecha")
-ETIQUETAS_FINALES = {"fecha", "fechas", "cuando", "horario", "inicio", "lugar", "sede"}
+ETIQUETAS_FINALES = {"fecha", "fechas", "cuando", "horario", "inicio", "lugar", "sede",
+                     # 26/10: PEDPAL pega su categoría al final del título
+                     "webinars"}
 
 # Texto de interfaz que varias webs meten DENTRO del enlace del curso, detrás
 # del título. Salió de la tabla real del 05/10: "Máster en Entrenamiento para
@@ -507,6 +524,8 @@ CABEZA_RUIDO = [
     "proximamente", "novedad", "destacado", "nuevo curso", "nuevo",
     "en directo", "online", "presencial", "semipresencial", "enfermeria",
     "formacion continuada",
+    # 26/10: "Cambio de fecha | Las IV Jornadas Sempal para Residentes…"
+    "cambio de fecha", "nueva fecha", "aplazado", "aplazada",
 ]
 
 # Palabras que, si quedan al principio tras recortar, delatan que nos hemos
@@ -556,6 +575,9 @@ VERBOS_DE_NOTICIA = {
     "aprende", "aprenden", "ocupadas", "publica", "publican", "edita",
     "cumple", "cumplen", "felicita", "felicitan", "agradece", "agradecen",
     "recuerda", "recuerdan", "conmemora", "conmemoran",
+    # 26/10: "Las IV Jornadas Sempal para Residentes FINALIZAN en Toledo". Un
+    # acto que ya ha terminado no tiene sitio en una agenda de lo que viene.
+    "finaliza", "finalizan", "concluye", "concluyen", "termina", "terminan",
 }
 
 # Y en forma reflexiva, que no se puede tratar como palabra suelta: "forma"
@@ -583,11 +605,36 @@ PUBLICO_GENERAL = ["ciudadania", "poblacion general", "primeros auxilios",
                    "para pacientes", "para familiares", "escolares", "alumnado"]
 OTRAS_PROFESIONES = ["fisioterap", "terapia manual", "osteopat", "podolog",
                      "odontolog", "veterinar", "logopedi"]
+# 26/10: "XIX Curso de Ecocardiografía fetal" entró por la palabra
+# "ecocardiografía", que se acepta porque la eco transesofágica y la POCUS son
+# de anestesia y críticos. La fetal es de obstetricia y cardiología pediátrica.
+# Ojo: "cirugía fetal" NO se excluye, que su anestesia sí es de la casa.
+FUERA_DE_AMBITO = ["ecocardiografia fetal", "ecografia fetal",
+                   "ecografia obstetrica", "neuropediatria"]
+
+# Enlaces a un documento cuyo texto es el nombre del fichero. Al principio se
+# descartaban, pero al probarlo contra todo el histórico se llevaba por delante
+# dos cursos reales: "Programa VII Curso Eco Pulmonar Seneo 2026v0.pdf" y
+# "Programa Curso de Revision 2026.pdf". Ahora se limpian y se quedan.
+_RE_FICHERO = re.compile(r"\.(?:pdf|docx?|pptx?|xlsx?|jpe?g|png|zip)\s*$", re.I)
+
+
+def limpia_nombre_de_fichero(titulo: str) -> str:
+    """'Programa VII Curso Eco Pulmonar Seneo 2026v0.pdf' → 'VII Curso Eco
+    Pulmonar Seneo 2026'. Si no es un nombre de fichero, no lo toca."""
+    if not _RE_FICHERO.search(titulo):
+        return titulo
+    t = _RE_FICHERO.sub("", titulo).replace("_", " ")
+    t = re.sub(r"(\d{4})v\d+\b", r"\1", t)                     # 2026v0 → 2026
+    t = re.sub(r"[\s-]+(?:v\d+|final|def(?:initivo)?)\s*$", "", t, flags=re.I)
+    t = re.sub(r"^(?:programa|cartel|d[ií]ptico|tr[ií]ptico)"
+               r"(?:\s+(?:del?|de\s+la))?\s+", "", t, flags=re.I)
+    return re.sub(r"\s+", " ", t).strip() or titulo
 
 
 def es_para_otro_publico(titulo: str) -> bool:
     n = normaliza(titulo)
-    return any(p in n for p in PUBLICO_GENERAL + OTRAS_PROFESIONES)
+    return any(p in n for p in PUBLICO_GENERAL + OTRAS_PROFESIONES + FUERA_DE_AMBITO)
 
 # Páginas de sección: su título es el nombre del apartado, no un curso.
 # "Congressos i Jornades SCARTD" no es un congreso, es el índice de congresos.
@@ -601,12 +648,26 @@ SON_SECCION = [
     "todos los cursos", "ver todos los cursos", "jornadas y congresos",
     # 19/10: "Número 18 de 'Actualidad SECPAL'" es un boletín, no un acto
     "numero ", "boletin", "newsletter",
+    # 26/10: el canal del IACS publica la página "Últimos artículos" como una
+    # entrada más, y el de Bellvitge su boletín interno, "E-Bellvitge 755"
+    "ultimos articulos", "ultimas noticias", "noticias destacadas",
+    "articulos relacionados", "e-bellvitge",
 ]
+
+
+# Botones y etiquetas sueltas que a veces llegan como título de una entrada.
+# Se comparan enteros: "Inscripciones" a secas no es un curso (ARINDUZ, 26/10),
+# pero "Inscripción abierta: Curso de ecografía" sí lo es.
+SOLO_ETIQUETA = {"inscripciones", "inscripcion", "programa", "agenda", "noticias",
+                 "eventos", "formacion", "mas informacion", "cursos", "actividades",
+                 "convocatorias", "novedades"}
 
 
 def titulo_util(titulo: str) -> bool:
     """¿Este texto sirve como título de un curso?"""
     n = normaliza(titulo)
+    if n.strip(" .:·-") in SOLO_ETIQUETA:
+        return False
     if len(n) < 12:
         return False
     if len(n) < 50 and any(p in n for p in NO_SON_TITULO):
@@ -658,7 +719,7 @@ def pule_titulo(titulo: str) -> str:
     Todos los casos vienen de la tabla real del 05/10, que es la primera que
     se miró con intención de publicarla.
     """
-    limpio = titulo
+    limpio = limpia_nombre_de_fichero(titulo)
 
     # 1. Cola: se corta en la primera marca de ruido, si deja título suficiente
     norm = normaliza(limpio)
@@ -1112,6 +1173,13 @@ def desde_html(url: str, html: str, fuente: dict) -> list[Evento]:
 # --- Rastreo de una fuente ------------------------------------------------
 
 def rastrea(fuente: dict, verbose: bool = True) -> tuple[list[Evento], str]:
+    ev, estado = _rastrea(fuente, verbose)
+    if fuente.get("filtro") == "dolor":
+        ev = [e for e in ev if es_de_dolor(e.titulo)]
+    return ev, estado
+
+
+def _rastrea(fuente: dict, verbose: bool = True) -> tuple[list[Evento], str]:
     url = fuente["url"]
     nombre = fuente["nombre"]
 
@@ -1360,6 +1428,19 @@ def sanea_memoria(memoria: dict[str, dict]) -> dict[str, dict]:
     return limpia
 
 
+def titulo_de_otro_anio(e: "Evento") -> bool:
+    """
+    ¿El título delata un año anterior al de la fecha asignada?
+
+    El caso del "XVIII Congreso SED 2022" archivado como de octubre de 2026 ya
+    se limpiaba en la memoria. Pero el 26/10 entró nuevo "18 Actualidad SECPAL
+    Octubre Diciembre 2022.pdf" con fecha de 2026, y salió en la tabla de esa
+    misma semana: la memoria solo se limpia al cargarla, una semana después.
+    """
+    anio = anio_en_texto(e.titulo)
+    return bool(anio and e.inicio and anio < int(e.inicio[:4]))
+
+
 def recura_titulo(titulo: str) -> str:
     """
     Vuelve a pasar por el limpiador un título guardado hace semanas.
@@ -1477,10 +1558,17 @@ def main() -> int:
             unicos[e.id] = e
     # Lo recién encontrado, hasta el horizonte (un año por defecto)
     frescos = unifica([e for e in unicos.values()
-                       if e.inicio and margen <= date.fromisoformat(e.inicio) <= horizonte])
+                       if e.inicio and margen <= date.fromisoformat(e.inicio) <= horizonte
+                       and not titulo_de_otro_anio(e)])
 
     # Se suma a la memoria de cursos conocidos y se olvida lo ya pasado
     memoria = carga_memoria()
+    # Lo que se guardó de una fuente con filtro "dolor" antes de que lo tuviera
+    # se revisa con la regla de hoy, para que no siga saliendo desde la memoria.
+    filtro_de = {f["nombre"]: f.get("filtro") for f in cfg["fuentes"]}
+    memoria = {k: v for k, v in memoria.items()
+               if filtro_de.get(v.get("entidad")) != "dolor"
+               or es_de_dolor(v.get("titulo", ""))}
     for e in frescos:
         d = asdict(e)
         d["descubierto"] = memoria.get(e.id, {}).get("descubierto", hoy.isoformat())

@@ -518,7 +518,7 @@ fuentes:
     url: https://www.secpal.org/
     nivel: 2
     ambito: dolor
-    filtro: estricto
+    filtro: dolor
     estado: ok
     feed: https://www.secpal.org/feed/
     # sugerencia: https://www.secpal.org/formacion-y-congresos/
@@ -1756,21 +1756,22 @@ fuentes:
   # del Dolor y Sociedad Canaria del Dolor.
 
   # ---------- Cuidados paliativos — sociedades autonómicas ----------
-  # Las 15 federadas de SECPAL tampoco estaban. Van con filtro estricto: solo
-  # aportan cuando el curso menciona dolor, analgesia, sedación o paliativos.
-  # Si quieres TODO lo que publican, cambia su filtro a "evento".
+  # Las 15 federadas de SECPAL tampoco estaban. Van con filtro "dolor": solo
+  # aportan un curso si su título habla de dolor, analgesia, opioides,
+  # sedación, anestesia o críticos (decisión del 26/10). Para que aporten
+  # TODO lo que publican, cambia su filtro a "evento".
   - nombre: "SACPA (Andalucía) — Paliativos"
     url: https://sociedadandaluzadecuidadospaliativos.com/category/formacion/
     nivel: 2
     ambito: dolor
-    filtro: estricto
+    filtro: dolor
     estado: ok
     feed: https://sociedadandaluzadecuidadospaliativos.com/feed/
   - nombre: "CUSIRAR (Aragón) — Paliativos"
     url: https://cusirar.org/formate-con-cusirar
     nivel: 2
     ambito: dolor
-    filtro: estricto
+    filtro: dolor
     estado: ok
     feed: https://cusirar.org/feed
     # sugerencia: https://cusirar.org/noticias
@@ -1778,14 +1779,14 @@ fuentes:
     url: https://illespal.org/es/inici-espanol/
     nivel: 2
     ambito: dolor
-    filtro: estricto
+    filtro: dolor
     estado: ok
     feed: https://illespal.org/es/feed/
   - nombre: "SOCPAL (Cantabria) — Paliativos"
     url: https://sociedadcantabrapaliativos.com/
     nivel: 2
     ambito: dolor
-    filtro: estricto
+    filtro: dolor
     estado: ok
     feed: https://sociedadcantabrapaliativos.com/feed/
     # sugerencia: https://sociedadcantabrapaliativos.com/jornada/
@@ -1793,7 +1794,7 @@ fuentes:
     url: https://scbcp.cat/?p=page/html/activitats
     nivel: 2
     ambito: dolor
-    filtro: estricto
+    filtro: dolor
     estado: ok
     feed: none
     # sugerencia: https://scbcp.cat/?p=page/html/extracademiques
@@ -1801,7 +1802,7 @@ fuentes:
     url: https://www.arinduz.org/cursos-y-formacion
     nivel: 2
     ambito: dolor
-    filtro: estricto
+    filtro: dolor
     estado: ok
     feed: none
     # sugerencia: https://www.arinduz.org/recursos
@@ -1809,7 +1810,7 @@ fuentes:
     url: https://www.sogacopal.com/eventos/
     nivel: 2
     ambito: dolor
-    filtro: estricto
+    filtro: dolor
     estado: ok
     feed: https://www.sogacopal.com/feed/
     # sugerencia: https://www.sogacopal.com/eventos/#content
@@ -1817,7 +1818,7 @@ fuentes:
     url: https://www.paliativosmadrid.org/?seccion=formacion&subSeccion=cursosYtalleres
     nivel: 2
     ambito: dolor
-    filtro: estricto
+    filtro: dolor
     estado: ok
     feed: none
     # sugerencia: https://www.paliativosmadrid.org/?seccion=gruposTrabajo&subSeccion=grupoFormacionAcreditacion
@@ -1825,7 +1826,7 @@ fuentes:
     url: https://www.paliativosnavarra.com/
     nivel: 2
     ambito: dolor
-    filtro: estricto
+    filtro: dolor
     estado: ok
     feed: none
     # redirige a: https://webmedikal.com/
@@ -1833,7 +1834,7 @@ fuentes:
     url: https://www.svmpaliativa.org/category/formacion/
     nivel: 2
     ambito: dolor
-    filtro: estricto
+    filtro: dolor
     estado: ok
     feed: https://www.svmpaliativa.org/feed/
   # Sin web propia: SACPAL (Asturias), PACyL (Castilla y León),
@@ -1914,7 +1915,7 @@ fuentes:
     url: https://pedpal.es/actividades-y-cursos/
     nivel: 2
     ambito: dolor
-    filtro: estricto
+    filtro: dolor
     estado: ok
     feed: https://pedpal.es/feed/
     # sugerencia: https://pedpal.es/congresos-y-jornadas/
@@ -1922,7 +1923,7 @@ fuentes:
     url: https://www.secpal.org/aecpal/
     nivel: 2
     ambito: dolor
-    filtro: estricto
+    filtro: dolor
     estado: ok
     feed: https://www.secpal.org/aecpal/feed/
     # sugerencia: https://www.secpal.org/secpal-advierte-de-que-el-reto-actual-de-los-cuidados-paliativos-es-garantizar-la-formacion-y-el-reconocimiento-de-sus-mas-de-4-000-profesionales/
@@ -2459,6 +2460,9 @@ fuentes:
     url: https://formacion.sjdhospitalbarcelona.org/es/especialidades/anestesiologia-pediatrica
     nivel: 2
     ambito: anestesia
-    filtro: evento
+    filtro: estricto
+    # 26/10: el canal que le asignó el verificador es el de toda la formación
+    # del hospital, no solo anestesia ("Avances en neuropediatría"). Con filtro
+    # estricto solo pasa lo de la especialidad.
     estado: ok
     feed: https://formacion.sjdhospitalbarcelona.org/rss.xml

@@ -675,3 +675,52 @@ for _t in ["Publicar y no morir en el intento. Un webinar de la revista Medicina
            "Cartagena: Acto Conmemorativo del Día Mundial de los Cuidados Paliativos"]:
     assert titulo_util(_t), f"debería quedarse: {_t}"
 print("Tabla del 19/10: noticias, boletines y otro público ✓")
+
+
+# ---------------------------------------------------------------------------
+# Tabla del 26/10 — el primer rastreo con todo, Madrid incluida
+#
+# 29 cursos. Cinco eran errores y tres, de paliativos sin dolor ni sedación;
+# para estos últimos Luis eligió el filtro "dolor" en las fuentes de paliativos.
+# Todo probado contra los 110 títulos del histórico.
+# ---------------------------------------------------------------------------
+from agenda import (es_de_dolor, titulo_de_otro_anio, limpia_nombre_de_fichero)
+
+# 1. Lo que no es un curso
+for _t in ["Últimos artículos", "E-Bellvitge 755", "Inscripciones",
+           "XIX Curso de Ecocardiografía fetal", "Avances en neuropediatría",
+           "Las IV Jornadas Sempal para Residentes finalizan el en Toledo"]:
+    assert not titulo_util(recura_titulo(_t)), f"debería descartarse: {_t}"
+
+# ...pero la anestesia de la cirugía fetal sí es de la casa
+assert titulo_util("Curso de anestesia en cirugía fetal y procedimiento EXIT")
+
+# 2. Nombres de fichero: se limpian, no se tiran. Los dos primeros son cursos
+#    reales que la regla de "descartar ficheros" se habría llevado.
+assert limpia_nombre_de_fichero("Programa VII Curso Eco Pulmonar Seneo 2026v0.pdf") == \
+    "VII Curso Eco Pulmonar Seneo 2026"
+assert limpia_nombre_de_fichero("Programa Curso de Revision 2026.pdf") == "Curso de Revision 2026"
+assert limpia_nombre_de_fichero("Curso de Ventilación Mecánica") == "Curso de Ventilación Mecánica"
+
+# 3. Un título de 2022 con fecha de 2026 no entra, tampoco recién encontrado
+_e = _ev("18 Actualidad SECPAL Octubre Diciembre 2022", "2026-10-28", "SECPAL", "u")
+assert titulo_de_otro_anio(_e)
+assert not titulo_de_otro_anio(_ev("VI Congreso SEMDOR 2026", "2026-11-12", "SEMDOR", "u"))
+
+# 4. Filtro "dolor" para las fuentes de paliativos
+for _t in ["Curso avanzado en tratamiento opioide", "XV Congreso Internacional SECPAL",
+           "Sedación paliativa en el domicilio", "Manejo del dolor irruptivo oncológico"]:
+    assert es_de_dolor(_t), f"debería entrar con filtro dolor: {_t}"
+for _t in ["Espiritualidad y alzhéimer: cuando el sentido va más allá del significado",
+           "La dimensión espiritual en cuidados paliativos: una mirada desde la Psicología",
+           "Webinar de Cuidados Paliativos Perinatales: Las 10 mejores comunicaciones"]:
+    assert not es_de_dolor(_t), f"no debería entrar con filtro dolor: {_t}"
+
+# 5. Etiquetas pegadas
+assert recura_titulo("La dimensión espiritual en cuidados paliativos Webinars") == \
+    "La dimensión espiritual en cuidados paliativos"
+assert recura_titulo("Cambio de fecha | Las IV Jornadas Sempal para Residentes arrancan") == \
+    "Las IV Jornadas Sempal para Residentes arrancan"
+assert recura_titulo("Inscripción abierta: Curso de ecografía en el paciente crítico") == \
+    "Curso de ecografía en el paciente crítico"
+print("Tabla del 26/10 y filtro de paliativos ✓")
