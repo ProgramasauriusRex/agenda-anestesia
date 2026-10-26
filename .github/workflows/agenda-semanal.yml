@@ -1,9 +1,12 @@
 name: Agenda semanal
 
-# Cuándo se ejecuta solo:
+# Cuándo se ejecuta solo: los lunes a las 06:13 UTC (07:13 en invierno y 08:13
+# en verano, hora de Madrid). No a las 06:00 en punto: GitHub va saturado a las
+# horas en punto y retrasa las ejecuciones programadas. El 26/10 la de las
+# 06:00 no arrancó hasta las 12:32.
 on:
   schedule:
-    - cron: "0 6 * * 1"     # todos los lunes (06:00 UTC = 08:00 en España)
+    - cron: "13 6 * * 1"
   workflow_dispatch:         # y siempre que le des al botón "Run workflow"
 
 permissions:
@@ -12,7 +15,7 @@ permissions:
 jobs:
   rastrear:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -25,12 +28,23 @@ jobs:
       - name: Rastrear
         run: python agenda.py --nivel 1 2 3 --meses 1 --diagnostico
 
-      - name: Guardar la agenda en el repositorio
+      # El post de Instagram con TODOS los cursos del próximo mes, hecho justo
+      # después del rastreo para que siempre salga de la tabla de hoy. Si algo
+      # falla aquí, la agenda se guarda igual: el post nunca puede impedirlo.
+      - name: Montar el post de Instagram
+        continue-on-error: true
+        run: |
+          pip install playwright
+          python -m playwright install --with-deps chromium
+          python imagen.py --csv salida/AGENDA-ACTUAL.csv --salida salida/post
+
+      - name: Guardar la agenda y el post en el repositorio
         run: |
           git config user.name "agenda-bot"
           git config user.email "agenda-bot@users.noreply.github.com"
           git add salida estado.json fuentes.yaml
           git diff --staged --quiet || git commit -m "Agenda $(date +%Y-%m-%d)"
+          git pull --rebase --autostash
           git push
 
       - name: Dejarla también como fichero descargable
