@@ -37,6 +37,29 @@ BASE = Path(__file__).parent
 SALIDA = BASE / "salida"
 PLANTILLA = BASE / "plantilla"
 
+
+def _busca_plantilla() -> Path:
+    """
+    Dónde está estilo.css: en plantilla/ o, si no, junto a este archivo.
+
+    Al subir la carpeta plantilla desde la web de GitHub, el 27/10, la carpeta
+    no se conservó y los archivos quedaron sueltos en la raíz del repositorio.
+    Moverlos desde la web obliga a borrar y volver a subir uno por uno, así que
+    el programa los busca en los dos sitios.
+    """
+    for sitio in (PLANTILLA, BASE):
+        if (sitio / "estilo.css").exists():
+            return sitio
+    sys.exit("No encuentro estilo.css ni en plantilla/ ni junto a imagen.py.")
+
+
+def _busca_tipografias() -> list[Path]:
+    for sitio in (PLANTILLA / "tipografias", PLANTILLA, BASE):
+        hallados = sorted(sitio.glob("*-latin-*-normal.woff2"))
+        if hallados:
+            return hallados
+    return []
+
 ANCHO, ALTO = 1080, 1350
 MAX_POR_DIAPOSITIVA = 5        # con más, el texto deja de respirar en un móvil
 MAX_DIAPOSITIVAS = 20          # el límite de Instagram para un carrusel
@@ -145,7 +168,7 @@ def _tipografias() -> str:
     """Las tipografías van dentro del HTML: la imagen sale idéntica en
     cualquier ordenador, tenga o no esas letras instaladas."""
     reglas = []
-    for ruta in sorted((PLANTILLA / "tipografias").glob("*.woff2")):
+    for ruta in _busca_tipografias():
         m = re.match(r"(montserrat|inter)-latin-(\d{3})-normal", ruta.stem)
         if not m:
             continue
@@ -166,7 +189,7 @@ def _fondo(ruta: Path | None) -> str:
 
 
 def _pagina(cuerpo: str, fondo: Path | None) -> str:
-    estilo = (PLANTILLA / "estilo.css").read_text(encoding="utf-8")
+    estilo = (_busca_plantilla() / "estilo.css").read_text(encoding="utf-8")
     return (f'<!doctype html><html lang="es"><head><meta charset="utf-8">'
             f'<style>{_tipografias()}\n{estilo}</style></head>'
             f'<body>{_fondo(fondo)}{cuerpo}</body></html>')
