@@ -439,6 +439,79 @@ print("Relleno de lugares desde la ficha ✓")
 
 
 # ---------------------------------------------------------------------------
+# Sedes equivocadas de la agenda del 02/11 (aviso de Luis)
+#
+# - Jornada Balear de Anestesiología: salió "Madrid". La ficha dice "27 de
+#   noviembre de 2026 · Hospital Universitari Son Llàtzer" (Palma) sin nombrar
+#   la ciudad, y la única ciudad de la página era la de un ponente: "Hospital
+#   Universitario Puerta de Hierro, Majadahonda (Madrid)".
+# - Soporte vital intermedio pediátrico (Colegio de Murcia): salió "Online"
+#   por su "Fase online". Es semipresencial, con las clases en la Arrixaca.
+# - El curso de ecocardiografía del Colegio de Córdoba sí es en Madrid: "Lugar:
+#   Madrid · Centro Tecnológico de Simulación eSalùdate". El Colegio lo anuncia.
+# ---------------------------------------------------------------------------
+_balear = ("Jornada Balear de Anestesiología\n27 de noviembre de 2026 · Hospital Universitari "
+           "Son Llàtzer\nPonentes\nDr. Pedro X\nUnidad del Dolor del Hospital Quirónsalud "
+           "Tenerife. Director de MIVI Canarias.\nDr. Juan Y\nJefe del Servicio de "
+           "Anestesiología, UCI Quirúrgica y Dolor del Hospital Universitario Puerta de Hierro, "
+           "Majadahonda (Madrid).\nInscripción\nNombre y Apellidos *")
+assert extrae_lugar(_balear, "2026-11-27", "27 de noviembre de 2026", final=True) == "Palma"
+# Sin hospital conocido, la ciudad del ponente tampoco vale: mejor vacío
+assert extrae_lugar(_balear.replace("Hospital Universitari Son Llàtzer", "Sala Magna"),
+                    "2026-11-27", final=True) == ""
+assert extrae_lugar("Fecha: 22 de noviembre de 2026\nLugar: Madrid · Centro Tecnológico de "
+                    "Simulación eSalùdate\nInscripción online", "2026-11-22", final=True) == "Madrid"
+_murcia = ("SOPORTE VITAL INTERMEDIO PEDIÁTRICO\nModalidad: semipresencial\nInicio Fase No "
+           "Presencial: lunes 02 de noviembre, entrega del material vía email.\nFase online : "
+           "Examen tipo test al iniciar la fase presencial\nLugar: Hospital Universitario "
+           "Virgen de la Arrixaca")
+assert extrae_lugar(_murcia, "2026-11-02", final=True) == "Murcia"
+# En el listado, un semipresencial sin ciudad se deja vacío: así se abre la ficha
+assert extrae_lugar("Soporte vital intermedio pediátrico. Semipresencial. Fase online") == ""
+# "Online" solo si lo es el curso
+assert extrae_lugar("Inscripción online abierta. Sede: Hotel Meliá, Valencia") == "Valencia"
+assert extrae_lugar("Un webinar de la revista Medicina Intensiva") == "Online"
+assert extrae_lugar("Presencial y en streaming. Lugar: Palacio de Congresos de Granada") == "Granada"
+assert extrae_lugar("Instructor en SVB y DEA | Presencial y online") == ""
+assert extrae_lugar("Instructor en SVB y DEA | Presencial y online", final=True) == "Online"
+assert extrae_lugar("Actualización en línea con las guías. Hospital Clínico Universitario de "
+                    "Valladolid") == "Valladolid"
+assert extrae_lugar("Taller de realidad virtual. Salamanca, 3 de diciembre") == "Salamanca"
+assert extrae_lugar("Organiza el Servicio. Dra. Ana López (Hospital Clínic de Barcelona). "
+                    "Lugar: Hotel NH, Zaragoza") == "Zaragoza"
+assert extrae_lugar("VI Jornada SCARTD. Dr. Martí, Hospital de Bellvitge. 5 de novembre 2026, "
+                    "Barcelona", "2026-11-05", final=True) == "Barcelona"
+
+# La ficha leída con sus líneas: el ponente va en su párrafo, la sede en el suyo
+_d3 = tempfile.mkdtemp()
+open(os.path.join(_d3, "jornada.html"), "w", encoding="utf-8").write(
+    '<html><body><h1>Jornada Balear de Anestesiología</h1>'
+    '<p>27 de noviembre de 2026 · Hospital Universitari Son Llàtzer</p>'
+    '<h2>Ponentes</h2><div><b>Dr. Juan Y</b><br>Jefe del Servicio de Anestesiología del '
+    '<a href="#">Hospital Universitario Puerta de Hierro</a>, Majadahonda (Madrid).</div>'
+    '<form>Nombre y Apellidos *</form></body></html>')
+_cwd3 = os.getcwd()
+os.chdir(_d3)
+_srv3 = socketserver.TCPServer(("127.0.0.1", 0), http.server.SimpleHTTPRequestHandler)
+_p3 = _srv3.server_address[1]
+threading.Thread(target=_srv3.serve_forever, daemon=True).start()
+try:
+    _jb = _ev("Jornada Balear de Anestesiología", "2026-11-27", "SBARTD (Baleares)",
+              f"http://127.0.0.1:{_p3}/jornada.html")
+    completa_lugares([_jb])
+finally:
+    _srv3.shutdown(); os.chdir(_cwd3); shutil.rmtree(_d3, ignore_errors=True)
+assert _jb.lugar == "Palma", _jb.lugar
+
+# El texto del botón no es parte del título
+from agenda import recura_titulo as _rt
+assert _rt("Inscripción Jornada Balear de Anestesiología") == "Jornada Balear de Anestesiología"
+assert _rt("Inscripción en el registro de anestesia pediátrica") == \
+    "Inscripción en el registro de anestesia pediátrica"
+print("Sedes de la agenda del 02/11: ponentes, online y semipresenciales ✓")
+
+
+# ---------------------------------------------------------------------------
 # Titulares de noticias — defectos reales del rastreo del 12/10
 #
 # Tres de los dieciséis cursos de ese lunes eran noticias de la web de un

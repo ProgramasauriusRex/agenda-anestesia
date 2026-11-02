@@ -46,7 +46,7 @@ import requests
 import yaml
 from bs4 import BeautifulSoup
 
-from fechas import extrae_fechas, formatea, anio_en_texto
+from fechas import extrae_fechas, formatea, anio_en_texto, MESES as _MESES
 
 BASE = Path(__file__).parent
 SALIDA = BASE / "salida"
@@ -534,6 +534,10 @@ CABEZA_RUIDO = [
     "formacion continuada",
     # 26/10: "Cambio de fecha | Las IV Jornadas Sempal para Residentes…"
     "cambio de fecha", "nueva fecha", "aplazado", "aplazada",
+    # 02/11: "Inscripción Jornada Balear de Anestesiología" (el texto del botón
+    # de la web de la SBARTD). Van detrás de "inscripcion abierta" para que
+    # esa se quite entera.
+    "inscripciones abiertas", "inscripciones", "inscripcion",
 ]
 
 # Palabras que, si quedan al principio tras recortar, delatan que nos hemos
@@ -947,58 +951,205 @@ def limpia_titulo(titulo: str, frag: str) -> str:
     return limpio if len(limpio) >= 8 else titulo
 
 
-def extrae_lugar(texto: str) -> str:
-    """
-    Ciudad o modalidad del curso. En la primera tanda real, 12 de 27 cursos
-    salían sin lugar, así que aquí se mira en tres pasadas: primero si es
-    online, luego una etiqueta explícita ("Sede:", "Lugar:"), y por último
-    cualquier ciudad española reconocible.
+CIUDADES = [
+    "A Coruña", "Albacete", "Alcalá de Henares", "Alcorcón", "Algeciras", "Alicante",
+    "Almería", "Ávila", "Badajoz", "Badalona", "Barakaldo", "Barcelona", "Bilbao",
+    "Burgos", "Cáceres", "Cádiz", "Cartagena", "Castellón", "Ceuta",
+    "Ciudad Real", "Córdoba", "Cuenca", "Donostia", "Elche", "Ferrol",
+    "Fuenlabrada", "Getafe", "Gijón", "Girona", "Granada", "Guadalajara", "Huelva",
+    "Huesca", "Ibiza", "Jaén", "Jerez de la Frontera", "Las Palmas de Gran Canaria",
+    "Las Palmas", "Leganés", "León", "L'Hospitalet de Llobregat", "Lleida", "Logroño",
+    "Lugo", "Madrid", "Mahón", "Majadahonda", "Málaga", "Manresa",
+    "Marbella", "Mataró", "Melilla", "Mérida", "Móstoles", "Murcia", "Ourense",
+    "Oviedo", "Palencia", "Palma", "Pamplona", "Ponferrada", "Pontevedra", "Reus",
+    "Sabadell", "Salamanca", "San Sebastián", "Santander",
+    "Santa Cruz de Tenerife", "Santiago de Compostela", "Segovia",
+    "Sevilla", "Soria", "Tarragona", "Terrassa", "Teruel", "Toledo",
+    "Valdepeñas", "Valencia", "Valladolid", "Vigo", "Vitoria-Gasteiz",
+    "Vitoria", "Zamora", "Zaragoza", "Talavera de la Reina",
+]
 
-    Si no encuentra nada devuelve vacío. Nunca se deduce del organizador:
-    que un curso lo dé el Colegio de Málaga no significa que sea en Málaga,
-    y un hueco visible es preferible a un dato inventado.
-    """
-    t = " " + re.sub(r"\s+", " ", texto) + " "
+# Hospitales y sedes cuyo nombre no lleva la ciudad. El 02/11, la Jornada Balear
+# de Anestesiología decía solo "27 de noviembre de 2026 · Hospital Universitari
+# Son Llàtzer": sin esta lista, la única ciudad de la página era la de un
+# ponente, y salió "Madrid". Solo nombres inequívocos; los que llevan la ciudad
+# dentro ("Hospital Clínico Universitario de Valladolid") ya los coge CIUDADES.
+SEDES_CONOCIDAS = [
+    (r"Son Ll[aà]tzer|Son Espases|Son Dureta", "Palma"),
+    (r"Can Misses", "Ibiza"),
+    (r"Mateu Orfila", "Mahón"),
+    (r"Ram[oó]n y Cajal|12 de Octubre|Doce de Octubre|Gregorio Mara[nñ][oó]n|"
+     r"Cl[ií]nico San Carlos|Hospital (?:Universitario )?(?:de )?La Paz|"
+     r"Hospital (?:Universitario )?(?:de )?La Princesa|Ni[nñ]o Jes[uú]s|"
+     r"Fundaci[oó]n Jim[eé]nez D[ií]az|Infanta Leonor|Infanta Sof[ií]a|Severo Ochoa|"
+     r"Puerta de Hierro|Pr[ií]ncipe de Asturias", "Madrid"),
+    (r"Vall d.Hebron|Bellvitge|Santa Creu i Sant Pau|Hospital (?:de )?Sant Pau|"
+     r"Hospital Cl[ií]nic\b(?! (?:de|Universitari[oa]? de) )|Hospital del Mar|"
+     r"Sant Joan de D[eé]u", "Barcelona"),
+    (r"Germans Trias", "Badalona"),
+    (r"Parc Taul[ií]", "Sabadell"),
+    (r"Hospital (?:Universitari[oa]? )?(?:i Polit[eè]cnic )?La Fe\b|Doctor Peset|Dr\.? Peset",
+     "Valencia"),
+    (r"Virgen del Roc[ií]o|Virgen Macarena|Virgen de Valme", "Sevilla"),
+    (r"Carlos Haya|Virgen de la Victoria", "Málaga"),
+    (r"Virgen de las Nieves|San Cecilio", "Granada"),
+    (r"Arrixaca|Morales Meseguer", "Murcia"),
+    (r"Valdecilla", "Santander"),
+    (r"Miguel Servet|Lozano Blesa", "Zaragoza"),
+    (r"Hospital (?:Universitario )?(?:de )?Cruces", "Barakaldo"),
+    (r"Basurto", "Bilbao"),
+    (r"\bHUCA\b|Central de Asturias", "Oviedo"),
+    (r"R[ií]o Hortega", "Valladolid"),
+    (r"Doctor Negr[ií]n|Dr\.? Negr[ií]n", "Las Palmas de Gran Canaria"),
+    (r"Dr\.? Balmis|Doctor Balmis", "Alicante"),
+    (r"Complejo Hospitalario de Navarra|Hospital Universitario de Navarra", "Pamplona"),
+]
 
-    # 1. Modalidad a distancia, que gana a cualquier ciudad que se mencione
-    if re.search(r"\b(?:100%\s*)?(?:on-?line|en línea|virtual|streaming|"
-                 r"tele(?:formación|matic\w*)|a distancia)\b", t, re.I):
+_RE_CIUDADES = [(re.compile(rf"\b{re.escape(c)}\b", re.I), c) for c in CIUDADES]
+_RE_SEDES = [(re.compile(patron, re.I), c) for patron, c in SEDES_CONOCIDAS]
+
+# Una ciudad dicha al presentar a una persona es la de su hospital, no la del
+# curso: "Jefe del Servicio de Anestesiología del Hospital Puerta de Hierro,
+# Majadahonda (Madrid)". Si delante, en la misma frase, hay uno de estos
+# cargos, esa ciudad no cuenta.
+_RE_PERSONA = re.compile(
+    r"\b(?:jef[ea]s?|director[ae]?s?|coordinador[ae]?s?|adjunt[oa]s?|facultativ[oa]s?|"
+    r"f\.e\.a\.?|fea|profesor[ae]?s?|catedr[aá]tic[oa]s?|ponentes?|docentes?|"
+    r"moderador[ae]?s?|dr|dra|especialista|residentes?|presidente|presidenta|"
+    r"m[eé]dic[oa]s? adjunt[oa]s?|enfermer[oa]s?)\b\.?", re.I)
+_ABREVIATURAS = {"dr", "dra", "sr", "sra", "prof", "h", "u", "hosp", "d", "dña",
+                 "avda", "c", "s", "sto", "sta", "dpto", "serv"}
+
+# Modalidad. "Online" solo cuando lo es el curso, no la inscripción ni el pago:
+# el 02/11, el "Soporte vital intermedio pediátrico" de Murcia salía "Online"
+# por su "Fase online", y es semipresencial con las clases en la Arrixaca.
+_RE_ONLINE = re.compile(
+    r"\b(?:100\s*%\s*)?(?:on-?line|en l[ií]nea(?!\s+con\b)|virtual(?:es)?|streaming|"
+    r"webinars?|tele(?:formaci[oó]n|m[aá]tic\w*)|a distancia|no presencial)\b", re.I)
+_RE_NO_ES_MODALIDAD = re.compile(
+    r"(?:inscripci[oó]n(?:es)?|inscr[ií]bete|pago|matr[ií]cula|formulario|reserva|"
+    r"solicitud|registro|tienda|secretar[ií]a|tr[aá]mites?|fase|material(?:es)?|"
+    r"examen|test|evaluaci[oó]n|contenidos?|parte|campus|aula|acceso|plataforma|"
+    r"realidad|visita|biblioteca)\W+(?:\w+\W+){0,2}$", re.I)
+_RE_SEMIPRESENCIAL = re.compile(
+    r"\bsemi-?presencial\w*|\bblended\b|\bh[ií]brid[oa]s?\b|\bmodalidad mixta\b|"
+    r"\b(?:fase|parte|sesi[oó]n(?:es)?|clases?|pr[aá]cticas?) presencial(?:es)?\b", re.I)
+_RE_PRESENCIAL = re.compile(r"(?<!no )\bpresencial(?:es)?\b", re.I)
+_RE_ETIQUETA_LUGAR = re.compile(
+    r"\b(?:sede|lugar|d[oó]nde|ubicaci[oó]n|direcci[oó]n|celebra(?:ci[oó]n)?\s+en|"
+    r"tendr[aá]\s+lugar\s+en|se\s+celebrar[aá]\s+en)\s*:?\s*([^;|\n]{3,90})", re.I)
+
+
+def _clausula_previa(t: str, pos: int) -> str:
+    """El trozo de frase que va delante de `pos`, hasta el punto anterior.
+    Los puntos de "Dr." o "H. U." no cortan la frase."""
+    i = pos
+    tope = max(0, pos - 170)
+    while i > tope:
+        ch = t[i - 1]
+        if ch in "\n;|":
+            break
+        if ch == "." and i < len(t) and t[i] == " ":
+            palabra = re.findall(r"[\wáéíóúñ]+$", t[:i - 1], re.I)
+            if not palabra or (normaliza(palabra[0]) not in _ABREVIATURAS
+                               and len(palabra[0]) > 1):
+                break
+        i -= 1
+    return t[i:pos]
+
+
+def _ciudad_en(t: str, desde: int = 0, hasta: int | None = None,
+               saltar_personas: bool = True) -> str:
+    """
+    La primera ciudad (o sede conocida) en t[desde:hasta]. A igualdad de
+    posición gana la más larga: "Las Palmas de Gran Canaria" antes que "Las
+    Palmas". Si `saltar_personas`, no cuentan las que van en la presentación
+    de un ponente.
+    """
+    hasta = len(t) if hasta is None else hasta
+    halladas = []
+    for patron, ciudad in _RE_CIUDADES + _RE_SEDES:
+        for m in patron.finditer(t, desde, hasta):
+            if saltar_personas and _RE_PERSONA.search(_clausula_previa(t, m.start())):
+                continue
+            halladas.append((m.start(), -(m.end() - m.start()), ciudad))
+            break
+    return min(halladas)[2] if halladas else ""
+
+
+def _modalidad(t: str) -> str:
+    """'online', 'mixta' (semipresencial o presencial y online) o ''."""
+    online = any(not _RE_NO_ES_MODALIDAD.search(t[max(0, m.start() - 40):m.start()])
+                 for m in _RE_ONLINE.finditer(t))
+    if _RE_SEMIPRESENCIAL.search(t):
+        return "mixta"
+    if online:
+        return "mixta" if _RE_PRESENCIAL.search(t) else "online"
+    return ""
+
+
+def _junto_a_la_fecha(t: str, inicio, frag: str) -> list[tuple[int, int]]:
+    """Tramos de texto alrededor de cada vez que aparece la fecha del curso."""
+    posiciones = []
+    if frag and len(frag) >= 5:
+        posiciones += [m.start() for m in re.finditer(re.escape(frag), t, re.I)]
+    if inicio:
+        d = inicio if isinstance(inicio, date) else date.fromisoformat(str(inicio)[:10])
+        mes = "(?:" + "|".join(k for k, v in _MESES.items() if v == d.month and "_" not in k) + ")"
+        for patron in (rf"\b0?{d.day}\s+(?:de\s+)?{mes}\b", rf"\b0?{d.day}[/.-]0?{d.month}\b"):
+            posiciones += [m.start() for m in re.finditer(patron, t, re.I)]
+    return [(max(0, p - 80), min(len(t), p + 220)) for p in sorted(set(posiciones))]
+
+
+def extrae_lugar(texto: str, inicio=None, frag: str = "", final: bool = False) -> str:
+    """
+    Ciudad del curso, "Online", o vacío si no se sabe.
+
+    Se mira, por este orden:
+      1. Una etiqueta explícita: "Sede: Hotel X, Valencia", "Lugar: Madrid".
+      2. Lo que va pegado a la fecha del curso (si se conoce `inicio`): en una
+         ficha, "27 de noviembre · Hospital Son Llàtzer" es la sede.
+      3. La primera ciudad que no vaya en la presentación de un ponente.
+    Los hospitales conocidos cuentan como su ciudad (SEDES_CONOCIDAS).
+
+    La modalidad va aparte. Es "Online" solo si lo es el curso: "inscripción
+    online" o "fase online" no lo hacen online. Un curso semipresencial o
+    presencial y online da su ciudad; si no hay ciudad, en el listado se deja
+    vacío para que se abra la ficha, y en la ficha (`final`) un curso que
+    también se puede seguir online queda como "Online".
+
+    Nunca se deduce del organizador: que un curso lo dé el Colegio de Málaga no
+    significa que sea en Málaga, y un hueco visible es preferible a un dato
+    inventado.
+    """
+    t = re.sub(r"[ \t\r\f\v]+", " ", texto or "")
+    t = re.sub(r" *\n[\n ]*", "\n", t)
+    plano = " " + t.replace("\n", " ") + " "
+
+    modalidad = _modalidad(plano)
+    if modalidad == "online":
         return "Online"
 
-    CIUDADES = [
-        "A Coruña", "Albacete", "Alcalá de Henares", "Algeciras", "Alicante",
-        "Almería", "Ávila", "Badajoz", "Badalona", "Barcelona", "Bilbao",
-        "Burgos", "Cáceres", "Cádiz", "Cartagena", "Castellón", "Ceuta",
-        "Ciudad Real", "Córdoba", "Cuenca", "Donostia", "Elche", "Ferrol",
-        "Getafe", "Gijón", "Girona", "Granada", "Guadalajara", "Huelva",
-        "Huesca", "Jaén", "Jerez de la Frontera", "Las Palmas de Gran Canaria",
-        "Las Palmas", "León", "Lleida", "Logroño", "Lugo", "Madrid", "Málaga",
-        "Marbella", "Melilla", "Mérida", "Móstoles", "Murcia", "Ourense",
-        "Oviedo", "Palencia", "Palma", "Pamplona", "Pontevedra", "Reus",
-        "Sabadell", "Salamanca", "San Sebastián", "Santander",
-        "Santa Cruz de Tenerife", "Santiago de Compostela", "Segovia",
-        "Sevilla", "Soria", "Tarragona", "Terrassa", "Teruel", "Toledo",
-        "Valdepeñas", "Valencia", "Valladolid", "Vigo", "Vitoria-Gasteiz",
-        "Vitoria", "Zamora", "Zaragoza", "Talavera de la Reina",
-    ]
+    ciudad = ""
+    # 1. Etiqueta explícita (gana a todo: es lo que la web dice que es la sede)
+    for m in _RE_ETIQUETA_LUGAR.finditer(t):
+        if ciudad := _ciudad_en(m.group(1), saltar_personas=False):
+            break
+    # 2. Junto a la fecha
+    if not ciudad and (inicio or frag):
+        for desde, hasta in _junto_a_la_fecha(t, inicio, frag):
+            if ciudad := _ciudad_en(t, desde, hasta):
+                break
+    # 3. Cualquier ciudad que no sea la de un ponente
+    if not ciudad:
+        ciudad = _ciudad_en(t)
 
-    # 2. Etiqueta explícita: "Sede: Hotel X, Valencia" / "Lugar: Madrid"
-    etiqueta = re.search(r"\b(?:sede|lugar|ubicaci[oó]n|celebra(?:ci[oó]n)?\s+en|"
-                         r"tendr[aá]\s+lugar\s+en)\s*:?\s*([^.;|]{3,80})", t, re.I)
-    # Gana la que aparece ANTES en el texto, y a igualdad la más larga: en
-    # "Valdepeñas (Ciudad Real)" la sede es Valdepeñas y la provincia solo
-    # acompaña; en "Las Palmas de Gran Canaria" gana el nombre completo.
-    def primera(donde: str) -> str:
-        halladas = []
-        for c in CIUDADES:
-            m = re.search(rf"\b{re.escape(c)}\b", donde, re.I)
-            if m:
-                halladas.append((m.start(), -len(c), c))
-        return min(halladas)[2] if halladas else ""
-
-    if etiqueta and (c := primera(etiqueta.group(1))):
-        return c
-    return primera(t)
+    if ciudad:
+        return ciudad
+    if modalidad == "mixta" and final and _RE_ONLINE.search(plano) \
+            and not re.search(r"semi-?presencial", plano, re.I):
+        return "Online"
+    return ""
 
 
 def desde_feed(url_feed: str, fuente: dict) -> list[Evento]:
@@ -1023,7 +1174,7 @@ def desde_feed(url_feed: str, fuente: dict) -> list[Evento]:
             titulo=recorta(arregla_mayusculas(limpio)) + (" — plazas agotadas" if lleno else ""),
             fecha_texto=frag,
             inicio=ini.isoformat(), fin=fin.isoformat() if fin else None,
-            lugar=extrae_lugar(conjunto),
+            lugar=extrae_lugar(conjunto, ini, frag),
             entidad=fuente["nombre"],
             url=e.get("link", url_feed),
             ambito=fuente.get("ambito", "mixto"),
@@ -1062,6 +1213,27 @@ def _cupo_para_seguir() -> bool:
         return True
 
 
+_BLOQUES = ["p", "div", "li", "tr", "td", "th", "h1", "h2", "h3", "h4", "h5", "h6",
+            "dd", "dt", "section", "article", "table", "ul", "ol", "figcaption"]
+
+
+def texto_con_lineas(sopa) -> str:
+    """
+    El texto de la página con un salto de línea entre bloques (párrafos,
+    celdas, elementos de lista). Para saber qué ciudad acompaña a qué: con todo
+    pegado en una sola línea, la ciudad de un ponente y la sede del curso no se
+    distinguían.
+    """
+    for br in sopa.find_all("br"):
+        br.replace_with("\n")
+    for tag in sopa.find_all(_BLOQUES):
+        tag.insert_before("\n")
+        tag.insert_after("\n")
+    texto = sopa.get_text(" ")
+    texto = re.sub(r"[ \t\r\f\v\xa0]+", " ", texto)
+    return re.sub(r" *\n[\n ]*", "\n", texto).strip()
+
+
 def fecha_en_la_ficha(url: str) -> tuple[date | None, date | None, str, str]:
     """
     Abre la ficha de un curso y busca allí su fecha. Devuelve también el texto
@@ -1078,7 +1250,8 @@ def fecha_en_la_ficha(url: str) -> tuple[date | None, date | None, str, str]:
         return None, None, "", ""
     for tag in sopa(["script", "style", "nav", "footer", "header"]):
         tag.decompose()
-    texto = sopa.get_text(" ", strip=True)[:6000]
+    con_lineas = texto_con_lineas(sopa)[:6000]
+    texto = con_lineas.replace("\n", " ")
 
     hoy = date.today()
     trozos = [texto[i:i + 300] for i in range(0, len(texto), 250)]
@@ -1089,9 +1262,9 @@ def fecha_en_la_ficha(url: str) -> tuple[date | None, date | None, str, str]:
             continue
         # Con una pista delante, es la fecha del evento y no la de publicación
         if any(p in normaliza(trozo) for p in PISTAS_FECHA):
-            return ini, fin, frag, texto
+            return ini, fin, frag, con_lineas
         if respaldo is None:
-            respaldo = (ini, fin, frag, texto)
+            respaldo = (ini, fin, frag, con_lineas)
     return respaldo or (None, None, "", "")
 
 
@@ -1166,7 +1339,7 @@ def desde_html(url: str, html: str, fuente: dict) -> list[Evento]:
             titulo=recorta(arregla_mayusculas(limpio)) + (" — plazas agotadas" if lleno else ""),
             fecha_texto=frag,
             inicio=ini.isoformat(), fin=fin.isoformat() if fin else None,
-            lugar=extrae_lugar(conjunto),
+            lugar=extrae_lugar(conjunto, ini, frag),
             entidad=fuente["nombre"],
             url=urljoin(url, a["href"]),
             ambito=fuente.get("ambito", "mixto"),
@@ -1189,7 +1362,7 @@ def desde_html(url: str, html: str, fuente: dict) -> list[Evento]:
             titulo=recorta(arregla_mayusculas(limpio)) + (" — plazas agotadas" if lleno else ""),
             fecha_texto=frag,
             inicio=ini.isoformat(), fin=fin.isoformat() if fin else None,
-            lugar=extrae_lugar(f"{texto_enlace} {texto_ficha[:1500]}"),
+            lugar=extrae_lugar(f"{texto_enlace}\n{texto_ficha[:3000]}", ini, frag, final=True),
             entidad=fuente["nombre"],
             url=destino,
             ambito=fuente.get("ambito", "mixto"),
@@ -1376,6 +1549,13 @@ def _completa_desde(destino: Evento, otro: Evento) -> Evento:
 
 LUGARES_POR_RASTREO = 50
 
+# Sube cada vez que cambian las reglas del lugar. Los lugares guardados en la
+# memoria con reglas más viejas se borran una vez y se vuelven a sacar: si no,
+# un "Madrid" mal deducido de una fuente mensual seguiría saliendo hasta que
+# esa web se visitara otra vez, quizá ya pasado el curso.
+#   2 (02/11): ciudades de ponentes, "inscripción online", semipresenciales.
+REGLAS_LUGAR = 2
+
 
 def completa_lugares(eventos: list[Evento]) -> int:
     """
@@ -1404,7 +1584,8 @@ def completa_lugares(eventos: list[Evento]) -> int:
             sopa = BeautifulSoup(r.text, "lxml")
             for tag in sopa(["script", "style", "nav", "footer", "header"]):
                 tag.decompose()
-            lugar = extrae_lugar(sopa.get_text(" ", strip=True)[:2500])
+            lugar = extrae_lugar(texto_con_lineas(sopa)[:3000], e.inicio, e.fecha_texto,
+                                 final=True)
         except Exception:
             return False
         if lugar:
@@ -1591,6 +1772,16 @@ def main() -> int:
 
     # Se suma a la memoria de cursos conocidos y se olvida lo ya pasado
     memoria = carga_memoria()
+    # Si las reglas del lugar han cambiado desde el último rastreo, los lugares
+    # guardados se borran (una sola vez) y se vuelven a sacar más abajo. Se
+    # hace antes de sumar lo de hoy, que ya viene con las reglas nuevas. El
+    # cambio solo queda apuntado en estado.json en un rastreo de verdad, no en
+    # una consulta.
+    estado = carga_estado()
+    if estado.get("reglas_lugar", 1) < REGLAS_LUGAR:
+        for v in memoria.values():
+            v["lugar"] = ""
+        estado["reglas_lugar"] = REGLAS_LUGAR
     # Lo que se guardó de una fuente con filtro "dolor" antes de que lo tuviera
     # se revisa con la regla de hoy, para que no siga saliendo desde la memoria.
     filtro_de = {f["nombre"]: f.get("filtro") for f in cfg["fuentes"]}
@@ -1631,7 +1822,6 @@ def main() -> int:
     # entrase en la ventana del post semanal ya no aparecería como nuevo:
     # se perdería sin dejar rastro. Por eso --todo no escribe nada: es una
     # consulta de lectura, no altera lo que verás el lunes.
-    estado = carga_estado()
     if args.todo:
         nuevos = eventos
     else:
