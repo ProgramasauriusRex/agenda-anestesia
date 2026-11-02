@@ -97,20 +97,6 @@
   "descubierto": "2026-09-21",
   "ultima_vez": "2026-11-02"
  },
- "c61e0b107295a4": {
-  "titulo": "II Jornada Enfermería de SEMDOR",
-  "fecha_texto": "12 de noviembre de 2026",
-  "inicio": "2026-11-12",
-  "fin": "2026-11-12",
-  "lugar": "Granada",
-  "entidad": "Dolor.com — Congresos y jornadas",
-  "url": "https://www.dolor.com/formacion/congresos-y-jornadas/2026/ii-jornada-enfermeria-de-semdor",
-  "ambito": "dolor",
-  "via": "html",
-  "id": "c61e0b107295a4",
-  "descubierto": "2026-09-21",
-  "ultima_vez": "2026-11-02"
- },
  "abfd2350d5dd71": {
   "titulo": "VI Jornada de la Societat Catalana d'Anestesiologia, Reanimació i Terapèutica del Dolor",
   "fecha_texto": "5 de novembre 2026",
@@ -123,7 +109,7 @@
   "via": "html",
   "id": "abfd2350d5dd71",
   "descubierto": "2026-09-21",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "f7a3f8e1d2b2b3": {
   "titulo": "Curso anual de “Tomando el pulso a la anestesiología” 2ª edición",
@@ -151,7 +137,7 @@
   "via": "feed",
   "id": "007261812d90b9",
   "descubierto": "2026-09-21",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "481e5cab44c32b": {
   "titulo": "ESICM Lives Forum",
@@ -165,7 +151,7 @@
   "via": "feed",
   "id": "481e5cab44c32b",
   "descubierto": "2026-09-21",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "c1db2609e049e6": {
   "titulo": "Las IV Jornadas Sempal para Residentes ‘Medicina Paliativa, un enfoque imprescindible’ continúan el en Dénia",
@@ -433,34 +419,6 @@
   "descubierto": "2026-10-19",
   "ultima_vez": "2026-11-02"
  },
- "bec60113da75ac": {
-  "titulo": "Área de socios de la seNeo",
-  "fecha_texto": "30 noviembre al 4 diciembre",
-  "inicio": "2026-11-30",
-  "fin": "2026-12-04",
-  "lugar": "Online",
-  "entidad": "SENeo — Neonatología (intensivos neonatales)",
-  "url": "https://seneo.es/socios/acceso-socios",
-  "ambito": "criticos",
-  "via": "html",
-  "id": "bec60113da75ac",
-  "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-02"
- },
- "50b9083f4954ea": {
-  "titulo": "Congresos Nacionales Seneo",
-  "fecha_texto": "27/11/2026",
-  "inicio": "2026-11-27",
-  "fin": "2026-11-27",
-  "lugar": "Online",
-  "entidad": "SENeo — Neonatología (intensivos neonatales)",
-  "url": "https://seneo.es/formacion/cursos-y-congresos",
-  "ambito": "criticos",
-  "via": "ficha",
-  "id": "50b9083f4954ea",
-  "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-02"
- },
  "533d19d7644a58": {
   "titulo": "Curso de Soporte Vital Avanzado",
   "fecha_texto": "13 noviembre 2026",
@@ -494,7 +452,7 @@
   "fecha_texto": "12 noviembre 2026",
   "inicio": "2026-11-12",
   "fin": "2026-11-12",
-  "lugar": "Valencia",
+  "lugar": "",
   "entidad": "H. U. i Politècnic La Fe — agenda",
   "url": "https://lafe.san.gva.es/es/agenda-la-fe/-/asset_publisher/eCmYpoQZHLdl/content/curs-de-suport-vital-avan%C3%A7at-recertificaci%C3%B3?p_r_p_assetEntryId=183653745&_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_eCmYpoQZHLdl_type=content&_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_eCmYpoQZHLdl_urlTitle=curs-de-suport-vital-avan%25C3%25A7at-recertificaci%25C3%25B3&_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_eCmYpoQZHLdl_redirect=https%3A%2F%2Flafe.san.gva.es%2Fes%2Fagenda-la-fe%3Fp_p_id%3Dcom_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_eCmYpoQZHLdl%26p_p_lifecycle%3D0%26p_p_state%3Dnormal%26p_p_mode%3Dview%26p_r_p_assetEntryId%3D183653745%26_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_eCmYpoQZHLdl_cur%3D0%26p_r_p_resetCur%3Dfalse",
   "ambito": "mixto",
@@ -557,7 +515,7 @@
   "via": "feed",
   "id": "78bd79d76d6166",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "09b0749fb4cd8a": {
   "titulo": "Las IV Jornadas Sempal para Residentes arrancarán en Bilbao",
@@ -629,20 +587,6 @@
   "descubierto": "2026-10-19",
   "ultima_vez": "2026-10-19"
  },
- "59b721d4715546": {
-  "titulo": "Seminario On-Line Actualización en el manejo de la agitación y la conducta suicida en la infancia y adolescencia",
-  "fecha_texto": "3 de noviembre de 2026",
-  "inicio": "2026-11-03",
-  "fin": "2026-11-03",
-  "lugar": "Online",
-  "entidad": "SEUP — Urgencias de Pediatría",
-  "url": "https://seup.org/actualizacion-en-el-manejo-de-la-agitacion-y-la-conducta-suicida-en-la-infancia-y-adolescencia/",
-  "ambito": "criticos",
-  "via": "feed",
-  "id": "59b721d4715546",
-  "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-02"
- },
  "1f5414d3400374": {
   "titulo": "Concurso «Logo Svnrartd»",
   "fecha_texto": "8 de octubre",
@@ -670,20 +614,6 @@
   "id": "f44e5592e8fdca",
   "descubierto": "2026-10-26",
   "ultima_vez": "2026-11-02"
- },
- "51abda65457fd8": {
-  "titulo": "La Junta de Andalucía licita la redacción del proyecto del nuevo Hospital de Cádiz",
-  "fecha_texto": "1 de diciembre",
-  "inicio": "2026-12-01",
-  "fin": "2026-12-01",
-  "lugar": "Cádiz",
-  "entidad": "Hospitecnia — Agenda",
-  "url": "https://hospitecnia.com/noticias/junta-andalucia-licita-redaccion-proyecto-hospital-cadiz",
-  "ambito": "mixto",
-  "via": "feed",
-  "id": "51abda65457fd8",
-  "descubierto": "2026-10-26",
-  "ultima_vez": "2026-10-26"
  },
  "00cbddd4b76d04": {
   "titulo": "XV Congreso de la Sociedad Murciana de Medicina Intensiva y Unidades Coronarias (Somiuc)",
@@ -811,20 +741,6 @@
   "descubierto": "2026-11-02",
   "ultima_vez": "2026-11-02"
  },
- "cf65f9569ee87f": {
-  "titulo": "Programa VII Curso Eco Pulmonar Seneo 2026v0.pdf",
-  "fecha_texto": "14 y 15 de mayo",
-  "inicio": "2027-05-14",
-  "fin": "2027-05-15",
-  "lugar": "Online",
-  "entidad": "SENeo — Neonatología (intensivos neonatales)",
-  "url": "https://seneo.es/images/site/CURSOS/2026/PROGRAMA_VII_CURSO_ECO_PULMONAR_SENEO_2026v0.pdf",
-  "ambito": "criticos",
-  "via": "html",
-  "id": "cf65f9569ee87f",
-  "descubierto": "2026-11-02",
-  "ultima_vez": "2026-11-02"
- },
  "69381f2d46dbc2": {
   "titulo": "Las IV Jornadas Sempal para Residentes arrancarán en Bilbao",
   "fecha_texto": "8 de mayo.",
@@ -878,6 +794,34 @@
   "ambito": "mixto",
   "via": "ficha",
   "id": "30fa9e09c62557",
+  "descubierto": "2026-11-02",
+  "ultima_vez": "2026-11-02"
+ },
+ "3f2a23b56c21e9": {
+  "titulo": "Acceso socios",
+  "fecha_texto": "30 noviembre al 4 diciembre",
+  "inicio": "2026-11-30",
+  "fin": "2026-12-04",
+  "lugar": "Online",
+  "entidad": "SENeo — Neonatología (intensivos neonatales)",
+  "url": "https://seneo.es/socios/acceso-socios",
+  "ambito": "criticos",
+  "via": "html",
+  "id": "3f2a23b56c21e9",
+  "descubierto": "2026-11-02",
+  "ultima_vez": "2026-11-02"
+ },
+ "cf65f9569ee87f": {
+  "titulo": "Programa VII Curso Eco Pulmonar Seneo 2026v0.pdf",
+  "fecha_texto": "14 y 15 de mayo",
+  "inicio": "2027-05-14",
+  "fin": "2027-05-15",
+  "lugar": "Online",
+  "entidad": "SENeo — Neonatología (intensivos neonatales)",
+  "url": "https://seneo.es/images/site/CURSOS/2026/PROGRAMA_VII_CURSO_ECO_PULMONAR_SENEO_2026v0.pdf",
+  "ambito": "criticos",
+  "via": "html",
+  "id": "cf65f9569ee87f",
   "descubierto": "2026-11-02",
   "ultima_vez": "2026-11-02"
  }
