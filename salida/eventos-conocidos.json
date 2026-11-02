@@ -13,20 +13,6 @@
   "descubierto": "2026-09-21",
   "ultima_vez": "2026-10-05"
  },
- "022110b5d7757e": {
-  "titulo": "Visión actual del dolor pélvico crónico",
-  "fecha_texto": "29 de octubre 2026",
-  "inicio": "2026-10-29",
-  "fin": "2026-10-29",
-  "lugar": "Online",
-  "entidad": "Formación SED",
-  "url": "https://formaciondolor.com/evento/vision-actual-del-dolor-pelvico-cronico/",
-  "ambito": "dolor",
-  "via": "html",
-  "id": "022110b5d7757e",
-  "descubierto": "2026-09-21",
-  "ultima_vez": "2026-10-26"
- },
  "0afac2a37edad7": {
   "titulo": "Ver en la web",
   "fecha_texto": "27, 28 y 29 de mayo",
@@ -109,7 +95,7 @@
   "via": "html",
   "id": "16328ff188da3f",
   "descubierto": "2026-09-21",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "c61e0b107295a4": {
   "titulo": "II Jornada Enfermería de SEMDOR",
@@ -123,7 +109,7 @@
   "via": "html",
   "id": "c61e0b107295a4",
   "descubierto": "2026-09-21",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "abfd2350d5dd71": {
   "titulo": "VI Jornada de la Societat Catalana d'Anestesiologia, Reanimació i Terapèutica del Dolor",
@@ -181,20 +167,6 @@
   "descubierto": "2026-09-21",
   "ultima_vez": "2026-10-26"
  },
- "d9b7732ffb07d1": {
-  "titulo": "Las IV Jornadas Sempal para Residentes finalizan el en Toledo",
-  "fecha_texto": "18 de septiembre",
-  "inicio": "2027-09-18",
-  "fin": "2027-09-18",
-  "lugar": "Toledo",
-  "entidad": "SECPAL",
-  "url": "https://www.secpal.org/las-iv-jornadas-sempal-para-residentes-medicina-paliativa-un-enfoque-imprescindible-finalizan-18-septiembre-en-toledo/",
-  "ambito": "dolor",
-  "via": "feed",
-  "id": "d9b7732ffb07d1",
-  "descubierto": "2026-09-21",
-  "ultima_vez": "2026-10-12"
- },
  "c1db2609e049e6": {
   "titulo": "Las IV Jornadas Sempal para Residentes ‘Medicina Paliativa, un enfoque imprescindible’ continúan el en Dénia",
   "fecha_texto": "29 de mayo",
@@ -206,20 +178,6 @@
   "ambito": "dolor",
   "via": "feed",
   "id": "c1db2609e049e6",
-  "descubierto": "2026-09-21",
-  "ultima_vez": "2026-09-21"
- },
- "487f9cdd8bf219": {
-  "titulo": "Una nueva sesión sobre atención paliativa en demencias pone el foco en la dimensión psicológica y conductual",
-  "fecha_texto": "21 de mayo",
-  "inicio": "2027-05-21",
-  "fin": "2027-05-21",
-  "lugar": "",
-  "entidad": "SECPAL",
-  "url": "https://www.secpal.org/nueva-sesion-ceafa-secpal-dimension-psicologica-en-demencias/",
-  "ambito": "dolor",
-  "via": "feed",
-  "id": "487f9cdd8bf219",
   "descubierto": "2026-09-21",
   "ultima_vez": "2026-09-21"
  },
@@ -235,7 +193,7 @@
   "via": "feed",
   "id": "8ceaeb09319dd4",
   "descubierto": "2026-09-28",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "78b1da9a6e5102": {
   "titulo": "Lee la carta",
@@ -249,7 +207,7 @@
   "via": "html",
   "id": "78b1da9a6e5102",
   "descubierto": "2026-09-28",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "9cbb9883390004": {
   "titulo": "Programa del VIII Congreso Aragonés SADARTD",
@@ -263,7 +221,7 @@
   "via": "ficha",
   "id": "9cbb9883390004",
   "descubierto": "2026-09-28",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "b166ba7a3d8ef7": {
   "titulo": "Soporte vital intermedio pediátrico",
@@ -277,7 +235,7 @@
   "via": "html",
   "id": "b166ba7a3d8ef7",
   "descubierto": "2026-09-28",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "37ad718314615c": {
   "titulo": "Curso SVA Semipresencial del PNRCP-SEMICYUC",
@@ -305,35 +263,7 @@
   "via": "html",
   "id": "888f21e87583e1",
   "descubierto": "2026-10-05",
-  "ultima_vez": "2026-10-26"
- },
- "24b3646a9c6074": {
-  "titulo": "70 Reunion anual AAEAR 2026",
-  "fecha_texto": "29 al 30 de octubre del 2026",
-  "inicio": "2026-10-29",
-  "fin": "2026-10-30",
-  "lugar": "Jerez de la Frontera",
-  "entidad": "AAEAR (Andalucía-Extremadura)",
-  "url": "https://www.aaear.es/70-reunion-anual-aaear-2026",
-  "ambito": "anestesia",
-  "via": "html",
-  "id": "24b3646a9c6074",
-  "descubierto": "2026-10-05",
-  "ultima_vez": "2026-10-26"
- },
- "2f768b35109ce0": {
-  "titulo": "VIII Curso Avanzado de Ecografía en el Paciente Crítico – Octubre 2026",
-  "fecha_texto": "27 de octubre de 2026",
-  "inicio": "2026-10-27",
-  "fin": "2026-10-27",
-  "lugar": "Burgos",
-  "entidad": "Colegio de Médicos de Burgos",
-  "url": "https://www.combu.es/eventos/cursos/viii-curso-avanzado-de-ecografia-en-el-paciente-critico-octubre-2026/",
-  "ambito": "mixto",
-  "via": "html",
-  "id": "2f768b35109ce0",
-  "descubierto": "2026-10-05",
-  "ultima_vez": "2026-10-05"
+  "ultima_vez": "2026-11-02"
  },
  "4dc46c1544c3e7": {
   "titulo": "Principios Teóricos de Ecografía Clínica en Urgencias",
@@ -391,34 +321,6 @@
   "descubierto": "2026-10-05",
   "ultima_vez": "2026-10-12"
  },
- "2366d345b80b70": {
-  "titulo": "Seminario “hematología en Obstericia y Ginecología”",
-  "fecha_texto": "26 de octubre",
-  "inicio": "2026-10-26",
-  "fin": "2026-10-26",
-  "lugar": "Pamplona",
-  "entidad": "Colegio de Médicos de Navarra",
-  "url": "https://colegiodemedicos.es/seminario-hematologia-en-obstericia/?utm_source=rss&utm_medium=rss&utm_campaign=seminario-hematologia-en-obstericia",
-  "ambito": "mixto",
-  "via": "feed",
-  "id": "2366d345b80b70",
-  "descubierto": "2026-10-05",
-  "ultima_vez": "2026-10-05"
- },
- "ff8a9058a5bcba": {
-  "titulo": "Últimos artículos",
-  "fecha_texto": "26 dec",
-  "inicio": "2026-12-26",
-  "fin": "2026-12-26",
-  "lugar": "Soria",
-  "entidad": "IACS (Aragón)",
-  "url": "https://www.iacs.es/ultimos-articulos-320/",
-  "ambito": "mixto",
-  "via": "feed",
-  "id": "ff8a9058a5bcba",
-  "descubierto": "2026-10-12",
-  "ultima_vez": "2026-10-19"
- },
  "5bcef89b74076f": {
   "titulo": "Curso práctico de Ecocardiografía",
   "fecha_texto": "22 de noviembre de 2026",
@@ -447,20 +349,6 @@
   "descubierto": "2026-10-12",
   "ultima_vez": "2026-10-12"
  },
- "7f6eba9efc78d1": {
-  "titulo": "Curso Ventilación Mecánica no Invasiva",
-  "fecha_texto": "29 oct",
-  "inicio": "2026-10-29",
-  "fin": "2026-10-29",
-  "lugar": "Online",
-  "entidad": "Colegio de Médicos de Lugo",
-  "url": "https://comlugo.org/cursos-actividades/curso-ventilacion-mecanica-no-invasiva/",
-  "ambito": "mixto",
-  "via": "html",
-  "id": "7f6eba9efc78d1",
-  "descubierto": "2026-10-12",
-  "ultima_vez": "2026-10-26"
- },
  "8f094b91520e33": {
   "titulo": "Analgesia y sedación en el paciente pediátrico en Urgencias",
   "fecha_texto": "09 de octubre",
@@ -474,34 +362,6 @@
   "id": "8f094b91520e33",
   "descubierto": "2026-10-12",
   "ultima_vez": "2026-10-12"
- },
- "352917d67cb40e": {
-  "titulo": "VIII Curso Avanzado de Ecografía en el Paciente Crítico – Octubre 2026",
-  "fecha_texto": "27 de octubre de 2026",
-  "inicio": "2026-10-27",
-  "fin": "2026-10-27",
-  "lugar": "",
-  "entidad": "Colegio de Médicos de Burgos",
-  "url": "https://www.combu.es/eventos/cursos/viii-curso-avanzado-de-ecografia-en-el-paciente-critico-octubre-2026/",
-  "ambito": "mixto",
-  "via": "html",
-  "id": "352917d67cb40e",
-  "descubierto": "2026-10-12",
-  "ultima_vez": "2026-10-19"
- },
- "4fd446be3e2755": {
-  "titulo": "Cartagena: Acto Conmemorativo del Día Mundial de los Cuidados Paliativos",
-  "fecha_texto": "7 de octubre",
-  "inicio": "2027-10-07",
-  "fin": "2027-10-07",
-  "lugar": "Cartagena",
-  "entidad": "SECPAL",
-  "url": "https://www.secpal.org/7-de-octubre-cartagena-acto-conmemorativo-del-dia-mundial-de-los-cuidados-paliativos/",
-  "ambito": "dolor",
-  "via": "feed",
-  "id": "4fd446be3e2755",
-  "descubierto": "2026-10-12",
-  "ultima_vez": "2026-10-26"
  },
  "15e529ba88a341": {
   "titulo": "Webinar – Del diagnóstico al tratamiento: hacia una analgesia individualizada en UCI",
@@ -529,21 +389,7 @@
   "via": "html",
   "id": "6303259cd7815c",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
- },
- "c59810c36e7120": {
-  "titulo": "Inscripciones",
-  "fecha_texto": "12 de diciembre",
-  "inicio": "2026-12-12",
-  "fin": "2026-12-12",
-  "lugar": "",
-  "entidad": "ARINDUZ (País Vasco) — Paliativos",
-  "url": "https://forms.gle/Lt7txGJmzcQqBWTG8",
-  "ambito": "dolor",
-  "via": "html",
-  "id": "c59810c36e7120",
-  "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "6693297ca58441": {
   "titulo": "Automatrícula",
@@ -557,7 +403,7 @@
   "via": "html",
   "id": "6693297ca58441",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "73c900fe79a469": {
   "titulo": "¡Reserva la fecha!",
@@ -571,7 +417,7 @@
   "via": "html",
   "id": "73c900fe79a469",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "3ae9bd4690903c": {
   "titulo": "XXIV Congreso en Vigo",
@@ -585,7 +431,7 @@
   "via": "html",
   "id": "3ae9bd4690903c",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "bec60113da75ac": {
   "titulo": "Área de socios de la seNeo",
@@ -599,7 +445,7 @@
   "via": "html",
   "id": "bec60113da75ac",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "50b9083f4954ea": {
   "titulo": "Congresos Nacionales Seneo",
@@ -613,7 +459,7 @@
   "via": "ficha",
   "id": "50b9083f4954ea",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "533d19d7644a58": {
   "titulo": "Curso de Soporte Vital Avanzado",
@@ -627,21 +473,7 @@
   "via": "html",
   "id": "533d19d7644a58",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
- },
- "7637a2957d728e": {
-  "titulo": "Curso de Soporte Vital Inmediato",
-  "fecha_texto": "27 octubre 2026",
-  "inicio": "2026-10-27",
-  "fin": "2026-10-27",
-  "lugar": "Valencia",
-  "entidad": "H. U. i Politècnic La Fe — agenda",
-  "url": "https://lafe.san.gva.es/es/agenda-la-fe/-/asset_publisher/eCmYpoQZHLdl/content/curs-de-suport-vital-immediat?p_r_p_assetEntryId=183655898&_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_eCmYpoQZHLdl_type=content&_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_eCmYpoQZHLdl_urlTitle=curs-de-suport-vital-immediat&_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_eCmYpoQZHLdl_redirect=https%3A%2F%2Flafe.san.gva.es%2Fes%2Fagenda-la-fe%3Fp_p_id%3Dcom_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_eCmYpoQZHLdl%26p_p_lifecycle%3D0%26p_p_state%3Dnormal%26p_p_mode%3Dview%26p_r_p_assetEntryId%3D183655898%26_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_eCmYpoQZHLdl_cur%3D0%26p_r_p_resetCur%3Dfalse",
-  "ambito": "mixto",
-  "via": "html",
-  "id": "7637a2957d728e",
-  "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "3caf04d4c84cec": {
   "titulo": "17º Congreso Nacional Cirugía Mayor Ambulatoria",
@@ -655,7 +487,7 @@
   "via": "html",
   "id": "3caf04d4c84cec",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "ed793a0bbc91dd": {
   "titulo": "Curso de Soporte Vital Avanzado Recertificación",
@@ -669,21 +501,7 @@
   "via": "html",
   "id": "ed793a0bbc91dd",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
- },
- "cf65f9569ee87f": {
-  "titulo": "Programa VII Curso Eco Pulmonar Seneo 2026v0.pdf",
-  "fecha_texto": "14 y 15 de mayo",
-  "inicio": "2027-05-14",
-  "fin": "2027-05-15",
-  "lugar": "Online",
-  "entidad": "SENeo — Neonatología (intensivos neonatales)",
-  "url": "https://seneo.es/images/site/CURSOS/2026/PROGRAMA_VII_CURSO_ECO_PULMONAR_SENEO_2026v0.pdf",
-  "ambito": "criticos",
-  "via": "html",
-  "id": "cf65f9569ee87f",
-  "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "71a7b5a44c620f": {
   "titulo": "Abordaje interdisciplinar del dolor crónico pediátrico",
@@ -697,24 +515,10 @@
   "via": "feed",
   "id": "71a7b5a44c620f",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
- },
- "4bd9c9d9add7a2": {
-  "titulo": "Curso Teórico–práctico de Ecografía Obstétrica para Matronas",
-  "fecha_texto": "16, 19 y 20 de febrero de 2027",
-  "inicio": "2027-02-16",
-  "fin": "2027-02-20",
-  "lugar": "Online",
-  "entidad": "Hospital Clínic — Aula Clínic",
-  "url": "https://www.aulaclinic.com/cursos/1501/curso-teoricopractico-de-ecografia-obstetrica-para-matronas",
-  "ambito": "mixto",
-  "via": "ficha",
-  "id": "4bd9c9d9add7a2",
-  "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "5f86b93cbb6d61": {
-  "titulo": "Instructor en Soporte Vital Básico y DEA | Presencial y online",
+  "titulo": "Instructor en Soporte Vital Básico y DEA",
   "fecha_texto": "14 de noviembre",
   "inicio": "2026-11-14",
   "fin": "2026-11-14",
@@ -739,7 +543,7 @@
   "via": "html",
   "id": "bcdce8d25ba7bc",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "78bd79d76d6166": {
   "titulo": "SOVAMICYUC con el “Día Internacional de la Reanimación Cardiopulmonar”",
@@ -755,22 +559,8 @@
   "descubierto": "2026-10-19",
   "ultima_vez": "2026-10-26"
  },
- "8aa1f557b7e3ce": {
-  "titulo": "Publicar y no morir en el intento. Un webinar de la revista Medicina Intensiva",
-  "fecha_texto": "27 de octubre",
-  "inicio": "2026-10-27",
-  "fin": "2026-10-27",
-  "lugar": "Barcelona",
-  "entidad": "SEMICYUC",
-  "url": "https://semicyuc.org/2026/10/publicar-y-no-morir-en-el-intento/",
-  "ambito": "criticos",
-  "via": "feed",
-  "id": "8aa1f557b7e3ce",
-  "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
- },
  "09b0749fb4cd8a": {
-  "titulo": "Cambio de fecha | Las IV Jornadas Sempal para Residentes arrancarán en Bilbao el",
+  "titulo": "Las IV Jornadas Sempal para Residentes arrancarán en Bilbao",
   "fecha_texto": "8 de mayo.",
   "inicio": "2027-05-08",
   "fin": "2027-05-08",
@@ -784,7 +574,7 @@
   "ultima_vez": "2026-10-26"
  },
  "fbd78cc0c7e3b7": {
-  "titulo": "2ª Edición de Casos Clínicos en Cuidados Paliativos Pediátricos de Pedpal Webinars",
+  "titulo": "2ª Edición de Casos Clínicos en Cuidados Paliativos Pediátricos de Pedpal",
   "fecha_texto": "10 mar 2027",
   "inicio": "2027-03-10",
   "fin": "2027-03-10",
@@ -809,7 +599,7 @@
   "via": "html",
   "id": "6e400d523fa737",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "b0ec17c31c129b": {
   "titulo": "Cuidados Paliativos (Online) (IV Edición) a distancia 60 ECTS Preinscripción abierta",
@@ -823,21 +613,7 @@
   "via": "ficha",
   "id": "b0ec17c31c129b",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
- },
- "e14575ec6ac952": {
-  "titulo": "Epidermólisis ampollosa en cuidados paliativos: nuevo webinar de formación especializada Webinars",
-  "fecha_texto": "9 de junio.",
-  "inicio": "2027-06-09",
-  "fin": "2027-06-09",
-  "lugar": "Online",
-  "entidad": "PEDPAL — Paliativos pediátricos",
-  "url": "https://pedpal.es/actividad-curso/epidermolisis-ampollosa-en-cuidados-paliativos-nuevo-webinar-de-formacion-especializada/",
-  "ambito": "dolor",
-  "via": "ficha",
-  "id": "e14575ec6ac952",
-  "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "fc2eb08757f996": {
   "titulo": "El Colegio de Médicos de Sevilla reafirma su compromiso con la formación en reanimación cardiopulmonar",
@@ -865,49 +641,7 @@
   "via": "feed",
   "id": "59b721d4715546",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
- },
- "70927801bf50f8": {
-  "titulo": "Importancia de explorar aspectos psicológicos, sociales y espirituales en las visitas iniciales de los equipos de…",
-  "fecha_texto": "30 de noviembre.",
-  "inicio": "2026-11-30",
-  "fin": "2026-11-30",
-  "lugar": "",
-  "entidad": "PEDPAL — Paliativos pediátricos",
-  "url": "https://pedpal.es/actividad-curso/importancia-de-explorar-aspectos-psicologicos-sociales-y-espirituales-en-las-visitas-iniciales-de-los-equipos-de-cuidados-paliativos-pediatricos/",
-  "ambito": "dolor",
-  "via": "ficha",
-  "id": "70927801bf50f8",
-  "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
- },
- "c230cf91d1c6d3": {
-  "titulo": "E-Bellvitge 755",
-  "fecha_texto": "30 octubre de 2026",
-  "inicio": "2026-10-30",
-  "fin": "2026-10-30",
-  "lugar": "Barcelona",
-  "entidad": "H. U. de Bellvitge — agenda",
-  "url": "https://bellvitgehospital.cat/ca/node/7427",
-  "ambito": "mixto",
-  "via": "feed",
-  "id": "c230cf91d1c6d3",
-  "descubierto": "2026-10-26",
-  "ultima_vez": "2026-10-26"
- },
- "7235d935a8e106": {
-  "titulo": "Últimos artículos",
-  "fecha_texto": "26 oct",
-  "inicio": "2026-10-26",
-  "fin": "2026-10-26",
-  "lugar": "Soria",
-  "entidad": "IACS (Aragón)",
-  "url": "https://www.iacs.es/ultimos-articulos-322/",
-  "ambito": "mixto",
-  "via": "feed",
-  "id": "7235d935a8e106",
-  "descubierto": "2026-10-26",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "1f5414d3400374": {
   "titulo": "Concurso «Logo Svnrartd»",
@@ -921,133 +655,21 @@
   "via": "feed",
   "id": "1f5414d3400374",
   "descubierto": "2026-10-26",
-  "ultima_vez": "2026-10-26"
- },
- "7624469a18c526": {
-  "titulo": "Avances en neuropediatría",
-  "fecha_texto": "5 y 6 de noviembre de 2026",
-  "inicio": "2026-11-05",
-  "fin": "2026-11-06",
-  "lugar": "Online",
-  "entidad": "H. Sant Joan de Déu Barcelona — Anestesiología pediátrica",
-  "url": "https://formacion.sjdhospitalbarcelona.org/es/formaciones/avances-neuropediatria",
-  "ambito": "anestesia",
-  "via": "feed",
-  "id": "7624469a18c526",
-  "descubierto": "2026-10-26",
-  "ultima_vez": "2026-10-26"
- },
- "73852380658aa3": {
-  "titulo": "XIX Curso de Ecocardiografía fetal",
-  "fecha_texto": "16 noviembre, 2026",
-  "inicio": "2026-11-16",
-  "fin": "2026-11-16",
-  "lugar": "Málaga",
-  "entidad": "H. U. 12 de Octubre",
-  "url": "https://www.comunidad.madrid/hospital/12octubre/actividad/116485",
-  "ambito": "mixto",
-  "via": "html",
-  "id": "73852380658aa3",
-  "descubierto": "2026-10-26",
-  "ultima_vez": "2026-10-26"
- },
- "e98c29e2938bbd": {
-  "titulo": "Programa Curso de Revision 2026.pdf",
-  "fecha_texto": "23 de marzo al 15 de junio",
-  "inicio": "2027-03-23",
-  "fin": "2027-06-15",
-  "lugar": "",
-  "entidad": "AMCP (Madrid) — Paliativos",
-  "url": "https://www.lagunacuida.org/wp-content/uploads/2026/02/Programa-Curso-de-Revision-2026.pdf",
-  "ambito": "dolor",
-  "via": "html",
-  "id": "e98c29e2938bbd",
-  "descubierto": "2026-10-26",
-  "ultima_vez": "2026-10-26"
- },
- "8a4a74092329ec": {
-  "titulo": "Curso avanzado en tratamiento opioide",
-  "fecha_texto": "26 de octubre al 01 de diciembre",
-  "inicio": "2026-10-26",
-  "fin": "2026-12-01",
-  "lugar": "Online",
-  "entidad": "AMCP (Madrid) — Paliativos",
-  "url": "https://www.lagunacuida.org/curso-avanzado-en-tratamiento-opioide/",
-  "ambito": "dolor",
-  "via": "html",
-  "id": "8a4a74092329ec",
-  "descubierto": "2026-10-26",
-  "ultima_vez": "2026-10-26"
- },
- "7797c6254bac8f": {
-  "titulo": "18 Actualidad SECPAL Octubre Diciembre 2022.pdf",
-  "fecha_texto": "28 de octubre",
-  "inicio": "2026-10-28",
-  "fin": "2026-10-28",
-  "lugar": "Madrid",
-  "entidad": "SECPAL",
-  "url": "https://www.secpal.org/wp-content/uploads/2022/11/18-Actualidad-Secpal-Octubre-Diciembre-2022.pdf",
-  "ambito": "dolor",
-  "via": "html",
-  "id": "7797c6254bac8f",
-  "descubierto": "2026-10-26",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "f44e5592e8fdca": {
   "titulo": "XIX Jornada Anual de Seguridad del Paciente Crítico",
   "fecha_texto": "2 de diciembre de 2026",
   "inicio": "2026-12-02",
   "fin": "2026-12-02",
-  "lugar": "",
+  "lugar": "Online",
   "entidad": "SEMICYUC",
   "url": "https://semicyuc.org/2026/10/xix-jornada-anual-de-seguridad-del-paciente-critico/",
   "ambito": "criticos",
   "via": "feed",
   "id": "f44e5592e8fdca",
   "descubierto": "2026-10-26",
-  "ultima_vez": "2026-10-26"
- },
- "6b1fa2e2e79dfb": {
-  "titulo": "V Jornada de Cuidados Paliativos de la Comunidad de Madrid",
-  "fecha_texto": "27 octubre, 2026",
-  "inicio": "2026-10-27",
-  "fin": "2026-10-27",
-  "lugar": "Madrid",
-  "entidad": "H. U. Ramón y Cajal",
-  "url": "https://www.comunidad.madrid/hospital/ramonycajal/actividad/120384",
-  "ambito": "mixto",
-  "via": "html",
-  "id": "6b1fa2e2e79dfb",
-  "descubierto": "2026-10-26",
-  "ultima_vez": "2026-10-26"
- },
- "648a505d7a5132": {
-  "titulo": "III Acto de Homenaje a los Cuidados Paliativos – Tiempo de Cuidar",
-  "fecha_texto": "22 de octubre",
-  "inicio": "2027-10-22",
-  "fin": "2027-10-22",
-  "lugar": "",
-  "entidad": "SVMP (C. Valenciana) — Paliativos",
-  "url": "https://www.svmpaliativa.org/iii-acto-de-homenaje-a-los-cuidados-paliativos-tiempo-de-cuidar/",
-  "ambito": "dolor",
-  "via": "feed",
-  "id": "648a505d7a5132",
-  "descubierto": "2026-10-26",
-  "ultima_vez": "2026-10-26"
- },
- "4dbfd1c72b2f48": {
-  "titulo": "Espiritualidad y alzhéimer: cuando el sentido va más allá del significado",
-  "fecha_texto": "28 de octubre",
-  "inicio": "2026-10-28",
-  "fin": "2026-10-28",
-  "lugar": "Online",
-  "entidad": "SECPAL",
-  "url": "https://www.secpal.org/sesion-sobre-atencion-paliativa-en-demencias-espiritualidad-y-alzheimer/",
-  "ambito": "dolor",
-  "via": "feed",
-  "id": "4dbfd1c72b2f48",
-  "descubierto": "2026-10-26",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "51abda65457fd8": {
   "titulo": "La Junta de Andalucía licita la redacción del proyecto del nuevo Hospital de Cádiz",
@@ -1060,20 +682,6 @@
   "ambito": "mixto",
   "via": "feed",
   "id": "51abda65457fd8",
-  "descubierto": "2026-10-26",
-  "ultima_vez": "2026-10-26"
- },
- "aba2b6a8e60070": {
-  "titulo": "La dimensión espiritual en cuidados paliativos: una mirada desde la Psicología Webinars",
-  "fecha_texto": "4 de noviembre de 2026",
-  "inicio": "2026-11-04",
-  "fin": "2026-11-04",
-  "lugar": "Online",
-  "entidad": "PEDPAL — Paliativos pediátricos",
-  "url": "https://pedpal.es/actividad-curso/webinar-dimension-espiritual-en-cuidados-paliativos/",
-  "ambito": "dolor",
-  "via": "ficha",
-  "id": "aba2b6a8e60070",
   "descubierto": "2026-10-26",
   "ultima_vez": "2026-10-26"
  },
@@ -1092,7 +700,7 @@
   "ultima_vez": "2026-10-26"
  },
  "9691cf460ddb1a": {
-  "titulo": "Nueva sesión del Curso de Soporte Vital Básico y DEA dirigido a médicos y otros profesionales, el",
+  "titulo": "Nueva sesión del Curso de Soporte Vital Básico y DEA dirigido a médicos y otros profesionales",
   "fecha_texto": "18 de noviembre.",
   "inicio": "2026-11-18",
   "fin": "2026-11-18",
@@ -1102,20 +710,6 @@
   "ambito": "mixto",
   "via": "feed",
   "id": "9691cf460ddb1a",
-  "descubierto": "2026-10-26",
-  "ultima_vez": "2026-10-26"
- },
- "1dcac2f4c66388": {
-  "titulo": "Webinar de Cuidados Paliativos Perinatales: Las 10 mejores comunicaciones de la III Jornada Nacional Webinars",
-  "fecha_texto": "4 de noviembre",
-  "inicio": "2026-11-04",
-  "fin": "2026-11-04",
-  "lugar": "Online",
-  "entidad": "PEDPAL — Paliativos pediátricos",
-  "url": "https://pedpal.es/actividad-curso/webinar-cuidados-paliativos-perinatales/",
-  "ambito": "dolor",
-  "via": "ficha",
-  "id": "1dcac2f4c66388",
   "descubierto": "2026-10-26",
   "ultima_vez": "2026-10-26"
  },
@@ -1131,7 +725,7 @@
   "via": "feed",
   "id": "ce038c5a87a533",
   "descubierto": "2026-10-26",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-02"
  },
  "0c9bc733d55d55": {
   "titulo": "Galicia e o Norte de Portugal no marco do proxecto IntegraSaúde reforzan a cooperación transfronteiriza na atención ás…",
@@ -1146,5 +740,145 @@
   "id": "0c9bc733d55d55",
   "descubierto": "2026-10-26",
   "ultima_vez": "2026-10-26"
+ },
+ "2e9aac607c9cbd": {
+  "titulo": "Jornadas Atención Primaria SEMDOR",
+  "fecha_texto": "1 de abril de 2027",
+  "inicio": "2027-04-01",
+  "fin": "2027-04-01",
+  "lugar": "",
+  "entidad": "Dolor.com — Congresos y jornadas",
+  "url": "https://www.dolor.com/formacion/congresos-y-jornadas/2027/jornadas-de-dolor-en-atencion-primaria-semdor-2027",
+  "ambito": "dolor",
+  "via": "html",
+  "id": "2e9aac607c9cbd",
+  "descubierto": "2026-11-02",
+  "ultima_vez": "2026-11-02"
+ },
+ "f4f23500effb69": {
+  "titulo": "XVII curso de estimulacion cardiaca",
+  "fecha_texto": "15 y 16 de abril",
+  "inicio": "2027-04-15",
+  "fin": "2027-04-16",
+  "lugar": "Online",
+  "entidad": "SOVAMICYUC (C. Valenciana)",
+  "url": "https://sovamicyuc.es/xvii-curso-de-estimulacion-cardiaca",
+  "ambito": "criticos",
+  "via": "html",
+  "id": "f4f23500effb69",
+  "descubierto": "2026-11-02",
+  "ultima_vez": "2026-11-02"
+ },
+ "1de4c2a21f9797": {
+  "titulo": "Instructor en Soporte Vital Básico y DEA",
+  "fecha_texto": "14 de noviembre",
+  "inicio": "2026-11-14",
+  "fin": "2026-11-14",
+  "lugar": "Online",
+  "entidad": "Colegio de Médicos de Málaga",
+  "url": "https://commalaga.com/formacion-commalaga/instructor14noviembre/",
+  "ambito": "mixto",
+  "via": "html",
+  "id": "1de4c2a21f9797",
+  "descubierto": "2026-11-02",
+  "ultima_vez": "2026-11-02"
+ },
+ "eaf5c5b768493d": {
+  "titulo": "Curso de Soporte Vital Básico (SVB) y DEA",
+  "fecha_texto": "16 de diciembre",
+  "inicio": "2026-12-16",
+  "fin": "2026-12-16",
+  "lugar": "Online",
+  "entidad": "Colegio de Médicos de Málaga",
+  "url": "https://commalaga.com/formacion-commalaga/curso-de-soporte-vital-basico-svb-y-dea-16-de-diciembre/",
+  "ambito": "mixto",
+  "via": "html",
+  "id": "eaf5c5b768493d",
+  "descubierto": "2026-11-02",
+  "ultima_vez": "2026-11-02"
+ },
+ "d1d6da44ab4eab": {
+  "titulo": "Inscripción Jornada Balear de Anestesiología",
+  "fecha_texto": "27 de noviembre de 2026",
+  "inicio": "2026-11-27",
+  "fin": "2026-11-27",
+  "lugar": "Madrid",
+  "entidad": "SBARTD (Baleares)",
+  "url": "http://www.sbartd.es/jornada.html",
+  "ambito": "anestesia",
+  "via": "ficha",
+  "id": "d1d6da44ab4eab",
+  "descubierto": "2026-11-02",
+  "ultima_vez": "2026-11-02"
+ },
+ "cf65f9569ee87f": {
+  "titulo": "Programa VII Curso Eco Pulmonar Seneo 2026v0.pdf",
+  "fecha_texto": "14 y 15 de mayo",
+  "inicio": "2027-05-14",
+  "fin": "2027-05-15",
+  "lugar": "Online",
+  "entidad": "SENeo — Neonatología (intensivos neonatales)",
+  "url": "https://seneo.es/images/site/CURSOS/2026/PROGRAMA_VII_CURSO_ECO_PULMONAR_SENEO_2026v0.pdf",
+  "ambito": "criticos",
+  "via": "html",
+  "id": "cf65f9569ee87f",
+  "descubierto": "2026-11-02",
+  "ultima_vez": "2026-11-02"
+ },
+ "69381f2d46dbc2": {
+  "titulo": "Las IV Jornadas Sempal para Residentes arrancarán en Bilbao",
+  "fecha_texto": "8 de mayo.",
+  "inicio": "2027-05-08",
+  "fin": "2027-05-08",
+  "lugar": "Bilbao",
+  "entidad": "SOGACOPAL (Galicia) — Paliativos",
+  "url": "https://www.sogacopal.com/2026/03/cambio-de-fecha-las-iv-jornadas-sempal-para-residentes-arrancaran-en-bilbao-el-8-de-mayo/",
+  "ambito": "dolor",
+  "via": "feed",
+  "id": "69381f2d46dbc2",
+  "descubierto": "2026-11-02",
+  "ultima_vez": "2026-11-02"
+ },
+ "bc63540c401eb5": {
+  "titulo": "2ª Edición de Casos Clínicos en Cuidados Paliativos Pediátricos de Pedpal",
+  "fecha_texto": "11 de nov",
+  "inicio": "2026-11-11",
+  "fin": "2026-11-11",
+  "lugar": "Murcia",
+  "entidad": "PEDPAL — Paliativos pediátricos",
+  "url": "https://pedpal.es/actividad-curso/2a-edicion-casos-clinicos-cuidados-paliativos-pediatricos-pedpal/",
+  "ambito": "dolor",
+  "via": "ficha",
+  "id": "bc63540c401eb5",
+  "descubierto": "2026-11-02",
+  "ultima_vez": "2026-11-02"
+ },
+ "ec4e6722b467fe": {
+  "titulo": "La UGR forma a futuros médicos en Soporte Vital Avanzado mediante simulación clínica de alta fidelidad",
+  "fecha_texto": "29 de octubre",
+  "inicio": "2027-10-29",
+  "fin": "2027-10-29",
+  "lugar": "",
+  "entidad": "U. de Granada",
+  "url": "http://www.ugr.es/universidad/noticias/ugr-forma-soporte-vital-avanzado-simulacion",
+  "ambito": "mixto",
+  "via": "feed",
+  "id": "ec4e6722b467fe",
+  "descubierto": "2026-11-02",
+  "ultima_vez": "2026-11-02"
+ },
+ "30fa9e09c62557": {
+  "titulo": "Curso P.A.S. (Pautas de Actuación y Seguimiento). Tratamiento del dolor agudo adaptado a cada paciente (2ª edición)",
+  "fecha_texto": "2 de octubre de 2027",
+  "inicio": "2027-10-02",
+  "fin": "2027-10-02",
+  "lugar": "Granada",
+  "entidad": "Colegio de Médicos de Granada",
+  "url": "https://comgranada.com/curso-p-a-s-pautas-de-actuacion-y-seguimiento-tratamiento-del-dolor-agudo-adaptado-a-cada-paciente-2a-edicion/",
+  "ambito": "mixto",
+  "via": "ficha",
+  "id": "30fa9e09c62557",
+  "descubierto": "2026-11-02",
+  "ultima_vez": "2026-11-02"
  }
 }

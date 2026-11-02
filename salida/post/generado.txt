@@ -1,0 +1,4 @@
+fecha: 2026-11-02
+tabla: AGENDA-ACTUAL.csv
+cursos: 18
+imagenes: 6
