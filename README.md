@@ -43,7 +43,17 @@ python agenda.py --todo --meses 6    # mirar sin más: no altera el post del lun
 ### El post de Instagram
 
 Una portada y, detrás, un carrusel con cada curso: **nombre, entidad
-organizadora, lugar y fecha**. Formato 4:5 vertical (1080 × 1350).
+organizadora, lugar y fecha**. Formato 4:5 vertical, guardado a 2160 × 2700
+como los resúmenes del podcast, con su misma estética (27/10): fondo azul
+marino, verde menta, titular a dos colores, encabezados numerados, tarjetas
+con franja de color, TIPs en amarillo y el bloque "Escúchanos en".
+
+- **Portada:** el periodo, cuántos cursos hay, cuántos presenciales y online,
+  el primero que empieza, las ciudades y los TIPs con el aviso de comprobar
+  fechas en la web del organizador.
+- **Diapositivas:** cada una con el tramo de fechas que cubre ("5 – 12 de
+  noviembre") y una tarjeta por curso; los colores se van alternando. Un curso
+  con plazas agotadas lleva la etiqueta COMPLETO.
 
 **Cada lunes, solo.** El post lleva **todos los cursos del próximo mes**
 (decisión de Luis, 26/10) y se monta en dos tiempos:
@@ -77,8 +87,10 @@ verdad, letra a letra como viene de la web del organizador.
 
 **Cómo decide cuántos cursos van en cada imagen.** No a ojo: mide cada imagen
 tal y como va a quedar y mete los que caben, hasta cinco. Luego reparte a
-partes iguales: 20 cursos salen en 5 imágenes de 4, no en 5-5-5-4-1. Un título
-de más de tres líneas se corta con puntos suspensivos. Instagram admite 20
+partes iguales: 21 cursos salen en 4-4-4-3-3-3, no en 5-5-5-5-1. Un título
+de más de cuatro líneas se corta con puntos suspensivos (y no impide que otros
+cursos compartan su imagen). Si en la portada no caben todas las ciudades,
+enseña las que caben y "+N más". Instagram admite 20
 imágenes por carrusel; si salieran más, avisa.
 
 **La entidad organizadora, no la web donde se encontró.** Cuando un curso sale
@@ -86,9 +98,11 @@ de un agregador (Dolor.com, DimeCongresos, AnestesiaR…) y el título nombra a
 una sociedad, figura la sociedad: "II Jornada Enfermería de SEMDOR", recogida
 por Dolor.com, aparece como de SEMDOR.
 
-**Cambiar el aspecto.** Todo está en `plantilla/estilo.css`: colores,
-tipografías y tamaños, con las variables arriba del todo. Para cambiar el
-diseño no hace falta tocar `imagen.py`.
+**Cambiar el aspecto.** Todo está en `estilo.css`: colores, tipografías y
+tamaños, con las variables arriba del todo. Para cambiar el diseño no hace
+falta tocar `imagen.py`. `imagen.py` busca `estilo.css` y las tipografías
+(`*.woff2`) en `plantilla/` o, si no están ahí, junto a él en la raíz, que es
+donde quedaron al subirlos desde la web.
 
 **Quitar un curso.** Si sale uno que no es para tu audiencia, añade un trozo
 de su título como línea nueva en `descartes.txt`. Desaparece de la tabla y del

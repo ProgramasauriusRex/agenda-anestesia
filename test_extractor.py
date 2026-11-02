@@ -709,6 +709,24 @@ assert [len(g) for g in _rep] == [4, 4, 4, 3, 3, 3], [len(g) for g in _rep]
 _rep = _im.reparte([{"i": i} for i in range(8)], _cabe4)
 assert [len(g) for g in _rep] == [4, 4], [len(g) for g in _rep]
 assert sum(len(g) for g in _im.reparte([{"i": i} for i in range(13)], _cabe4)) == 13
+# Lo que añade el diseño de los resúmenes (27/10)
+assert _im.periodo_corto([{"inicio": "2026-10-27"}, {"inicio": "2026-11-22"}]) == "OCT – NOV 2026"
+assert _im.periodo_corto([{"inicio": "2026-11-02"}, {"inicio": "2026-11-30"}]) == "NOV 2026"
+assert _im.periodo_corto([{"inicio": "2026-12-10"}, {"inicio": "2027-01-15"}]) == "DIC 2026 – ENE 2027"
+assert _im.rango([{"inicio": "2026-10-26"}, {"inicio": "2026-11-22"}]) == \
+    "del 26 de octubre al 22 de noviembre"
+assert _im.rango([{"inicio": "2026-11-12"}]) == "el 12 de noviembre"
+assert _im.rango_corto([{"inicio": "2026-11-05"}, {"inicio": "2026-11-12"}]) == "5 – 12 de noviembre"
+assert _im.rango_corto([{"inicio": "2026-10-29"}, {"inicio": "2026-11-03"}]) == \
+    "29 de octubre – 3 de noviembre"
+assert _im.rango_corto([{"inicio": "2026-11-12"}, {"inicio": "2026-11-12"}]) == "12 de noviembre"
+# Ciudades: online no cuenta, de más a menos, y "Ávila" se ordena con la A
+assert _im.ciudades([{"lugar": "Zaragoza"}, {"lugar": "Ávila"}, {"lugar": "Online"},
+                     {"lugar": "Madrid"}, {"lugar": "Madrid"}, {"lugar": ""}]) == \
+    [("Madrid", 2), ("Ávila", 1), ("Zaragoza", 1)]
+# Un título larguísimo no deja a los demás cursos solos: la medida de
+# "cabe" ya no mira si algún título sale cortado
+assert "recortado" not in _im._CABE
 print("Post de Instagram: fechas, organizador y reparto ✓")
 
 # ---------------------------------------------------------------------------

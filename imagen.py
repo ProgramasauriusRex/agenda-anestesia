@@ -61,8 +61,14 @@ def _busca_tipografias() -> list[Path]:
     return []
 
 ANCHO, ALTO = 1080, 1350
+ESCALA = 2                     # se guarda a 2160 × 2700, como los resúmenes
 MAX_POR_DIAPOSITIVA = 5        # con más, el texto deja de respirar en un móvil
 MAX_DIAPOSITIVAS = 20          # el límite de Instagram para un carrusel
+N_ACENTOS = 5                  # menta, coral, azul, ámbar y lila (c0…c4 en estilo.css)
+MAX_CIUDADES = 9               # en la portada; si hay más, "+N más"
+
+PLATAFORMAS = (("iVoox", "ivoox"), ("Spotify", "spotify"),
+               ("Apple Podcasts", "apple"), ("YouTube Music", "youtube"))
 
 MES_CORTO = ["", "ENE", "FEB", "MAR", "ABR", "MAY", "JUN",
              "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"]
@@ -80,6 +86,11 @@ ICONO_LUGAR = ('<svg viewBox="0 0 24 24"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 
 ICONO_ONLINE = ('<svg viewBox="0 0 24 24"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 '
                 '1-1 1h-6v2h3v2H7v-2h3v-2H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1 2v8h14V7z"/>'
                 '</svg>')
+# Un micrófono, junto al nombre de la cuenta. Va en lugar del logo de
+# Instagram de los resúmenes: un logo de otra marca no se dibuja aquí.
+ICONO_MARCA = ('<svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 '
+               '3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 '
+               '11z"/></svg>')
 
 
 # --- Datos -----------------------------------------------------------------
@@ -160,6 +171,56 @@ def periodo(filas: list[dict]) -> str:
     if a.year == b.year:
         return f"{MES_LARGO[a.month]} – {MES_LARGO[b.month]} {a.year}"
     return f"{MES_LARGO[a.month]} {a.year} – {MES_LARGO[b.month]} {b.year}"
+
+
+def periodo_corto(filas: list[dict]) -> str:
+    """Para la etiqueta de arriba: 'NOV 2026', 'OCT – NOV 2026', 'DIC 2026 – ENE 2027'."""
+    fechas = [date.fromisoformat(f["inicio"]) for f in filas]
+    a, b = min(fechas), max(fechas)
+    if (a.year, a.month) == (b.year, b.month):
+        return f"{MES_CORTO[a.month]} {a.year}"
+    if a.year == b.year:
+        return f"{MES_CORTO[a.month]} – {MES_CORTO[b.month]} {a.year}"
+    return f"{MES_CORTO[a.month]} {a.year} – {MES_CORTO[b.month]} {b.year}"
+
+
+def _dia_de_mes(d: date) -> str:
+    return f"{d.day} de {MES_LARGO[d.month].lower()}"
+
+
+def rango(filas: list[dict]) -> str:
+    """Para la entradilla: 'del 26 de octubre al 22 de noviembre', 'el 12 de noviembre'."""
+    fechas = [date.fromisoformat(f["inicio"]) for f in filas]
+    a, b = min(fechas), max(fechas)
+    if a == b:
+        return f"el {_dia_de_mes(a)}"
+    return f"del {_dia_de_mes(a)} al {_dia_de_mes(b)}"
+
+
+def rango_corto(filas: list[dict]) -> str:
+    """Encabezado de cada diapositiva: '12 de noviembre', '26 – 29 de octubre',
+    '29 de octubre – 5 de noviembre'."""
+    fechas = [date.fromisoformat(f["inicio"]) for f in filas]
+    a, b = min(fechas), max(fechas)
+    if a == b:
+        return _dia_de_mes(a)
+    if (a.year, a.month) == (b.year, b.month):
+        return f"{a.day} – {b.day} de {MES_LARGO[a.month].lower()}"
+    return f"{_dia_de_mes(a)} – {_dia_de_mes(b)}"
+
+
+def es_online(fila: dict) -> bool:
+    return (fila.get("lugar") or "").strip().lower() == "online"
+
+
+def ciudades(filas: list[dict]) -> list[tuple[str, int]]:
+    """Ciudades de los cursos presenciales, de más a menos cursos."""
+    cuenta: dict[str, int] = {}
+    for f in filas:
+        lugar = (f.get("lugar") or "").strip()
+        if lugar and not es_online(f):
+            cuenta[lugar] = cuenta.get(lugar, 0) + 1
+    return sorted(cuenta.items(), key=lambda c: (-c[1], c[0]))
 
 
 # --- Composición -----------------------------------------------------------

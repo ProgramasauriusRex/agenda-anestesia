@@ -1,36 +1,52 @@
 /*
   Estilo del post de Instagram de la agenda formativa.
 
-  TODO lo que cambia el aspecto está en este archivo. Para adaptar el post a
-  otra estética (los resúmenes del podcast, por ejemplo) basta con tocar las
-  variables de aquí abajo: colores, tipografías y tamaños. La estructura y los
+  Sigue la plantilla de los resúmenes del podcast: fondo azul marino, verde
+  menta como acento principal, tarjetas con una franja de color, encabezados
+  numerados con una línea fina, etiquetas "TIP" en amarillo y el bloque de
+  "Escúchanos en" al pie. Los colores están medidos sobre los propios
+  resúmenes (Neuroestimulador medular, Profilaxis antibiótica, Torácica).
+
+  TODO lo que cambia el aspecto está en este archivo. La estructura y los
   datos los pone imagen.py y no hace falta tocarlo.
 
-  Versión provisional: sigue la familia visual de la carátula de iVoox
-  (quirófano oscuro, paleta teal y acero, un acento ámbar) a la espera de
-  ajustarla a la plantilla de los resúmenes.
+  Las medidas son píxeles de una imagen de 1080 × 1350; imagen.py la saca al
+  doble (2160 × 2700), como los resúmenes, para que se vea nítida.
 */
 
 :root {
-  /* Colores */
-  --fondo-arriba:   #0E2A33;   /* teal profundo, donde "cuelgan" las lámparas */
-  --fondo-abajo:    #061317;   /* casi negro, el suelo */
-  --texto:          #EEF4F5;
-  --texto-suave:    #9DB7BE;
-  --acento:         #F2A541;   /* ámbar: fechas y detalles */
-  --linea:          rgba(157, 183, 190, .20);
-  --insignia-fondo: rgba(242, 165, 65, .14);
+  /* Fondo y superficies */
+  --fondo:          #0B1B33;
+  --tarjeta:        #132A4A;
+  --linea:          #22324A;
+  --chip:           #1B3557;
+
+  /* Texto */
+  --texto:          #F3F6FB;
+  --texto-suave:    #A9B8CF;
+
+  /* Acentos, en el orden en que se van alternando las tarjetas */
+  --menta:          #2ED3B7;
+  --coral:          #FF6B5B;
+  --azul:           #5BB8FF;
+  --ambar:          #FFC24B;
+  --lila:           #B38BFF;
+
+  /* Caja de TIPs y caja de la marca */
+  --tip-fondo:      #1E2735;
+  --tip-borde:      #4A4536;
+  --marca-arriba:   #163155;
+  --marca-abajo:    #1A3A63;
+  --marca-borde:    #24466F;
+  --marca-chip:     #2B476C;
 
   /* Tipografías */
   --titular: 'Montserrat', sans-serif;
   --cuerpo:  'Inter', sans-serif;
 
-  /* Tamaños (en píxeles de una imagen de 1080 × 1350) */
-  --margen:          84px;
-  --curso-titulo:    35px;
-  --curso-detalle:   25px;
-  --fecha-dia:       54px;
-  --fecha-mes:       22px;
+  /* Márgenes */
+  --margen-lado:    54px;
+  --margen-arriba:  58px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -42,238 +58,381 @@ body {
   overflow: hidden;
   color: var(--texto);
   font-family: var(--cuerpo);
-  background: linear-gradient(180deg, var(--fondo-arriba) 0%, var(--fondo-abajo) 78%);
+  background:
+    radial-gradient(900px 620px at 100% 0%, rgba(46, 211, 183, .085), transparent 70%),
+    radial-gradient(700px 520px at 0% 100%, rgba(91, 184, 255, .06), transparent 70%),
+    var(--fondo);
   -webkit-font-smoothing: antialiased;
 }
+b, strong { font-weight: 700; color: var(--texto); }
 
-/* Las dos lámparas de quirófano: dos halos de luz arriba, uno a cada lado,
-   con el ámbar de la izquierda que lleva la carátula. Solo CSS, sin imagen. */
-body::before, body::after {
-  content: "";
-  position: absolute;
-  top: -260px;
-  width: 760px; height: 760px;
-  border-radius: 50%;
-  pointer-events: none;
-}
-body::before {
-  left: -300px;
-  background: radial-gradient(closest-side, rgba(242, 165, 65, .20), transparent);
-}
-body::after {
-  right: -300px;
-  background: radial-gradient(closest-side, rgba(170, 214, 224, .16), transparent);
-}
-
-/* Si se le pasa un fondo generado por IA, va debajo de todo, oscurecido para
-   que el texto se lea siempre. */
+/* Si se le pasa un fondo (por ejemplo, hecho con IA), va debajo de todo,
+   apagado para que el texto se lea siempre. */
 .fondo-imagen {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
-  opacity: .38;
+  opacity: .22;
 }
 
 .diapositiva {
   position: relative;
   z-index: 1;
   width: 1080px; height: 1350px;
-  padding: var(--margen);
+  padding: var(--margen-arriba) var(--margen-lado) 48px;
   display: flex; flex-direction: column;
 }
 
-/* --- Marca y pie, comunes a todas ---------------------------------------- */
+/* Los colores de acento se reparten con una clase: c0 menta, c1 coral... */
+.c0 { --c: var(--menta); }
+.c1 { --c: var(--coral); }
+.c2 { --c: var(--azul); }
+.c3 { --c: var(--ambar); }
+.c4 { --c: var(--lila); }
 
+/* --- Cinta de arriba: etiqueta + HABLANDO DE ANESTESIA ------------------- */
+
+.cinta {
+  display: flex; align-items: center; gap: 16px;
+}
+.etiqueta {
+  padding: 7px 14px 6px;
+  border-radius: 9px;
+  background: var(--menta);
+  color: var(--fondo);
+  font-family: var(--titular);
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
 .marca {
   font-family: var(--titular);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 22px;
-  letter-spacing: .32em;
+  letter-spacing: .17em;
   text-transform: uppercase;
-  color: var(--texto-suave);
+  color: var(--menta);
+  white-space: nowrap;
 }
-.marca b { color: var(--acento); font-weight: 800; }
 
-.pie {
-  margin-top: auto;
-  display: flex; justify-content: space-between; align-items: flex-end;
-  font-size: 22px;
+/* --- Encabezado numerado: (1) TÍTULO ———————— ---------------------------- */
+
+.apartado {
+  display: flex; align-items: center; gap: 14px;
   color: var(--texto-suave);
 }
-.pie .usuario { font-weight: 600; color: var(--texto); }
-.pie .aviso   { max-width: 560px; text-align: right; line-height: 1.35; font-size: 19px; }
+.apartado .num {
+  flex: 0 0 auto;
+  width: 36px; height: 36px;
+  border: 2.5px solid var(--texto-suave);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--cuerpo);
+  font-weight: 600;
+  font-size: 20px;
+}
+.apartado .nombre {
+  font-family: var(--titular);
+  font-weight: 800;
+  font-size: 23px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.apartado .raya {
+  flex: 1;
+  height: 2px;
+  background: var(--linea);
+}
+.apartado .cuenta {
+  font-family: var(--titular);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: .08em;
+}
 
 /* --- Portada ------------------------------------------------------------- */
 
-.portada .bloque {
-  margin-top: 210px;
-}
-.portada .antetitulo {
-  font-family: var(--titular);
-  font-weight: 600;
-  font-size: 30px;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: var(--acento);
-}
 .portada h1 {
-  margin-top: 26px;
+  margin-top: 30px;
   font-family: var(--titular);
-  font-weight: 800;
-  font-size: 128px;
-  line-height: .98;
-  letter-spacing: -.02em;
+  font-weight: 900;
+  font-size: 132px;
+  line-height: .94;
+  letter-spacing: -.012em;
   text-transform: uppercase;
 }
-.portada .regla {
-  width: 140px; height: 8px;
-  margin: 46px 0 40px;
-  background: var(--acento);
-  border-radius: 4px;
-}
-.portada .periodo {
-  font-family: var(--titular);
-  font-weight: 600;
-  font-size: 54px;
-}
-.portada .areas {
-  margin-top: 22px;
-  font-size: 32px;
-  font-weight: 500;
+.portada h1 .menta { color: var(--menta); }
+
+.portada .entradilla {
+  margin-top: 26px;
+  font-size: 30px;
+  line-height: 1.4;
   color: var(--texto-suave);
 }
-.portada .cifra {
-  margin-top: 70px;
-  font-size: 34px;
-  font-weight: 500;
+
+.portada .apartado { margin-top: 44px; }
+
+.cifras {
+  margin-top: 20px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
 }
-.portada .cifra b {
+.cifra {
+  background: var(--tarjeta);
+  border-top: 7px solid var(--c);
+  border-radius: 20px;
+  padding: 18px 20px 20px;
+}
+.cifra .rotulo {
+  font-weight: 700;
+  font-size: 22px;
+}
+.cifra .valor {
+  margin-top: 4px;
+  font-family: var(--titular);
+  font-weight: 900;
+  font-size: 62px;
+  line-height: 1.05;
+  color: var(--c);
+  white-space: nowrap;
+}
+.cifra .valor.fecha { font-size: 46px; line-height: 1.4; }
+.cifra .nota {
+  margin-top: 4px;
+  font-size: 19px;
+  line-height: 1.3;
+  color: var(--texto-suave);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ciudades {
+  margin-top: 20px;
+  display: flex; flex-wrap: wrap; gap: 12px;
+}
+.ciudad {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 18px 10px 16px;
+  border-radius: 999px;
+  background: var(--tarjeta);
+  font-weight: 600;
+  font-size: 22px;
+}
+.ciudad::before {
+  content: "";
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--c);
+}
+.ciudad b { color: var(--c); font-weight: 800; }
+.ciudad.resto { color: var(--texto-suave); }
+.ciudad.resto::before { display: none; }
+
+/* --- Cierre de la portada: TIPs + marca ---------------------------------- */
+
+.cierre {
+  margin-top: auto;
+  display: grid; grid-template-columns: 1.62fr 1fr; gap: 18px;
+}
+.tips {
+  background: var(--tip-fondo);
+  border: 2px solid var(--tip-borde);
+  border-radius: 20px;
+  padding: 22px 22px;
+  display: flex; flex-direction: column; justify-content: center; gap: 13px;
+}
+.tip {
+  display: flex; align-items: flex-start; gap: 14px;
+  font-size: 20px;
+  line-height: 1.35;
+}
+.insignia-tip {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  padding: 3px 9px 2px;
+  border-radius: 7px;
+  background: var(--ambar);
+  color: var(--fondo);
   font-family: var(--titular);
   font-weight: 800;
-  font-size: 92px;
-  color: var(--acento);
-  margin-right: 18px;
-  vertical-align: -10px;
+  font-size: 16px;
+  letter-spacing: .04em;
 }
-.portada .desliza {
-  font-family: var(--titular);
+
+.caja-marca {
+  background: linear-gradient(160deg, var(--marca-arriba), var(--marca-abajo));
+  border: 2px solid var(--marca-borde);
+  border-radius: 20px;
+  padding: 20px 20px 18px;
+  display: flex; flex-direction: column; align-items: flex-end;
+}
+.usuario {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 800;
+  font-size: 23px;
+  white-space: nowrap;
+}
+.icono-marca {
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  background: var(--menta);
+  display: flex; align-items: center; justify-content: center;
+}
+.icono-marca svg { width: 22px; height: 22px; fill: var(--fondo); }
+.escuchanos {
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .22em;
+  color: var(--texto-suave);
+}
+.plataformas {
+  margin-top: 10px;
+  display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px;
+}
+.plataforma {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--marca-chip);
   font-weight: 700;
-  font-size: 24px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--acento);
+  font-size: 15px;
+  white-space: nowrap;
 }
+.plataforma::before {
+  content: "";
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--punto);
+}
+.ivoox   { --punto: #F45A00; }
+.spotify { --punto: #1ED760; }
+.apple   { --punto: #A855F7; }
+.youtube { --punto: #FF0033; }
 
 /* --- Diapositivas de lista ----------------------------------------------- */
 
-.lista .cabecera {
-  display: flex; justify-content: space-between; align-items: baseline;
-  padding-bottom: 28px;
-  border-bottom: 2px solid var(--acento);
-}
-.lista .cabecera .seccion {
-  font-family: var(--titular);
-  font-weight: 700;
-  font-size: 26px;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-}
-.lista .cabecera .pagina {
-  font-family: var(--titular);
-  font-weight: 600;
-  font-size: 24px;
-  color: var(--texto-suave);
-}
+.lista .apartado { margin-top: 34px; }
 
-.cursos { list-style: none; margin-top: 8px; }
-/* Con tres o más cursos la lista ocupa toda la altura disponible y el aire
-   se reparte entre las filas, en vez de quedarse todo abajo. */
-.cursos.llena {
-  flex: 1;
-  display: flex; flex-direction: column; justify-content: space-evenly;
-  margin-bottom: 24px;
+.cursos {
+  list-style: none;
+  margin-top: 22px;
+  display: flex; flex-direction: column; gap: 16px;
 }
+/* Con tres o más cursos la lista ocupa toda la altura y cada tarjeta crece
+   un poco; con una o dos, no se estiran (quedarían huecas) y van centradas. */
+.cursos.llena { flex: 1; margin-bottom: 26px; }
+.cursos.llena .curso { flex: 1 1 auto; }
+.cursos.pocas { flex: 1; justify-content: center; margin-bottom: 26px; }
 
 .curso {
-  display: flex; gap: 34px;
-  padding: 34px 0;
-  border-bottom: 1px solid var(--linea);
+  display: flex; align-items: center; gap: 24px;
+  background: var(--tarjeta);
+  border-left: 7px solid var(--c);
+  border-radius: 20px;
+  padding: 22px 28px 22px 20px;
 }
-.curso:last-child { border-bottom: none; }
 
 .curso .fecha {
-  flex: 0 0 138px;
+  flex: 0 0 132px;
+  width: 132px;
+  align-self: stretch;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  padding-right: 18px;
+  border-right: 2px solid var(--linea);
   text-align: center;
-  padding-top: 4px;
 }
 .curso .fecha .dia {
-  display: block;
   font-family: var(--titular);
-  font-weight: 800;
-  font-size: var(--fecha-dia);
+  font-weight: 900;
+  font-size: 54px;
   line-height: 1;
-  color: var(--acento);
+  color: var(--c);
   white-space: nowrap;
 }
-.curso .fecha .dia.largo { font-size: 40px; }     /* "30 OCT – 2" */
+.curso .fecha .dia.largo { font-size: 33px; letter-spacing: -.02em; }   /* "29-30" */
 .curso .fecha .mes {
-  display: block;
-  margin-top: 10px;
+  margin-top: 8px;
   font-family: var(--titular);
-  font-weight: 700;
-  font-size: var(--fecha-mes);
-  letter-spacing: .2em;
+  font-weight: 800;
+  font-size: 19px;
+  letter-spacing: .18em;
   color: var(--texto-suave);
 }
-
 .curso .fecha .hasta {
-  display: block;
-  margin-top: 10px;
-  font-size: 19px;
+  margin-top: 8px;
+  font-size: 15px;
   font-weight: 600;
-  color: var(--acento);
+  color: var(--texto);
   white-space: nowrap;
 }
 
 .curso .datos { flex: 1; min-width: 0; }
 
 .curso .titulo {
-  font-family: var(--titular);
   font-weight: 700;
-  font-size: var(--curso-titulo);
-  line-height: 1.22;
-  /* como mucho tres líneas; si no cabe, puntos suspensivos */
+  font-size: 29px;
+  line-height: 1.24;
+  /* como mucho cuatro líneas; si no cabe, puntos suspensivos */
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 .curso .entidad {
-  margin-top: 14px;
-  font-size: var(--curso-detalle);
+  margin-top: 12px;
+  font-size: 22px;
   font-weight: 600;
+  color: var(--texto);
 }
 .curso .lugar {
-  margin-top: 6px;
-  font-size: var(--curso-detalle);
-  font-weight: 400;
+  margin-top: 5px;
+  font-size: 22px;
   color: var(--texto-suave);
 }
 .curso .lugar svg {
-  width: 22px; height: 22px;
+  width: 21px; height: 21px;
   vertical-align: -3px;
-  margin-right: 8px;
-  fill: var(--acento);
+  margin-right: 7px;
+  fill: var(--c);
 }
 .insignia {
   display: inline-block;
-  margin-left: 14px;
-  padding: 3px 12px;
-  border-radius: 6px;
+  margin-left: 12px;
+  padding: 3px 10px 2px;
+  border-radius: 7px;
+  background: var(--coral);
+  color: var(--fondo);
   font-family: var(--titular);
-  font-weight: 700;
-  font-size: 17px;
-  letter-spacing: .14em;
-  color: var(--acento);
-  background: var(--insignia-fondo);
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: .1em;
   vertical-align: 3px;
+}
+
+/* Pie de las diapositivas de lista */
+.pie {
+  margin-top: auto;
+  display: flex; justify-content: space-between; align-items: center; gap: 20px;
+}
+.pie .usuario { font-size: 21px; }
+.pie .icono-marca { width: 30px; height: 30px; border-radius: 8px; }
+.pie .icono-marca svg { width: 19px; height: 19px; }
+.pie .desliza {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--titular);
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--menta);
+}
+.pie .desliza svg { width: 26px; height: 26px; fill: var(--menta); }
+.pie .aviso {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 18px;
+  color: var(--texto-suave);
 }
