@@ -836,3 +836,78 @@ try:
 finally:
     shutil.rmtree(_dp, ignore_errors=True)
 print("Post: semana sin cursos ✓")
+
+# ---------------------------------------------------------------------------
+# Tabla de cursos de la Sección RCP de la SEDAR (06/11)
+#
+# Cinco columnas (FECHA ONLINE · FECHA PRESENCIAL · SEDE · PROGRAMA ·
+# INSCRIPCIÓN) y ninguna fila con título. Réplica de la tabla real: clave de
+# orden oculta delante de la fecha, años de dos cifras, COMPLETO y POSPUESTO,
+# filas sin año y el profesorado metido en la celda de la sede.
+# ---------------------------------------------------------------------------
+from agenda import desde_tabla, rastrea as _rastrea_fuente
+
+_HTML_RCP = """<html><body><h1>CURSOS</h1>
+<table class="table"><thead><tr><th>FECHA ONLINE</th><th>FECHA PRESENCIAL</th><th>SEDE</th><th>PROGRAMA</th><th>INSCRIPCIÓN</th></tr></thead><tbody>
+<tr><td><span style="display:none">20261005</span>5 octubre 2026</td><td>6 y 7 Noviembre 26</td><td>H. Universitario de A Coruña</td><td><a href="/images/site/cursos/2026/Diptico_SVA_HUAC_6_y_7_noviembre_2026.pdf">PROGRAMA PDF</a></td><td><a href="https://intranet.pacifico-meetings.com/GescoWeb/?cfg=6765">INSCRIPCIÓN</a></td></tr>
+<tr><td><span style="display:none">20261005</span>5 octubre 2026</td><td>5 y 6 Noviembre 26</td><td>Hospital Universitario Dr. Peset de Valencia<br>EVES (Escuela Valenciana de Estudios de Salud)</td><td><a href="/images/site/cursos/2026/Diptico-Curso-SEDAR-SVA-Hosp-Dr-Peset.pdf">PROGRAMA PDF</a></td><td><strong>COMPLETO</strong></td></tr>
+<tr><td><span style="display:none">20261123</span>23 noviembre 2026</td><td>11 y 12 Diciembre 26</td><td>Hospital Universitari Son Llàtzer</td><td><a href="/images/site/cursos/2026/sva_son_llatzer.pdf">PROGRAMA PDF</a></td><td><a href="https://intranet.pacifico-meetings.com/GescoWeb/?cfg=7000">INSCRIPCIÓN</a></td></tr>
+<tr><td><span style="display:none">20261201</span>1 diciembre 2026</td><td>15 y 16 Enero 27</td><td>Hospital Universitario de Basurto <strong>POSPUESTO</strong></td><td><a href="/images/site/cursos/2027/basurto.pdf">PROGRAMA PDF</a></td><td></td></tr>
+<tr><td><span style="display:none">20261210</span>10 diciembre 2026</td><td>22 y 23 de enero</td><td>Hospital General Universitario de Elche</td><td><a href="/images/site/cursos/2027/elche.pdf">PROGRAMA PDF</a></td><td></td></tr>
+<tr><td>10 diciembre 2026</td><td>22 y 23 de enero</td><td>Hospital Universitario de Basurto</td><td><a href="/images/site/cursos/2027/basurto2.pdf">PROGRAMA PDF</a></td><td></td></tr>
+<tr><td><span style="display:none">20260504</span>4 mayo 2026</td><td>4 y 5 junio 26</td><td>Unidad docente Muktiprofesional de Atención Familiar y Comunitaria Castellón</td><td><a href="/images/site/cursos/2026/castellon.pdf">PROGRAMA PDF</a></td><td></td></tr>
+<tr><td><span style="display:none">20231117</span>17 de Noviembre 2023</td><td>15 y 16 de Diciembre</td><td>Hospital Universitario de Cáceres (COMPLETO)</td><td><a href="/images/site/cursos/RCP/Diptico_Caceres15_12_23.pdf">VER PDF</a></td><td></td></tr>
+<tr><td><span style="display:none">20210824</span>24 de agosto al 24 de septiembre</td><td>24 y 25 de septiembre</td><td>CURSO DE SOPORTE VITAL AVANZADO EN QUIRÓFANO Y CUIDADOS CRÍTICOS<br>Hospital Universitario Fundación de Alcorcón<br><strong>PROFESORADO</strong><br>Dra. María Aliaño. Directora de Curso. Instructora ERC-SEDAR</td><td><a href="/images/site/cursos/Idehav2.pdf">VER PDF</a></td><td></td></tr>
+<tr><td>sin fecha</td><td>por determinar</td><td>Hospital X</td><td></td><td></td></tr>
+</tbody></table></body></html>
+"""
+_F_RCP = {"nombre": "SEDAR · Sección RCP — Cursos SVA", "ambito": "anestesia",
+          "url": "https://seccionrcp-sedar.es/index.php/soporte-vital-avanzado-sva/cursos",
+          "tabla": {"titulo": "Curso de Soporte Vital Avanzado ERC-SEDAR",
+                    "fecha": "FECHA PRESENCIAL", "fecha_previa": "FECHA ONLINE",
+                    "sede": "SEDE", "enlace": "PROGRAMA"}}
+_rcp = {(e.inicio, e.lugar): e for e in desde_tabla(_F_RCP["url"], _HTML_RCP, _F_RCP)}
+_tb = "Curso de Soporte Vital Avanzado ERC-SEDAR · "
+# La fecha es la PRESENCIAL ("6 y 7 Noviembre 26"), no el inicio de la parte online
+assert _rcp[("2026-11-06", "A Coruña")].titulo == _tb + "H. Universitario de A Coruña"
+assert _rcp[("2026-11-06", "A Coruña")].fin == "2026-11-07"
+assert _rcp[("2026-11-06", "A Coruña")].url.endswith("Diptico_SVA_HUAC_6_y_7_noviembre_2026.pdf")
+# COMPLETO en la columna de inscripción
+assert _rcp[("2026-11-05", "Valencia")].titulo.endswith("Dr. Peset de Valencia — plazas agotadas")
+assert ("2026-12-11", "Palma") in _rcp                       # Son Llàtzer
+# Sin año, con la parte online en diciembre: el curso es en enero del año siguiente
+assert ("2027-01-22", "Elche") in _rcp and ("2027-01-22", "Bilbao") in _rcp
+# Año de dos cifras: "4 y 5 junio 26" es junio de 2026, no de 2027
+assert ("2026-06-04", "Castellón") in _rcp
+# Pospuesto: fuera. Sin fecha: fuera.
+assert not any("2027-01-15" == k[0] for k in _rcp)
+assert len(_rcp) == 8, sorted(_rcp)
+# El profesorado de la celda no se cuela en la sede
+assert _rcp[("2021-09-24", "Alcorcón")].titulo == _tb + "Hospital Universitario Fundación de Alcorcón"
+# Los títulos aguantan la limpieza de la memoria sin cambiar
+from agenda import recura_titulo as _rt2, titulo_util as _tu2
+assert all(_rt2(e.titulo) == e.titulo and _tu2(e.titulo) for e in _rcp.values())
+# Basurto y Elche, mismo día: dos cursos distintos, no se juntan
+assert len(unifica(list(_rcp.values()))) == 8
+
+# Y la fuente con bloque "tabla" se lee con desde_tabla, no con el genérico
+_d4 = tempfile.mkdtemp()
+open(os.path.join(_d4, "cursos.html"), "w", encoding="utf-8").write(_HTML_RCP)
+_cwd4 = os.getcwd()
+os.chdir(_d4)
+_srv4 = socketserver.TCPServer(("127.0.0.1", 0), http.server.SimpleHTTPRequestHandler)
+threading.Thread(target=_srv4.serve_forever, daemon=True).start()
+try:
+    _ev4, _est4 = _rastrea_fuente(dict(_F_RCP, url=f"http://127.0.0.1:{_srv4.server_address[1]}/cursos.html",
+                                       feed="none"))
+finally:
+    _srv4.shutdown(); os.chdir(_cwd4); shutil.rmtree(_d4, ignore_errors=True)
+assert _est4 == "tabla (8)", _est4
+assert all(e.via == "tabla" for e in _ev4)
+
+# "A Coruña" conserva su artículo; "Unidad docente" no es un ponente
+assert arregla_mayusculas("HOSPITAL UNIVERSITARIO DE A CORUÑA") == "Hospital Universitario de A Coruña"
+assert arregla_mayusculas("Introducción A La Ecografía").startswith("Introducción a ")
+assert extrae_lugar("Unidad docente Multiprofesional de Atención Familiar y Comunitaria Castellón") \
+    == "Castellón"
+print("Tabla de cursos de la Sección RCP de la SEDAR ✓")

@@ -854,6 +854,15 @@ def arregla_mayusculas(titulo: str) -> str:
     """
     MINUSCULAS = {"de", "del", "la", "las", "el", "los", "y", "e", "en", "a",
                   "al", "con", "para", "por", "sobre", "un", "una", "the", "of"}
+    # Topónimos con artículo gallego: la "A" de "A Coruña" no es una preposición.
+    # El 06/11, "H. Universitario de A Coruña" salía "de a Coruña".
+    CON_ARTICULO = {"coruña", "estrada", "guarda", "laracha", "pobra", "rúa", "grove",
+                    "porriño", "barco", "carballiño", "rosal"}
+
+    def _es_articulo_de_lugar(palabras: list[str], i: int) -> bool:
+        return (palabras[i].strip(".,;:()[]«»\"'").lower() in {"a", "o"}
+                and i + 1 < len(palabras)
+                and palabras[i + 1].strip(".,;:()[]«»\"'").lower() in CON_ARTICULO)
 
     def _primera_mayuscula(t: str) -> str:
         """La primera letra del título, en mayúscula. 'analgesia y sedación…'
@@ -870,11 +879,14 @@ def arregla_mayusculas(titulo: str) -> str:
     # Caso 1: el título entero grita. Se reescribe completo.
     if len(letras) >= 12 and sum(c.isupper() for c in letras) / len(letras) >= 0.8:
         salida = []
-        for i, palabra in enumerate(titulo.split()):
+        palabras = titulo.split()
+        for i, palabra in enumerate(palabras):
             nucleo = palabra.strip(".,;:()[]«»\"'")
             if nucleo.upper() in SIGLAS_INTACTAS or (nucleo.isupper() and len(nucleo) <= 4
                                                      and not nucleo.isalpha()):
                 salida.append(palabra)
+            elif _es_articulo_de_lugar(palabras, i):
+                salida.append(palabra.capitalize())
             elif i > 0 and nucleo.lower() in MINUSCULAS:
                 salida.append(palabra.lower())
             else:
@@ -885,9 +897,12 @@ def arregla_mayusculas(titulo: str) -> str:
     # "…pediátrico en URGENCIAS". Se baja esa palabra y se deja el resto igual.
     # Y al revés: una sigla conocida escrita en minúscula se sube ("aaear").
     salida = []
-    for i, palabra in enumerate(titulo.split()):
+    palabras = titulo.split()
+    for i, palabra in enumerate(palabras):
         nucleo = palabra.strip(".,;:()[]«»\"'")
         if not nucleo.isalpha():
+            salida.append(palabra)
+        elif _es_articulo_de_lugar(palabras, i):
             salida.append(palabra)
         elif nucleo.upper() in SIGLAS_INTACTAS:
             salida.append(palabra.replace(nucleo, nucleo.upper()))
@@ -1014,7 +1029,7 @@ _RE_SEDES = [(re.compile(patron, re.I), c) for patron, c in SEDES_CONOCIDAS]
 # cargos, esa ciudad no cuenta.
 _RE_PERSONA = re.compile(
     r"\b(?:jef[ea]s?|director[ae]?s?|coordinador[ae]?s?|adjunt[oa]s?|facultativ[oa]s?|"
-    r"f\.e\.a\.?|fea|profesor[ae]?s?|catedr[aá]tic[oa]s?|ponentes?|docentes?|"
+    r"f\.e\.a\.?|fea|profesor[ae]?s?|catedr[aá]tic[oa]s?|ponentes?|(?<!unidad )docentes?|"
     r"moderador[ae]?s?|dr|dra|especialista|residentes?|presidente|presidenta|"
     r"m[eé]dic[oa]s? adjunt[oa]s?|enfermer[oa]s?)\b\.?", re.I)
 _ABREVIATURAS = {"dr", "dra", "sr", "sra", "prof", "h", "u", "hosp", "d", "dña",
@@ -1371,6 +1386,163 @@ def desde_html(url: str, html: str, fuente: dict) -> list[Evento]:
     return eventos
 
 
+# --- Tablas de cursos sin título por fila --------------------------------
+#
+# 06/11: la Sección RCP de la SEDAR publica sus cursos de Soporte Vital
+# Avanzado en una tabla de cinco columnas (FECHA ONLINE · FECHA PRESENCIAL ·
+# SEDE · PROGRAMA · INSCRIPCIÓN). Ninguna fila dice cómo se llama el curso:
+# todas son el mismo curso ERC-SEDAR en distintos hospitales. El extractor
+# genérico busca un título y una palabra de evento junto a cada enlace, y aquí
+# el único enlace largo es "PROGRAMA PDF", así que no sacaba nada. Además, la
+# fecha que tiene delante es la del inicio de la parte online, no la del curso.
+#
+# Para estas webs, la fuente lleva en fuentes.yaml un bloque `tabla` que dice
+# qué columnas mirar y qué título poner:
+#
+#     tabla:
+#       titulo: "Curso de Soporte Vital Avanzado ERC-SEDAR"
+#       fecha: "FECHA PRESENCIAL"      # la columna con la fecha del curso
+#       fecha_previa: "FECHA ONLINE"   # de dónde sacar el año si falta
+#       sede: "SEDE"
+#       enlace: "PROGRAMA"             # columna cuyo enlace se guarda
+
+_MES_TABLA = "|".join(sorted((k for k in _MESES if "_" not in k), key=len, reverse=True))
+_RE_CLAVE_ORDEN = re.compile(r"^\s*(20\d{2})(0[1-9]|1[0-2])([0-3]\d)")
+_RE_ESTADO_FUERA = re.compile(r"\b(?:pospuest[oa]|aplazad[oa]|suspendid[oa]|cancelad[oa]|"
+                              r"anulad[oa])\b", re.I)
+_RE_ESTADO_LLENO = re.compile(r"\(?\s*\b(?:completo|plazas agotadas|sin plazas)\b\s*\)?", re.I)
+_RE_PARECE_SEDE = re.compile(r"hospital|complejo|centro|aulas?|colegio|universi|unidad|"
+                             r"cl[ií]nic|fundaci|instituto|escuela|ideha|cibir|sede", re.I)
+
+
+def _fecha_de_celda(texto: str) -> tuple[str, int | None]:
+    """
+    Limpia una celda de fecha de la tabla. Devuelve el texto y el año de su
+    clave de orden, si la tiene.
+
+    La web mete delante una clave para ordenar ("20261005" + "5 octubre 2026"
+    se lee "202610055 octubre 2026") y escribe el año con dos cifras ("6 y 7
+    Noviembre 26"). Sin arreglarlo, "4 y 5 junio 26" se leía como junio de
+    2027, y un curso pasado aparecía como si fuera del año que viene.
+    """
+    t = re.sub(r"\s+", " ", texto or "").strip()
+    anio = None
+    if m := _RE_CLAVE_ORDEN.match(t):
+        anio = int(m.group(1))
+        t = t[m.end():].strip()
+    t = re.sub(rf"\b({_MES_TABLA})\s+(?:de\s+)?(\d{{2}})\b(?!\d)",
+               lambda m: f"{m.group(1)} de 20{m.group(2)}", t, flags=re.I)
+    return t, anio
+
+
+def _sede_de_celda(celda) -> str:
+    """La primera línea de la celda que parece una sede, sin estados ni
+    profesorado ("Hospital Universitario de Basurto COMPLETO")."""
+    lineas = []
+    for linea in texto_con_lineas(celda).split("\n"):
+        if re.search(r"profesorado|instructor[ae]s?\b|director[ae]? de(?:l)? curso|candidat",
+                     linea, re.I):
+            break
+        linea = _RE_ESTADO_LLENO.sub(" ", linea)
+        linea = re.sub(r"^\s*sede\s*:\s*", "", linea, flags=re.I)
+        linea = re.sub(r"\s+", " ", linea).strip(" .,;:-–—/")
+        if len(linea) >= 4:
+            lineas.append(linea)
+    for linea in lineas:
+        if _RE_PARECE_SEDE.search(linea) and not re.search(r"curso de soporte", linea, re.I):
+            return linea
+    return lineas[0] if lineas else ""
+
+
+def _abrevia_sede(sede: str) -> str:
+    for largo, corto in (("Complejo Hospitalario Universitario", "C. H. U."),
+                         ("Hospital General Universitario", "H. G. U."),
+                         ("Hospital Universitario", "H. U."), ("Hospital Universitari", "H. U."),
+                         ("Hospital", "H."), ("Universitario", "Univ."),
+                         ("Multiprofesional", "Multiprof."), ("Muktiprofesional", "Multiprof.")):
+        sede = re.sub(rf"\b{largo}\b", corto, sede, flags=re.I)
+    return sede
+
+
+def desde_tabla(url: str, html: str, fuente: dict) -> list[Evento]:
+    cfg = fuente["tabla"]
+    titulo_base = cfg["titulo"]
+    buscar = {clave: normaliza(cfg[clave]) for clave in ("fecha", "fecha_previa", "sede", "enlace")
+              if cfg.get(clave)}
+    sopa = BeautifulSoup(html, "lxml")
+    eventos: list[Evento] = []
+    hoy = date.today()
+
+    for tabla in sopa.find_all("table"):
+        filas = tabla.find_all("tr")
+        if len(filas) < 2:
+            continue
+        cabecera = [normaliza(c.get_text(" ", strip=True)) for c in filas[0].find_all(["th", "td"])]
+        col = {clave: next((i for i, c in enumerate(cabecera) if nombre in c), None)
+               for clave, nombre in buscar.items()}
+        if col.get("fecha") is None or col.get("sede") is None:
+            continue
+
+        for tr in filas[1:]:
+            celdas = tr.find_all(["td", "th"])
+            if len(celdas) <= max(col["fecha"], col["sede"]):
+                continue
+            fila_txt = tr.get_text(" ", strip=True)
+            if _RE_ESTADO_FUERA.search(fila_txt):
+                continue                      # pospuesto o cancelado: no se anuncia
+
+            texto_fecha, anio_clave = _fecha_de_celda(celdas[col["fecha"]].get_text(" ", strip=True))
+            # La fecha previa (inicio de la parte online), con su año
+            ini_prev = None
+            i_prev = col.get("fecha_previa")
+            if i_prev is not None and i_prev < len(celdas):
+                previa, anio_prev = _fecha_de_celda(celdas[i_prev].get_text(" ", strip=True))
+                if not re.search(r"\b20\d{2}\b", previa) and anio_prev:
+                    previa = f"{previa} de {anio_prev}"
+                if re.search(r"\b20\d{2}\b", previa):
+                    ini_prev, _, _ = extrae_fechas(previa)
+            if re.search(r"\b20\d{2}\b", texto_fecha):
+                ini, fin, frag = extrae_fechas(texto_fecha)
+            elif anio_clave:
+                ini, fin, frag = extrae_fechas(f"{texto_fecha} de {anio_clave}")
+            elif ini_prev:
+                # Sin año: el de la parte online, que va antes. Si la parte
+                # online es en diciembre y el curso en enero, es el año siguiente.
+                ini, fin, frag = extrae_fechas(f"{texto_fecha} de {ini_prev.year}")
+                if ini and ini < ini_prev:
+                    ini, fin, frag = extrae_fechas(f"{texto_fecha} de {ini_prev.year + 1}")
+            else:
+                continue                      # sin año seguro, mejor no adivinar
+            if not ini or (fin and fin < ini):
+                continue
+            sede = _sede_de_celda(celdas[col["sede"]])
+            if not sede:
+                continue
+            lleno = bool(_RE_ESTADO_LLENO.search(fila_txt))
+
+            enlace = None
+            i_enl = col.get("enlace")
+            if i_enl is not None and i_enl < len(celdas):
+                enlace = celdas[i_enl].find("a", href=True)
+            enlace = enlace or tr.find("a", href=True)
+            destino = urljoin(url, enlace["href"]) if enlace else f"{url}#{ini.isoformat()}"
+
+            titulo = f"{titulo_base} · {sede}"
+            if len(titulo) > 118:
+                titulo = f"{titulo_base} · {_abrevia_sede(sede)}"
+            eventos.append(Evento(
+                titulo=recorta(titulo) + (" — plazas agotadas" if lleno else ""),
+                fecha_texto=frag,
+                inicio=ini.isoformat(), fin=fin.isoformat() if fin else None,
+                lugar=extrae_lugar(sede, final=True),
+                entidad=fuente["nombre"],
+                url=destino,
+                ambito=fuente.get("ambito", "mixto"),
+                via="tabla",
+            ))
+    return eventos
+
+
 # --- Rastreo de una fuente ------------------------------------------------
 
 def rastrea(fuente: dict, verbose: bool = True) -> tuple[list[Evento], str]:
@@ -1386,6 +1558,15 @@ def _rastrea(fuente: dict, verbose: bool = True) -> tuple[list[Evento], str]:
 
     if not robots_permite(url):
         return [], "robots.txt prohíbe el rastreo"
+
+    # Una tabla de cursos con su propio formato (ver desde_tabla): se lee tal
+    # cual, aunque la web tenga RSS, que en estos casos no trae los cursos.
+    if fuente.get("tabla"):
+        r = descarga(url, reintenta_404=True)
+        if not r:
+            return [], "no responde / error de red"
+        ev = desde_tabla(url, r.text, fuente)
+        return ev, f"tabla ({len(ev)})"
 
     # Si el verificador ya averiguó si esta web tiene RSS, no se vuelve a
     # preguntar. Sondear 13 direcciones a ciegas cada semana, en webs que ya

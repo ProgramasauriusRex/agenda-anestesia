@@ -224,6 +224,23 @@ fuentes:
     filtro: evento
     estado: ok
     feed: none
+  # 06/11, a petición de Luis: la web propia de la Sección RCP, con la tabla de
+  # cursos de Soporte Vital Avanzado ERC-SEDAR. Las filas no traen título (son
+  # todas el mismo curso en distintos hospitales), así que se lee con el bloque
+  # "tabla" (ver desde_tabla en agenda.py) y no con el extractor genérico.
+  - nombre: "SEDAR · Sección RCP — Cursos SVA"
+    url: https://seccionrcp-sedar.es/index.php/soporte-vital-avanzado-sva/cursos
+    nivel: 1
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+    feed: none
+    tabla:
+      titulo: "Curso de Soporte Vital Avanzado ERC-SEDAR"
+      fecha: "FECHA PRESENCIAL"
+      fecha_previa: "FECHA ONLINE"
+      sede: "SEDE"
+      enlace: "PROGRAMA"
   - nombre: "SEDAR · Vía Aérea"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/via-aerea/formacion-via
     nivel: 2
