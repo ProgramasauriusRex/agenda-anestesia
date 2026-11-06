@@ -241,6 +241,44 @@ fuentes:
       fecha_previa: "FECHA ONLINE"
       sede: "SEDE"
       enlace: "PROGRAMA"
+  # 06/11: el resto de cursos de la misma web. SVI tiene la misma tabla que SVA
+  # (hoy vacía); BIC, una tabla más corta (FECHA · SEDE · PROGRAMA); GIC no
+  # tiene tabla: es una página con un solo curso (ver desde_pagina).
+  - nombre: "SEDAR · Sección RCP — Cursos SVI"
+    url: https://seccionrcp-sedar.es/index.php/soporte-vital-inmediato/cursos
+    nivel: 1
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+    feed: none
+    tabla:
+      titulo: "Curso de Soporte Vital Inmediato ERC-SEDAR"
+      fecha: "FECHA PRESENCIAL"
+      fecha_previa: "FECHA ONLINE"
+      sede: "SEDE"
+      enlace: "PROGRAMA"
+  - nombre: "SEDAR · Sección RCP — Instructor GIC"
+    url: https://seccionrcp-sedar.es/index.php/general-instructor-course-gic
+    nivel: 1
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+    feed: none
+    pagina:
+      titulo: "Curso de Instructor Genérico ERC-SEDAR (GIC)"
+      fecha: "Jornadas presenciales"
+  - nombre: "SEDAR · Sección RCP — Instructor BIC"
+    url: https://seccionrcp-sedar.es/index.php/basic-instructor-course-bic
+    nivel: 1
+    ambito: anestesia
+    filtro: evento
+    estado: pendiente
+    feed: none
+    tabla:
+      titulo: "Curso de Instructor Básico ERC-SEDAR (BIC)"
+      fecha: "FECHA"
+      sede: "SEDE"
+      enlace: "PROGRAMA"
   - nombre: "SEDAR · Vía Aérea"
     url: https://www.sedar.es/index.php/secciones-y-grupos-de-trabajo/via-aerea/formacion-via
     nivel: 2

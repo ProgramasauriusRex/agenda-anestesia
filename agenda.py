@@ -1543,6 +1543,72 @@ def desde_tabla(url: str, html: str, fuente: dict) -> list[Evento]:
     return eventos
 
 
+# --- Páginas de un solo curso --------------------------------------------
+#
+# 06/11: la página del curso de instructores GIC de la Sección RCP no tiene
+# listado: describe UN curso, con sus fechas en una lista ("Jornadas
+# presenciales: 13 y 14 noviembre 2026", "Inicio parte on-line: 13 octubre
+# 2026", "Webinario: 3 noviembre 2026"). El extractor genérico no saca nada (no
+# hay enlaces con título) y, si lo hiciera, cogería la primera fecha, que es la
+# de la parte online. La fuente lleva en fuentes.yaml un bloque `pagina`:
+#
+#     pagina:
+#       titulo: "Curso de Instructor Genérico ERC-SEDAR (GIC)"
+#       fecha: "Jornadas presenciales"     # la línea que trae la fecha del curso
+#
+# La sede solo se toma de una línea "Sede:" o "Lugar:" de la propia página:
+# en esa web la única ciudad suele ser la de la dirección de la SEDAR en el
+# pie, y un "Madrid" inventado es peor que un hueco.
+
+_RE_LINEA_SEDE = re.compile(r"^\s*(?:sede|lugar(?:\s+de\s+celebraci[oó]n)?)\s*:\s*(.+)", re.I)
+_RE_CURSO_LLENO = re.compile(r"plazas agotadas|curso completo|sin plazas|"
+                             r"inscripci[oó]n(?:es)? cerradas?", re.I)
+
+
+def desde_pagina(url: str, html: str, fuente: dict) -> list[Evento]:
+    cfg = fuente["pagina"]
+    etiqueta = normaliza(cfg["fecha"])
+    sopa = BeautifulSoup(html, "lxml")
+    for tag in sopa(["script", "style", "nav", "footer", "header"]):
+        tag.decompose()
+    programa = next((a for a in sopa.find_all("a", href=True)
+                     if "programa" in normaliza(a.get_text(" ", strip=True))), None)
+    lineas = [l for l in texto_con_lineas(sopa).split("\n") if l.strip()]
+
+    for i, linea in enumerate(lineas):
+        n = normaliza(linea)
+        if etiqueta not in n:
+            continue
+        # La fecha va tras la etiqueta; si no, en la línea siguiente, siempre
+        # que esa no sea ya otra etiqueta ("Inicio parte on-line: …")
+        resto = linea[n.find(etiqueta) + len(etiqueta):] if len(n) == len(linea) else linea
+        ini, fin, frag = extrae_fechas(resto)
+        if not ini and i + 1 < len(lineas) and ":" not in lineas[i + 1]:
+            ini, fin, frag = extrae_fechas(lineas[i + 1])
+        if not ini:
+            continue
+        cerca = " ".join(lineas[max(0, i - 3):i + 4])
+        if _RE_ESTADO_FUERA.search(cerca):
+            return []
+        lugar = ""
+        for l in lineas:
+            if m := _RE_LINEA_SEDE.match(l):
+                if lugar := extrae_lugar(m.group(1), final=True):
+                    break
+        lleno = bool(_RE_CURSO_LLENO.search(" ".join(lineas)))
+        return [Evento(
+            titulo=cfg["titulo"] + (" — plazas agotadas" if lleno else ""),
+            fecha_texto=frag,
+            inicio=ini.isoformat(), fin=fin.isoformat() if fin else None,
+            lugar=lugar,
+            entidad=fuente["nombre"],
+            url=urljoin(url, programa["href"]) if programa else url,
+            ambito=fuente.get("ambito", "mixto"),
+            via="pagina",
+        )]
+    return []
+
+
 # --- Rastreo de una fuente ------------------------------------------------
 
 def rastrea(fuente: dict, verbose: bool = True) -> tuple[list[Evento], str]:
@@ -1561,12 +1627,15 @@ def _rastrea(fuente: dict, verbose: bool = True) -> tuple[list[Evento], str]:
 
     # Una tabla de cursos con su propio formato (ver desde_tabla): se lee tal
     # cual, aunque la web tenga RSS, que en estos casos no trae los cursos.
-    if fuente.get("tabla"):
+    if fuente.get("tabla") or fuente.get("pagina"):
         r = descarga(url, reintenta_404=True)
         if not r:
             return [], "no responde / error de red"
-        ev = desde_tabla(url, r.text, fuente)
-        return ev, f"tabla ({len(ev)})"
+        if fuente.get("tabla"):
+            ev = desde_tabla(url, r.text, fuente)
+            return ev, f"tabla ({len(ev)})"
+        ev = desde_pagina(url, r.text, fuente)
+        return ev, f"pagina ({len(ev)})"
 
     # Si el verificador ya averiguó si esta web tiene RSS, no se vuelve a
     # preguntar. Sondear 13 direcciones a ciegas cada semana, en webs que ya
@@ -1756,10 +1825,17 @@ def completa_lugares(eventos: list[Evento]) -> int:
         return 0
 
     def mira(e: Evento) -> bool:
+        # Un PDF (el díptico de un curso) no se puede leer como página: su
+        # texto sale ilegible y alguna ciudad suelta podría colarse.
+        if urlparse(e.url).path.lower().endswith(".pdf"):
+            return False
         if not robots_permite(e.url) or not _cupo_para_seguir():
             return False
         r = descarga(e.url)
         if not r:
+            return False
+        tipo = (getattr(r, "headers", None) or {}).get("content-type", "text/html")
+        if "html" not in tipo.lower():
             return False
         try:
             sopa = BeautifulSoup(r.text, "lxml")

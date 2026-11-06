@@ -911,3 +911,59 @@ assert arregla_mayusculas("Introducción A La Ecografía").startswith("Introducc
 assert extrae_lugar("Unidad docente Multiprofesional de Atención Familiar y Comunitaria Castellón") \
     == "Castellón"
 print("Tabla de cursos de la Sección RCP de la SEDAR ✓")
+
+# ---------------------------------------------------------------------------
+# Resto de cursos de la Sección RCP (06/11): SVI, BIC y GIC
+# ---------------------------------------------------------------------------
+from agenda import desde_pagina
+
+# GIC: una página con un solo curso. La fecha es la de las jornadas
+# presenciales, no la del inicio online ni la del webinario; y el "Madrid" de
+# la dirección del pie no es la sede.
+_HTML_GIC = """<html><body><div class="cabecera">SECCIÓN RCP DE LA SEDAR</div>
+<h2>CURSO DE INSTRUCTOR GENÉRICO -GENERIC INSTRUCTOR COURSE – (GIC)</h2>
+<p>El curso consta de una parte on-line y dos jornadas presenciales. La inscripción permanecerá abierta hasta completar las 24 plazas.</p>
+<ul><li><strong>Jornadas presenciales:</strong> 13 y 14 noviembre 2026</li>
+<li><strong>Inicio parte on-line:</strong> 13 octubre 2026</li>
+<li><strong>Webinario:</strong> 3 noviembre 2026</li></ul>
+<p><a href="/images/site/Diiptico%20GIC%20SEDAR%20Noviembre%202026_V2.pdf">PROGRAMA</a> <a href="#">COMPLETO</a></p>
+<div class="pie">SEDAR · C/ José Abascal nº 46, Madrid · Secretaría Técnica: Pacífico Meetings, Calle Castelló 128, Madrid</div>
+</body></html>
+"""
+_F_GIC = {"nombre": "SEDAR · Sección RCP — Instructor GIC", "ambito": "anestesia",
+          "pagina": {"titulo": "Curso de Instructor Genérico ERC-SEDAR (GIC)",
+                     "fecha": "Jornadas presenciales"}}
+_gic = desde_pagina("https://seccionrcp-sedar.es/index.php/general-instructor-course-gic",
+                    _HTML_GIC, _F_GIC)
+assert len(_gic) == 1
+assert (_gic[0].inicio, _gic[0].fin) == ("2026-11-13", "2026-11-14"), (_gic[0].inicio, _gic[0].fin)
+assert _gic[0].lugar == "", _gic[0].lugar
+assert _gic[0].titulo == "Curso de Instructor Genérico ERC-SEDAR (GIC)"   # sin COMPLETO
+assert _gic[0].url.endswith("Diiptico%20GIC%20SEDAR%20Noviembre%202026_V2.pdf")
+# Con una línea "Sede:" sí hay ciudad
+assert desde_pagina("x", _HTML_GIC.replace("<p>El curso", "<p>Sede: Hospital Universitario "
+                    "Marqués de Valdecilla</p><p>El curso"), _F_GIC)[0].lugar == "Santander"
+
+# BIC: tabla de tres columnas, con la clave de orden delante de la fecha
+_HTML_BIC = """<html><body><h1>CURSOS</h1><table><tr><th>FECHA</th><th>SEDE</th><th>PROGRAMA</th></tr>
+<tr><td><span style="display:none">20240527</span>04 de Octubre de 2024</td><td>Hospital Universitario La Fe</td><td><a href="/images/site/cursos/RCP/bic/Di%C3%ACptico_BIC_SEDAR_41024v2.pdf">PROGRAMA PDF</a></td></tr>
+<tr><td><span style="display:none">20270115</span>15 de Enero de 2027</td><td>Hospital Universitario La Fe</td><td><a href="/images/site/cursos/RCP/bic/BIC_2027.pdf">PROGRAMA PDF</a></td></tr>
+</table></body></html>
+"""
+_F_BIC = {"nombre": "SEDAR · Sección RCP — Instructor BIC", "ambito": "anestesia",
+          "tabla": {"titulo": "Curso de Instructor Básico ERC-SEDAR (BIC)", "fecha": "FECHA",
+                    "sede": "SEDE", "enlace": "PROGRAMA"}}
+_bic = desde_tabla("https://seccionrcp-sedar.es/index.php/basic-instructor-course-bic",
+                   _HTML_BIC, _F_BIC)
+assert [(e.inicio, e.lugar) for e in _bic] == [("2024-10-04", "Valencia"), ("2027-01-15", "Valencia")]
+
+# SVI: la misma tabla que SVA, hoy vacía
+_HTML_SVI = """<html><body><h1>CURSOS</h1><table><thead><tr><th>FECHA ONLINE</th><th>FECHA PRESENCIAL</th><th>SEDE</th><th>PROGRAMA</th><th>INSCRIPCIÓN</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></body></html>
+"""
+assert desde_tabla("x", _HTML_SVI, dict(_F_RCP, nombre="SEDAR · Sección RCP — Cursos SVI")) == []
+
+# Un díptico en PDF no se abre para buscar la ciudad
+_pdf = _ev("Curso de Instructor Genérico ERC-SEDAR (GIC)", "2026-11-13",
+           "SEDAR · Sección RCP — Instructor GIC", "http://127.0.0.1:9/diptico.pdf")
+assert completa_lugares([_pdf]) == 0 and _pdf.lugar == ""
+print("Sección RCP: SVI, BIC y GIC ✓")
