@@ -622,7 +622,10 @@ OTRAS_PROFESIONES = ["fisioterap", "terapia manual", "osteopat", "podolog",
 # de anestesia y críticos. La fetal es de obstetricia y cardiología pediátrica.
 # Ojo: "cirugía fetal" NO se excluye, que su anestesia sí es de la casa.
 FUERA_DE_AMBITO = ["ecocardiografia fetal", "ecografia fetal",
-                   "ecografia obstetrica", "neuropediatria"]
+                   "ecografia obstetrica", "neuropediatria",
+                   # 09/11: "Automatización y robotización en la Central de
+                   # Esterilización", de Hospitecnia (ingeniería hospitalaria)
+                   "central de esterilizacion"]
 
 # Enlaces a un documento cuyo texto es el nombre del fichero. Al principio se
 # descartaban, pero al probarlo contra todo el histórico se llevaba por delante
@@ -1861,7 +1864,10 @@ def _adopta_entidad(e: Evento, candidatos: list[Evento]) -> Evento:
         if otro is e or not otro.entidad:
             continue
         sigla = normaliza(otro.entidad).split(" —")[0].split("(")[0].strip()
-        if len(sigla) >= 3 and sigla in n and normaliza(e.entidad) != sigla:
+        # Palabra entera: el 09/11, "SED" se encontraba dentro de "ERC-SEDAR" y
+        # el curso de instructores GIC de la Sección RCP salió como de la SED.
+        if (len(sigla) >= 3 and re.search(rf"(?<!\w){re.escape(sigla)}(?!\w)", n)
+                and normaliza(e.entidad) != sigla):
             e.entidad = otro.entidad
             break
     return e

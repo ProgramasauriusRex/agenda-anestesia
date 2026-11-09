@@ -967,3 +967,24 @@ _pdf = _ev("Curso de Instructor Genérico ERC-SEDAR (GIC)", "2026-11-13",
            "SEDAR · Sección RCP — Instructor GIC", "http://127.0.0.1:9/diptico.pdf")
 assert completa_lugares([_pdf]) == 0 and _pdf.lugar == ""
 print("Sección RCP: SVI, BIC y GIC ✓")
+
+
+# ---------------------------------------------------------------------------
+# Agenda del 09/11
+# ---------------------------------------------------------------------------
+# El GIC de la Sección RCP salió firmado por la SED: su sigla se encontraba
+# dentro de "ERC-SEDAR". La sigla tiene que ir como palabra entera.
+_gic9 = _ev("Curso de Instructor Genérico ERC-SEDAR (GIC)", "2026-11-13",
+            "SEDAR · Sección RCP — Instructor GIC", "https://x.es/gic.pdf")
+_sed9 = _ev("Visión actual del dolor pélvico crónico", "2026-11-20",
+            "SED — Sociedad Española del Dolor", "https://x.es/sed")
+_u9 = {e.titulo: e.entidad for e in unifica([_gic9, _sed9])}
+assert _u9["Curso de Instructor Genérico ERC-SEDAR (GIC)"] == "SEDAR · Sección RCP — Instructor GIC", _u9
+# …pero una sigla que sí va como palabra se sigue adoptando
+_sem9 = _ev("II Jornada Enfermería de SEMDOR", "2026-11-12", "Dolor.com — Congresos y jornadas",
+            "https://x.es/semdor")
+_org9 = _ev("VI Congreso SEMDOR 2026", "2026-11-12", "SEMDOR", "https://semdor.es/c")
+assert {e.titulo: e.entidad for e in unifica([_sem9, _org9])}["II Jornada Enfermería de SEMDOR"] == "SEMDOR"
+# La central de esterilización no es de la especialidad
+assert not titulo_util("Automatización y robotización en la Central de Esterilización")
+print("Agenda del 09/11: siglas como palabra entera y esterilización ✓")
