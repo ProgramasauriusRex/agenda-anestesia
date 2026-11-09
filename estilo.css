@@ -374,7 +374,7 @@ b, strong { font-weight: 700; color: var(--texto); }
 
 .curso .titulo {
   font-weight: 700;
-  font-size: 29px;
+  font-size: 32px;            /* 09/11: antes 29px; Luis lo pidió algo mayor */
   line-height: 1.24;
   /* como mucho cuatro líneas; si no cabe, puntos suspensivos */
   display: -webkit-box;
@@ -384,17 +384,17 @@ b, strong { font-weight: 700; color: var(--texto); }
 }
 .curso .entidad {
   margin-top: 12px;
-  font-size: 22px;
+  font-size: 25px;            /* antes 22px */
   font-weight: 600;
   color: var(--texto);
 }
 .curso .lugar {
   margin-top: 5px;
-  font-size: 22px;
+  font-size: 25px;            /* antes 22px */
   color: var(--texto-suave);
 }
 .curso .lugar svg {
-  width: 21px; height: 21px;
+  width: 23px; height: 23px;
   vertical-align: -3px;
   margin-right: 7px;
   fill: var(--c);
