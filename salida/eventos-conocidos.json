@@ -4,7 +4,7 @@
   "fecha_texto": "16 de septiembre",
   "inicio": "2027-09-16",
   "fin": "2027-09-16",
-  "lugar": "Online",
+  "lugar": "",
   "entidad": "SEMICYUC",
   "url": "https://semicyuc.org/2026/08/webinar-bienestar/",
   "ambito": "criticos",
@@ -18,7 +18,7 @@
   "fecha_texto": "27, 28 y 29 de mayo",
   "inicio": "2027-05-27",
   "fin": "2027-05-29",
-  "lugar": "Vitoria",
+  "lugar": "",
   "entidad": "Formación SED",
   "url": "https://congresosedolor.es/",
   "ambito": "dolor",
@@ -32,7 +32,7 @@
   "fecha_texto": "4 y 5 de julio",
   "inicio": "2027-07-04",
   "fin": "2027-07-05",
-  "lugar": "Santiago de Compostela",
+  "lugar": "",
   "entidad": "Formación SED",
   "url": "https://formaciondolor.com/evento/curso-de-verano-nuevas-tecnologias-en-el-abordaje-del-dolor/",
   "ambito": "dolor",
@@ -95,28 +95,14 @@
   "via": "html",
   "id": "16328ff188da3f",
   "descubierto": "2026-09-21",
-  "ultima_vez": "2026-11-02"
- },
- "abfd2350d5dd71": {
-  "titulo": "VI Jornada de la Societat Catalana d'Anestesiologia, Reanimació i Terapèutica del Dolor",
-  "fecha_texto": "5 de novembre 2026",
-  "inicio": "2026-11-05",
-  "fin": "2026-11-05",
-  "lugar": "Barcelona",
-  "entidad": "SCARTD (Cataluña)",
-  "url": "https://www.scartd.org/?p=page/html/detallactivitat/id/29131/codi_entitat/004/tipus_entitat/s",
-  "ambito": "anestesia",
-  "via": "html",
-  "id": "abfd2350d5dd71",
-  "descubierto": "2026-09-21",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "f7a3f8e1d2b2b3": {
   "titulo": "Curso anual de “Tomando el pulso a la anestesiología” 2ª edición",
   "fecha_texto": "23 de enero",
   "inicio": "2027-01-23",
   "fin": "2027-01-23",
-  "lugar": "Online",
+  "lugar": "",
   "entidad": "ACMARTD (Castilla-La Mancha)",
   "url": "http://acmartd.org/curso-anual-de-tomando-el-pulso-a-la-anestesiologia-2a-edicion/",
   "ambito": "anestesia",
@@ -137,7 +123,7 @@
   "via": "feed",
   "id": "007261812d90b9",
   "descubierto": "2026-09-21",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "481e5cab44c32b": {
   "titulo": "ESICM Lives Forum",
@@ -151,14 +137,14 @@
   "via": "feed",
   "id": "481e5cab44c32b",
   "descubierto": "2026-09-21",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "c1db2609e049e6": {
   "titulo": "Las IV Jornadas Sempal para Residentes ‘Medicina Paliativa, un enfoque imprescindible’ continúan el en Dénia",
   "fecha_texto": "29 de mayo",
   "inicio": "2027-05-29",
   "fin": "2027-05-29",
-  "lugar": "Alicante",
+  "lugar": "",
   "entidad": "SECPAL",
   "url": "https://www.secpal.org/las-iv-jornadas-sempal-para-residentes-continuan-29-mayo-en-denia/",
   "ambito": "dolor",
@@ -179,7 +165,7 @@
   "via": "feed",
   "id": "8ceaeb09319dd4",
   "descubierto": "2026-09-28",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "78b1da9a6e5102": {
   "titulo": "Lee la carta",
@@ -193,42 +179,28 @@
   "via": "html",
   "id": "78b1da9a6e5102",
   "descubierto": "2026-09-28",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "9cbb9883390004": {
   "titulo": "Programa del VIII Congreso Aragonés SADARTD",
   "fecha_texto": "30 de mayo",
   "inicio": "2027-05-30",
   "fin": "2027-05-30",
-  "lugar": "",
+  "lugar": "Zaragoza",
   "entidad": "SADARTD (Aragón)",
   "url": "https://sadartd.wordpress.com/jornadas-de-anestesia-reanimacion-y-cirugia-vascular/",
   "ambito": "anestesia",
   "via": "ficha",
   "id": "9cbb9883390004",
   "descubierto": "2026-09-28",
-  "ultima_vez": "2026-11-02"
- },
- "b166ba7a3d8ef7": {
-  "titulo": "Soporte vital intermedio pediátrico",
-  "fecha_texto": "02 de noviembre",
-  "inicio": "2026-11-02",
-  "fin": "2026-11-02",
-  "lugar": "Online",
-  "entidad": "Colegio de Médicos de Murcia",
-  "url": "https://www.commurcia.es/ficha_formacion?id=1020",
-  "ambito": "mixto",
-  "via": "html",
-  "id": "b166ba7a3d8ef7",
-  "descubierto": "2026-09-28",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "37ad718314615c": {
   "titulo": "Curso SVA Semipresencial del PNRCP-SEMICYUC",
   "fecha_texto": "28 de septiembre",
   "inicio": "2027-09-28",
   "fin": "2027-09-28",
-  "lugar": "Online",
+  "lugar": "",
   "entidad": "SEMICYUC",
   "url": "https://semicyuc.org/2026/09/sva-semicyuc/",
   "ambito": "criticos",
@@ -249,14 +221,14 @@
   "via": "html",
   "id": "888f21e87583e1",
   "descubierto": "2026-10-05",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "4dc46c1544c3e7": {
   "titulo": "Principios Teóricos de Ecografía Clínica en Urgencias",
   "fecha_texto": "1 de octubre",
   "inicio": "2027-10-01",
   "fin": "2027-10-01",
-  "lugar": "Online",
+  "lugar": "",
   "entidad": "Colegio de Médicos de Cantabria",
   "url": "https://www.comcantabria.es/formacion/principios-teoricos-de-ecografia-clinica-en-urgencias-7a-ed/",
   "ambito": "mixto",
@@ -375,7 +347,7 @@
   "via": "html",
   "id": "6303259cd7815c",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "6693297ca58441": {
   "titulo": "Automatrícula",
@@ -389,7 +361,7 @@
   "via": "html",
   "id": "6693297ca58441",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "73c900fe79a469": {
   "titulo": "¡Reserva la fecha!",
@@ -403,7 +375,7 @@
   "via": "html",
   "id": "73c900fe79a469",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "3ae9bd4690903c": {
   "titulo": "XXIV Congreso en Vigo",
@@ -417,7 +389,7 @@
   "via": "html",
   "id": "3ae9bd4690903c",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "533d19d7644a58": {
   "titulo": "Curso de Soporte Vital Avanzado",
@@ -431,7 +403,7 @@
   "via": "html",
   "id": "533d19d7644a58",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "3caf04d4c84cec": {
   "titulo": "17º Congreso Nacional Cirugía Mayor Ambulatoria",
@@ -445,7 +417,7 @@
   "via": "html",
   "id": "3caf04d4c84cec",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "ed793a0bbc91dd": {
   "titulo": "Curso de Soporte Vital Avanzado Recertificación",
@@ -459,7 +431,7 @@
   "via": "html",
   "id": "ed793a0bbc91dd",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "71a7b5a44c620f": {
   "titulo": "Abordaje interdisciplinar del dolor crónico pediátrico",
@@ -473,14 +445,14 @@
   "via": "feed",
   "id": "71a7b5a44c620f",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "5f86b93cbb6d61": {
   "titulo": "Instructor en Soporte Vital Básico y DEA",
   "fecha_texto": "14 de noviembre",
   "inicio": "2026-11-14",
   "fin": "2026-11-14",
-  "lugar": "Online",
+  "lugar": "Málaga",
   "entidad": "Colegio de Médicos de Málaga",
   "url": "https://commalaga.com/formacion-commalaga/instructor14noviembre/",
   "ambito": "mixto",
@@ -501,7 +473,7 @@
   "via": "html",
   "id": "bcdce8d25ba7bc",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "78bd79d76d6166": {
   "titulo": "SOVAMICYUC con el “Día Internacional de la Reanimación Cardiopulmonar”",
@@ -515,14 +487,14 @@
   "via": "feed",
   "id": "78bd79d76d6166",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "09b0749fb4cd8a": {
   "titulo": "Las IV Jornadas Sempal para Residentes arrancarán en Bilbao",
   "fecha_texto": "8 de mayo.",
   "inicio": "2027-05-08",
   "fin": "2027-05-08",
-  "lugar": "Bilbao",
+  "lugar": "",
   "entidad": "SOGACOPAL (Galicia) — Paliativos",
   "url": "https://www.sogacopal.com/2026/03/cambio-de-fecha-las-iv-jornadas-sempal-para-residentes-arrancaran-en-bilbao-el-8-de-mayo/",
   "ambito": "dolor",
@@ -557,7 +529,7 @@
   "via": "html",
   "id": "6e400d523fa737",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "b0ec17c31c129b": {
   "titulo": "Cuidados Paliativos (Online) (IV Edición) a distancia 60 ECTS Preinscripción abierta",
@@ -571,14 +543,14 @@
   "via": "ficha",
   "id": "b0ec17c31c129b",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "fc2eb08757f996": {
   "titulo": "El Colegio de Médicos de Sevilla reafirma su compromiso con la formación en reanimación cardiopulmonar",
   "fecha_texto": "16 de octubre",
   "inicio": "2027-10-16",
   "fin": "2027-10-16",
-  "lugar": "Sevilla",
+  "lugar": "",
   "entidad": "Colegio de Médicos de Sevilla",
   "url": "https://comsevilla.es/el-colegio-de-medicos-de-sevilla-reafirma-su-compromiso-con-la-formacion-en-reanimacion-cardiopulmonar/",
   "ambito": "mixto",
@@ -599,28 +571,28 @@
   "via": "feed",
   "id": "1f5414d3400374",
   "descubierto": "2026-10-26",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "f44e5592e8fdca": {
   "titulo": "XIX Jornada Anual de Seguridad del Paciente Crítico",
   "fecha_texto": "2 de diciembre de 2026",
   "inicio": "2026-12-02",
   "fin": "2026-12-02",
-  "lugar": "Online",
+  "lugar": "Madrid",
   "entidad": "SEMICYUC",
   "url": "https://semicyuc.org/2026/10/xix-jornada-anual-de-seguridad-del-paciente-critico/",
   "ambito": "criticos",
   "via": "feed",
   "id": "f44e5592e8fdca",
   "descubierto": "2026-10-26",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "00cbddd4b76d04": {
   "titulo": "XV Congreso de la Sociedad Murciana de Medicina Intensiva y Unidades Coronarias (Somiuc)",
   "fecha_texto": "23 de octubre",
   "inicio": "2027-10-23",
   "fin": "2027-10-23",
-  "lugar": "Murcia",
+  "lugar": "",
   "entidad": "Colegio de Médicos de Murcia",
   "url": "https://www.commurcia.es/noticia?id=2295",
   "ambito": "mixto",
@@ -655,7 +627,7 @@
   "via": "feed",
   "id": "ce038c5a87a533",
   "descubierto": "2026-10-26",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "0c9bc733d55d55": {
   "titulo": "Galicia e o Norte de Portugal no marco do proxecto IntegraSaúde reforzan a cooperación transfronteiriza na atención ás…",
@@ -683,14 +655,14 @@
   "via": "html",
   "id": "2e9aac607c9cbd",
   "descubierto": "2026-11-02",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "f4f23500effb69": {
   "titulo": "XVII curso de estimulacion cardiaca",
   "fecha_texto": "15 y 16 de abril",
   "inicio": "2027-04-15",
   "fin": "2027-04-16",
-  "lugar": "Online",
+  "lugar": "",
   "entidad": "SOVAMICYUC (C. Valenciana)",
   "url": "https://sovamicyuc.es/xvii-curso-de-estimulacion-cardiaca",
   "ambito": "criticos",
@@ -704,35 +676,35 @@
   "fecha_texto": "14 de noviembre",
   "inicio": "2026-11-14",
   "fin": "2026-11-14",
-  "lugar": "Online",
+  "lugar": "",
   "entidad": "Colegio de Médicos de Málaga",
   "url": "https://commalaga.com/formacion-commalaga/instructor14noviembre/",
   "ambito": "mixto",
   "via": "html",
   "id": "1de4c2a21f9797",
   "descubierto": "2026-11-02",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "eaf5c5b768493d": {
   "titulo": "Curso de Soporte Vital Básico (SVB) y DEA",
   "fecha_texto": "16 de diciembre",
   "inicio": "2026-12-16",
   "fin": "2026-12-16",
-  "lugar": "Online",
+  "lugar": "",
   "entidad": "Colegio de Médicos de Málaga",
   "url": "https://commalaga.com/formacion-commalaga/curso-de-soporte-vital-basico-svb-y-dea-16-de-diciembre/",
   "ambito": "mixto",
   "via": "html",
   "id": "eaf5c5b768493d",
   "descubierto": "2026-11-02",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "d1d6da44ab4eab": {
-  "titulo": "Inscripción Jornada Balear de Anestesiología",
+  "titulo": "Jornada Balear de Anestesiología",
   "fecha_texto": "27 de noviembre de 2026",
   "inicio": "2026-11-27",
   "fin": "2026-11-27",
-  "lugar": "Madrid",
+  "lugar": "Palma",
   "entidad": "SBARTD (Baleares)",
   "url": "http://www.sbartd.es/jornada.html",
   "ambito": "anestesia",
@@ -746,28 +718,28 @@
   "fecha_texto": "8 de mayo.",
   "inicio": "2027-05-08",
   "fin": "2027-05-08",
-  "lugar": "Bilbao",
+  "lugar": "",
   "entidad": "SOGACOPAL (Galicia) — Paliativos",
   "url": "https://www.sogacopal.com/2026/03/cambio-de-fecha-las-iv-jornadas-sempal-para-residentes-arrancaran-en-bilbao-el-8-de-mayo/",
   "ambito": "dolor",
   "via": "feed",
   "id": "69381f2d46dbc2",
   "descubierto": "2026-11-02",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "bc63540c401eb5": {
   "titulo": "2ª Edición de Casos Clínicos en Cuidados Paliativos Pediátricos de Pedpal",
   "fecha_texto": "11 de nov",
   "inicio": "2026-11-11",
   "fin": "2026-11-11",
-  "lugar": "Murcia",
+  "lugar": "Online",
   "entidad": "PEDPAL — Paliativos pediátricos",
   "url": "https://pedpal.es/actividad-curso/2a-edicion-casos-clinicos-cuidados-paliativos-pediatricos-pedpal/",
   "ambito": "dolor",
   "via": "ficha",
   "id": "bc63540c401eb5",
   "descubierto": "2026-11-02",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
  },
  "ec4e6722b467fe": {
   "titulo": "La UGR forma a futuros médicos en Soporte Vital Avanzado mediante simulación clínica de alta fidelidad",
@@ -795,20 +767,90 @@
   "via": "ficha",
   "id": "30fa9e09c62557",
   "descubierto": "2026-11-02",
-  "ultima_vez": "2026-11-02"
+  "ultima_vez": "2026-11-09"
+ },
+ "10820d7ae5424f": {
+  "titulo": "Jornada Balear de Anestesiología",
+  "fecha_texto": "27 de noviembre de 2026",
+  "inicio": "2026-11-27",
+  "fin": "2026-11-27",
+  "lugar": "Palma",
+  "entidad": "SBARTD (Baleares)",
+  "url": "http://www.sbartd.es/jornada.html",
+  "ambito": "anestesia",
+  "via": "ficha",
+  "id": "10820d7ae5424f",
+  "descubierto": "2026-11-09",
+  "ultima_vez": "2026-11-09"
+ },
+ "1031768a1689d6": {
+  "titulo": "Soporte vital intermedio pediátrico",
+  "fecha_texto": "02 de noviembre",
+  "inicio": "2027-11-02",
+  "fin": "2027-11-02",
+  "lugar": "",
+  "entidad": "Colegio de Médicos de Murcia",
+  "url": "https://www.commurcia.es/ficha_formacion?id=1020",
+  "ambito": "mixto",
+  "via": "html",
+  "id": "1031768a1689d6",
+  "descubierto": "2026-11-09",
+  "ultima_vez": "2026-11-09"
+ },
+ "74540402a28eaa": {
+  "titulo": "Curso de Instructor Genérico ERC-SEDAR (GIC)",
+  "fecha_texto": "13 y 14 noviembre 2026",
+  "inicio": "2026-11-13",
+  "fin": "2026-11-14",
+  "lugar": "",
+  "entidad": "SED — Sociedad Española del Dolor",
+  "url": "https://seccionrcp-sedar.es/images/site/Diiptico GIC SEDAR Noviembre 2026_V2.pdf",
+  "ambito": "anestesia",
+  "via": "pagina",
+  "id": "74540402a28eaa",
+  "descubierto": "2026-11-09",
+  "ultima_vez": "2026-11-09"
  },
  "cf65f9569ee87f": {
   "titulo": "Programa VII Curso Eco Pulmonar Seneo 2026v0.pdf",
   "fecha_texto": "14 y 15 de mayo",
   "inicio": "2027-05-14",
   "fin": "2027-05-15",
-  "lugar": "Online",
+  "lugar": "",
   "entidad": "SENeo — Neonatología (intensivos neonatales)",
   "url": "https://seneo.es/images/site/CURSOS/2026/PROGRAMA_VII_CURSO_ECO_PULMONAR_SENEO_2026v0.pdf",
   "ambito": "criticos",
   "via": "html",
   "id": "cf65f9569ee87f",
-  "descubierto": "2026-11-02",
-  "ultima_vez": "2026-11-02"
+  "descubierto": "2026-11-09",
+  "ultima_vez": "2026-11-09"
+ },
+ "4a046e4a0bf704": {
+  "titulo": "Automatización y robotización en la Central de Esterilización…",
+  "fecha_texto": "08/11/2026",
+  "inicio": "2026-11-08",
+  "fin": "2026-11-08",
+  "lugar": "",
+  "entidad": "Hospitecnia — Agenda",
+  "url": "https://hospitecnia.com/tecnologia/smart-hospital/automatizacion-robotizacion-central-esterilizacion",
+  "ambito": "mixto",
+  "via": "feed",
+  "id": "4a046e4a0bf704",
+  "descubierto": "2026-11-09",
+  "ultima_vez": "2026-11-09"
+ },
+ "0bdfe0ed8f4946": {
+  "titulo": "Más de 200 ciudadanos realizaron talleres de Reanimación Cardiopulmonar organizados por el COM Cantabria y el…",
+  "fecha_texto": "del 19 al 28 de octubre",
+  "inicio": "2027-10-19",
+  "fin": "2027-10-28",
+  "lugar": "Santander",
+  "entidad": "Colegio de Médicos de Cantabria",
+  "url": "https://www.comcantabria.es/actualidad/mas-de-200-ciudadanos-realizaron-talleres-de-reanimacion-cardiopulmonar-organizados-por-el-com-cantabria-y-el-ayuntamiento-de-santander-en-la-semana-del-corazon/",
+  "ambito": "mixto",
+  "via": "feed",
+  "id": "0bdfe0ed8f4946",
+  "descubierto": "2026-11-09",
+  "ultima_vez": "2026-11-09"
  }
 }

@@ -1,21 +1,21 @@
 # Agenda — Anestesiología, Cuidados Críticos y Dolor
 
-Generada el 02/11/2026 · 13 eventos
+Generada el 09/11/2026 · 13 eventos
 
 | Título | Fechas | Lugar | Entidad organizadora |
 |---|---|---|---|
-| [Soporte vital intermedio pediátrico](https://www.commurcia.es/ficha_formacion?id=1020) | 2 noviembre 2026 | Online | Colegio de Médicos de Murcia |
-| [VI Jornada de la Societat Catalana d'Anestesiologia, Reanimació i Terapèutica del Dolor](https://www.scartd.org/?p=page/html/detallactivitat/id/29131/codi_entitat/004/tipus_entitat/s) | 5 noviembre 2026 | Barcelona | SCARTD (Cataluña) |
-| [2ª Edición de Casos Clínicos en Cuidados Paliativos Pediátricos de Pedpal](https://pedpal.es/actividad-curso/2a-edicion-casos-clinicos-cuidados-paliativos-pediatricos-pedpal/) | 11 noviembre 2026 | Murcia | PEDPAL — Paliativos pediátricos |
+| [Automatización y robotización en la Central de Esterilización…](https://hospitecnia.com/tecnologia/smart-hospital/automatizacion-robotizacion-central-esterilizacion) | 8 noviembre 2026 | — | Hospitecnia — Agenda |
+| [2ª Edición de Casos Clínicos en Cuidados Paliativos Pediátricos de Pedpal](https://pedpal.es/actividad-curso/2a-edicion-casos-clinicos-cuidados-paliativos-pediatricos-pedpal/) | 11 noviembre 2026 | Online | PEDPAL — Paliativos pediátricos |
 | [VI Congreso SEMDOR 2026](https://www.dolor.com/formacion/congresos-y-jornadas/2026/vi-congreso-semdor-2026) | 12 noviembre 2026 | Granada | Dolor.com — Congresos y jornadas |
 | [Curso de Soporte Vital Avanzado Recertificación](https://lafe.san.gva.es/es/agenda-la-fe/-/asset_publisher/eCmYpoQZHLdl/content/curs-de-suport-vital-avan%C3%A7at-recertificaci%C3%B3?p_r_p_assetEntryId=183653745&_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_eCmYpoQZHLdl_type=content&_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_eCmYpoQZHLdl_urlTitle=curs-de-suport-vital-avan%25C3%25A7at-recertificaci%25C3%25B3&_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_eCmYpoQZHLdl_redirect=https%3A%2F%2Flafe.san.gva.es%2Fes%2Fagenda-la-fe%3Fp_p_id%3Dcom_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_eCmYpoQZHLdl%26p_p_lifecycle%3D0%26p_p_state%3Dnormal%26p_p_mode%3Dview%26p_r_p_assetEntryId%3D183653745%26_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_eCmYpoQZHLdl_cur%3D0%26p_r_p_resetCur%3Dfalse) | 12 noviembre 2026 | Valencia | H. U. i Politècnic La Fe — agenda |
 | [Abordaje interdisciplinar del dolor crónico pediátrico](https://formacion.sjdhospitalbarcelona.org/es/formaciones/abordaje-interdisciplinar-dolor-cronico-pediatrico) | 12 noviembre 2026 | Barcelona | H. Sant Joan de Déu Barcelona — Anestesiología pediátrica |
 | [Curso de Soporte Vital Avanzado](https://lafe.san.gva.es/es/agenda-la-fe/-/asset_publisher/eCmYpoQZHLdl/content/curs-de-suport-vital-avan%C3%A7at?p_r_p_assetEntryId=183647388&_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_eCmYpoQZHLdl_type=content&_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_eCmYpoQZHLdl_urlTitle=curs-de-suport-vital-avan%25C3%25A7at&_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_eCmYpoQZHLdl_redirect=https%3A%2F%2Flafe.san.gva.es%2Fes%2Fagenda-la-fe%3Fp_p_id%3Dcom_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_eCmYpoQZHLdl%26p_p_lifecycle%3D0%26p_p_state%3Dnormal%26p_p_mode%3Dview%26p_r_p_assetEntryId%3D183647388%26_com_liferay_asset_publisher_web_portlet_AssetPublisherPortlet_INSTANCE_eCmYpoQZHLdl_cur%3D0%26p_r_p_resetCur%3Dfalse) | 13 noviembre 2026 | Valencia | H. U. i Politècnic La Fe — agenda |
-| [Instructor en Soporte Vital Básico y DEA](https://commalaga.com/formacion-commalaga/instructor14noviembre/) | 14 noviembre 2026 | Online | Colegio de Médicos de Málaga |
+| [Curso de Instructor Genérico ERC-SEDAR (GIC)](https://seccionrcp-sedar.es/images/site/Diiptico GIC SEDAR Noviembre 2026_V2.pdf) | 13-14 noviembre 2026 | — | SED — Sociedad Española del Dolor |
+| [Instructor en Soporte Vital Básico y DEA](https://commalaga.com/formacion-commalaga/instructor14noviembre/) | 14 noviembre 2026 | Málaga | Colegio de Médicos de Málaga |
 | [Nueva sesión del Curso de Soporte Vital Básico y DEA dirigido a médicos y otros profesionales](https://comsevilla.es/nueva-sesion-del-curso-de-soporte-vital-basico-y-dea-dirigido-a-medicos-y-otros-profesionales-el-18-de-noviembre/) | 18 noviembre 2026 | Sevilla | Colegio de Médicos de Sevilla |
 | [Curso práctico de Ecocardiografía](https://www.comcordoba.com/curso-practico-de-ecocardiografia/) | 22 noviembre 2026 | Madrid | Colegio de Médicos de Córdoba |
 | [Curso práctico de Ecocardiografía](https://comsalamanca.es/formacion/151268-curso-practico-de-ecocardiografia) | 22 noviembre 2026 | Salamanca | Colegio de Médicos de Salamanca |
-| [Inscripción Jornada Balear de Anestesiología](http://www.sbartd.es/jornada.html) | 27 noviembre 2026 | Madrid | SBARTD (Baleares) |
-| [XIX Jornada Anual de Seguridad del Paciente Crítico](https://semicyuc.org/2026/10/xix-jornada-anual-de-seguridad-del-paciente-critico/) | 2 diciembre 2026 | Online | SEMICYUC |
+| [Jornada Balear de Anestesiología](http://www.sbartd.es/jornada.html) | 27 noviembre 2026 | Palma | SBARTD (Baleares) |
+| [XIX Jornada Anual de Seguridad del Paciente Crítico](https://semicyuc.org/2026/10/xix-jornada-anual-de-seguridad-del-paciente-critico/) | 2 diciembre 2026 | Madrid | SEMICYUC |
 
 > Verificar cada evento en la web oficial antes de publicar: los rastreadores capturan fechas desactualizadas cuando el organizador las cambia.

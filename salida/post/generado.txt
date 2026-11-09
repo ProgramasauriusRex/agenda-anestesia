@@ -1,4 +1,4 @@
-fecha: 2026-11-02
+fecha: 2026-11-09
 tabla: AGENDA-ACTUAL.csv
 cursos: 13
 imagenes: 4
