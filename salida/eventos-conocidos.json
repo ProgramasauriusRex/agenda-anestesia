@@ -151,7 +151,7 @@
   "via": "feed",
   "id": "8ceaeb09319dd4",
   "descubierto": "2026-09-28",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "78b1da9a6e5102": {
   "titulo": "Lee la carta",
@@ -165,7 +165,7 @@
   "via": "html",
   "id": "78b1da9a6e5102",
   "descubierto": "2026-09-28",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "9cbb9883390004": {
   "titulo": "Programa del VIII Congreso Aragonés SADARTD",
@@ -179,7 +179,7 @@
   "via": "ficha",
   "id": "9cbb9883390004",
   "descubierto": "2026-09-28",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "37ad718314615c": {
   "titulo": "Curso SVA Semipresencial del PNRCP-SEMICYUC",
@@ -207,7 +207,7 @@
   "via": "html",
   "id": "888f21e87583e1",
   "descubierto": "2026-10-05",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "4dc46c1544c3e7": {
   "titulo": "Principios Teóricos de Ecografía Clínica en Urgencias",
@@ -333,7 +333,7 @@
   "via": "html",
   "id": "6303259cd7815c",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "6693297ca58441": {
   "titulo": "Automatrícula",
@@ -347,7 +347,7 @@
   "via": "html",
   "id": "6693297ca58441",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "73c900fe79a469": {
   "titulo": "¡Reserva la fecha!",
@@ -361,7 +361,7 @@
   "via": "html",
   "id": "73c900fe79a469",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "3ae9bd4690903c": {
   "titulo": "XXIV Congreso en Vigo",
@@ -375,7 +375,7 @@
   "via": "html",
   "id": "3ae9bd4690903c",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "3caf04d4c84cec": {
   "titulo": "17º Congreso Nacional Cirugía Mayor Ambulatoria",
@@ -389,21 +389,7 @@
   "via": "html",
   "id": "3caf04d4c84cec",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-16"
- },
- "5f86b93cbb6d61": {
-  "titulo": "Instructor en Soporte Vital Básico y DEA",
-  "fecha_texto": "14 de noviembre",
-  "inicio": "2026-11-14",
-  "fin": "2026-11-14",
-  "lugar": "Málaga",
-  "entidad": "Colegio de Médicos de Málaga",
-  "url": "https://commalaga.com/formacion-commalaga/instructor14noviembre/",
-  "ambito": "mixto",
-  "via": "html",
-  "id": "5f86b93cbb6d61",
-  "descubierto": "2026-10-19",
-  "ultima_vez": "2026-10-26"
+  "ultima_vez": "2026-11-23"
  },
  "bcdce8d25ba7bc": {
   "titulo": "XVI Congreso de la Sociedad del Dolor Palacio de Congresos Zaragoza",
@@ -417,7 +403,7 @@
   "via": "html",
   "id": "bcdce8d25ba7bc",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "78bd79d76d6166": {
   "titulo": "SOVAMICYUC con el “Día Internacional de la Reanimación Cardiopulmonar”",
@@ -431,7 +417,7 @@
   "via": "feed",
   "id": "78bd79d76d6166",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "09b0749fb4cd8a": {
   "titulo": "Las IV Jornadas Sempal para Residentes arrancarán en Bilbao",
@@ -473,7 +459,7 @@
   "via": "html",
   "id": "6e400d523fa737",
   "descubierto": "2026-10-19",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "b0ec17c31c129b": {
   "titulo": "Cuidados Paliativos (Online) (IV Edición) a distancia 60 ECTS Preinscripción abierta",
@@ -515,7 +501,7 @@
   "via": "feed",
   "id": "1f5414d3400374",
   "descubierto": "2026-10-26",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "f44e5592e8fdca": {
   "titulo": "XIX Jornada Anual de Seguridad del Paciente Crítico",
@@ -529,7 +515,7 @@
   "via": "feed",
   "id": "f44e5592e8fdca",
   "descubierto": "2026-10-26",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "00cbddd4b76d04": {
   "titulo": "XV Congreso de la Sociedad Murciana de Medicina Intensiva y Unidades Coronarias (Somiuc)",
@@ -545,20 +531,6 @@
   "descubierto": "2026-10-26",
   "ultima_vez": "2026-10-26"
  },
- "9691cf460ddb1a": {
-  "titulo": "Nueva sesión del Curso de Soporte Vital Básico y DEA dirigido a médicos y otros profesionales",
-  "fecha_texto": "18 de noviembre.",
-  "inicio": "2026-11-18",
-  "fin": "2026-11-18",
-  "lugar": "Sevilla",
-  "entidad": "Colegio de Médicos de Sevilla",
-  "url": "https://comsevilla.es/nueva-sesion-del-curso-de-soporte-vital-basico-y-dea-dirigido-a-medicos-y-otros-profesionales-el-18-de-noviembre/",
-  "ambito": "mixto",
-  "via": "feed",
-  "id": "9691cf460ddb1a",
-  "descubierto": "2026-10-26",
-  "ultima_vez": "2026-10-26"
- },
  "ce038c5a87a533": {
   "titulo": "El Comcadiz participó en San Fernando en la II Jornada de RCP de la Unidad Clínica SUAP Bahia de Cádiz La Janda",
   "fecha_texto": "16 de octubre",
@@ -571,7 +543,7 @@
   "via": "feed",
   "id": "ce038c5a87a533",
   "descubierto": "2026-10-26",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "0c9bc733d55d55": {
   "titulo": "Galicia e o Norte de Portugal no marco do proxecto IntegraSaúde reforzan a cooperación transfronteiriza na atención ás…",
@@ -599,7 +571,7 @@
   "via": "html",
   "id": "2e9aac607c9cbd",
   "descubierto": "2026-11-02",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "f4f23500effb69": {
   "titulo": "XVII curso de estimulacion cardiaca",
@@ -615,20 +587,6 @@
   "descubierto": "2026-11-02",
   "ultima_vez": "2026-11-02"
  },
- "1de4c2a21f9797": {
-  "titulo": "Instructor en Soporte Vital Básico y DEA",
-  "fecha_texto": "14 de noviembre",
-  "inicio": "2026-11-14",
-  "fin": "2026-11-14",
-  "lugar": "",
-  "entidad": "Colegio de Médicos de Málaga",
-  "url": "https://commalaga.com/formacion-commalaga/instructor14noviembre/",
-  "ambito": "mixto",
-  "via": "html",
-  "id": "1de4c2a21f9797",
-  "descubierto": "2026-11-02",
-  "ultima_vez": "2026-11-09"
- },
  "eaf5c5b768493d": {
   "titulo": "Curso de Soporte Vital Básico (SVB) y DEA",
   "fecha_texto": "16 de diciembre",
@@ -641,7 +599,7 @@
   "via": "html",
   "id": "eaf5c5b768493d",
   "descubierto": "2026-11-02",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "d1d6da44ab4eab": {
   "titulo": "Jornada Balear de Anestesiología",
@@ -669,7 +627,7 @@
   "via": "feed",
   "id": "69381f2d46dbc2",
   "descubierto": "2026-11-02",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "ec4e6722b467fe": {
   "titulo": "La UGR forma a futuros médicos en Soporte Vital Avanzado mediante simulación clínica de alta fidelidad",
@@ -697,7 +655,7 @@
   "via": "ficha",
   "id": "30fa9e09c62557",
   "descubierto": "2026-11-02",
-  "ultima_vez": "2026-11-09"
+  "ultima_vez": "2026-11-23"
  },
  "10820d7ae5424f": {
   "titulo": "Jornada Balear de Anestesiología",
@@ -711,7 +669,7 @@
   "via": "ficha",
   "id": "10820d7ae5424f",
   "descubierto": "2026-11-09",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "1031768a1689d6": {
   "titulo": "Soporte vital intermedio pediátrico",
@@ -725,7 +683,7 @@
   "via": "html",
   "id": "1031768a1689d6",
   "descubierto": "2026-11-09",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "0bdfe0ed8f4946": {
   "titulo": "Más de 200 ciudadanos realizaron talleres de Reanimación Cardiopulmonar organizados por el COM Cantabria y el…",
@@ -741,34 +699,6 @@
   "descubierto": "2026-11-09",
   "ultima_vez": "2026-11-09"
  },
- "c315e453afe54d": {
-  "titulo": "Curso del Colegio: Soporte Vital Cardiaco",
-  "fecha_texto": "16 nov.",
-  "inicio": "2026-11-16",
-  "fin": "2026-11-16",
-  "lugar": "Las Palmas",
-  "entidad": "Colegio de Médicos de Las Palmas",
-  "url": "https://www.medicoslaspalmas.es/index.php/agenda/month.calendar/2026/11/16/-",
-  "ambito": "mixto",
-  "via": "html",
-  "id": "c315e453afe54d",
-  "descubierto": "2026-11-16",
-  "ultima_vez": "2026-11-16"
- },
- "cf65f9569ee87f": {
-  "titulo": "Programa VII Curso Eco Pulmonar Seneo 2026v0.pdf",
-  "fecha_texto": "14 y 15 de mayo",
-  "inicio": "2027-05-14",
-  "fin": "2027-05-15",
-  "lugar": "",
-  "entidad": "SENeo — Neonatología (intensivos neonatales)",
-  "url": "https://seneo.es/images/site/CURSOS/2026/PROGRAMA_VII_CURSO_ECO_PULMONAR_SENEO_2026v0.pdf",
-  "ambito": "criticos",
-  "via": "html",
-  "id": "cf65f9569ee87f",
-  "descubierto": "2026-11-16",
-  "ultima_vez": "2026-11-16"
- },
  "4a8aa64a7a2a47": {
   "titulo": "Nuevo curso de ecografía clínica en Pediatría los días en Burgos",
   "fecha_texto": "23 y 24 de noviembre",
@@ -781,7 +711,7 @@
   "via": "feed",
   "id": "4a8aa64a7a2a47",
   "descubierto": "2026-11-16",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "faddfcefb2e6fd": {
   "titulo": "2ª Edición de Casos Clínicos en Cuidados Paliativos Pediátricos de Pedpal",
@@ -795,7 +725,7 @@
   "via": "ficha",
   "id": "faddfcefb2e6fd",
   "descubierto": "2026-11-16",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
  "d3614945c81ae8": {
   "titulo": "XIX Jornada Anual de Seguridad del Paciente Crítico, Proyectos Zero: pasado, presente y futuro",
@@ -809,48 +739,76 @@
   "via": "ficha",
   "id": "d3614945c81ae8",
   "descubierto": "2026-11-16",
-  "ultima_vez": "2026-11-16"
+  "ultima_vez": "2026-11-23"
  },
- "2d922fb89776e0": {
-  "titulo": "II Jornada MIVI – Aesdrc: «Síndrome de Dolor Regional Complejo y Disautonomía, esas grandes desconocidas»",
-  "fecha_texto": "20 de noviembre de 2026",
-  "inicio": "2026-11-20",
-  "fin": "2026-11-20",
-  "lugar": "Online",
-  "entidad": "Colegio de Médicos de Sevilla",
-  "url": "https://comsevilla.es/ii-jornada-mivi-aesdrc-sindrome-de-dolor-regional-complejo-y-disautonomia-esas-grandes-desconocidas/",
-  "ambito": "mixto",
-  "via": "feed",
-  "id": "2d922fb89776e0",
-  "descubierto": "2026-11-16",
-  "ultima_vez": "2026-11-16"
- },
- "5f6fc551223ea1": {
-  "titulo": "El baño adaptado del futuro: digitalización, accesibilidad y entornos terapéuticos en el espacio asistencial",
-  "fecha_texto": "16/11/2026",
-  "inicio": "2026-11-16",
-  "fin": "2026-11-16",
+ "cf65f9569ee87f": {
+  "titulo": "Programa VII Curso Eco Pulmonar Seneo 2026v0.pdf",
+  "fecha_texto": "14 y 15 de mayo",
+  "inicio": "2027-05-14",
+  "fin": "2027-05-15",
   "lugar": "",
-  "entidad": "Hospitecnia — Agenda",
-  "url": "https://hospitecnia.com/tecnologia/hospital-digital/bano-adaptado-futuro-digitalizacion-accesibilidad",
+  "entidad": "SENeo — Neonatología (intensivos neonatales)",
+  "url": "https://seneo.es/images/site/CURSOS/2026/PROGRAMA_VII_CURSO_ECO_PULMONAR_SENEO_2026v0.pdf",
+  "ambito": "criticos",
+  "via": "html",
+  "id": "cf65f9569ee87f",
+  "descubierto": "2026-11-23",
+  "ultima_vez": "2026-11-23"
+ },
+ "a5b5d6a25f1358": {
+  "titulo": "Curso de Instructores en Soporte Vital enero 2027",
+  "fecha_texto": "8 y 9 de enero de 2027",
+  "inicio": "2027-01-08",
+  "fin": "2027-01-09",
+  "lugar": "Madrid",
+  "entidad": "SEUP — Urgencias de Pediatría",
+  "url": "https://seup.org/curso-de-instructores-en-soporte-vital-enero-2027/",
+  "ambito": "criticos",
+  "via": "feed",
+  "id": "a5b5d6a25f1358",
+  "descubierto": "2026-11-23",
+  "ultima_vez": "2026-11-23"
+ },
+ "6d5e3109d3fe3b": {
+  "titulo": "Dolor crónico con perspectiva de género: De la evidencia a la práctica clínica",
+  "fecha_texto": "10 diciembre 2026",
+  "inicio": "2026-12-10",
+  "fin": "2026-12-10",
+  "lugar": "Online",
+  "entidad": "Formación SED",
+  "url": "https://formaciondolor.com/evento/dolor-cronico-con-perspectiva-de-genero-de-la-evidencia-a-la-practica-clinica/",
+  "ambito": "dolor",
+  "via": "html",
+  "id": "6d5e3109d3fe3b",
+  "descubierto": "2026-11-23",
+  "ultima_vez": "2026-11-23"
+ },
+ "a0d4825bba0b63": {
+  "titulo": "La soledad del enfermo centra una nueva sesión del Aula Moscati en el Colegio de Médicos de Sevilla",
+  "fecha_texto": "19 de noviembre",
+  "inicio": "2027-11-19",
+  "fin": "2027-11-19",
+  "lugar": "Sevilla",
+  "entidad": "Colegio de Médicos de Sevilla",
+  "url": "https://comsevilla.es/la-soledad-del-enfermo-centra-una-nueva-sesion-del-aula-moscati-en-el-colegio-de-medicos-de-sevilla/",
   "ambito": "mixto",
   "via": "feed",
-  "id": "5f6fc551223ea1",
-  "descubierto": "2026-11-16",
-  "ultima_vez": "2026-11-16"
+  "id": "a0d4825bba0b63",
+  "descubierto": "2026-11-23",
+  "ultima_vez": "2026-11-23"
  },
- "9fd596388c9d06": {
+ "9091617fe95b45": {
   "titulo": "El autocuidado y la prevención del estrés, protagonistas de dos jornadas prácticas dirigidas a profesionales médicos",
   "fecha_texto": "17 y 25 de noviembre",
-  "inicio": "2026-11-17",
-  "fin": "2026-11-25",
+  "inicio": "2027-11-17",
+  "fin": "2027-11-25",
   "lugar": "Burgos",
   "entidad": "Colegio de Médicos de Burgos",
   "url": "https://www.combu.es/noticias/combu/actualidad/el-autocuidado-y-la-prevencion-del-estres-protagonistas-de-dos-jornadas-practicas-dirigidas-a-profesionales-medicos/",
   "ambito": "mixto",
   "via": "feed",
-  "id": "9fd596388c9d06",
-  "descubierto": "2026-11-16",
-  "ultima_vez": "2026-11-16"
+  "id": "9091617fe95b45",
+  "descubierto": "2026-11-23",
+  "ultima_vez": "2026-11-23"
  }
 }
